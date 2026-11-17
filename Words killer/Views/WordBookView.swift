@@ -10,7 +10,9 @@ private enum WordFilterScope: String, CaseIterable, Identifiable {
     case all = "全部"
     case mistakes = "错题/模糊"
     case mastered = "已掌握"
+    case favorites = "已收藏"
     case unseen = "未学习"
+    case custom = "自建词"
 
     var id: String { rawValue }
 }
@@ -18,21 +20,29 @@ private enum WordFilterScope: String, CaseIterable, Identifiable {
 struct WordBookView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var allProgress: [WordProgress]
+    @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
 
     @State private var speechService = SpeechService()
+    @State private var audioController = AudioLearningController()
     @State private var selectedLanguage: TargetLanguage? = nil
     @State private var filterScope: WordFilterScope = .all
     @State private var searchText = ""
     @State private var selectedWord: WordItem?
+    @State private var isShowingAddWordSheet = false
+    @State private var isShowingAudioPlayerSheet = false
 
     private var progressMap: [String: WordProgress] {
         Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
     }
 
+    private var allWords: [WordItem] {
+        WordLibrary.mergedWords(with: customWords)
+    }
+
     private var filteredWords: [WordItem] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 
-        return WordLibrary.words.filter { word in
+        return allWords.filter { word in
             if let selectedLanguage, word.language != selectedLanguage {
                 return false
             }
@@ -49,8 +59,16 @@ struct WordBookView: View {
                 guard let progress, progress.isMastered else {
                     return false
                 }
+            case .favorites:
+                guard let progress, progress.isFavorite else {
+                    return false
+                }
             case .unseen:
                 if let progress, progress.reviewCount > 0 {
+                    return false
+                }
+            case .custom:
+                if !word.id.hasPrefix("custom-") {
                     return false
                 }
             }
@@ -70,13 +88,20 @@ struct WordBookView: View {
         NavigationStack {
             List {
                 Section {
-                    Picker("状态筛选", selection: $filterScope) {
-                        ForEach(WordFilterScope.allCases) { scope in
-                            Text(scope.rawValue).tag(scope)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(WordFilterScope.allCases) { scope in
+                                FilterScopeChip(
+                                    title: scope.rawValue,
+                                    isSelected: filterScope == scope
+                                ) {
+                                    filterScope = scope
+                                }
+                            }
                         }
+                        .padding(.horizontal, 16)
                     }
-                    .pickerStyle(.segmented)
-                    .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                    .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 4, trailing: 0))
                     .listRowBackground(Color.clear)
 
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -105,31 +130,54 @@ struct WordBookView: View {
 
                 if filteredWords.isEmpty {
                     ContentUnavailableView(
-                        "没有匹配的词条",
-                        systemImage: "magnifyingglass",
-                        description: Text("尝试切换筛选条件或搜索其他关键词。")
+                        filterScope == .custom ? "暂无自建词汇" : (filterScope == .favorites ? "暂无收藏词汇" : "没有匹配的词条"),
+                        systemImage: filterScope == .custom ? "square.and.pencil" : (filterScope == .favorites ? "star" : "magnifyingglass"),
+                        description: Text(filterScope == .custom ? "点击右上角“+”即可录入或批量导入新单词。" : (filterScope == .favorites ? "在背词卡片或词库中点击五角星即可收藏重点词。" : "尝试切换筛选条件或搜索其他关键词。"))
                     )
                     .listRowBackground(Color.clear)
                 } else {
-                    Section("共 \(filteredWords.count) 词") {
+                    Section {
                         ForEach(filteredWords) { word in
                             WordBookRow(
                                 word: word,
                                 progress: progressMap[word.id],
-                                speechService: speechService
+                                speechService: speechService,
+                                onToggleFavorite: {
+                                    toggleFavorite(word)
+                                }
                             )
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 selectedWord = word
                             }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    toggleFavorite(word)
+                                } label: {
+                                    Label(
+                                        (progressMap[word.id]?.isFavorite == true) ? "取消收藏" : "收藏",
+                                        systemImage: (progressMap[word.id]?.isFavorite == true) ? "star.slash" : "star.fill"
+                                    )
+                                }
+                                .tint(.orange)
+                            }
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                if let progress = progressMap[word.id] {
+                                if word.id.hasPrefix("custom-") {
                                     Button(role: .destructive) {
+                                        deleteCustomWord(word.id)
+                                    } label: {
+                                        Label("删除自建", systemImage: "trash")
+                                    }
+                                }
+
+                                if let progress = progressMap[word.id] {
+                                    Button {
                                         modelContext.delete(progress)
                                         try? modelContext.save()
                                     } label: {
-                                        Label("重置", systemImage: "arrow.counterclockwise")
+                                        Label("重置进度", systemImage: "arrow.counterclockwise")
                                     }
+                                    .tint(.red)
                                 }
 
                                 Button {
@@ -140,17 +188,52 @@ struct WordBookView: View {
                                 .tint(.green)
                             }
                         }
+                    } header: {
+                        HStack {
+                            Text("共 \(filteredWords.count) 词")
+                            Spacer()
+                            Button {
+                                audioController.startPlayback(words: filteredWords)
+                                isShowingAudioPlayerSheet = true
+                            } label: {
+                                Label("听学这组词", systemImage: "headphones")
+                                    .font(.caption.weight(.medium))
+                                    .foregroundStyle(AppTheme.accent)
+                            }
+                        }
                     }
                 }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("词库与错题本")
             .searchable(text: $searchText, prompt: "搜索单词、释义或例句")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isShowingAddWordSheet = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .accessibilityLabel("添加自建词汇")
+                }
+            }
+            .sheet(isPresented: $isShowingAddWordSheet) {
+                AddCustomWordView()
+            }
+            .sheet(isPresented: $isShowingAudioPlayerSheet) {
+                AudioPlayerView(
+                    controller: audioController,
+                    playlistTitle: "\(selectedLanguage?.title ?? "全语种") · \(filterScope.rawValue) (\(filteredWords.count)词)"
+                )
+            }
             .sheet(item: $selectedWord) { word in
                 WordDetailSheet(
                     word: word,
                     progress: progressMap[word.id],
                     speechService: speechService,
+                    onToggleFavorite: {
+                        toggleFavorite(word)
+                    },
                     onRate: { rating in
                         rateWord(word, rating: rating)
                     }
@@ -159,8 +242,31 @@ struct WordBookView: View {
             }
             .onDisappear {
                 speechService.stop()
+                audioController.stopPlayback()
             }
         }
+    }
+
+    private func toggleFavorite(_ word: WordItem) {
+        let record: WordProgress
+        if let existing = progressMap[word.id] {
+            record = existing
+        } else {
+            record = WordProgress(wordID: word.id, language: word.language)
+            modelContext.insert(record)
+        }
+        record.isFavorite.toggle()
+        try? modelContext.save()
+    }
+
+    private func deleteCustomWord(_ id: String) {
+        if let custom = customWords.first(where: { $0.id == id }) {
+            modelContext.delete(custom)
+        }
+        if let progress = progressMap[id] {
+            modelContext.delete(progress)
+        }
+        try? modelContext.save()
     }
 
     private func markAsKnown(_ word: WordItem) {
@@ -180,7 +286,7 @@ struct WordBookView: View {
     }
 }
 
-private struct LanguageChip: View {
+private struct FilterScopeChip: View {
     let title: String
     let isSelected: Bool
     let action: () -> Void
@@ -201,10 +307,32 @@ private struct LanguageChip: View {
     }
 }
 
+private struct LanguageChip: View {
+    let title: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.caption.weight(.semibold))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(
+                    isSelected ? AppTheme.accent.opacity(0.8) : Color(.tertiarySystemGroupedBackground),
+                    in: Capsule()
+                )
+                .foregroundStyle(isSelected ? .white : .primary)
+        }
+        .buttonStyle(.plain)
+    }
+}
+
 private struct WordBookRow: View {
     let word: WordItem
     let progress: WordProgress?
     let speechService: SpeechService
+    var onToggleFavorite: (() -> Void)? = nil
 
     private var statusColor: Color {
         guard let progress, progress.reviewCount > 0 else { return .secondary }
@@ -221,9 +349,21 @@ private struct WordBookRow: View {
                 HStack(spacing: 8) {
                     Text(word.term)
                         .font(.headline)
-                    Text(word.pronunciation)
-                        .font(.caption)
-                        .foregroundStyle(AppTheme.accent)
+
+                    if word.id.hasPrefix("custom-") {
+                        Text("自建")
+                            .font(.system(size: 10, weight: .bold))
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 2)
+                            .background(Color.purple.opacity(0.14), in: Capsule())
+                            .foregroundStyle(.purple)
+                    }
+
+                    if !word.pronunciation.isEmpty {
+                        Text(word.pronunciation)
+                            .font(.caption)
+                            .foregroundStyle(AppTheme.accent)
+                    }
                 }
 
                 Text(word.translation)
@@ -242,6 +382,18 @@ private struct WordBookRow: View {
             }
 
             Spacer()
+
+            if let onToggleFavorite {
+                Button {
+                    onToggleFavorite()
+                } label: {
+                    Image(systemName: (progress?.isFavorite == true) ? "star.fill" : "star")
+                        .font(.subheadline)
+                        .foregroundStyle((progress?.isFavorite == true) ? Color.orange : Color.secondary.opacity(0.4))
+                        .frame(width: 32, height: 32)
+                }
+                .buttonStyle(.plain)
+            }
 
             Button {
                 speechService.speak(word.term, language: word.language)
@@ -264,6 +416,7 @@ private struct WordDetailSheet: View {
     let word: WordItem
     let progress: WordProgress?
     let speechService: SpeechService
+    var onToggleFavorite: (() -> Void)? = nil
     let onRate: (RecallRating) -> Void
 
     var body: some View {
@@ -275,7 +428,8 @@ private struct WordDetailSheet: View {
                         progress: progress,
                         isTranslationVisible: true,
                         isRequeuedInSession: false,
-                        speechService: speechService
+                        speechService: speechService,
+                        onToggleFavorite: onToggleFavorite
                     )
 
                     HStack(spacing: 10) {
@@ -309,5 +463,5 @@ private struct WordDetailSheet: View {
 
 #Preview {
     WordBookView()
-        .modelContainer(for: WordProgress.self, inMemory: true)
+        .modelContainer(for: [WordProgress.self, CustomWordRecord.self], inMemory: true)
 }

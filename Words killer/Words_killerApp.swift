@@ -14,6 +14,6 @@ struct Words_killerApp: App {
         WindowGroup {
             MainTabView()
         }
-        .modelContainer(for: WordProgress.self)
+        .modelContainer(for: [WordProgress.self, CustomWordRecord.self])
     }
 }

@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var allProgress: [WordProgress]
+    @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
 
     @AppStorage("selectedLanguage") private var selectedLanguageRawValue = TargetLanguage.english.rawValue
     @AppStorage("selectedDifficulty") private var selectedDifficultyRawValue = DifficultyLevel.beginner.rawValue
@@ -18,6 +19,10 @@ struct ContentView: View {
     @AppStorage("speechSpeed") private var speechSpeedRawValue = SpeechSpeed.normal.rawValue
 
     @State private var speechService = SpeechService()
+    @State private var audioController = AudioLearningController()
+    @State private var isShowingQuizSheet = false
+    @State private var isShowingAudioSheet = false
+
     @State private var sessionQueue: [WordItem] = []
     @State private var currentIndex = 0
     @State private var knownCount = 0
@@ -67,14 +72,19 @@ struct ContentView: View {
         } set: { newValue in
             speechSpeedRawValue = newValue.rawValue
             speechService.speed = newValue
+            audioController.speechService.speed = newValue
             if let word = currentWord {
                 speechService.speak(word.term, language: word.language)
             }
         }
     }
 
+    private var allWords: [WordItem] {
+        WordLibrary.mergedWords(with: customWords)
+    }
+
     private var availableWords: [WordItem] {
-        WordLibrary.words.filter { $0.language == selectedLanguage }
+        allWords.filter { $0.language == selectedLanguage }
     }
 
     private var progressMap: [String: WordProgress] {
@@ -124,6 +134,9 @@ struct ContentView: View {
                             speechService: speechService,
                             onSwipeRate: isChallengeFinished ? nil : { rating in
                                 rateCurrentWord(rating)
+                            },
+                            onToggleFavorite: {
+                                toggleFavorite(word)
                             }
                         )
                     } else {
@@ -138,15 +151,52 @@ struct ContentView: View {
             .background(AppTheme.background.ignoresSafeArea())
             .navigationTitle("Words Killer")
             .toolbarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack(spacing: 12) {
+                        Button {
+                            isShowingQuizSheet = true
+                        } label: {
+                            Image(systemName: "pencil.and.outline")
+                        }
+                        .accessibilityLabel("测验自测")
+
+                        Button {
+                            audioController.startPlayback(words: sessionQueue, startIndex: currentIndex)
+                            isShowingAudioSheet = true
+                        } label: {
+                            Image(systemName: "headphones")
+                        }
+                        .accessibilityLabel("随身听学")
+                    }
+                }
+            }
+            .sheet(isPresented: $isShowingQuizSheet) {
+                QuizView(
+                    sourceWords: sessionQueue,
+                    allAvailableWords: availableWords,
+                    onComplete: {
+                        startNewChallenge()
+                    }
+                )
+            }
+            .sheet(isPresented: $isShowingAudioSheet) {
+                AudioPlayerView(
+                    controller: audioController,
+                    playlistTitle: "\(selectedLanguage.title) · 本轮挑战 (\(sessionQueue.count)词)"
+                )
+            }
             .sensoryFeedback(.impact(weight: .light), trigger: feedbackTrigger)
             .onAppear {
                 speechService.speed = selectedSpeechSpeed
+                audioController.speechService.speed = selectedSpeechSpeed
                 if sessionQueue.isEmpty {
                     startNewChallenge()
                 }
             }
             .onDisappear {
                 speechService.stop()
+                audioController.stopPlayback()
             }
         }
     }
@@ -157,7 +207,7 @@ struct ContentView: View {
                 .font(.title2.weight(.bold))
                 .foregroundStyle(.primary)
 
-            Text("按记忆曲线优先推送到期词与新词。支持左右滑动判词、语音倍速切换与本地持久化。")
+            Text("按记忆曲线优先推送到期词与新词。支持手势滑词、多维测验自测、随身听学与自建词库。")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .lineSpacing(3)
@@ -244,6 +294,33 @@ struct ContentView: View {
             }
             .font(.caption)
             .foregroundStyle(.secondary)
+
+            Divider()
+
+            HStack(spacing: 12) {
+                Button {
+                    isShowingQuizSheet = true
+                } label: {
+                    Label("测验练习", systemImage: "list.bullet.clipboard")
+                        .font(.subheadline.weight(.semibold))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 38)
+                }
+                .buttonStyle(.bordered)
+                .tint(AppTheme.accent)
+
+                Button {
+                    audioController.startPlayback(words: sessionQueue, startIndex: currentIndex)
+                    isShowingAudioSheet = true
+                } label: {
+                    Label("随身听学", systemImage: "headphones")
+                        .font(.subheadline.weight(.semibold))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 38)
+                }
+                .buttonStyle(.bordered)
+                .tint(AppTheme.accent)
+            }
         }
         .padding(16)
         .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
@@ -312,6 +389,18 @@ struct ContentView: View {
         return "本轮完成 \(initialBatchCount) 个词：认识 \(knownCount) 个、模糊 \(fuzzyCount) 个（12 小时后复现）、不认识 \(unknownCount) 次（已重置记忆间隔）。"
     }
 
+    private func toggleFavorite(_ word: WordItem) {
+        let record: WordProgress
+        if let existing = progressMap[word.id] {
+            record = existing
+        } else {
+            record = WordProgress(wordID: word.id, language: word.language)
+            modelContext.insert(record)
+        }
+        record.isFavorite.toggle()
+        try? modelContext.save()
+    }
+
     private func rateCurrentWord(_ rating: RecallRating) {
         guard let word = currentWord, !isChallengeFinished else { return }
 
@@ -358,6 +447,7 @@ struct ContentView: View {
 
     private func startNewChallenge() {
         speechService.stop()
+        audioController.stopPlayback()
         let newWords = SpacedRepetitionEngine.buildChallenge(
             from: availableWords,
             difficulty: selectedDifficulty,
@@ -386,5 +476,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: WordProgress.self, inMemory: true)
+        .modelContainer(for: [WordProgress.self, CustomWordRecord.self], inMemory: true)
 }

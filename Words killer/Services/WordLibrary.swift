@@ -18,6 +18,13 @@ enum WordLibrary {
         return decoded
     }
 
+    static func mergedWords(with customRecords: [CustomWordRecord]) -> [WordItem] {
+        if customRecords.isEmpty {
+            return words
+        }
+        return customRecords.map { $0.toWordItem() } + words
+    }
+
     private static let fallbackWords: [WordItem] = [
         WordItem(
             id: "en-beg-hello",

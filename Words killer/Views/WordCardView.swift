@@ -12,6 +12,7 @@ struct WordCardView: View {
     let isRequeuedInSession: Bool
     let speechService: SpeechService
     var onSwipeRate: ((RecallRating) -> Void)? = nil
+    var onToggleFavorite: (() -> Void)? = nil
 
     @State private var dragOffset: CGSize = .zero
 
@@ -116,6 +117,20 @@ struct WordCardView: View {
                 Spacer()
 
                 VStack(spacing: 10) {
+                    if onToggleFavorite != nil {
+                        Button {
+                            onToggleFavorite?()
+                        } label: {
+                            Image(systemName: (progress?.isFavorite == true) ? "star.fill" : "star")
+                                .font(.body)
+                                .foregroundStyle((progress?.isFavorite == true) ? Color.orange : Color.secondary)
+                                .frame(width: 36, height: 36)
+                                .background((progress?.isFavorite == true) ? Color.orange.opacity(0.15) : Color(.tertiarySystemFill), in: Circle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("收藏单词")
+                    }
+
                     Button {
                         speechService.speak(word.term, language: word.language)
                     } label: {

@@ -8,9 +8,14 @@ import SwiftUI
 
 struct StatsView: View {
     @Query private var allProgress: [WordProgress]
+    @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
+
+    private var allWords: [WordItem] {
+        WordLibrary.mergedWords(with: customWords)
+    }
 
     private var wordLookup: [String: WordItem] {
-        Dictionary(uniqueKeysWithValues: WordLibrary.words.map { ($0.id, $0) })
+        Dictionary(uniqueKeysWithValues: allWords.map { ($0.id, $0) })
     }
 
     private var studiedCount: Int {
@@ -24,6 +29,10 @@ struct StatsView: View {
     private var dueCount: Int {
         let now = Date.now
         return allProgress.filter { $0.reviewCount > 0 && $0.isDue(at: now) }.count
+    }
+
+    private var favoriteCount: Int {
+        allProgress.filter(\.isFavorite).count
     }
 
     private var totalReviews: Int {
@@ -101,6 +110,8 @@ struct StatsView: View {
                 StatPill(title: "已学习词数", value: "\(studiedCount)", color: AppTheme.accent)
                 StatPill(title: "已掌握词数", value: "\(masteredCount)", color: .green)
                 StatPill(title: "当前待复习", value: "\(dueCount)", color: .orange)
+                StatPill(title: "已收藏生词", value: "\(favoriteCount)", color: .orange)
+                StatPill(title: "自建词汇量", value: "\(customWords.count)", color: .indigo)
                 StatPill(title: "累计复习次", value: "\(totalReviews)", color: .blue)
             }
         }
@@ -113,7 +124,7 @@ struct StatsView: View {
             SectionTitle(icon: "globe.asia.australia.fill", title: "各语种掌握度")
 
             ForEach(TargetLanguage.allCases) { language in
-                let total = WordLibrary.words.filter { $0.language == language }.count
+                let total = allWords.filter { $0.language == language }.count
                 let records = allProgress.filter { $0.languageRawValue == language.rawValue }
                 let mastered = records.filter(\.isMastered).count
                 let due = records.filter { $0.reviewCount > 0 && $0.isDue() }.count
@@ -156,8 +167,15 @@ struct StatsView: View {
                     let word = wordLookup[record.wordID]
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(word?.term ?? record.wordID)
-                                .font(.subheadline.weight(.semibold))
+                            HStack(spacing: 6) {
+                                Text(word?.term ?? record.wordID)
+                                    .font(.subheadline.weight(.semibold))
+                                if record.isFavorite {
+                                    Image(systemName: "star.fill")
+                                        .font(.caption2)
+                                        .foregroundStyle(.orange)
+                                }
+                            }
                             Text(word?.translation ?? "")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -200,5 +218,5 @@ struct StatsView: View {
 
 #Preview {
     StatsView()
-        .modelContainer(for: WordProgress.self, inMemory: true)
+        .modelContainer(for: [WordProgress.self, CustomWordRecord.self], inMemory: true)
 }
