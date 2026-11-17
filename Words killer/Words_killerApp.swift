@@ -5,13 +5,15 @@
 //  Created by TedJi on 2026/6/19.
 //
 
+import SwiftData
 import SwiftUI
 
 @main
 struct Words_killerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainTabView()
         }
+        .modelContainer(for: WordProgress.self)
     }
 }
