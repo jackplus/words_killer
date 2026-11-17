@@ -30,6 +30,44 @@ struct StatsView: View {
         allProgress.reduce(0) { $0 + $1.reviewCount }
     }
 
+    private var todayReviewedCount: Int {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: .now)
+        return allProgress.filter {
+            guard let date = $0.lastReviewedAt else { return false }
+            return calendar.isDate(date, inSameDayAs: today)
+        }.count
+    }
+
+    private var streakDays: Int {
+        let calendar = Calendar.current
+        let activeDays = Set(
+            allProgress.compactMap { $0.lastReviewedAt }
+                .map { calendar.startOfDay(for: $0) }
+        )
+        guard !activeDays.isEmpty else { return 0 }
+
+        let today = calendar.startOfDay(for: .now)
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: today)
+
+        var cursor: Date
+        if activeDays.contains(today) {
+            cursor = today
+        } else if let yesterday, activeDays.contains(yesterday) {
+            cursor = yesterday
+        } else {
+            return 0
+        }
+
+        var streak = 0
+        while activeDays.contains(cursor) {
+            streak += 1
+            guard let prev = calendar.date(byAdding: .day, value: -1, to: cursor) else { break }
+            cursor = prev
+        }
+        return streak
+    }
+
     private var recentReviewed: [WordProgress] {
         allProgress
             .filter { $0.lastReviewedAt != nil }
@@ -58,6 +96,8 @@ struct StatsView: View {
             SectionTitle(icon: "chart.line.uptrend.xyaxis", title: "总体进度")
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                StatPill(title: "连续打卡", value: "\(streakDays) 天", color: .purple)
+                StatPill(title: "今日已复习", value: "\(todayReviewedCount) 词", color: .teal)
                 StatPill(title: "已学习词数", value: "\(studiedCount)", color: AppTheme.accent)
                 StatPill(title: "已掌握词数", value: "\(masteredCount)", color: .green)
                 StatPill(title: "当前待复习", value: "\(dueCount)", color: .orange)

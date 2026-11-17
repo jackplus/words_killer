@@ -15,6 +15,7 @@ struct ContentView: View {
     @AppStorage("selectedLanguage") private var selectedLanguageRawValue = TargetLanguage.english.rawValue
     @AppStorage("selectedDifficulty") private var selectedDifficultyRawValue = DifficultyLevel.beginner.rawValue
     @AppStorage("autoSpeakOnCard") private var autoSpeakOnCard = true
+    @AppStorage("speechSpeed") private var speechSpeedRawValue = SpeechSpeed.normal.rawValue
 
     @State private var speechService = SpeechService()
     @State private var sessionQueue: [WordItem] = []
@@ -38,6 +39,10 @@ struct ContentView: View {
         DifficultyLevel(rawValue: selectedDifficultyRawValue) ?? .beginner
     }
 
+    private var selectedSpeechSpeed: SpeechSpeed {
+        SpeechSpeed(rawValue: speechSpeedRawValue) ?? .normal
+    }
+
     private var languageSelection: Binding<TargetLanguage> {
         Binding {
             selectedLanguage
@@ -53,6 +58,18 @@ struct ContentView: View {
         } set: { newValue in
             selectedDifficultyRawValue = newValue.rawValue
             startNewChallenge()
+        }
+    }
+
+    private var speechSpeedSelection: Binding<SpeechSpeed> {
+        Binding {
+            selectedSpeechSpeed
+        } set: { newValue in
+            speechSpeedRawValue = newValue.rawValue
+            speechService.speed = newValue
+            if let word = currentWord {
+                speechService.speak(word.term, language: word.language)
+            }
         }
     }
 
@@ -104,7 +121,10 @@ struct ContentView: View {
                             progress: progressMap[word.id],
                             isTranslationVisible: isTranslationVisible,
                             isRequeuedInSession: requeuedIDs.contains(word.id),
-                            speechService: speechService
+                            speechService: speechService,
+                            onSwipeRate: isChallengeFinished ? nil : { rating in
+                                rateCurrentWord(rating)
+                            }
                         )
                     } else {
                         EmptyStateView()
@@ -120,6 +140,7 @@ struct ContentView: View {
             .toolbarTitleDisplayMode(.inline)
             .sensoryFeedback(.impact(weight: .light), trigger: feedbackTrigger)
             .onAppear {
+                speechService.speed = selectedSpeechSpeed
                 if sessionQueue.isEmpty {
                     startNewChallenge()
                 }
@@ -136,7 +157,7 @@ struct ContentView: View {
                 .font(.title2.weight(.bold))
                 .foregroundStyle(.primary)
 
-            Text("按记忆曲线优先推送到期词与新词。点击喇叭可听原声朗读，三档反馈会写入本地学习记录。")
+            Text("按记忆曲线优先推送到期词与新词。支持左右滑动判词、语音倍速切换与本地持久化。")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .lineSpacing(3)
@@ -179,6 +200,19 @@ struct ContentView: View {
             Toggle("切卡自动朗读单词", isOn: $autoSpeakOnCard)
                 .font(.subheadline)
                 .tint(AppTheme.accent)
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("朗读语速")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+
+                Picker("朗读语速", selection: speechSpeedSelection) {
+                    ForEach(SpeechSpeed.allCases) { speed in
+                        Text(speed.title).tag(speed)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
         }
         .padding(16)
         .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 8, style: .continuous))

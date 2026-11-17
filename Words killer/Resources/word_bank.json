@@ -2498,5 +2498,2505 @@
     "translation": "盈利能力；回报率",
     "memoryCue": "商业项目评估核心词。",
     "example": "El proyecto ofrece buena rentabilidad."
+  },
+  {
+    "id": "en-beg-food",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "food",
+    "pronunciation": "/fuːd/",
+    "translation": "食物",
+    "memoryCue": "oo 发长音 /uː/，不要和 foot 短音混淆。",
+    "example": "This restaurant serves great food."
+  },
+  {
+    "id": "en-beg-city",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "city",
+    "pronunciation": "/ˈsɪti/",
+    "translation": "城市",
+    "memoryCue": "c 在 i 前读 /s/，复数 cities。",
+    "example": "Shanghai is a vibrant city."
+  },
+  {
+    "id": "en-beg-phone",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "phone",
+    "pronunciation": "/foʊn/",
+    "translation": "手机；电话",
+    "memoryCue": "ph 发 /f/ 音，动词可指“打电话”。",
+    "example": "I left my phone on the desk."
+  },
+  {
+    "id": "en-beg-sleep",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "sleep",
+    "pronunciation": "/sliːp/",
+    "translation": "睡觉",
+    "memoryCue": "过去式 slept，早睡 sleep early。",
+    "example": "I try to sleep before eleven."
+  },
+  {
+    "id": "en-beg-walk",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "walk",
+    "pronunciation": "/wɔːk/",
+    "translation": "散步；走",
+    "memoryCue": "字母 l 不发音，take a walk 散步。",
+    "example": "We often walk after dinner."
+  },
+  {
+    "id": "en-beg-music",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "music",
+    "pronunciation": "/ˈmjuːzɪk/",
+    "translation": "音乐",
+    "memoryCue": "不可数名词，listen to music。",
+    "example": "I listen to music while running."
+  },
+  {
+    "id": "en-beg-apple",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "apple",
+    "pronunciation": "/ˈæpl/",
+    "translation": "苹果",
+    "memoryCue": "元音开头用 an apple。",
+    "example": "An apple a day keeps the doctor away."
+  },
+  {
+    "id": "en-beg-day",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "day",
+    "pronunciation": "/deɪ/",
+    "translation": "天；白天",
+    "memoryCue": "every day（每天）分开写。",
+    "example": "Have a wonderful day!"
+  },
+  {
+    "id": "en-beg-night",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "night",
+    "pronunciation": "/naɪt/",
+    "translation": "夜晚",
+    "memoryCue": "gh 不发音，good night 晚安。",
+    "example": "The stars look bright tonight."
+  },
+  {
+    "id": "en-beg-happy",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "happy",
+    "pronunciation": "/ˈhæpi/",
+    "translation": "开心的；幸福的",
+    "memoryCue": "反义词 unhappy，名词 happiness。",
+    "example": "She looks very happy today."
+  },
+  {
+    "id": "en-ele-healthy",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "healthy",
+    "pronunciation": "/ˈhelθi/",
+    "translation": "健康的",
+    "memoryCue": "health 加 -y 变形容词，注意 th 咬舌。",
+    "example": "Eating vegetables keeps you healthy."
+  },
+  {
+    "id": "en-ele-minute",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "minute",
+    "pronunciation": "/ˈmɪnɪt/",
+    "translation": "分钟；片刻",
+    "memoryCue": "作形容词读 /maɪˈnjuːt/ 表示“微小的”。",
+    "example": "Give me five minutes to finish."
+  },
+  {
+    "id": "en-ele-practice",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "practice",
+    "pronunciation": "/ˈpræktɪs/",
+    "translation": "练习；实践",
+    "memoryCue": "美式名动同形，英式动词拼作 practise。",
+    "example": "Daily practice builds real confidence."
+  },
+  {
+    "id": "en-ele-goal",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "goal",
+    "pronunciation": "/ɡoʊl/",
+    "translation": "目标；球门",
+    "memoryCue": "set a goal（定目标），score a goal（进球）。",
+    "example": "My goal is to read twenty books this year."
+  },
+  {
+    "id": "en-ele-reason",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "reason",
+    "pronunciation": "/ˈriːzn/",
+    "translation": "原因；理由",
+    "memoryCue": "搭配 for this reason（出于这个原因）。",
+    "example": "There is a good reason for the delay."
+  },
+  {
+    "id": "en-ele-result",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "result",
+    "pronunciation": "/rɪˈzʌlt/",
+    "translation": "结果；成效",
+    "memoryCue": "as a result（因此；结果）。",
+    "example": "The test result came back positive."
+  },
+  {
+    "id": "en-ele-energy",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "energy",
+    "pronunciation": "/ˈenərdʒi/",
+    "translation": "精力；能量",
+    "memoryCue": "形容人精力充沛用 energetic。",
+    "example": "Morning exercise gives me more energy."
+  },
+  {
+    "id": "en-ele-decide",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "decide",
+    "pronunciation": "/dɪˈsaɪd/",
+    "translation": "决定",
+    "memoryCue": "名词 decision，常用 decide to do。",
+    "example": "We decided to leave early tomorrow."
+  },
+  {
+    "id": "en-ele-prepare",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "prepare",
+    "pronunciation": "/prɪˈper/",
+    "translation": "准备",
+    "memoryCue": "pre-（预先）+ pare（备好）。",
+    "example": "I need time to prepare for the talk."
+  },
+  {
+    "id": "en-ele-explain",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "explain",
+    "pronunciation": "/ɪkˈspleɪn/",
+    "translation": "解释；说明",
+    "memoryCue": "不可说 explain me，应说 explain to me。",
+    "example": "Let me explain how this works."
+  },
+  {
+    "id": "en-int-resource",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "resource",
+    "pronunciation": "/ˈriːsɔːrs/",
+    "translation": "资源；资料",
+    "memoryCue": "re-（再）+ source（源头）= 可反复取用的资源。",
+    "example": "Online courses are a great resource."
+  },
+  {
+    "id": "en-int-progress",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "progress",
+    "pronunciation": "/ˈprɑːɡres/",
+    "translation": "进展；进步",
+    "memoryCue": "不可数名词，make progress（取得进步）。",
+    "example": "You are making steady progress."
+  },
+  {
+    "id": "en-int-process",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "process",
+    "pronunciation": "/ˈprɑːses/",
+    "translation": "流程；过程；处理",
+    "memoryCue": "in the process of（在……过程中）。",
+    "example": "Learning is a gradual process."
+  },
+  {
+    "id": "en-int-compare",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "compare",
+    "pronunciation": "/kəmˈper/",
+    "translation": "比较；对比",
+    "memoryCue": "com-（一起）+ pare（配对）= 放在一起比。",
+    "example": "Let's compare the two options carefully."
+  },
+  {
+    "id": "en-int-solution",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "solution",
+    "pronunciation": "/səˈluːʃn/",
+    "translation": "解决方案",
+    "memoryCue": "动词 solve，名词 solution，常接 to。",
+    "example": "We found a practical solution to the issue."
+  },
+  {
+    "id": "en-int-challenge",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "challenge",
+    "pronunciation": "/ˈtʃælɪndʒ/",
+    "translation": "挑战；质疑",
+    "memoryCue": "既可指困难，也可指提出异议。",
+    "example": "Taking on a new role is an exciting challenge."
+  },
+  {
+    "id": "en-int-confirm",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "confirm",
+    "pronunciation": "/kənˈfɜːrm/",
+    "translation": "确认；证实",
+    "memoryCue": "con- + firm（坚定）= 使确定。",
+    "example": "Please confirm your flight details."
+  },
+  {
+    "id": "en-int-focus",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "focus",
+    "pronunciation": "/ˈfoʊkəs/",
+    "translation": "专注；焦点",
+    "memoryCue": "搭配 focus on（专注于）。",
+    "example": "Try to focus on one task at a time."
+  },
+  {
+    "id": "en-int-balance",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "balance",
+    "pronunciation": "/ˈbæləns/",
+    "translation": "平衡；余额",
+    "memoryCue": "bank balance 银行余额，work-life balance。",
+    "example": "It is hard to balance speed and quality."
+  },
+  {
+    "id": "en-int-require",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "require",
+    "pronunciation": "/rɪˈkwaɪər/",
+    "translation": "需要；要求",
+    "memoryCue": "比 need 更正式，名词 requirement。",
+    "example": "This job requires strong attention to detail."
+  },
+  {
+    "id": "en-adv-interpret",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "interpret",
+    "pronunciation": "/ɪnˈtɜːrprət/",
+    "translation": "解释；口译",
+    "memoryCue": "inter-（在之间）+ pret = 在双方间传译。",
+    "example": "How should we interpret this survey data?"
+  },
+  {
+    "id": "en-adv-assumption",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "assumption",
+    "pronunciation": "/əˈsʌmpʃn/",
+    "translation": "假设；设想",
+    "memoryCue": "动词 assume，不要把 assumption 当成事实。",
+    "example": "We need to test our core assumptions."
+  },
+  {
+    "id": "en-adv-evidence",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "evidence",
+    "pronunciation": "/ˈevɪdəns/",
+    "translation": "证据；依据",
+    "memoryCue": "不可数名词，e-vid（看）= 让人看清的依据。",
+    "example": "There is strong evidence to support this."
+  },
+  {
+    "id": "en-adv-framework",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "framework",
+    "pronunciation": "/ˈfreɪmwɜːrk/",
+    "translation": "框架；体系",
+    "memoryCue": "frame（框）+ work（结构）= 工作框架。",
+    "example": "We built a clear framework for evaluation."
+  },
+  {
+    "id": "en-adv-constraint",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "constraint",
+    "pronunciation": "/kənˈstreɪnt/",
+    "translation": "限制；约束条件",
+    "memoryCue": "con- + strain（拉紧）= 束缚限制。",
+    "example": "Budget is our main constraint right now."
+  },
+  {
+    "id": "en-adv-tradeoff",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "tradeoff",
+    "pronunciation": "/ˈtreɪdɔːf/",
+    "translation": "权衡；取舍",
+    "memoryCue": "有得必有失的折中，常写作 trade-off。",
+    "example": "Every design choice involves a tradeoff."
+  },
+  {
+    "id": "en-adv-insight",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "insight",
+    "pronunciation": "/ˈɪnsaɪt/",
+    "translation": "洞察；深刻见解",
+    "memoryCue": "in-（向内）+ sight（看）= 看透本质。",
+    "example": "User interviews gave us valuable insights."
+  },
+  {
+    "id": "en-adv-evaluate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "evaluate",
+    "pronunciation": "/ɪˈvæljueɪt/",
+    "translation": "评估；评价",
+    "memoryCue": "e-（出）+ value（价值）= 评出价值。",
+    "example": "Let's evaluate the results after thirty days."
+  },
+  {
+    "id": "en-adv-implement",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "implement",
+    "pronunciation": "/ˈɪmplɪment/",
+    "translation": "实施；执行",
+    "memoryCue": "把方案真正落到实处，名词 implementation。",
+    "example": "It takes discipline to implement a plan."
+  },
+  {
+    "id": "en-adv-optimize",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "optimize",
+    "pronunciation": "/ˈɑːptɪmaɪz/",
+    "translation": "优化；使最优化",
+    "memoryCue": "源自 optimum（最佳），技术与营销高频。",
+    "example": "We can optimize the page for faster loading."
+  },
+  {
+    "id": "en-biz-budget",
+    "language": "english",
+    "difficulty": "business",
+    "term": "budget",
+    "pronunciation": "/ˈbʌdʒɪt/",
+    "translation": "预算",
+    "memoryCue": "stay within budget 控制在预算内。",
+    "example": "Our Q3 marketing budget was approved."
+  },
+  {
+    "id": "en-biz-contract",
+    "language": "english",
+    "difficulty": "business",
+    "term": "contract",
+    "pronunciation": "/ˈkɑːntrækt/",
+    "translation": "合同；契约",
+    "memoryCue": "作动词重音在后 /kənˈtrækt/ 表“收缩”。",
+    "example": "Both parties signed the annual contract."
+  },
+  {
+    "id": "en-biz-client",
+    "language": "english",
+    "difficulty": "business",
+    "term": "client",
+    "pronunciation": "/ˈklaɪənt/",
+    "translation": "客户（专业服务）",
+    "memoryCue": "律所、咨询、广告行业常用 client。",
+    "example": "We have a review meeting with the client."
+  },
+  {
+    "id": "en-biz-campaign",
+    "language": "english",
+    "difficulty": "business",
+    "term": "campaign",
+    "pronunciation": "/kæmˈpeɪn/",
+    "translation": "营销活动；战役",
+    "memoryCue": "注意 g 不发音，launch a campaign。",
+    "example": "The summer campaign drove record traffic."
+  },
+  {
+    "id": "en-biz-milestone",
+    "language": "english",
+    "difficulty": "business",
+    "term": "milestone",
+    "pronunciation": "/ˈmaɪlstoʊn/",
+    "translation": "里程碑",
+    "memoryCue": "mile（英里）+ stone（石碑）= 关键节点。",
+    "example": "Shipping version 1.0 is a major milestone."
+  },
+  {
+    "id": "en-biz-workflow",
+    "language": "english",
+    "difficulty": "business",
+    "term": "workflow",
+    "pronunciation": "/ˈwɜːrkfloʊ/",
+    "translation": "工作流",
+    "memoryCue": "work + flow，流程自动化常用词。",
+    "example": "We automated the approval workflow."
+  },
+  {
+    "id": "en-biz-benchmark",
+    "language": "english",
+    "difficulty": "business",
+    "term": "benchmark",
+    "pronunciation": "/ˈbentʃmɑːrk/",
+    "translation": "基准；标杆",
+    "memoryCue": "用于和行业标准或竞品做横向对比。",
+    "example": "Let's benchmark our conversion rate."
+  },
+  {
+    "id": "en-biz-quarterly",
+    "language": "english",
+    "difficulty": "business",
+    "term": "quarterly",
+    "pronunciation": "/ˈkwɔːrtərli/",
+    "translation": "季度的；每季一次",
+    "memoryCue": "QBR = Quarterly Business Review。",
+    "example": "We hold a quarterly business review."
+  },
+  {
+    "id": "en-biz-retention",
+    "language": "english",
+    "difficulty": "business",
+    "term": "retention",
+    "pronunciation": "/rɪˈtenʃn/",
+    "translation": "留存；保留",
+    "memoryCue": "re- + tain（留住）= 用户或员工留存。",
+    "example": "User retention improved after onboarding."
+  },
+  {
+    "id": "en-biz-forecast",
+    "language": "english",
+    "difficulty": "business",
+    "term": "forecast",
+    "pronunciation": "/ˈfɔːrkæst/",
+    "translation": "预测；预估",
+    "memoryCue": "fore-（提前）+ cast（投掷）= 提前预测。",
+    "example": "Sales forecast looks stronger next quarter."
+  },
+  {
+    "id": "ja-beg-inu",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "犬",
+    "pronunciation": "いぬ / inu",
+    "translation": "狗",
+    "memoryCue": "生活中常见宠物词，和猫（neko）一组记。",
+    "example": "公園で犬を散歩させます。"
+  },
+  {
+    "id": "ja-beg-hon",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "本",
+    "pronunciation": "ほん / hon",
+    "translation": "书",
+    "memoryCue": "注意日语“本”单独指书本，书店是本屋。",
+    "example": "毎日寝る前に本を読みます。"
+  },
+  {
+    "id": "ja-beg-kuruma",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "車",
+    "pronunciation": "くるま / kuruma",
+    "translation": "汽车",
+    "memoryCue": "电车是電車（densha），普通车是車。",
+    "example": "週末は車で海へ行きます。"
+  },
+  {
+    "id": "ja-beg-eki",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "駅",
+    "pronunciation": "えき / eki",
+    "translation": "车站",
+    "memoryCue": "汉字“驿”的简化，坐地铁必看。",
+    "example": "駅の前で会いましょう。"
+  },
+  {
+    "id": "ja-beg-miru",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "見る",
+    "pronunciation": "みる / miru",
+    "translation": "看；观看",
+    "memoryCue": "二类动词（一段动词），礼貌形見ます。",
+    "example": "今夜新しい映画を見ます。"
+  },
+  {
+    "id": "ja-beg-kiku",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "聞く",
+    "pronunciation": "きく / kiku",
+    "translation": "听；询问",
+    "memoryCue": "兼有“听”和“问”两种含义。",
+    "example": "音楽を聞きながら走ります。"
+  },
+  {
+    "id": "ja-beg-iku",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "行く",
+    "pronunciation": "いく / iku",
+    "translation": "去",
+    "memoryCue": "注意て形是特殊的行って（itte）。",
+    "example": "来週東京へ行く予定です。"
+  },
+  {
+    "id": "ja-beg-kuru",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "来る",
+    "pronunciation": "くる / kuru",
+    "translation": "来",
+    "memoryCue": "日语两大不规则动词之一，礼貌形来ます。",
+    "example": "友達が家に遊びに来ます。"
+  },
+  {
+    "id": "ja-beg-oishii",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "美味しい",
+    "pronunciation": "おいしい / oishii",
+    "translation": "好吃的",
+    "memoryCue": "い形容词，口语常直接写假名おいしい。",
+    "example": "このラーメンはとても美味しいです。"
+  },
+  {
+    "id": "ja-beg-ashita",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "明日",
+    "pronunciation": "あした / ashita",
+    "translation": "明天",
+    "memoryCue": "书面语也常读作 あす（asu）。",
+    "example": "明日は朝八時に起きます。"
+  },
+  {
+    "id": "ja-ele-shuukan",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "習慣",
+    "pronunciation": "しゅうかん / shuukan",
+    "translation": "习惯",
+    "memoryCue": "注意长音 shuu，养成习惯 習慣をつける。",
+    "example": "毎朝単語を覚える習慣があります。"
+  },
+  {
+    "id": "ja-ele-ryokou",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "旅行",
+    "pronunciation": "りょこう / ryokou",
+    "translation": "旅行",
+    "memoryCue": "拗音 ryo + 长音 kou。",
+    "example": "秋に京都へ旅行したいです。"
+  },
+  {
+    "id": "ja-ele-tenki",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "天気",
+    "pronunciation": "てんき / tenki",
+    "translation": "天气",
+    "memoryCue": "和中文“天气”同形，聊天开场常用。",
+    "example": "明日の天気はどうでしょうか。"
+  },
+  {
+    "id": "ja-ele-kangaeru",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "考える",
+    "pronunciation": "かんがえる / kangaeru",
+    "translation": "思考；考虑",
+    "memoryCue": "二类动词，礼貌形考えます。",
+    "example": "もう少しよく考えてみます。"
+  },
+  {
+    "id": "ja-ele-tsukau",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "使う",
+    "pronunciation": "つかう / tsukau",
+    "translation": "使用",
+    "memoryCue": "一类动词，礼貌形使います。",
+    "example": "このアプリを毎日使っています。"
+  },
+  {
+    "id": "ja-ele-tsukuru",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "作る",
+    "pronunciation": "つくる / tsukuru",
+    "translation": "制作；做",
+    "memoryCue": "做饭、做计划、做表格都用作る。",
+    "example": "簡単なメモを作りました。"
+  },
+  {
+    "id": "ja-ele-oboeru",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "覚える",
+    "pronunciation": "おぼえる / oboeru",
+    "translation": "记住；学会",
+    "memoryCue": "背单词最核心动词：単語を覚える。",
+    "example": "新しい言葉を十個覚えました。"
+  },
+  {
+    "id": "ja-ele-wasureru",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "忘れる",
+    "pronunciation": "わすれる / wasureru",
+    "translation": "忘记",
+    "memoryCue": "和覚える（记住）成对记忆。",
+    "example": "傘を電車に忘れてしまいました。"
+  },
+  {
+    "id": "ja-ele-tetsudau",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "手伝う",
+    "pronunciation": "てつだう / tetsudau",
+    "translation": "帮忙",
+    "memoryCue": "“手”+“传”= 搭把手帮忙。",
+    "example": "引っ越しを手伝ってくれて助かりました。"
+  },
+  {
+    "id": "ja-ele-anshin",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "安心",
+    "pronunciation": "あんしん / anshin",
+    "translation": "放心；安心",
+    "memoryCue": "和心配（担心）恰好反义。",
+    "example": "それを聞いて安心しました。"
+  },
+  {
+    "id": "ja-int-keikaku",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "計画",
+    "pronunciation": "けいかく / keikaku",
+    "translation": "计划",
+    "memoryCue": "比予定更强调系统性的规划。",
+    "example": "来月の計画を立てています。"
+  },
+  {
+    "id": "ja-int-katei",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "過程",
+    "pronunciation": "かてい / katei",
+    "translation": "过程",
+    "memoryCue": "区分：家庭（かてい）同音不同字。",
+    "example": "結果だけでなく過程も大切です。"
+  },
+  {
+    "id": "ja-int-sentaku",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "選択",
+    "pronunciation": "せんたく / sentaku",
+    "translation": "选择",
+    "memoryCue": "注意与洗濯（洗衣服）同音。",
+    "example": "正しい選択ができたと思います。"
+  },
+  {
+    "id": "ja-int-riyuu",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "理由",
+    "pronunciation": "りゆう / riyuu",
+    "translation": "理由；原因",
+    "memoryCue": "长音 yuu，询问理由用どういう理由で。",
+    "example": "遅れた理由を説明してください。"
+  },
+  {
+    "id": "ja-int-kekka",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "結果",
+    "pronunciation": "けっか / kekka",
+    "translation": "结果",
+    "memoryCue": "促音っ导致 kek-ka。",
+    "example": "努力の結果が少しずつ出てきました。"
+  },
+  {
+    "id": "ja-int-houhou",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "方法",
+    "pronunciation": "ほうほう / houhou",
+    "translation": "方法",
+    "memoryCue": "两个长音：hou-hou。",
+    "example": "もっと良い方法を探しています。"
+  },
+  {
+    "id": "ja-int-kyouryoku",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "協力",
+    "pronunciation": "きょうりょく / kyouryoku",
+    "translation": "合作；协助",
+    "memoryCue": "拗长音 kyou + ryoku。",
+    "example": "皆さんの協力に感謝します。"
+  },
+  {
+    "id": "ja-int-seichou",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "成長",
+    "pronunciation": "せいちょう / seichou",
+    "translation": "成长；增长",
+    "memoryCue": "个人能力或公司业绩增长均可。",
+    "example": "チーム全体が大きく成長しました。"
+  },
+  {
+    "id": "ja-int-fukushuu",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "復習",
+    "pronunciation": "ふくしゅう / fukushuu",
+    "translation": "复习",
+    "memoryCue": "预习是予習（よしゅう），复习是復習。",
+    "example": "寝る前に今日の単語を復習します。"
+  },
+  {
+    "id": "ja-int-shuchuu",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "集中",
+    "pronunciation": "しゅうちゅう / shuuchuu",
+    "translation": "集中；专注",
+    "memoryCue": "两个长音 shuu-chuu，集中注意力。",
+    "example": "三十分だけ勉強に集中します。"
+  },
+  {
+    "id": "ja-adv-kasetsu",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "仮説",
+    "pronunciation": "かせつ / kasetsu",
+    "translation": "假设；假说",
+    "memoryCue": "先立仮説再验证：仮説を立てる。",
+    "example": "まず仮説を立ててから検証します。"
+  },
+  {
+    "id": "ja-adv-konkyo",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "根拠",
+    "pronunciation": "こんきょ / konkyo",
+    "translation": "依据；根据",
+    "memoryCue": "有根据：根拠がある。",
+    "example": "データに基づいた根拠が必要です。"
+  },
+  {
+    "id": "ja-adv-kijun",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "基準",
+    "pronunciation": "きじゅん / kijun",
+    "translation": "标准；基准",
+    "memoryCue": "评估或筛选的参照尺度。",
+    "example": "採用の基準を明確にしました。"
+  },
+  {
+    "id": "ja-adv-youshi",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "要素",
+    "pronunciation": "ようそ / youso",
+    "translation": "要素；成分",
+    "memoryCue": "成功的关键要素：成功の要素。",
+    "example": "この企画には新しい要素が必要です。"
+  },
+  {
+    "id": "ja-adv-haikei",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "背景",
+    "pronunciation": "はいけい / haikei",
+    "translation": "背景",
+    "memoryCue": "了解事情来龙去脉：背景を理解する。",
+    "example": "問題の背景を整理しましょう。"
+  },
+  {
+    "id": "ja-adv-kaishaku",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "解釈",
+    "pronunciation": "かいしゃく / kaishaku",
+    "translation": "解释；理解",
+    "memoryCue": "对条文或数据的主观解读。",
+    "example": "同じデータでも解釈が分かれます。"
+  },
+  {
+    "id": "ja-adv-yuuisei",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "優位性",
+    "pronunciation": "ゆういせい / yuuisei",
+    "translation": "优势",
+    "memoryCue": "竞争优势：競争上の優位性。",
+    "example": "競合に対する優位性を保ちます。"
+  },
+  {
+    "id": "ja-adv-saiteki",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "最適",
+    "pronunciation": "さいてき / saiteki",
+    "translation": "最合适；最优",
+    "memoryCue": "最优化即最適化（さいてきか）。",
+    "example": "今の状況に最適な方法を選びます。"
+  },
+  {
+    "id": "ja-adv-tenkai",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "展開",
+    "pronunciation": "てんかい / tenkai",
+    "translation": "展开；推广",
+    "memoryCue": "业务拓展或剧情展开。",
+    "example": "新しい市場へ事業を展開します。"
+  },
+  {
+    "id": "ja-adv-kadai-kaiketsu",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "解決",
+    "pronunciation": "かいけつ / kaiketsu",
+    "translation": "解决",
+    "memoryCue": "与問題、課題高频搭配。",
+    "example": "根本的な解決策が見つかりました。"
+  },
+  {
+    "id": "ja-biz-koushou",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "交渉",
+    "pronunciation": "こうしょう / koushou",
+    "translation": "谈判；交涉",
+    "memoryCue": "价格或条件谈判：条件を交渉する。",
+    "example": "価格について先方と交渉します。"
+  },
+  {
+    "id": "ja-biz-seikyuusho",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "請求書",
+    "pronunciation": "せいきゅうしょ / seikyuusho",
+    "translation": "请款单；账单",
+    "memoryCue": "月末财务对账与开票核心词。",
+    "example": "今月分の請求書を発行しました。"
+  },
+  {
+    "id": "ja-biz-rieki",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "利益",
+    "pronunciation": "りえき / rieki",
+    "translation": "利润；利益",
+    "memoryCue": "区别于売上（营收）。",
+    "example": "コストを下げて利益を増やします。"
+  },
+  {
+    "id": "ja-biz-shinchoku",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "進捗",
+    "pronunciation": "しんちょく / shinchoku",
+    "translation": "进度；进展",
+    "memoryCue": "项目汇报必用：進捗どうですか。",
+    "example": "プロジェクトの進捗を共有します。"
+  },
+  {
+    "id": "ja-biz-gijiroku",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "議事録",
+    "pronunciation": "ぎじろく / gijiroku",
+    "translation": "会议纪要",
+    "memoryCue": "开完会发纪要：議事録を送る。",
+    "example": "会議の議事録を後ほど送ります。"
+  },
+  {
+    "id": "ja-biz-tantou",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "担当",
+    "pronunciation": "たんとう / tantou",
+    "translation": "负责；负责人",
+    "memoryCue": "负责人称 担当者（たんとうしゃ）。",
+    "example": "この案件は私が担当しています。"
+  },
+  {
+    "id": "ja-biz-yusen",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "優先",
+    "pronunciation": "ゆうせん / yusen",
+    "translation": "优先",
+    "memoryCue": "优先级即 優先度（ゆうせんど）。",
+    "example": "まずは重要な作業を優先します。"
+  },
+  {
+    "id": "ja-biz-teikei",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "提携",
+    "pronunciation": "ていけい / teikei",
+    "translation": "合作；结盟",
+    "memoryCue": "战略合作即 業務提携。",
+    "example": "大手企業と業務提携を結びました。"
+  },
+  {
+    "id": "ja-biz-kessai",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "決裁",
+    "pronunciation": "けっさい / kessai",
+    "translation": "批示；拍板",
+    "memoryCue": "内部审批流程通过：決裁が下りる。",
+    "example": "社長の決裁を待っています。"
+  },
+  {
+    "id": "ja-biz-shucchou",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "出張",
+    "pronunciation": "しゅっちょう / shucchou",
+    "translation": "出差",
+    "memoryCue": "注意促音っ与长音 ou。",
+    "example": "来週は大阪へ出張します。"
+  },
+  {
+    "id": "ko-beg-gaejip",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "강아지",
+    "pronunciation": "gangaji",
+    "translation": "小狗",
+    "memoryCue": "固有词，宠物店和日常常用。",
+    "example": "귀여운 강아지를 키우고 있어요."
+  },
+  {
+    "id": "ko-beg-goyang-i",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "고양이",
+    "pronunciation": "goyangi",
+    "translation": "猫",
+    "memoryCue": "固有词，三音节 go-yang-i。",
+    "example": "고양이가 창문 옆에서 자고 있어요."
+  },
+  {
+    "id": "ko-beg-chaek",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "책",
+    "pronunciation": "chaek",
+    "translation": "书",
+    "memoryCue": "汉字词“册”，书店 서점。",
+    "example": "자기 전에 책을 조금 읽어요."
+  },
+  {
+    "id": "ko-beg-hakgyo",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "학교",
+    "pronunciation": "hakgyo",
+    "translation": "学校",
+    "memoryCue": "汉字词“学校”，和日语 gakkou 同源。",
+    "example": "아침 여덟 시에 학교에 가요."
+  },
+  {
+    "id": "ko-beg-haksaeng",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "학생",
+    "pronunciation": "haksaeng",
+    "translation": "学生",
+    "memoryCue": "汉字词“学生”。",
+    "example": "저는 대학교 학생입니다."
+  },
+  {
+    "id": "ko-beg-seonsaengnim",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "선생님",
+    "pronunciation": "seonsaengnim",
+    "translation": "老师",
+    "memoryCue": "汉字词“先生”+ 敬称 님。",
+    "example": "선생님, 질문이 하나 있어요."
+  },
+  {
+    "id": "ko-beg-eumsik",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "음식",
+    "pronunciation": "eumsik",
+    "translation": "食物；饮食",
+    "memoryCue": "汉字词“饮食”。",
+    "example": "한국 음식 중에서 비빔밥을 좋아해요."
+  },
+  {
+    "id": "ko-beg-don",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "돈",
+    "pronunciation": "don",
+    "translation": "钱",
+    "memoryCue": "单音节固有词，赚钱 돈을 벌다。",
+    "example": "여행을 가려면 돈을 모아야 해요."
+  },
+  {
+    "id": "ko-beg-handeupone",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "휴대폰",
+    "pronunciation": "hyudaepon",
+    "translation": "手机",
+    "memoryCue": "携带（휴대）+ phone（폰）。",
+    "example": "휴대폰 배터리가 거의 없어요."
+  },
+  {
+    "id": "ko-beg-jeonyeok",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "저녁",
+    "pronunciation": "jeonyeok",
+    "translation": "晚上；晚餐",
+    "memoryCue": "兼表傍晚时间与晚饭。",
+    "example": "오늘 저녁에 뭐 먹을까요?"
+  },
+  {
+    "id": "ko-ele-seupgwan",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "습관",
+    "pronunciation": "seupgwan",
+    "translation": "习惯",
+    "memoryCue": "汉字词“习惯”。",
+    "example": "좋은 습관을 만드는 게 중요해요."
+  },
+  {
+    "id": "ko-ele-iyagi",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "이야기",
+    "pronunciation": "iyagi",
+    "translation": "故事；谈话",
+    "memoryCue": "口语常缩略为 얘기（yaegi）。",
+    "example": "오랜만에 재미있는 이야기를 나눴어요."
+  },
+  {
+    "id": "ko-ele-gihoek",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "기억",
+    "pronunciation": "gieok",
+    "translation": "记忆；记得",
+    "memoryCue": "汉字词“记忆”，记起来 기억나다。",
+    "example": "그 단어의 뜻이 잘 기억나지 않아요."
+  },
+  {
+    "id": "ko-ele-iye",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "이해",
+    "pronunciation": "ihae",
+    "translation": "理解",
+    "memoryCue": "汉字词“理解”，理解了 이해했어요。",
+    "example": "이제 문법 설명이 잘 이해돼요."
+  },
+  {
+    "id": "ko-ele-yeonseup",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "연습",
+    "pronunciation": "yeonseup",
+    "translation": "练习",
+    "memoryCue": "汉字词“练习”，多练习 많이 연습하다。",
+    "example": "발음을 매일 조금씩 연습해요."
+  },
+  {
+    "id": "ko-ele-doum",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "도움",
+    "pronunciation": "doum",
+    "translation": "帮助",
+    "memoryCue": "动词 돕다 的名词化，对……有帮助 도움이 되다。",
+    "example": "이 앱이 공부에 큰 도움이 돼요."
+  },
+  {
+    "id": "ko-ele-gyeoljeong",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "결정",
+    "pronunciation": "gyeoljeong",
+    "translation": "决定",
+    "memoryCue": "汉字词“决定”。",
+    "example": "아직 최종 결정을 내리지 못했어요."
+  },
+  {
+    "id": "ko-ele-gyeolgwa",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "결과",
+    "pronunciation": "gyeolgwa",
+    "translation": "结果",
+    "memoryCue": "汉字词“结果”。",
+    "example": "시험 결과가 생각보다 좋았어요."
+  },
+  {
+    "id": "ko-ele-iyu",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "이유",
+    "pronunciation": "iyu",
+    "translation": "理由；原因",
+    "memoryCue": "汉字词“理由”，和中文几乎同音。",
+    "example": "그렇게 생각한 이유가 뭐예요?"
+  },
+  {
+    "id": "ko-ele-seolmyeong",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "설명",
+    "pronunciation": "seolmyeong",
+    "translation": "说明；解释",
+    "memoryCue": "汉字词“说明”，和日语説明同源。",
+    "example": "다시 한번 쉽게 설명해 주세요."
+  },
+  {
+    "id": "ko-int-bangbeop",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "방법",
+    "pronunciation": "bangbeop",
+    "translation": "方法；办法",
+    "memoryCue": "汉字词“方法”。",
+    "example": "더 효율적인 방법을 찾고 있어요."
+  },
+  {
+    "id": "ko-int-useon",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "우선",
+    "pronunciation": "useon",
+    "translation": "优先；首先",
+    "memoryCue": "汉字词“优先”，优先级 우선순위。",
+    "example": "우선 중요한 일부터 처리합시다."
+  },
+  {
+    "id": "ko-int-maengnak",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "맥락",
+    "pronunciation": "maengnak",
+    "translation": "语境；脉络",
+    "memoryCue": "汉字词“脉络”，ㄱ+ㄹ 鼻音化读 maengnak。",
+    "example": "단어는 문장 맥락 속에서 외워야 해요."
+  },
+  {
+    "id": "ko-int-pideubaek",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "피드백",
+    "pronunciation": "pideubaek",
+    "translation": "反馈",
+    "memoryCue": "外来词 feedback，职场与产品开发高频。",
+    "example": "사용자 피드백을 반영해 수정했어요."
+  },
+  {
+    "id": "ko-int-jipjung",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "집중",
+    "pronunciation": "jipjung",
+    "translation": "集中；专注",
+    "memoryCue": "汉字词“集中”。",
+    "example": "아침 시간에 집중이 가장 잘 돼요."
+  },
+  {
+    "id": "ko-int-bokseup",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "복습",
+    "pronunciation": "bokseup",
+    "translation": "复习",
+    "memoryCue": "汉字词“复习”，对应日语復習。",
+    "example": "어제 배운 단어를 다시 복습했어요."
+  },
+  {
+    "id": "ko-int-seongjang",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "성장",
+    "pronunciation": "seongjang",
+    "translation": "成长；增长",
+    "memoryCue": "汉字词“成长”。",
+    "example": "꾸준한 노력이 성장으로 이어져요."
+  },
+  {
+    "id": "ko-int-haegyeol",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "해결",
+    "pronunciation": "haegyeol",
+    "translation": "解决",
+    "memoryCue": "汉字词“解决”。",
+    "example": "팀원들과 함께 문제를 해결했어요."
+  },
+  {
+    "id": "ko-int-yogu",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "요구",
+    "pronunciation": "yogu",
+    "translation": "要求；需求",
+    "memoryCue": "汉字词“要求”，客户需求 고객 요구。",
+    "example": "시장의 요구에 빠르게 대응해야 해요."
+  },
+  {
+    "id": "ko-int-gijun",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "기준",
+    "pronunciation": "gijun",
+    "translation": "标准；基准",
+    "memoryCue": "汉字词“基准”。",
+    "example": "명확한 기준을 세우고 평가합니다."
+  },
+  {
+    "id": "ko-adv-gaseol",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "가설",
+    "pronunciation": "gaseol",
+    "translation": "假设；假说",
+    "memoryCue": "汉字词“假说”，和日语仮説同源。",
+    "example": "데이터로 가설을 검증해 봅시다."
+  },
+  {
+    "id": "ko-adv-geungeo",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "근거",
+    "pronunciation": "geungeo",
+    "translation": "依据；根据",
+    "memoryCue": "汉字词“根据”，和日语根拠同源。",
+    "example": "주장을 뒷받침할 근거가 부족해요."
+  },
+  {
+    "id": "ko-adv-haeseok",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "해석",
+    "pronunciation": "haeseok",
+    "translation": "解释；解读",
+    "memoryCue": "汉字词“解析”，指对文本或数据的解读。",
+    "example": "같은 결과라도 해석이 다를 수 있어요."
+  },
+  {
+    "id": "ko-adv-baegyeong",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "배경",
+    "pronunciation": "baegyeong",
+    "translation": "背景",
+    "memoryCue": "汉字词“背景”。",
+    "example": "사건의 배경을 먼저 이해해야 해요."
+  },
+  {
+    "id": "ko-adv-gujo",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "구조",
+    "pronunciation": "gujo",
+    "translation": "结构；构造",
+    "memoryCue": "汉字词“构造”。",
+    "example": "앱의 코드 구조를 깔끔하게 바꿨어요."
+  },
+  {
+    "id": "ko-adv-choejeokhwa",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "최적화",
+    "pronunciation": "choejeokhwa",
+    "translation": "优化；最优化",
+    "memoryCue": "汉字词“最适化”。",
+    "example": "검색 속도를 최적화할 필요가 있어요."
+  },
+  {
+    "id": "ko-adv-tongchal",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "통찰",
+    "pronunciation": "tongchal",
+    "translation": "洞察",
+    "memoryCue": "汉字词“洞察”，洞察力 통찰력。",
+    "example": "인터뷰를 통해 새로운 통찰을 얻었어요."
+  },
+  {
+    "id": "ko-adv-jeyak",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "제약",
+    "pronunciation": "jeyak",
+    "translation": "限制；制约",
+    "memoryCue": "汉字词“制约”。",
+    "example": "예산과 시간의 제약이 있습니다."
+  },
+  {
+    "id": "ko-adv-byeonhwa",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "변화",
+    "pronunciation": "byeonhwa",
+    "translation": "变化",
+    "memoryCue": "汉字词“变化”。",
+    "example": "시장 변화에 유연하게 적응해야 해요."
+  },
+  {
+    "id": "ko-adv-hyeonhwang",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "현황",
+    "pronunciation": "hyeonhwang",
+    "translation": "现状；现况",
+    "memoryCue": "汉字词“现况”，汇报开头常用。",
+    "example": "현재 진행 현황을 간략히 공유합니다."
+  },
+  {
+    "id": "ko-biz-jean",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "제안",
+    "pronunciation": "jean",
+    "translation": "提案；建议",
+    "memoryCue": "汉字词“提案”，提案书 제안서。",
+    "example": "새로운 협업 방안을 제안했습니다."
+  },
+  {
+    "id": "ko-biz-suik",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "수익",
+    "pronunciation": "suik",
+    "translation": "收益；盈利",
+    "memoryCue": "汉字词“收益”，ROI 相关高频词。",
+    "example": "광고 수익이 전월 대비 증가했어요."
+  },
+  {
+    "id": "ko-biz-biyong",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "비용",
+    "pronunciation": "biyong",
+    "translation": "成本；费用",
+    "memoryCue": "汉字词“费用”。",
+    "example": "불필요한 운영 비용을 줄여야 해요."
+  },
+  {
+    "id": "ko-biz-jinhaeng",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "진행",
+    "pronunciation": "jinhaeng",
+    "translation": "进行；推进",
+    "memoryCue": "汉字词“进行”，进度 진행 상황。",
+    "example": "계획대로 순조롭게 진행되고 있어요."
+  },
+  {
+    "id": "ko-biz-damdang",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "담당",
+    "pronunciation": "damdang",
+    "translation": "负责；担当",
+    "memoryCue": "汉字词“担当”，负责人 담당자。",
+    "example": "이번 프로젝트는 제가 담당합니다."
+  },
+  {
+    "id": "ko-biz-hoeuilok",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "회의록",
+    "pronunciation": "hoeuirok",
+    "translation": "会议纪要",
+    "memoryCue": "汉字词“会议录”，ㄹ鼻音化。",
+    "example": "회의가 끝나고 회의록을 공유했어요."
+  },
+  {
+    "id": "ko-biz-gyeonjeok",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "견적",
+    "pronunciation": "gyeonjeok",
+    "translation": "报价；估价",
+    "memoryCue": "汉字词“见积”，报价单 견적서。",
+    "example": "업체에 견적서를 요청해 두었어요."
+  },
+  {
+    "id": "ko-biz-jehu",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "제휴",
+    "pronunciation": "jehu",
+    "translation": "合作；联盟",
+    "memoryCue": "汉字词“提携”，商业合作高频。",
+    "example": "파트너사와 전략적 제휴를 맺었어요."
+  },
+  {
+    "id": "ko-biz-gyeoljae",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "결재",
+    "pronunciation": "gyeoljae",
+    "translation": "审批；批示",
+    "memoryCue": "区分：결제（支付结算），결재（审批）。",
+    "example": "문서 결재가 아직 대기 중입니다."
+  },
+  {
+    "id": "ko-biz-chuljang",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "출장",
+    "pronunciation": "chuljang",
+    "translation": "出差",
+    "memoryCue": "汉字词“出张”，和日语出張同源。",
+    "example": "다음 주에 상하이로 출장을 갑니다."
+  },
+  {
+    "id": "fr-beg-chat",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "chat",
+    "pronunciation": "/ʃa/",
+    "translation": "猫",
+    "memoryCue": "ch 读 /ʃ/，末尾 t 不发音。",
+    "example": "Le chat dort sur le canapé."
+  },
+  {
+    "id": "fr-beg-chien",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "chien",
+    "pronunciation": "/ʃjɛ̃/",
+    "translation": "狗",
+    "memoryCue": "ien 发鼻化元音 /jɛ̃/，阴性 chienne。",
+    "example": "Mon chien aime courir au parc."
+  },
+  {
+    "id": "fr-beg-pain",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "pain",
+    "pronunciation": "/pɛ̃/",
+    "translation": "面包",
+    "memoryCue": "法棍 baguette 之外最基础的面包词。",
+    "example": "J'achète du pain frais chaque matin."
+  },
+  {
+    "id": "fr-beg-ville",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "ville",
+    "pronunciation": "/vil/",
+    "translation": "城市",
+    "memoryCue": "注意这里 ll 不发 /j/，直接读 /vil/。",
+    "example": "Paris est une ville magnifique."
+  },
+  {
+    "id": "fr-beg-nuit",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "nuit",
+    "pronunciation": "/nɥi/",
+    "translation": "夜晚",
+    "memoryCue": "bonne nuit 晚安，末尾 t 不发音。",
+    "example": "Il fait déjà nuit à dix-huit heures."
+  },
+  {
+    "id": "fr-beg-matin",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "matin",
+    "pronunciation": "/matɛ̃/",
+    "translation": "早晨；上午",
+    "memoryCue": "le matin 表示在早上，不加介词。",
+    "example": "Je révise mes mots le matin."
+  },
+  {
+    "id": "fr-beg-famille",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "famille",
+    "pronunciation": "/famij/",
+    "translation": "家庭；家人",
+    "memoryCue": "ill 在元音后读 /ij/。",
+    "example": "Ma famille habite près de Lyon."
+  },
+  {
+    "id": "fr-beg-parler",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "parler",
+    "pronunciation": "/paʁle/",
+    "translation": "说；讲",
+    "memoryCue": "第一组规则动词，parler français。",
+    "example": "Est-ce que vous parlez français ?"
+  },
+  {
+    "id": "fr-beg-manger",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "manger",
+    "pronunciation": "/mɑ̃ʒe/",
+    "translation": "吃",
+    "memoryCue": "我们吃 nous mangeons 需加 e 保 /ʒ/ 音。",
+    "example": "On va manger au restaurant ce soir ?"
+  },
+  {
+    "id": "fr-beg-ecole",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "école",
+    "pronunciation": "/ekɔl/",
+    "translation": "学校",
+    "memoryCue": "阴性名词，à l'école 在学校。",
+    "example": "Les enfants vont à l'école à huit heures."
+  },
+  {
+    "id": "fr-ele-meteo",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "météo",
+    "pronunciation": "/meteo/",
+    "translation": "天气预报；天气",
+    "memoryCue": "日常聊天极高频，quel temps / la météo。",
+    "example": "Regardons la météo avant de sortir."
+  },
+  {
+    "id": "fr-ele-horaire",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "horaire",
+    "pronunciation": "/ɔʁɛʁ/",
+    "translation": "时刻表；日程时间",
+    "memoryCue": "h 不发音，与英文 hour 同源。",
+    "example": "Quel est votre horaire de travail ?"
+  },
+  {
+    "id": "fr-ele-soutien",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "soutien",
+    "pronunciation": "/sutjɛ̃/",
+    "translation": "支持；支撑",
+    "memoryCue": "动词 soutenir（支持）。",
+    "example": "Merci pour votre soutien constant."
+  },
+  {
+    "id": "fr-ele-decider",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "décider",
+    "pronunciation": "/deside/",
+    "translation": "决定",
+    "memoryCue": "décider de faire qc. 决定做某事。",
+    "example": "Nous avons décidé de partir tôt."
+  },
+  {
+    "id": "fr-ele-preparer",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "préparer",
+    "pronunciation": "/pʁepaʁe/",
+    "translation": "准备",
+    "memoryCue": "与英文 prepare 同源。",
+    "example": "Je prépare une présentation pour demain."
+  },
+  {
+    "id": "fr-ele-expliquer",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "expliquer",
+    "pronunciation": "/ɛksplike/",
+    "translation": "解释；说明",
+    "memoryCue": "与英文 explain 同源。",
+    "example": "Pouvez-vous expliquer cette règle ?"
+  },
+  {
+    "id": "fr-ele-souvenir",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "souvenir",
+    "pronunciation": "/suvniʁ/",
+    "translation": "记忆；纪念品",
+    "memoryCue": "se souvenir de 记得，英文借用作纪念品。",
+    "example": "J'ai un bon souvenir de ce voyage."
+  },
+  {
+    "id": "fr-ele-oublier",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "oublier",
+    "pronunciation": "/ublije/",
+    "translation": "忘记",
+    "memoryCue": "n'oubliez pas（别忘了）。",
+    "example": "N'oubliez pas de réviser ce soir."
+  },
+  {
+    "id": "fr-ele-arriver",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "arriver",
+    "pronunciation": "/aʁive/",
+    "translation": "到达；发生",
+    "memoryCue": "作复合过去时用助动词 être。",
+    "example": "Le train va arriver dans cinq minutes."
+  },
+  {
+    "id": "fr-ele-raison",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "raison",
+    "pronunciation": "/ʁɛzɔ̃/",
+    "translation": "原因；道理",
+    "memoryCue": "avoir raison（有道理 / 对的）。",
+    "example": "Vous avez tout à fait raison."
+  },
+  {
+    "id": "fr-int-adapter",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "adapter",
+    "pronunciation": "/adapte/",
+    "translation": "适应；改编",
+    "memoryCue": "s'adapter à 适应新环境。",
+    "example": "Il faut s'adapter aux changements."
+  },
+  {
+    "id": "fr-int-efficacite",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "efficacité",
+    "pronunciation": "/efikasite/",
+    "translation": "效率；有效性",
+    "memoryCue": "名词形式，对应形容词 efficace。",
+    "example": "Cette application améliore notre efficacité."
+  },
+  {
+    "id": "fr-int-retour",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "retour",
+    "pronunciation": "/ʁətuʁ/",
+    "translation": "反馈；返回",
+    "memoryCue": "商务法语中 faire un retour = 给反馈。",
+    "example": "J'attends votre retour sur ce document."
+  },
+  {
+    "id": "fr-int-ressource",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "ressource",
+    "pronunciation": "/ʁəsuʁs/",
+    "translation": "资源；手段",
+    "memoryCue": "双写 s 读 /s/，对应英文 resource。",
+    "example": "Nous manquons de ressources pour ce projet."
+  },
+  {
+    "id": "fr-int-processus",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "processus",
+    "pronunciation": "/pʁɔsesys/",
+    "translation": "流程；过程",
+    "memoryCue": "注意末尾 s 要发音，单复数同形。",
+    "example": "Le processus de validation est simple."
+  },
+  {
+    "id": "fr-int-comparer",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "comparer",
+    "pronunciation": "/kɔ̃paʁe/",
+    "translation": "比较；对比",
+    "memoryCue": "与英文 compare 同源。",
+    "example": "Comparons les deux offres en détail."
+  },
+  {
+    "id": "fr-int-defi",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "défi",
+    "pronunciation": "/defi/",
+    "translation": "挑战",
+    "memoryCue": "relever un défi（迎接挑战）。",
+    "example": "C'est un beau défi pour toute l'équipe."
+  },
+  {
+    "id": "fr-int-confirmer",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "confirmer",
+    "pronunciation": "/kɔ̃fiʁme/",
+    "translation": "确认；证实",
+    "memoryCue": "与英文 confirm 同源。",
+    "example": "Merci de confirmer votre présence."
+  },
+  {
+    "id": "fr-int-maintenir",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "maintenir",
+    "pronunciation": "/mɛ̃tniʁ/",
+    "translation": "维持；保持",
+    "memoryCue": "main（手）+ tenir（握住），英文 maintain 来源。",
+    "example": "Il est difficile de maintenir ce rythme."
+  },
+  {
+    "id": "fr-int-fiable",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "fiable",
+    "pronunciation": "/fjabl/",
+    "translation": "可靠的",
+    "memoryCue": "源自 fier（信任），对应英文 reliable。",
+    "example": "C'est une source d'information fiable."
+  },
+  {
+    "id": "fr-adv-interpreter",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "interpréter",
+    "pronunciation": "/ɛ̃tɛʁpʁete/",
+    "translation": "解释；口译",
+    "memoryCue": "与英文 interpret 同源。",
+    "example": "Comment interpréter ces résultats ?"
+  },
+  {
+    "id": "fr-adv-preuve",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "preuve",
+    "pronunciation": "/pʁœv/",
+    "translation": "证据；证明",
+    "memoryCue": "faire ses preuves（证明自己的能力）。",
+    "example": "Nous avons besoin de preuves concrètes."
+  },
+  {
+    "id": "fr-adv-cadre",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "cadre",
+    "pronunciation": "/kadʁ/",
+    "translation": "框架；背景；高管",
+    "memoryCue": "dans le cadre de（在……框架/背景下）。",
+    "example": "Ce projet s'inscrit dans un cadre clair."
+  },
+  {
+    "id": "fr-adv-contrainte",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "contrainte",
+    "pronunciation": "/kɔ̃tʁɛ̃t/",
+    "translation": "限制；约束",
+    "memoryCue": "对应英文 constraint。",
+    "example": "Nous travaillons sous forte contrainte."
+  },
+  {
+    "id": "fr-adv-compromis",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "compromis",
+    "pronunciation": "/kɔ̃pʁɔmi/",
+    "translation": "折中；妥协",
+    "memoryCue": "trouver un compromis 找到平衡方案。",
+    "example": "Il faut trouver un juste compromis."
+  },
+  {
+    "id": "fr-adv-ambigu",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "ambigu",
+    "pronunciation": "/ɑ̃biɡy/",
+    "translation": "模棱两可的",
+    "memoryCue": "阴性加 e 为 ambiguë，对应 ambiguous。",
+    "example": "Cette phrase reste un peu ambiguë."
+  },
+  {
+    "id": "fr-adv-resilient",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "résilient",
+    "pronunciation": "/ʁeziljɑ̃/",
+    "translation": "有韧性的",
+    "memoryCue": "对应英文 resilient。",
+    "example": "Une équipe résiliente surmonte les crises."
+  },
+  {
+    "id": "fr-adv-inevitable",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "inévitable",
+    "pronunciation": "/inevitabl/",
+    "translation": "不可避免的",
+    "memoryCue": "对应英文 inevitable。",
+    "example": "Ce changement devient inévitable."
+  },
+  {
+    "id": "fr-adv-attenuer",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "atténuer",
+    "pronunciation": "/atenɥe/",
+    "translation": "减轻；缓和",
+    "memoryCue": "常搭配 risque（风险）或 impact。",
+    "example": "Nous cherchons à atténuer les risques."
+  },
+  {
+    "id": "fr-adv-pragmatique",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "pragmatique",
+    "pronunciation": "/pʁaɡmatik/",
+    "translation": "务实的",
+    "memoryCue": "对应英文 pragmatic。",
+    "example": "Adoptons une approche pragmatique."
+  },
+  {
+    "id": "fr-biz-echeance",
+    "language": "french",
+    "difficulty": "business",
+    "term": "échéance",
+    "pronunciation": "/eʃeɑ̃s/",
+    "translation": "到期日；截止期限",
+    "memoryCue": "比 délai 更强调具体截止日期。",
+    "example": "L'échéance du projet est fixée à lundi."
+  },
+  {
+    "id": "fr-biz-revenu",
+    "language": "french",
+    "difficulty": "business",
+    "term": "revenu",
+    "pronunciation": "/ʁəvny/",
+    "translation": "收入；收益",
+    "memoryCue": "英文 revenue 借自此词。",
+    "example": "Les revenus ont augmenté cette année."
+  },
+  {
+    "id": "fr-biz-marge",
+    "language": "french",
+    "difficulty": "business",
+    "term": "marge",
+    "pronunciation": "/maʁʒ/",
+    "translation": "利润率；余地",
+    "memoryCue": "marge brute 毛利率，对应英文 margin。",
+    "example": "Nous devons protéger notre marge brute."
+  },
+  {
+    "id": "fr-biz-campagne",
+    "language": "french",
+    "difficulty": "business",
+    "term": "campagne",
+    "pronunciation": "/kɑ̃paɲ/",
+    "translation": "营销活动；战役",
+    "memoryCue": "gn 发 /ɲ/，lancer une campagne。",
+    "example": "La campagne digitale démarre demain."
+  },
+  {
+    "id": "fr-biz-jalon",
+    "language": "french",
+    "difficulty": "business",
+    "term": "jalon",
+    "pronunciation": "/ʒalɔ̃/",
+    "translation": "里程碑；关键节点",
+    "memoryCue": "项目管理中对应英文 milestone。",
+    "example": "Voici les principaux jalons du trimestre."
+  },
+  {
+    "id": "fr-biz-partenaire",
+    "language": "french",
+    "difficulty": "business",
+    "term": "partenaire",
+    "pronunciation": "/paʁtənɛʁ/",
+    "translation": "合作伙伴",
+    "memoryCue": "英文 partner 的同源词。",
+    "example": "Nous travaillons avec un partenaire local."
+  },
+  {
+    "id": "fr-biz-prevision",
+    "language": "french",
+    "difficulty": "business",
+    "term": "prévision",
+    "pronunciation": "/pʁevizjɔ̃/",
+    "translation": "预测；预估",
+    "memoryCue": "对应英文 forecast / prevision。",
+    "example": "Les prévisions de vente sont positives."
+  },
+  {
+    "id": "fr-biz-livrable",
+    "language": "french",
+    "difficulty": "business",
+    "term": "livrable",
+    "pronunciation": "/livʁabl/",
+    "translation": "可交付成果",
+    "memoryCue": "来自 livrer（交付），对应 deliverable。",
+    "example": "Chaque équipe doit fournir ses livrables."
+  },
+  {
+    "id": "fr-biz-alignement",
+    "language": "french",
+    "difficulty": "business",
+    "term": "alignement",
+    "pronunciation": "/aliɲmɑ̃/",
+    "translation": "对齐；一致",
+    "memoryCue": "gn 发 /ɲ/，对应英文 alignment。",
+    "example": "Un alignement rapide est nécessaire."
+  },
+  {
+    "id": "fr-biz-fidelisation",
+    "language": "french",
+    "difficulty": "business",
+    "term": "fidélisation",
+    "pronunciation": "/fidelizasjɔ̃/",
+    "translation": "客户留存；忠诚度",
+    "memoryCue": "来自 fidèle（忠诚的），对应 retention。",
+    "example": "La fidélisation des clients est cruciale."
+  },
+  {
+    "id": "es-beg-gato",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "gato",
+    "pronunciation": "/ˈɡato/",
+    "translation": "猫",
+    "memoryCue": "阴性 gata，常见宠物词。",
+    "example": "Mi gato duerme todo el día."
+  },
+  {
+    "id": "es-beg-perro",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "perro",
+    "pronunciation": "/ˈpero/",
+    "translation": "狗",
+    "memoryCue": "双写 rr 发大舌颤音 /r/。",
+    "example": "El perro corre por el parque."
+  },
+  {
+    "id": "es-beg-comida",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "comida",
+    "pronunciation": "/koˈmiða/",
+    "translation": "食物；餐食",
+    "memoryCue": "来自动词 comer（吃）。",
+    "example": "La comida española es deliciosa."
+  },
+  {
+    "id": "es-beg-ciudad",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "ciudad",
+    "pronunciation": "/sjuˈðað/",
+    "translation": "城市",
+    "memoryCue": "结尾 d 读得很轻柔 /ð/。",
+    "example": "Madrid es una ciudad muy animada."
+  },
+  {
+    "id": "es-beg-noche",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "noche",
+    "pronunciation": "/ˈnotʃe/",
+    "translation": "夜晚",
+    "memoryCue": "buenas noches 晚上好 / 晚安。",
+    "example": "Esta noche vamos a cenar juntos."
+  },
+  {
+    "id": "es-beg-manana",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "mañana",
+    "pronunciation": "/maˈɲana/",
+    "translation": "早晨；明天",
+    "memoryCue": "带波浪号 ñ 读 /ɲ/，兼表早上和明天。",
+    "example": "Mañana por la mañana tengo clase."
+  },
+  {
+    "id": "es-beg-familia",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "familia",
+    "pronunciation": "/faˈmilja/",
+    "translation": "家庭；家人",
+    "memoryCue": "与英文拼写完全相同。",
+    "example": "Toda mi familia vive en Shanghái."
+  },
+  {
+    "id": "es-beg-hablar",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "hablar",
+    "pronunciation": "/aˈβlaɾ/",
+    "translation": "说；讲",
+    "memoryCue": "h 不发音，规则 -ar 动词。",
+    "example": "Quiero hablar español con fluidez."
+  },
+  {
+    "id": "es-beg-comer",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "comer",
+    "pronunciation": "/koˈmeɾ/",
+    "translation": "吃",
+    "memoryCue": "规则 -er 动词，吃饭时间 hora de comer。",
+    "example": "Vamos a comer algo ligero."
+  },
+  {
+    "id": "es-beg-escuela",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "escuela",
+    "pronunciation": "/esˈkwela/",
+    "translation": "学校",
+    "memoryCue": "s 开头加 e-，对应 school / école。",
+    "example": "La escuela está cerca de mi casa."
+  },
+  {
+    "id": "es-ele-horario",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "horario",
+    "pronunciation": "/oˈɾaɾjo/",
+    "translation": "日程表；时间表",
+    "memoryCue": "h 不发音，与法语 horaire 同源。",
+    "example": "Tengo un horario muy ocupado hoy."
+  },
+  {
+    "id": "es-ele-apoyo",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "apoyo",
+    "pronunciation": "/aˈpoʝo/",
+    "translation": "支持；支撑",
+    "memoryCue": "动词 apoyar（支持）。",
+    "example": "Agradezco mucho tu apoyo constante."
+  },
+  {
+    "id": "es-ele-decidir",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "decidir",
+    "pronunciation": "/desiˈðiɾ/",
+    "translation": "决定",
+    "memoryCue": "规则 -ir 动词，对应英文 decide。",
+    "example": "Todavía no hemos decidido la fecha."
+  },
+  {
+    "id": "es-ele-preparar",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "preparar",
+    "pronunciation": "/pɾepaˈɾaɾ/",
+    "translation": "准备",
+    "memoryCue": "与英文 prepare 同源。",
+    "example": "Necesito preparar la reunión de mañana."
+  },
+  {
+    "id": "es-ele-explicar",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "explicar",
+    "pronunciation": "/ekspliˈkaɾ/",
+    "translation": "解释；说明",
+    "memoryCue": "与英文 explain 同源。",
+    "example": "¿Puedes explicar eso con un ejemplo?"
+  },
+  {
+    "id": "es-ele-olvidar",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "olvidar",
+    "pronunciation": "/olβiˈðaɾ/",
+    "translation": "忘记",
+    "memoryCue": "no olvides（别忘了）。",
+    "example": "No olvides repasar las tarjetas hoy."
+  },
+  {
+    "id": "es-ele-razon",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "razón",
+    "pronunciation": "/raˈson/",
+    "translation": "原因；道理",
+    "memoryCue": "tener razón（有道理 / 说得对）。",
+    "example": "Tienes toda la razón en ese punto."
+  },
+  {
+    "id": "es-ele-resultado",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "resultado",
+    "pronunciation": "/resulˈtaðo/",
+    "translation": "结果",
+    "memoryCue": "对应英文 result。",
+    "example": "El resultado del proyecto fue excelente."
+  },
+  {
+    "id": "es-ele-practicar",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "practicar",
+    "pronunciation": "/pɾaktiˈkaɾ/",
+    "translation": "练习",
+    "memoryCue": "第一人称过去式 c 变 qu：practiqué。",
+    "example": "Es necesario practicar todos los días."
+  },
+  {
+    "id": "es-ele-meta",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "meta",
+    "pronunciation": "/ˈmeta/",
+    "translation": "目标；终点",
+    "memoryCue": "比 objetivo 更短促直观，常指具体目标。",
+    "example": "Mi meta es aprender veinte palabras diarias."
+  },
+  {
+    "id": "es-int-adaptar",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "adaptar",
+    "pronunciation": "/aðapˈtaɾ/",
+    "translation": "适应；改编",
+    "memoryCue": "adaptarse a 适应新环境。",
+    "example": "Debemos adaptar el plan al mercado."
+  },
+  {
+    "id": "es-int-recurso",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "recurso",
+    "pronunciation": "/reˈkurso/",
+    "translation": "资源",
+    "memoryCue": "对应英文 resource，常作复数 recursos。",
+    "example": "Contamos con pocos recursos este mes."
+  },
+  {
+    "id": "es-int-proceso",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "proceso",
+    "pronunciation": "/pɾoˈseso/",
+    "translation": "流程；过程",
+    "memoryCue": "西语单 s 简化，对应英文 process。",
+    "example": "El proceso de compra es muy sencillo."
+  },
+  {
+    "id": "es-int-comparar",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "comparar",
+    "pronunciation": "/kompaˈɾaɾ/",
+    "translation": "比较；对比",
+    "memoryCue": "与英文 compare 同源。",
+    "example": "Vamos a comparar las dos propuestas."
+  },
+  {
+    "id": "es-int-desafio",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "desafío",
+    "pronunciation": "/desaˈfio/",
+    "translation": "挑战",
+    "memoryCue": "重音在 í 上，对应法语 défi。",
+    "example": "Afrontamos un nuevo desafío técnico."
+  },
+  {
+    "id": "es-int-confirmar",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "confirmar",
+    "pronunciation": "/konfiɾˈmaɾ/",
+    "translation": "确认；证实",
+    "memoryCue": "与英文 confirm 同源。",
+    "example": "Por favor, confirma tu asistencia hoy."
+  },
+  {
+    "id": "es-int-mantener",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "mantener",
+    "pronunciation": "/manteˈneɾ/",
+    "translation": "维持；保持",
+    "memoryCue": "不规则变位同 tener：mantengo。",
+    "example": "Queremos mantener una buena relación."
+  },
+  {
+    "id": "es-int-fiable",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "fiable",
+    "pronunciation": "/ˈfjaβle/",
+    "translation": "可靠的",
+    "memoryCue": "与法语 fiable 完全同形。",
+    "example": "Necesitamos un proveedor más fiable."
+  },
+  {
+    "id": "es-int-enfocar",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "enfocar",
+    "pronunciation": "/enfoˈkaɾ/",
+    "translation": "聚焦；专注",
+    "memoryCue": "源自 foco（焦点），enfocarse en。",
+    "example": "Conviene enfocar el esfuerzo en lo clave."
+  },
+  {
+    "id": "es-int-requerir",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "requerir",
+    "pronunciation": "/rekeˈɾiɾ/",
+    "translation": "需要；要求",
+    "memoryCue": "词干变位 e→ie：requiere。",
+    "example": "Esta tarea requiere mucha atención."
+  },
+  {
+    "id": "es-adv-interpretar",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "interpretar",
+    "pronunciation": "/inteɾpɾeˈtaɾ/",
+    "translation": "解释；口译",
+    "memoryCue": "与英文 interpret 同源。",
+    "example": "¿Cómo debemos interpretar estos datos?"
+  },
+  {
+    "id": "es-adv-suposicion",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "suposición",
+    "pronunciation": "/suposiˈsjon/",
+    "translation": "假设；推测",
+    "memoryCue": "来自 suponer（假设），对应 assumption。",
+    "example": "No tomes una suposición como un hecho."
+  },
+  {
+    "id": "es-adv-evidencia",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "evidencia",
+    "pronunciation": "/eβiˈðensja/",
+    "translation": "证据；依据",
+    "memoryCue": "对应英文 evidence。",
+    "example": "Tenemos suficiente evidencia para decidir."
+  },
+  {
+    "id": "es-adv-marco",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "marco",
+    "pronunciation": "/ˈmaɾko/",
+    "translation": "框架；范围",
+    "memoryCue": "en el marco de（在……框架内）。",
+    "example": "Definimos un marco claro de trabajo."
+  },
+  {
+    "id": "es-adv-restriccion",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "restricción",
+    "pronunciation": "/restɾikˈsjon/",
+    "translation": "限制；约束",
+    "memoryCue": "对应英文 restriction。",
+    "example": "Trabajamos con una restricción de tiempo."
+  },
+  {
+    "id": "es-adv-compromiso",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "compromiso",
+    "pronunciation": "/kompɾoˈmiso/",
+    "translation": "承诺；折中",
+    "memoryCue": "商业语境多指坚定承诺或妥协平衡。",
+    "example": "Buscamos un compromiso entre costo y calidad."
+  },
+  {
+    "id": "es-adv-resiliente",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "resiliente",
+    "pronunciation": "/resiˈljente/",
+    "translation": "有韧性的",
+    "memoryCue": "对应英文 resilient。",
+    "example": "Un equipo resiliente supera cualquier crisis."
+  },
+  {
+    "id": "es-adv-inevitable",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "inevitable",
+    "pronunciation": "/ineβiˈtaβle/",
+    "translation": "不可避免的",
+    "memoryCue": "与英文拼写完全一致。",
+    "example": "El cambio tecnológico es inevitable."
+  },
+  {
+    "id": "es-adv-mitigar",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "mitigar",
+    "pronunciation": "/mitiˈɣaɾ/",
+    "translation": "缓解；减轻",
+    "memoryCue": "对应英文 mitigate，常搭配 riesgo。",
+    "example": "Tomamos medidas para mitigar el riesgo."
+  },
+  {
+    "id": "es-adv-pragmatico",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "pragmático",
+    "pronunciation": "/pɾaɣˈmatiko/",
+    "translation": "务实的",
+    "memoryCue": "重音在 á 上，对应 pragmatic。",
+    "example": "Prefiero un enfoque más pragmático."
+  },
+  {
+    "id": "es-biz-margen",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "margen",
+    "pronunciation": "/ˈmaɾxen/",
+    "translation": "利润率；边缘",
+    "memoryCue": "注意 j/g 在 e 前发 /x/，对应 margin。",
+    "example": "El margen bruto mejoró este trimestre."
+  },
+  {
+    "id": "es-biz-campana",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "campaña",
+    "pronunciation": "/kamˈpaɲa/",
+    "translation": "营销活动；战役",
+    "memoryCue": "ñ 读 /ɲ/，lanzar una campaña。",
+    "example": "La campaña digital tuvo gran alcance."
+  },
+  {
+    "id": "es-biz-hito",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "hito",
+    "pronunciation": "/ˈito/",
+    "translation": "里程碑",
+    "memoryCue": "h 不发音，项目管理中对应 milestone。",
+    "example": "Lanzar la versión 1.0 es un gran hito."
+  },
+  {
+    "id": "es-biz-socio",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "socio",
+    "pronunciation": "/ˈsosjo/",
+    "translation": "合作伙伴；股东",
+    "memoryCue": "商业合伙人常用词。",
+    "example": "Buscamos un socio estratégico en la región."
+  },
+  {
+    "id": "es-biz-prevision",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "previsión",
+    "pronunciation": "/pɾeβiˈsjon/",
+    "translation": "预测；预估",
+    "memoryCue": "对应英文 forecast。",
+    "example": "La previsión de ventas es muy optimista."
+  },
+  {
+    "id": "es-biz-entregable",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "entregable",
+    "pronunciation": "/entɾeˈɣaβle/",
+    "translation": "可交付成果",
+    "memoryCue": "来自 entregar（交付），对应 deliverable。",
+    "example": "Acordamos los entregables de la primera fase."
+  },
+  {
+    "id": "es-biz-alineacion",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "alineación",
+    "pronunciation": "/alineaˈsjon/",
+    "translation": "对齐；一致",
+    "memoryCue": "对应英文 alignment。",
+    "example": "Necesitamos alineación entre ambos equipos."
+  },
+  {
+    "id": "es-biz-retencion",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "retención",
+    "pronunciation": "/retenˈsjon/",
+    "translation": "留存；保留",
+    "memoryCue": "retención de clientes 客户留存。",
+    "example": "La retención de usuarios subió diez puntos."
+  },
+  {
+    "id": "es-biz-flujo",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "flujo",
+    "pronunciation": "/ˈfluxo/",
+    "translation": "流程；现金流",
+    "memoryCue": "flujo de trabajo 工作流 / flujo de caja 现金流。",
+    "example": "Optimizamos el flujo de trabajo interno."
+  },
+  {
+    "id": "es-biz-escalar",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "escalar",
+    "pronunciation": "/eskaˈlaɾ/",
+    "translation": "升级处理；扩展",
+    "memoryCue": "兼表“向上升级问题”和“规模化扩张”。",
+    "example": "Si hay bloqueo, hay que escalar el tema."
   }
 ]

@@ -11,6 +11,9 @@ struct WordCardView: View {
     let isTranslationVisible: Bool
     let isRequeuedInSession: Bool
     let speechService: SpeechService
+    var onSwipeRate: ((RecallRating) -> Void)? = nil
+
+    @State private var dragOffset: CGSize = .zero
 
     private var isSpeakingTerm: Bool {
         speechService.isSpeaking && speechService.activeText == word.term
@@ -20,7 +23,65 @@ struct WordCardView: View {
         speechService.isSpeaking && speechService.activeText == word.example
     }
 
+    private var swipeHint: (label: String, color: Color)? {
+        if dragOffset.width > 28 {
+            return ("认识", .green)
+        } else if dragOffset.width < -28 {
+            return ("不认识", .red)
+        }
+        return nil
+    }
+
     var body: some View {
+        ZStack(alignment: .topTrailing) {
+            cardContent
+
+            if let swipeHint {
+                Text(swipeHint.label)
+                    .font(.caption.weight(.bold))
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(swipeHint.color.opacity(0.18), in: Capsule())
+                    .foregroundStyle(swipeHint.color)
+                    .padding(14)
+                    .transition(.opacity)
+            }
+        }
+        .offset(x: dragOffset.width)
+        .rotationEffect(.degrees(Double(dragOffset.width / 24)))
+        .gesture(
+            DragGesture(minimumDistance: 20)
+                .onChanged { value in
+                    guard onSwipeRate != nil,
+                          abs(value.translation.width) > abs(value.translation.height) else { return }
+                    dragOffset = value.translation
+                }
+                .onEnded { value in
+                    guard let onSwipeRate else { return }
+                    let horizontal = value.translation.width
+                    if horizontal > 95 {
+                        withAnimation(.spring(response: 0.25, dampingFraction: 0.8)) {
+                            dragOffset = .zero
+                        }
+                        onSwipeRate(.known)
+                    } else if horizontal < -95 {
+                        withAnimation(.spring(response: 0.25, dampingFraction: 0.8)) {
+                            dragOffset = .zero
+                        }
+                        onSwipeRate(.unknown)
+                    } else {
+                        withAnimation(.spring(response: 0.25, dampingFraction: 0.8)) {
+                            dragOffset = .zero
+                        }
+                    }
+                }
+        )
+        .onChange(of: word.id) {
+            dragOffset = .zero
+        }
+    }
+
+    private var cardContent: some View {
         VStack(alignment: .leading, spacing: 18) {
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 8) {
@@ -109,12 +170,19 @@ struct WordCardView: View {
                     }
                 }
             }
+
+            if onSwipeRate != nil {
+                Text("支持左右滑动：左滑不认识 · 右滑认识")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
         }
         .padding(20)
         .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .stroke(AppTheme.accent.opacity(0.18), lineWidth: 1)
+                .stroke((swipeHint?.color ?? AppTheme.accent).opacity(swipeHint == nil ? 0.18 : 0.45), lineWidth: 1)
         )
     }
 
