@@ -57,7 +57,8 @@ final class CustomWordRecord {
             pronunciation: pronunciation,
             translation: translation,
             memoryCue: memoryCue,
-            example: example
+            example: example,
+            packID: "custom"
         )
     }
 }

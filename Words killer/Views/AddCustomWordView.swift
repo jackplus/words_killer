@@ -9,6 +9,7 @@ import SwiftUI
 struct AddCustomWordView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Query private var existingCustomWords: [CustomWordRecord]
 
     @State private var mode: Int = 0 // 0: 单词录入, 1: 批量导入
     @State private var language: TargetLanguage = .english
@@ -108,12 +109,15 @@ struct AddCustomWordView: View {
         Group {
             Section {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("支持两种格式（每行一词）：")
+                    Text("支持自动识别多种粘贴格式：")
                         .font(.caption.weight(.semibold))
-                    Text("1. 单词, 中文释义")
+                    Text("1. 单词, 中文释义（或 Tab 分隔 TSV / ECDICT CSV）")
                         .font(.caption2.monospaced())
                         .foregroundStyle(.secondary)
                     Text("2. 单词 / 音标 / 中文释义 / 双语例句")
+                        .font(.caption2.monospaced())
+                        .foregroundStyle(.secondary)
+                    Text("3. 开源词库 JSON（KyleBing / Qwerty / JLPT / 原生格式）")
                         .font(.caption2.monospaced())
                         .foregroundStyle(.secondary)
                 }
@@ -123,6 +127,12 @@ struct AddCustomWordView: View {
                     .frame(minHeight: 140)
                     .font(.body.monospaced())
                     .onChange(of: batchText) {
+                        parseBatchText()
+                    }
+                    .onChange(of: language) {
+                        parseBatchText()
+                    }
+                    .onChange(of: difficulty) {
                         parseBatchText()
                     }
             } header: {
@@ -183,95 +193,31 @@ struct AddCustomWordView: View {
     }
 
     private func parseBatchText() {
-        let lines = batchText.components(separatedBy: .newlines)
-        var results: [WordItem] = []
-
-        for line in lines {
-            let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !trimmed.isEmpty else { continue }
-
-            // Try slash separator first: term / pronunciation / translation / example
-            if trimmed.contains("/") {
-                let parts = trimmed.components(separatedBy: "/").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                if parts.count >= 2 {
-                    let term = parts[0]
-                    var pron = ""
-                    var trans = ""
-                    var ex = ""
-
-                    if parts.count == 2 {
-                        trans = parts[1]
-                    } else if parts.count == 3 {
-                        pron = parts[1]
-                        trans = parts[2]
-                    } else if parts.count >= 4 {
-                        pron = parts[1]
-                        trans = parts[2]
-                        ex = parts[3]
-                    }
-
-                    if !term.isEmpty && !trans.isEmpty {
-                        results.append(WordItem(
-                            id: "custom-" + UUID().uuidString,
-                            language: language,
-                            difficulty: difficulty,
-                            term: term,
-                            pronunciation: pron,
-                            translation: trans,
-                            memoryCue: "批量自建词",
-                            example: ex
-                        ))
-                        continue
-                    }
-                }
-            }
-
-            // Try comma separator: term, translation
-            if trimmed.contains(",") || trimmed.contains("，") {
-                let sep: Character = trimmed.contains(",") ? "," : "，"
-                let parts = trimmed.split(separator: sep, maxSplits: 1).map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
-                if parts.count == 2 && !parts[0].isEmpty && !parts[1].isEmpty {
-                    results.append(WordItem(
-                        id: "custom-" + UUID().uuidString,
-                        language: language,
-                        difficulty: difficulty,
-                        term: parts[0],
-                        pronunciation: "",
-                        translation: parts[1],
-                        memoryCue: "批量自建词",
-                        example: ""
-                    ))
-                    continue
-                }
-            }
-
-            // Try tab separator: term \t translation
-            if trimmed.contains("\t") {
-                let parts = trimmed.components(separatedBy: "\t").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                if parts.count >= 2 && !parts[0].isEmpty && !parts[1].isEmpty {
-                    results.append(WordItem(
-                        id: "custom-" + UUID().uuidString,
-                        language: language,
-                        difficulty: difficulty,
-                        term: parts[0],
-                        pronunciation: parts.count > 2 ? parts[1] : "",
-                        translation: parts.count > 2 ? parts[2] : parts[1],
-                        memoryCue: "批量自建词",
-                        example: parts.count > 3 ? parts[3] : ""
-                    ))
-                }
-            }
-        }
-
-        parsedPreview = results
+        let report = WordBankParser.parseExternalDictionary(
+            text: batchText,
+            defaultLanguage: language,
+            defaultDifficulty: difficulty,
+            packID: "custom"
+        )
+        parsedPreview = report.items
     }
 
     private func confirmBatchImport() {
         guard !parsedPreview.isEmpty else { return }
 
+        let existingIDs = Set(existingCustomWords.map(\.id))
+        let existingKeys = Set(
+            existingCustomWords.map { "\($0.languageRawValue)|\($0.term.trimmingCharacters(in: .whitespacesAndNewlines).lowercased())" }
+        )
+
+        var inserted = 0
         for item in parsedPreview {
+            let key = "\(item.language.rawValue)|\(item.term.lowercased())"
+            if existingIDs.contains(item.id) || existingKeys.contains(key) {
+                continue
+            }
             let record = CustomWordRecord(
-                id: item.id,
+                id: item.id.hasPrefix("custom-") ? item.id : "custom-\(item.id)",
                 language: item.language,
                 difficulty: item.difficulty,
                 term: item.term,
@@ -281,10 +227,14 @@ struct AddCustomWordView: View {
                 example: item.example
             )
             modelContext.insert(record)
+            inserted += 1
         }
 
         try? modelContext.save()
-        alertMessage = "成功导入 \(parsedPreview.count) 个单词！"
+        let skipped = parsedPreview.count - inserted
+        alertMessage = skipped > 0
+            ? "成功导入 \(inserted) 个新词（已跳过 \(skipped) 个重复词）！"
+            : "成功导入 \(inserted) 个单词！"
         showSuccessAlert = true
     }
 }

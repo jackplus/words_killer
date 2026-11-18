@@ -26,8 +26,10 @@ struct SettingsView: View {
 
     @AppStorage("accentTheme") private var accentThemeRawValue = AccentTheme.forest.rawValue
     @AppStorage("appearanceMode") private var appearanceModeRawValue = AppearanceMode.system.rawValue
+    @AppStorage(WordLibrary.disabledPacksStorageKey) private var disabledPacksRaw = ""
 
     @State private var notificationService = NotificationService()
+    @State private var isShowingWordPacks = false
     @State private var isExportingBackup = false
     @State private var isImportingBackup = false
     @State private var backupDocument: StudyBackupDocument?
@@ -100,6 +102,9 @@ struct SettingsView: View {
             .navigationTitle("学习设置")
             .task {
                 await notificationService.refreshAuthorizationStatus()
+            }
+            .sheet(isPresented: $isShowingWordPacks) {
+                WordPacksView()
             }
             .fileExporter(
                 isPresented: $isExportingBackup,
@@ -280,6 +285,12 @@ struct SettingsView: View {
     private var dataBackupSection: some View {
         Section {
             Button {
+                isShowingWordPacks = true
+            } label: {
+                Label("词书开关与公开词库导入", systemImage: "books.vertical")
+            }
+
+            Button {
                 backupDocument = BackupService.makeDocument(
                     progress: allProgress,
                     customWords: customWords,
@@ -309,8 +320,12 @@ struct SettingsView: View {
     }
 
     private var aboutSection: some View {
-        Section("关于 Words Killer") {
-            LabeledContent("词库总容量", value: "\(WordLibrary.words.count + customWords.count) 词")
+        let activeBuiltIn = WordLibrary.activeBuiltInWords(
+            disabledPackIDs: WordLibrary.parseDisabledPackIDs(disabledPacksRaw)
+        ).count
+        return Section("关于 Words Killer") {
+            LabeledContent("当前启用词量", value: "\(activeBuiltIn + customWords.count) 词")
+            LabeledContent("内置全库总量", value: "\(WordLibrary.allBuiltInWords.count) 词（\(WordLibrary.builtInPacks.count) 册）")
             LabeledContent("支持语种", value: "英 / 日 / 韩 / 法 / 西")
             LabeledContent("隐私架构", value: "100% 纯本地离线存储")
         }

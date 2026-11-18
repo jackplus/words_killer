@@ -22,6 +22,8 @@ struct WordBookView: View {
     @Query private var allProgress: [WordProgress]
     @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
 
+    @AppStorage(WordLibrary.disabledPacksStorageKey) private var disabledPacksRaw = ""
+
     @State private var speechService = SpeechService()
     @State private var audioController = AudioLearningController()
     @State private var selectedLanguage: TargetLanguage? = nil
@@ -29,6 +31,7 @@ struct WordBookView: View {
     @State private var searchText = ""
     @State private var selectedWord: WordItem?
     @State private var isShowingAddWordSheet = false
+    @State private var isShowingWordPacksSheet = false
     @State private var isShowingAudioPlayerSheet = false
     @State private var isShowingQuizSheet = false
 
@@ -37,7 +40,10 @@ struct WordBookView: View {
     }
 
     private var allWords: [WordItem] {
-        WordLibrary.mergedWords(with: customWords)
+        WordLibrary.mergedWords(
+            with: customWords,
+            disabledPackIDs: WordLibrary.parseDisabledPackIDs(disabledPacksRaw)
+        )
     }
 
     private var filteredWords: [WordItem] {
@@ -218,13 +224,25 @@ struct WordBookView: View {
             .searchable(text: $searchText, prompt: "搜索单词、释义或例句")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        isShowingAddWordSheet = true
-                    } label: {
-                        Image(systemName: "plus")
+                    HStack(spacing: 12) {
+                        Button {
+                            isShowingWordPacksSheet = true
+                        } label: {
+                            Image(systemName: "books.vertical")
+                        }
+                        .accessibilityLabel("词书与开源词库管理")
+
+                        Button {
+                            isShowingAddWordSheet = true
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                        .accessibilityLabel("添加自建词汇")
                     }
-                    .accessibilityLabel("添加自建词汇")
                 }
+            }
+            .sheet(isPresented: $isShowingWordPacksSheet) {
+                WordPacksView()
             }
             .sheet(isPresented: $isShowingAddWordSheet) {
                 AddCustomWordView()

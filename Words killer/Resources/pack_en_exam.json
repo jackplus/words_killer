@@ -1,0 +1,302 @@
+[
+  {
+    "id": "exam-en-beg-library",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "library",
+    "pronunciation": "/ˈlaɪbreri/",
+    "translation": "图书馆；藏书室",
+    "memoryCue": "词根 libr- 表示书（如 libre），不要和书店 bookstore 混淆。",
+    "example": "I usually study in the university library."
+  },
+  {
+    "id": "exam-en-beg-ticket",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "ticket",
+    "pronunciation": "/ˈtɪkɪt/",
+    "translation": "票；入场券；罚单",
+    "memoryCue": "出行与演出高频词：book a ticket（订票）。",
+    "example": "Please show your train ticket at the gate."
+  },
+  {
+    "id": "exam-en-beg-healthy-diet",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "exercise",
+    "pronunciation": "/ˈeksərsaɪz/",
+    "translation": "锻炼；练习；行使",
+    "memoryCue": "ex-（出）+ 活力释放 → 运动锻炼；做习题也用它。",
+    "example": "Regular exercise helps reduce daily stress."
+  },
+  {
+    "id": "exam-en-beg-neighbor",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "neighbor",
+    "pronunciation": "/ˈneɪbər/",
+    "translation": "邻居；邻国",
+    "memoryCue": "neigh（靠近）+ bor（居住者）→ 住在旁边的人。",
+    "example": "Our new neighbor brought us homemade cookies."
+  },
+  {
+    "id": "exam-en-beg-message",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "message",
+    "pronunciation": "/ˈmesɪdʒ/",
+    "translation": "消息；留言；主旨",
+    "memoryCue": "leave a message（留口信），注意和 massage（按摩）区分拼写。",
+    "example": "Did you get my text message this afternoon?"
+  },
+  {
+    "id": "exam-en-beg-holiday",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "holiday",
+    "pronunciation": "/ˈhɑːlədeɪ/",
+    "translation": "假期；节日",
+    "memoryCue": "holy（神圣的）+ day（日子）→ 最初指宗教节日，现指假期。",
+    "example": "Where are you going for the summer holiday?"
+  },
+  {
+    "id": "exam-en-ele-opportunity",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "opportunity",
+    "pronunciation": "/ˌɑːpərˈtuːnəti/",
+    "translation": "机会；良机",
+    "memoryCue": "op-（朝向）+ port（港口）→ 顺风进港的好时机，四级高频词。",
+    "example": "This internship is a valuable opportunity to learn."
+  },
+  {
+    "id": "exam-en-ele-environment",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "environment",
+    "pronunciation": "/ɪnˈvaɪrənmənt/",
+    "translation": "自然环境；周围状况",
+    "memoryCue": "注意中间有不明显发音的 n：environ-ment，雅思写作必考拼写。",
+    "example": "Protecting the marine environment requires global effort."
+  },
+  {
+    "id": "exam-en-ele-participate",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "participate",
+    "pronunciation": "/pɑːrˈtɪsɪpeɪt/",
+    "translation": "参加；参与",
+    "memoryCue": "part（部分）+ cip（拿）→ 拿走其中一份 → 参与（常接 in）。",
+    "example": "Over fifty teams will participate in the competition."
+  },
+  {
+    "id": "exam-en-ele-available",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "available",
+    "pronunciation": "/əˈveɪləbl/",
+    "translation": "可用的；有空的；可获得的",
+    "memoryCue": "avail（有益/效用）+ able → 随时能派上用场的。",
+    "example": "Are there any seats available on the morning flight?"
+  },
+  {
+    "id": "exam-en-ele-contribute",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "contribute",
+    "pronunciation": "/kənˈtrɪbjuːt/",
+    "translation": "贡献；捐助；促成",
+    "memoryCue": "con-（共同）+ tribute（给予）→ 大家一起出力，搭配 contribute to。",
+    "example": "Everyone contributed fresh ideas to the project."
+  },
+  {
+    "id": "exam-en-ele-essential",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "essential",
+    "pronunciation": "/ɪˈsenʃl/",
+    "translation": "必不可少的；本质的",
+    "memoryCue": "essence（本质/精华）的形容词，比 important 语气更强。",
+    "example": "Clear communication is essential for teamwork."
+  },
+  {
+    "id": "exam-en-int-significant",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "significant",
+    "pronunciation": "/sɪɡˈnɪfɪkənt/",
+    "translation": "显著的；意义重大的",
+    "memoryCue": "sign（标记/信号）+ fic（做）→ 留下明显印记的，四六级与雅思核心词。",
+    "example": "There has been a significant drop in air pollution."
+  },
+  {
+    "id": "exam-en-int-consequence",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "consequence",
+    "pronunciation": "/ˈkɑːnsɪkwens/",
+    "translation": "结果；后果；重要性",
+    "memoryCue": "con-（跟随）+ sequ（紧随）→ 紧跟行为之后而来的后果。",
+    "example": "Delayed maintenance can lead to serious consequences."
+  },
+  {
+    "id": "exam-en-int-acknowledge",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "acknowledge",
+    "pronunciation": "/əkˈnɑːlɪdʒ/",
+    "translation": "承认；致谢；确认收到",
+    "memoryCue": "ac- + knowledge（知晓）→ 公开表示自己已知晓并承认。",
+    "example": "Please acknowledge receipt of this email."
+  },
+  {
+    "id": "exam-en-int-alternative",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "alternative",
+    "pronunciation": "/ɔːlˈtɜːrnətɪv/",
+    "translation": "可供替代的；备选方案",
+    "memoryCue": "alter（改变/另一）→ 除原方案外的另一种选择。",
+    "example": "Solar power is a clean alternative to fossil fuels."
+  },
+  {
+    "id": "exam-en-int-phenomenon",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "phenomenon",
+    "pronunciation": "/fəˈnɑːmɪnɑːn/",
+    "translation": "现象；非凡的人或事物",
+    "memoryCue": "复数形式是 phenomena，托福阅读与自然科学高频词。",
+    "example": "Urban heat islands are a widespread phenomenon."
+  },
+  {
+    "id": "exam-en-int-vulnerable",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "vulnerable",
+    "pronunciation": "/ˈvʌlnərəbl/",
+    "translation": "脆弱的；易受伤害的",
+    "memoryCue": "vulner-（伤口）+ able → 容易受伤或受冲击的，常搭配 be vulnerable to。",
+    "example": "Coastal cities are particularly vulnerable to rising sea levels."
+  },
+  {
+    "id": "exam-en-adv-ubiquitous",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "ubiquitous",
+    "pronunciation": "/juːˈbɪkwɪtəs/",
+    "translation": "无所不在的；普遍存在的",
+    "memoryCue": "源自拉丁语 ubique（到处），托福/GRE 最常考的高频学术形容词之一。",
+    "example": "Smartphones have become ubiquitous in modern life."
+  },
+  {
+    "id": "exam-en-adv-empirical",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "empirical",
+    "pronunciation": "/ɪmˈpɪrɪkl/",
+    "translation": "实证的；以经验或观察为依据的",
+    "memoryCue": "与纯理论 theoretical 相对：empirical evidence（实证数据）。",
+    "example": "The hypothesis is supported by strong empirical evidence."
+  },
+  {
+    "id": "exam-en-adv-scrutinize",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "scrutinize",
+    "pronunciation": "/ˈskruːtənaɪz/",
+    "translation": "仔细审查；细致检查",
+    "memoryCue": "名词 scrutiny（严密审视），表示拿着放大镜逐项核查。",
+    "example": "Auditors scrutinized every transaction in the annual report."
+  },
+  {
+    "id": "exam-en-adv-paradox",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "paradox",
+    "pronunciation": "/ˈpærədɑːks/",
+    "translation": "悖论；似非而是的说法",
+    "memoryCue": "para-（偏离/超越）+ dox（观点）→ 看似矛盾却暗含道理的命题。",
+    "example": "It is a paradox that having more choices can make us less satisfied."
+  },
+  {
+    "id": "exam-en-adv-corroborate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "corroborate",
+    "pronunciation": "/kəˈrɑːbəreɪt/",
+    "translation": "证实；提供新证据支持",
+    "memoryCue": "cor-（加强）+ robor（力量）→ 让原有论点更稳固。",
+    "example": "Independent experiments corroborated the team's findings."
+  },
+  {
+    "id": "exam-en-adv-ephemeral",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "ephemeral",
+    "pronunciation": "/ɪˈfemərəl/",
+    "translation": "短暂的；转瞬即逝的",
+    "memoryCue": "epi- + hemera（一天）→ 只活一天的蜉蝣 → 昙花一现的。",
+    "example": "Viral internet trends are often ephemeral."
+  },
+  {
+    "id": "exam-en-biz-procurement",
+    "language": "english",
+    "difficulty": "business",
+    "term": "procurement",
+    "pronunciation": "/prəˈkjʊrmənt/",
+    "translation": "（企业或政府）采购；采办",
+    "memoryCue": "pro-（向前）+ cure（照管/取得）→ 企业供应链中的正式采购。",
+    "example": "Centralized procurement reduced hardware costs by 15%."
+  },
+  {
+    "id": "exam-en-biz-compliance",
+    "language": "english",
+    "difficulty": "business",
+    "term": "compliance",
+    "pronunciation": "/kəmˈplaɪəns/",
+    "translation": "合规；遵守法规或准则",
+    "memoryCue": "comply（遵守）的名词，跨国企业法务与审计核心词。",
+    "example": "All data practices must remain in strict compliance with privacy laws."
+  },
+  {
+    "id": "exam-en-biz-synergy",
+    "language": "english",
+    "difficulty": "business",
+    "term": "synergy",
+    "pronunciation": "/ˈsɪnərdʒi/",
+    "translation": "协同效应；合力（1+1>2）",
+    "memoryCue": "syn-（共同）+ erg（做功/能量）→ 合作产生大于单打独斗的效果。",
+    "example": "The merger created strong synergy between product and distribution."
+  },
+  {
+    "id": "exam-en-biz-delegation",
+    "language": "english",
+    "difficulty": "business",
+    "term": "delegation",
+    "pronunciation": "/ˌdelɪˈɡeɪʃn/",
+    "translation": "授权；委派；代表团",
+    "memoryCue": "delegate（委派权限）→ 管理学中的合理分权与任务委派。",
+    "example": "Effective delegation frees leaders to focus on long-term strategy."
+  },
+  {
+    "id": "exam-en-biz-liquidity",
+    "language": "english",
+    "difficulty": "business",
+    "term": "liquidity",
+    "pronunciation": "/lɪˈkwɪdəti/",
+    "translation": "资产流动性；变现能力",
+    "memoryCue": "liquid（液体）+ ity → 像水一样随时可调动变现的资金状态。",
+    "example": "Maintaining healthy cash liquidity is vital during market downturns."
+  },
+  {
+    "id": "exam-en-biz-turnaround",
+    "language": "english",
+    "difficulty": "business",
+    "term": "turnaround",
+    "pronunciation": "/ˈtɜːrnəraʊnd/",
+    "translation": "周转时间；扭亏为盈；好转",
+    "memoryCue": "turn around（掉头反转）→ 既指交付周转期，也指业绩逆转。",
+    "example": "We promised a 24-hour turnaround on customer support tickets."
+  }
+]

@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		9B98B4702FE4BF2600846D5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B98B4552FE4BF2400846D5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B98B45C2FE4BF2400846D5B;
+			remoteInfo = "Words killer";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		9B98B45D2FE4BF2400846D5B /* Words killer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Words killer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B98B4712FE4BF2600846D5B /* Words killerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Words killerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = "Words killer";
 			sourceTree = "<group>";
 		};
+		9B98B4722FE4BF2600846D5B /* Words killerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Words killerTests";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9B98B45A2FE4BF2400846D5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B98B4742FE4BF2600846D5B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				9B98B45F2FE4BF2400846D5B /* Words killer */,
+				9B98B4722FE4BF2600846D5B /* Words killerTests */,
 				9B98B45E2FE4BF2400846D5B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				9B98B45D2FE4BF2400846D5B /* Words killer.app */,
+				9B98B4712FE4BF2600846D5B /* Words killerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,29 @@
 			productReference = 9B98B45D2FE4BF2400846D5B /* Words killer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9B98B4762FE4BF2600846D5B /* Words killerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B98B4782FE4BF2600846D5B /* Build configuration list for PBXNativeTarget "Words killerTests" */;
+			buildPhases = (
+				9B98B4732FE4BF2600846D5B /* Sources */,
+				9B98B4742FE4BF2600846D5B /* Frameworks */,
+				9B98B4752FE4BF2600846D5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B98B4772FE4BF2600846D5B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9B98B4722FE4BF2600846D5B /* Words killerTests */,
+			);
+			name = "Words killerTests";
+			packageProductDependencies = (
+			);
+			productName = "Words killerTests";
+			productReference = 9B98B4712FE4BF2600846D5B /* Words killerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +130,10 @@
 				TargetAttributes = {
 					9B98B45C2FE4BF2400846D5B = {
 						CreatedOnToolsVersion = 26.5;
+					};
+					9B98B4762FE4BF2600846D5B = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 9B98B45C2FE4BF2400846D5B;
 					};
 				};
 			};
@@ -100,12 +152,20 @@
 			projectRoot = "";
 			targets = (
 				9B98B45C2FE4BF2400846D5B /* Words killer */,
+				9B98B4762FE4BF2600846D5B /* Words killerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9B98B45B2FE4BF2400846D5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B98B4752FE4BF2600846D5B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B98B4732FE4BF2600846D5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9B98B4772FE4BF2600846D5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B98B45C2FE4BF2400846D5B /* Words killer */;
+			targetProxy = 9B98B4702FE4BF2600846D5B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9B98B4662FE4BF2600846D5B /* Debug */ = {
@@ -310,6 +385,52 @@
 			};
 			name = Release;
 		};
+		9B98B4792FE4BF2600846D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5N7K59WT8G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tedji.Words-killerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Words killer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Words killer";
+			};
+			name = Debug;
+		};
+		9B98B47A2FE4BF2600846D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5N7K59WT8G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tedji.Words-killerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Words killer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Words killer";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -327,6 +448,15 @@
 			buildConfigurations = (
 				9B98B4692FE4BF2600846D5B /* Debug */,
 				9B98B46A2FE4BF2600846D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B98B4782FE4BF2600846D5B /* Build configuration list for PBXNativeTarget "Words killerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B98B4792FE4BF2600846D5B /* Debug */,
+				9B98B47A2FE4BF2600846D5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

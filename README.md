@@ -4,7 +4,8 @@
 
 ## 核心特性
 
-- **五语种结构化词库（500 词）**：内置 [`word_bank.json`](Words%20killer/Resources/word_bank.json)，覆盖 **英语、日语、韩语、法语、西班牙语**，每语种按 **入门 / 基础 / 进阶 / 高级 / 商务** 五档难度各 20 词，提供真实音标/注音、中文释义、记忆点与双语例句。
+- **五语种模块化词书体系（6 册 650 词 + 容错加载）**：内置核心词库 [`word_bank.json`](Words%20killer/Resources/word_bank.json)（500 词）及五套考级扩展词包（**英语 CET/雅思托福、日语 JLPT、韩语 TOPIK、法语 DELF、西语 DELE**，各 30 词），通过 [`WordBankParser`](Words%20killer/Services/WordBankParser.swift) 实现逐条容错解码、确定性 ID 生成与自动去重，支持在 [`WordPacksView`](Words%20killer/Views/WordPacksView.swift) 按需独立开关词书。
+- **公开免费词库无缝接入（多格式开源词典适配）**：内置通用开源词典解析引擎，支持一键从本地文件（`.json` / `.csv` / `.tsv` / `.txt`）或剪贴板导入主流宽松协议开源词库（兼容 **skywind3000/ECDICT CSV**、**KyleBing/english-vocabulary JSON**、**Qwerty-Learner JSON**、**Bluskyo/JLPT_Vocabulary JSON** 等，自动映射 `cet4/cet6/ielts/N5–N1` 等难度标签）。
 - **SwiftData 持久化与 SM-2 间隔重复**：通过 [`WordProgress`](Words%20killer/Models/WordProgress.swift)、[`ReviewEvent`](Words%20killer/Models/ReviewEvent.swift) 与 [`SpacedRepetitionEngine`](Words%20killer/Services/SpacedRepetitionEngine.swift) 统一记录卡片、测验与词库的三档记忆反馈：
   - **不认识**：重置掌握阶数并追加至本轮队列末尾二次重测。
   - **模糊**：标记为待巩固状态，设定 12 小时后到期复习。
@@ -33,7 +34,8 @@ Words killer/
 │   ├── CustomWordRecord.swift         # SwiftData @Model 自建生词持久化记录
 │   └── ReviewEvent.swift              # SwiftData @Model 每次复习/测验事件日志
 ├── Services/
-│   ├── WordLibrary.swift              # JSON 词库加载器与自建词库合并
+│   ├── WordLibrary.swift              # 模块化多词书注册表、词书开关与自建词合并
+│   ├── WordBankParser.swift           # 逐条容错解码器与多格式开源词典（ECDICT/KyleBing/JLPT）适配器
 │   ├── SpacedRepetitionEngine.swift   # 间隔重复调度、组卡与统一打卡记录引擎
 │   ├── StudyAnalytics.swift           # 连续打卡、14天趋势、12周热力图与7天到期预测计算
 │   ├── SpeechService.swift            # AVSpeechSynthesizer 语音朗读服务（多语种+中文释义）
@@ -44,15 +46,26 @@ Words killer/
 ├── Views/
 │   ├── MainTabView.swift              # 底部四标签 TabView 导航与全局主题/外观注入
 │   ├── WordCardView.swift             # 词卡主视图（状态标签 + 发音 + 收藏 + 记忆点）
-│   ├── WordBookView.swift             # 词库与错题本列表页（支持筛选组测验/听学与导入）
+│   ├── WordBookView.swift             # 词库与错题本列表页（支持筛选组测验/听学与词书入口）
+│   ├── WordPacksView.swift            # 内置词书管理、公开词库推荐与外部词典文件导入页
 │   ├── StatsView.swift                # 学习统计页（Swift Charts 趋势图、热力图与到期预测）
 │   ├── SettingsView.swift             # 学习计划、定时提醒、主题外观与数据备份页
 │   ├── QuizView.swift                 # 四选一自测、听音拼写与错题重测视图
 │   ├── AudioPlayerView.swift          # 随身听学沉浸播放器
-│   ├── AddCustomWordView.swift        # 手动单词录入与批量导入视图
+│   ├── AddCustomWordView.swift        # 手动单词录入与多格式粘贴批量导入视图
 │   └── Components.swift               # 公共 UI 组件、每日目标环与多主题配色
 └── Resources/
-    └── word_bank.json                 # 500 词五语种结构化词库
+    ├── word_bank.json                 # 500 词五语种核心词库
+    ├── pack_en_exam.json              # 英语 CET-4/6 · IELTS · TOEFL · BEC 扩展词包
+    ├── pack_ja_jlpt.json              # 日语 JLPT N5–N1 扩展词包
+    ├── pack_ko_topik.json             # 韩语 TOPIK I–II 扩展词包
+    ├── pack_fr_delf.json              # 法语 DELF A1–B2 扩展词包
+    └── pack_es_dele.json              # 西语 DELE A1–B2 扩展词包
+Words killerTests/                     # Swift Testing 自动化单元测试套件
+├── SpacedRepetitionTests.swift        # SM-2 记忆曲线、收藏优先组卡与持久化闭环测试
+├── WordBankParserTests.swift          # 6 册内置词书校验、坏数据容错与 4 类开源词库格式解析测试
+├── StudyAnalyticsTests.swift          # 去重打卡、连续天数、14天趋势、12周热力图与到期预测测试
+└── QuizAndBackupTests.swift           # 四选一出题不变量与 JSON 备份导出/幂等恢复测试
 ```
 
 ## 运行与打包要求

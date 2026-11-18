@@ -1,0 +1,302 @@
+[
+  {
+    "id": "exam-ko-beg-gyotong",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "교통",
+    "pronunciation": "gyo-tong",
+    "translation": "交通",
+    "memoryCue": "汉字词“交通”（교=交，통=通），TOPIK I 高频词。",
+    "example": "서울은 대중교통이 아주 편리합니다."
+  },
+  {
+    "id": "exam-ko-beg-doseogwan",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "도서관",
+    "pronunciation": "do-seo-gwan",
+    "translation": "图书馆",
+    "memoryCue": "汉字词“图书馆”（도=图，서=书，관=馆）。",
+    "example": "주말마다 도서관에서 책을 빌려요."
+  },
+  {
+    "id": "exam-ko-beg-undong",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "운동",
+    "pronunciation": "un-dong",
+    "translation": "运动；锻炼",
+    "memoryCue": "汉字词“运动”，搭配 운동하다（做运动）。",
+    "example": "건강을 위해 아침마다 운동을 해요."
+  },
+  {
+    "id": "exam-ko-beg-jumal",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "주말",
+    "pronunciation": "ju-mal",
+    "translation": "周末",
+    "memoryCue": "주（周）+ 말（末），日常寒暄最常用词。",
+    "example": "이번 주말에 같이 영화 볼까요?"
+  },
+  {
+    "id": "exam-ko-beg-gajok",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "가족",
+    "pronunciation": "ga-jok",
+    "translation": "家人；家庭",
+    "memoryCue": "汉字词“家族”，韩语里即指一家人。",
+    "example": "명절에는 가족과 함께 시간을 보냅니다."
+  },
+  {
+    "id": "exam-ko-beg-선물-seonmul",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "선물",
+    "pronunciation": "seon-mul",
+    "translation": "礼物",
+    "memoryCue": "汉字词“膳物”，指赠送给对方的礼品。",
+    "example": "친구 생일 선물로 꽃을 샀어요."
+  },
+  {
+    "id": "exam-ko-ele-hwangyeong",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "환경",
+    "pronunciation": "hwan-gyeong",
+    "translation": "环境",
+    "memoryCue": "汉字词“环境”（환=环，경=境），TOPIK 写作高频词。",
+    "example": "환경을 보호하기 위해 일회용품을 줄여야 합니다."
+  },
+  {
+    "id": "exam-ko-ele-munhwa",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "문화",
+    "pronunciation": "mun-hwa",
+    "translation": "文化",
+    "memoryCue": "汉字词“文化”（문=文，화=化）。",
+    "example": "언어를 배우면 그 나라의 문화도 이해할 수 있어요."
+  },
+  {
+    "id": "exam-ko-ele-gyuchik",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "규칙",
+    "pronunciation": "gyu-chik",
+    "translation": "规则；规律",
+    "memoryCue": "汉字词“规则”，규칙적인 생활（有规律的生活）。",
+    "example": "안전 규칙을 꼭 지켜 주세요."
+  },
+  {
+    "id": "exam-ko-ele-gwan-sim",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "관심",
+    "pronunciation": "gwan-sim",
+    "translation": "关心；兴趣；关注",
+    "memoryCue": "固定搭配 관심이 있다（对……感兴趣）。",
+    "example": "요즘 한국 요리에 관심이 많아요."
+  },
+  {
+    "id": "exam-ko-ele-노력-noryeok",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "노력",
+    "pronunciation": "no-ryeok",
+    "translation": "努力",
+    "memoryCue": "汉字词“努力”，搭配 노력하다（付出努力）。",
+    "example": "꾸준히 노력하면 좋은 결과가 있을 거예요."
+  },
+  {
+    "id": "exam-ko-ele-성격-seonggyeok",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "성격",
+    "pronunciation": "seong-gyeok",
+    "translation": "性格",
+    "memoryCue": "汉字词“性格”，성격이 활발하다（性格开朗）。",
+    "example": "그 사람은 성격이 밝고 친절해요."
+  },
+  {
+    "id": "exam-ko-int-gyeonghyang",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "경향",
+    "pronunciation": "gyeong-hyang",
+    "translation": "倾向；趋势",
+    "memoryCue": "TOPIK II 大作文图表题必背：〜는 경향이 있다（有……的趋势）。",
+    "example": "최근 1인 가구가 증가하는 경향이 뚜렷하다."
+  },
+  {
+    "id": "exam-ko-int-원인-wonin",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "원인",
+    "pronunciation": "won-in",
+    "translation": "原因；起因",
+    "memoryCue": "汉字词“原因”，常与 결과（结果）成对出现。",
+    "example": "사고의 정확한 원인을 조사하고 있습니다."
+  },
+  {
+    "id": "exam-ko-int-태도-taedo",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "태도",
+    "pronunciation": "tae-do",
+    "translation": "态度",
+    "memoryCue": "汉字词“态度”，적극적인 태도（积极的态度）。",
+    "example": "대화를 할 때는 상대방을 존중하는 태도가 필요합니다."
+  },
+  {
+    "id": "exam-ko-int-역할-yeokhal",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "역할",
+    "pronunciation": "yeok-hal",
+    "translation": "角色；作用；职责",
+    "memoryCue": "注意拼写是 역할 而非 역활，TOPIK 常见易错字！",
+    "example": "가정은 사회화의 기초적인 역할을 담당한다."
+  },
+  {
+    "id": "exam-ko-int-비교-bigyo",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "비교",
+    "pronunciation": "bi-gyo",
+    "translation": "比较；对比",
+    "memoryCue": "汉字词“比较”，搭配 과/와 비교하다。",
+    "example": "여러 제품의 장단점을 꼼꼼히 비교해 보았다."
+  },
+  {
+    "id": "exam-ko-int-유지-yuji",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "유지",
+    "pronunciation": "yu-ji",
+    "translation": "维持；保持",
+    "memoryCue": "汉字词“维持”，건강을 유지하다（保持健康）。",
+    "example": "적정 실내 온도를 유지하는 것이 좋습니다."
+  },
+  {
+    "id": "exam-ko-adv-모순-mosun",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "모순",
+    "pronunciation": "mo-sun",
+    "translation": "矛盾",
+    "memoryCue": "汉字词“矛盾”（모=矛，순=盾），TOPIK II 阅读高频议论词。",
+    "example": "이론과 현실 사이의 모순을 해결해야 한다."
+  },
+  {
+    "id": "exam-ko-adv-보완-bowan",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "보완",
+    "pronunciation": "bo-wan",
+    "translation": "补充完善；弥补缺陷",
+    "memoryCue": "汉字词“补完”，注意与 보안（保安/信息安全）区分读音与拼写。",
+    "example": "기존 제도의 문제점을 보완할 대책이 마련되었다."
+  },
+  {
+    "id": "exam-ko-adv-타당성-tadangseong",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "타당성",
+    "pronunciation": "ta-dang-seong",
+    "translation": "妥当性；合理性；可行性",
+    "memoryCue": "타당（妥当）+ 성（性），评估政策或论证是否站得住脚。",
+    "example": "사업 추진 전에 경제적 타당성을 검토해야 한다."
+  },
+  {
+    "id": "exam-ko-adv-잠재력-jamjaeryeok",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "잠재력",
+    "pronunciation": "jam-jae-ryeok",
+    "translation": "潜力；潜能",
+    "memoryCue": "汉字词“潜在力”，성장 잠재력（增长潜力）。",
+    "example": "이 기술은 무한한 발전 잠재력을 지니고 있다."
+  },
+  {
+    "id": "exam-ko-adv-보편적-bopyeonjeok",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "보편적",
+    "pronunciation": "bo-pyeon-jeok",
+    "translation": "普遍的；普适的",
+    "memoryCue": "汉字词“普遍的”，与 특수적（特殊的）相对。",
+    "example": "인권은 인류가 지켜야 할 보편적 가치이다."
+  },
+  {
+    "id": "exam-ko-adv-완화-wanhwa",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "완화",
+    "pronunciation": "wan-hwa",
+    "translation": "缓解；放宽（限制）",
+    "memoryCue": "汉字词“缓和”，규제 완화（放宽监管）、긴장 완화（缓解紧张）。",
+    "example": "정부는 중소기업에 대한 규제를 완화하기로 했다."
+  },
+  {
+    "id": "exam-ko-biz-실무-silmu",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "실무",
+    "pronunciation": "sil-mu",
+    "translation": "实务；一线具体业务",
+    "memoryCue": "실무자（具体经办负责人），韩国职场沟通高频词。",
+    "example": "자세한 일정은 양측 실무자끼리 조율하겠습니다."
+  },
+  {
+    "id": "exam-ko-biz-발주-balju",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "발주",
+    "pronunciation": "bal-ju",
+    "translation": "下单采购；发包订货",
+    "memoryCue": "발주서（采购订单 PO），与 수주（接单）成对记忆。",
+    "example": "자재 부족을 막기 위해 오늘 중으로 추가 발주를 넣었다."
+  },
+  {
+    "id": "exam-ko-biz-이해관계-ihaegwangye",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "이해관계",
+    "pronunciation": "i-hae-gwan-gye",
+    "translation": "利害关系；利益相关",
+    "memoryCue": "汉字词“利害关系”，이해관계자 即 stakeholder（利益相关方）。",
+    "example": "부서 간 이해관계를 조정하는 것이 리더의 역할이다."
+  },
+  {
+    "id": "exam-ko-biz-검토-geomto",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "검토",
+    "pronunciation": "geom-to",
+    "translation": "审阅；评估研究",
+    "memoryCue": "与日语“検討”同源，商务邮件常说 검토 부탁드립니다（烦请审阅）。",
+    "example": "보내 주신 계약서 초안을 면밀히 검토했습니다."
+  },
+  {
+    "id": "exam-ko-biz-인수인계-insuingye",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "인수인계",
+    "pronunciation": "in-su-in-gye",
+    "translation": "工作交接（接收与移交）",
+    "memoryCue": "인수（引受/接手）+ 인계（引继/移交）→ 岗位轮换时的工作交接。",
+    "example": "퇴사 전에 후임자에게 업무 인수인계를 마쳤다."
+  },
+  {
+    "id": "exam-ko-biz-성과-seonggwa",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "성과",
+    "pronunciation": "seong-gwa",
+    "translation": "绩效；成果",
+    "memoryCue": "汉字词“成果”，성과급（绩效奖金）。",
+    "example": "올해 신규 프로젝트에서 기대 이상의 성과를 거두었다."
+  }
+]

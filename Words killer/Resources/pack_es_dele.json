@@ -1,0 +1,302 @@
+[
+  {
+    "id": "exam-es-beg-biblioteca",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "biblioteca",
+    "pronunciation": "/bi.βljoˈte.ka/",
+    "translation": "图书馆（阴性）",
+    "memoryCue": "注意与书店 librería 区分：biblioteca 是借书看书的图书馆。",
+    "example": "Estudio español en la biblioteca todas las tardes."
+  },
+  {
+    "id": "exam-es-beg-billete",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "billete",
+    "pronunciation": "/biˈʎe.te/",
+    "translation": "车票；机票；纸币（阳性）",
+    "memoryCue": "billete de ida y vuelta（往返票），DELE A1 出行必背。",
+    "example": "Compré un billete de tren para Madrid."
+  },
+  {
+    "id": "exam-es-beg-vecino",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "vecino",
+    "pronunciation": "/beˈθi.no/",
+    "translation": "邻居；居民",
+    "memoryCue": "阴性为 vecina，同源词 vecindario（街坊社区）。",
+    "example": "Mi vecino tiene un jardín lleno de flores."
+  },
+  {
+    "id": "exam-es-beg-vacaciones",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "vacaciones",
+    "pronunciation": "/ba.kaˈθjo.nes/",
+    "translation": "假期（阴性复数）",
+    "memoryCue": "ir de vacaciones（去度假），日常总是以复数形式出现。",
+    "example": "En agosto nos vamos de vacaciones a la costa."
+  },
+  {
+    "id": "exam-es-beg-salud",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "salud",
+    "pronunciation": "/saˈluð/",
+    "translation": "健康；干杯祝词（阴性）",
+    "memoryCue": "别人打喷嚏或碰杯庆祝时都可以说 ¡Salud!。",
+    "example": "Caminar media hora al día mejora la salud."
+  },
+  {
+    "id": "exam-es-beg-barrio",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "barrio",
+    "pronunciation": "/ˈba.rjo/",
+    "translation": "街区；社区（阳性）",
+    "memoryCue": "双颤音 rr，DELE 口语介绍自己住处必用词。",
+    "example": "En mi barrio hay muchas tiendas pequeñas."
+  },
+  {
+    "id": "exam-es-ele-medioambiente",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "medioambiente",
+    "pronunciation": "/ˌme.ðjo.amˈbjen.te/",
+    "translation": "生态环境；自然环境（阳性）",
+    "memoryCue": "medio（周围媒介）+ ambiente（氛围环境），DELE A2/B1 必考话题词。",
+    "example": "Cuidar el medioambiente es responsabilidad de todos."
+  },
+  {
+    "id": "exam-es-ele-cotidiano",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "cotidiano",
+    "pronunciation": "/ko.tiˈðja.no/",
+    "translation": "日常的；每天的",
+    "memoryCue": "la vida cotidiana（日常生活），比 diario 更有书面质感。",
+    "example": "El transporte público facilita las tareas cotidianas."
+  },
+  {
+    "id": "exam-es-ele-participar",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "participar",
+    "pronunciation": "/paɾ.ti.θiˈpaɾ/",
+    "translation": "参加；参与（常接 en）",
+    "memoryCue": "搭配介词 en：participar en un taller（参加工作坊）。",
+    "example": "Más de cien jóvenes participaron en el festival."
+  },
+  {
+    "id": "exam-es-ele-disponible",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "disponible",
+    "pronunciation": "/dis.poˈni.βle/",
+    "translation": "可用的；有空的",
+    "memoryCue": "阴阳同形形容词，订房、约时间都高频使用。",
+    "example": "La habitación estará disponible a partir de las dos."
+  },
+  {
+    "id": "exam-es-ele-ventaja",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "ventaja",
+    "pronunciation": "/benˈta.xa/",
+    "translation": "优势；有利条件（阴性）",
+    "memoryCue": "与 desventaja（劣势/弊端）成对记忆，写作议论必备。",
+    "example": "Vivir cerca del metro es una gran ventaja."
+  },
+  {
+    "id": "exam-es-ele-imprescindible",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "imprescindible",
+    "pronunciation": "/im.pɾes.θinˈdi.βle/",
+    "translation": "必不可少的；不可或缺的",
+    "memoryCue": "prescindir（省去/放弃）加否定前缀 im- → 绝对不能省掉的。",
+    "example": "El descanso adecuado es imprescindible para rendir bien."
+  },
+  {
+    "id": "exam-es-int-tendencia",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "tendencia",
+    "pronunciation": "/tenˈden.θja/",
+    "translation": "趋势；倾向（阴性）",
+    "memoryCue": "marcar tendencia（引领潮流），DELE B1/B2 图表分析核心词。",
+    "example": "Existe una clara tendencia hacia el consumo responsable."
+  },
+  {
+    "id": "exam-es-int-consecuencia",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "consecuencia",
+    "pronunciation": "/kon.seˈkwen.θja/",
+    "translation": "后果；结果（阴性）",
+    "memoryCue": "como consecuencia（因此/作为结果），连接因果论证。",
+    "example": "La falta de lluvias tuvo graves consecuencias agrícolas."
+  },
+  {
+    "id": "exam-es-int-fomentar",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "fomentar",
+    "pronunciation": "/fo.menˈtaɾ/",
+    "translation": "促进；鼓励；培育",
+    "memoryCue": "DELE B2 作文高分动词：fomentar la lectura（提倡阅读）。",
+    "example": "El programa busca fomentar el intercambio cultural."
+  },
+  {
+    "id": "exam-es-int-concienciar",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "concienciar",
+    "pronunciation": "/kon.θjenˈθjaɾ/",
+    "translation": "使意识到；唤起公众意识",
+    "memoryCue": "conciencia（意识/良知）→ 唤起对社会或环保问题的重视。",
+    "example": "La campaña intenta concienciar sobre el ahorro de agua."
+  },
+  {
+    "id": "exam-es-int-alternativa",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "alternativa",
+    "pronunciation": "/al.teɾ.naˈti.βa/",
+    "translation": "替代方案；备选途径（阴性）",
+    "memoryCue": "buscar alternativas viables（寻找可行的替代方案）。",
+    "example": "El tren de alta velocidad ofrece una alternativa cómoda al avión."
+  },
+  {
+    "id": "exam-es-int-profundizar",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "profundizar",
+    "pronunciation": "/pɾo.fun.diˈθaɾ/",
+    "translation": "深入研究；深化（常接 en）",
+    "memoryCue": "profundo（深的）+ -izar → 深入探讨某个课题。",
+    "example": "En el próximo seminario profundizaremos en este tema."
+  },
+  {
+    "id": "exam-es-adv-paradoja",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "paradoja",
+    "pronunciation": "/pa.ɾaˈðo.xa/",
+    "translation": "悖论；自相矛盾的现象（阴性）",
+    "memoryCue": "注意 j 发 /x/ 音，形容词为 paradójico。",
+    "example": "Es una paradoja tener tanta información y tan poco tiempo."
+  },
+  {
+    "id": "exam-es-adv-ubicuo",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "ubicuo",
+    "pronunciation": "/uˈβi.kwo/",
+    "translation": "无处不在的",
+    "memoryCue": "与英语 ubiquitous 同源，正式学术书面词。",
+    "example": "La conectividad inalámbrica es hoy prácticamente ubicua."
+  },
+  {
+    "id": "exam-es-adv-obstaculizar",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "obstaculizar",
+    "pronunciation": "/obs.ta.ku.liˈθaɾ/",
+    "translation": "阻碍；妨碍",
+    "memoryCue": "obstáculo（障碍）+ -izar → 制造阻碍或拖慢进展。",
+    "example": "El exceso de trámites puede obstaculizar la innovación."
+  },
+  {
+    "id": "exam-es-adv-corroborar",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "corroborar",
+    "pronunciation": "/ko.ro.βoˈɾaɾ/",
+    "translation": "证实；印证",
+    "memoryCue": "用客观证据核实并印证先前的说法。",
+    "example": "Los análisis de laboratorio corroboraron el diagnóstico inicial."
+  },
+  {
+    "id": "exam-es-adv-efimero",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "efímero",
+    "pronunciation": "/eˈfi.me.ɾo/",
+    "translation": "短暂的；稍纵即逝的",
+    "memoryCue": "重音在倒数第三音节 fí，对应英语 ephemeral。",
+    "example": "La fama en las redes sociales suele ser efímera."
+  },
+  {
+    "id": "exam-es-adv-paliar",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "paliar",
+    "pronunciation": "/paˈljaɾ/",
+    "translation": "缓解；减轻（负面影响或痛楚）",
+    "memoryCue": "DELE C1 政经报道常考动词：paliar los efectos（减轻冲击）。",
+    "example": "Se aprobaron ayudas para paliar el impacto de la sequía."
+  },
+  {
+    "id": "exam-es-biz-proveedor",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "proveedor",
+    "pronunciation": "/pɾo.βe.eˈðoɾ/",
+    "translation": "供应商；供货商（阳性）",
+    "memoryCue": "proveer（供应）的名词，注意中间连续两个 e。",
+    "example": "Firmamos un acuerdo anual con el proveedor logístico."
+  },
+  {
+    "id": "exam-es-biz-licitacion",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "licitación",
+    "pronunciation": "/li.θi.taˈθjon/",
+    "translation": "公开招标；竞标（阴性）",
+    "memoryCue": "ganar una licitación（中标），跨国基建与商务核心词。",
+    "example": "Tres empresas internacionales participaron en la licitación."
+  },
+  {
+    "id": "exam-es-biz-liquidez",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "liquidez",
+    "pronunciation": "/li.kiˈðeθ/",
+    "translation": "资金流动性；变现力（阴性）",
+    "memoryCue": "falta de liquidez（现金流吃紧），财务汇报必备词。",
+    "example": "La empresa dispone de suficiente liquidez para expandirse."
+  },
+  {
+    "id": "exam-es-biz-cumplimiento",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "cumplimiento",
+    "pronunciation": "/kum.pliˈmjen.to/",
+    "translation": "合规；履行（合同或法规）",
+    "memoryCue": "cumplir（履行/遵守）的名词：cumplimiento normativo（监管合规）。",
+    "example": "Supervisamos el estricto cumplimiento de los plazos pactados."
+  },
+  {
+    "id": "exam-es-biz-acta",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "acta",
+    "pronunciation": "/ˈak.ta/",
+    "translation": "会议纪要；正式记录书（阴性）",
+    "memoryCue": "levantar el acta（撰写会议纪要），单数冠词用 el acta。",
+    "example": "Al finalizar la junta, todos aprobaron el acta de la sesión."
+  },
+  {
+    "id": "exam-es-biz-sinergia",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "sinergia",
+    "pronunciation": "/siˈneɾ.xja/",
+    "translation": "协同效应；合力（阴性）",
+    "memoryCue": "crear sinergias entre departamentos（跨部门协同增效）。",
+    "example": "La alianza estratégica generó una gran sinergia comercial."
+  }
+]

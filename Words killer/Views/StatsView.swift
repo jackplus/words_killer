@@ -14,6 +14,7 @@ struct StatsView: View {
 
     @AppStorage("dailyGoal") private var dailyGoal = 20
     @AppStorage("accentTheme") private var accentThemeRawValue = AccentTheme.forest.rawValue
+    @AppStorage(WordLibrary.disabledPacksStorageKey) private var disabledPacksRaw = ""
 
     @State private var selectedHeatmapDay: HeatmapDay?
 
@@ -22,7 +23,10 @@ struct StatsView: View {
     }
 
     private var allWords: [WordItem] {
-        WordLibrary.mergedWords(with: customWords)
+        WordLibrary.mergedWords(
+            with: customWords,
+            disabledPackIDs: WordLibrary.parseDisabledPackIDs(disabledPacksRaw)
+        )
     }
 
     private var wordLookup: [String: WordItem] {

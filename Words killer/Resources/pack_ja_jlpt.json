@@ -1,0 +1,302 @@
+[
+  {
+    "id": "exam-ja-beg-chikatetsu",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "地下鉄",
+    "pronunciation": "ちかてつ (chikatetsu)",
+    "translation": "地铁",
+    "memoryCue": "汉字直通中文“地下铁”，JLPT N5 交通必背词。",
+    "example": "毎日地下鉄で会社に通っています。"
+  },
+  {
+    "id": "exam-ja-beg-toshokan",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "図書館",
+    "pronunciation": "としょかん (toshokan)",
+    "translation": "图书馆",
+    "memoryCue": "図（图）+ 書（书）+ 館（馆），注意短音“としょ”。",
+    "example": "週末は図書館で日本語を勉強します。"
+  },
+  {
+    "id": "exam-ja-beg-yasumu",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "休む",
+    "pronunciation": "やすむ (yasumu)",
+    "translation": "休息；请假；缺席",
+    "memoryCue": "人靠在木（树）旁即“休”，既可表休息也可表请假。",
+    "example": "少し疲れたので、五分ぐらい休みましょう。"
+  },
+  {
+    "id": "exam-ja-beg-keshiki",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "景色",
+    "pronunciation": "けしき (keshiki)",
+    "translation": "景色；风景",
+    "memoryCue": "注意“景”在此读单音 け（ke），不带长音。",
+    "example": "山の頂上から見る景色はとてもきれいです。"
+  },
+  {
+    "id": "exam-ja-beg-narau",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "習う",
+    "pronunciation": "ならう (narau)",
+    "translation": "学习（向老师或行家学技艺）",
+    "memoryCue": "强调跟人学技能（如弹琴、游泳），区别于独自钻研的学ぶ。",
+    "example": "子どものころ、ピアノを習っていました。"
+  },
+  {
+    "id": "exam-ja-beg-shinsetsu",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "親切",
+    "pronunciation": "しんせつ (shinsetsu)",
+    "translation": "热心；亲切；周到",
+    "memoryCue": "形容动词（な形容词），指待人热心体贴，N5 高频词。",
+    "example": "駅員さんが親切に道を教えてくれました。"
+  },
+  {
+    "id": "exam-ja-ele-keiken-teinei",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "丁寧",
+    "pronunciation": "ていねい (teinei)",
+    "translation": "礼貌；仔细；周密",
+    "memoryCue": "丁寧語（敬体）的“丁寧”，既指说话礼貌也指做事细致。",
+    "example": "彼女はいつも丁寧なメールを書きます。"
+  },
+  {
+    "id": "exam-ja-ele-setsumei-soudan",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "相談",
+    "pronunciation": "そうだん (soudan)",
+    "translation": "商量；咨询；讨论",
+    "memoryCue": "相（相互）+ 談（交谈）→ 找人商量对策，JLPT N4 必考。",
+    "example": "進路について先生に相談しました。"
+  },
+  {
+    "id": "exam-ja-ele-renshuu",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "練習",
+    "pronunciation": "れんしゅう (renshuu)",
+    "translation": "练习；操练",
+    "memoryCue": "练（れん）+ 习（しゅう），注意后半部分是长音。",
+    "example": "発音を毎日練習すれば、必ず上手になります。"
+  },
+  {
+    "id": "exam-ja-ele-annai",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "案内",
+    "pronunciation": "あんない (annai)",
+    "translation": "向导；引导；通知指南",
+    "memoryCue": "店内常见的“ご案内”，既指带路也指活动通知。",
+    "example": "新入社員に社内を案内しました。"
+  },
+  {
+    "id": "exam-ja-ele-kankyou",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "環境",
+    "pronunciation": "かんきょう (kankyou)",
+    "translation": "环境；周遭条件",
+    "memoryCue": "音读与中文“环境”对应：かん（环）+ きょう（境）。",
+    "example": "静かな環境で集中して読書したいです。"
+  },
+  {
+    "id": "exam-ja-ele-juubun",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "十分",
+    "pronunciation": "じゅうぶん (juubun)",
+    "translation": "充分；足够；十足",
+    "memoryCue": "十分（十成满）→ 足够充分，不要只理解为“十分钟”。",
+    "example": "睡眠を十分にとることが大切です。"
+  },
+  {
+    "id": "exam-ja-int-kyoutsuu",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "共通",
+    "pronunciation": "きょうつう (kyoutsuu)",
+    "translation": "共同；共通",
+    "memoryCue": "共通点（共同点），JLPT N3 阅读高频词。",
+    "example": "二人は音楽という共通の趣味を持っています。"
+  },
+  {
+    "id": "exam-ja-int-구taiteki",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "具体的",
+    "pronunciation": "ぐたいてき (gutaiteki)",
+    "translation": "具体的；明确的",
+    "memoryCue": "与“抽象的（ちゅうしょうてき）”成对记忆。",
+    "example": "もう少し具体的な例を挙げてください。"
+  },
+  {
+    "id": "exam-ja-int-keikou",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "傾向",
+    "pronunciation": "けいこう (keikou)",
+    "translation": "倾向；趋势",
+    "memoryCue": "〜傾向がある（有……的趋势），N3/N2 图表与社论核心词。",
+    "example": "近年、在宅勤務を選ぶ人が増える傾向にあります。"
+  },
+  {
+    "id": "exam-ja-int-handan",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "判断",
+    "pronunciation": "はんだん (handan)",
+    "translation": "判断；裁定",
+    "memoryCue": "判（はん）+ 断（だん），冷静权衡后作出判断。",
+    "example": "データに基づいて冷静に判断する必要があります。"
+  },
+  {
+    "id": "exam-ja-int-fukuzatsu",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "複雑",
+    "pronunciation": "ふくざつ (fukuzatsu)",
+    "translation": "复杂；错综",
+    "memoryCue": "与“単純（たんじゅん）”反义配对记忆。",
+    "example": "手続きが複雑で時間がかかりました。"
+  },
+  {
+    "id": "exam-ja-int-iji",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "維持",
+    "pronunciation": "いじ (iji)",
+    "translation": "维持；保持",
+    "memoryCue": "健康維持、品質維持，音读简短只有两拍 いじ。",
+    "example": "高い品質を維持するために点検を続けています。"
+  },
+  {
+    "id": "exam-ja-adv-haaku",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "把握",
+    "pronunciation": "はあく (haaku)",
+    "translation": "掌握；摸清（情况、全貌）",
+    "memoryCue": "状況を把握する（掌握情况），JLPT N2 高频动词词干。",
+    "example": "まず問題の原因を正確に把握しましょう。"
+  },
+  {
+    "id": "exam-ja-adv-dakyou",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "妥協",
+    "pronunciation": "だきょう (dakyou)",
+    "translation": "妥协；折中让步",
+    "memoryCue": "妥（だ）+ 協（きょう），既可指谈判让步也可指不降低标准（妥協しない）。",
+    "example": "安全面では一切妥協できません。"
+  },
+  {
+    "id": "exam-ja-adv-kento",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "検討",
+    "pronunciation": "けんとう (kentou)",
+    "translation": "研究讨论；审议评估",
+    "memoryCue": "注意日语“検討”重在仔细评估考虑，不是中文的“写检讨认错”。",
+    "example": "前向きに検討させていただきます。"
+  },
+  {
+    "id": "exam-ja-adv-mujyun",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "矛盾",
+    "pronunciation": "むじゅん (mujun)",
+    "translation": "矛盾；前后抵触",
+    "memoryCue": "源自楚人卖矛与盾的典故，N2 议论文常考词。",
+    "example": "彼の発言には明らかな矛盾があります。"
+  },
+  {
+    "id": "exam-ja-adv-sokushin",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "促進",
+    "pronunciation": "そくしん (sokushin)",
+    "translation": "促进；推动",
+    "memoryCue": "促（そく，促音变读）+ 進（しん），如交流促進。",
+    "example": "地域経済の活性化を促進する政策が発表された。"
+  },
+  {
+    "id": "exam-ja-adv-kencho",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "顕著",
+    "pronunciation": "けんちょ (kencho)",
+    "translation": "显著；明显",
+    "memoryCue": "JLPT N1 核心书面形容动词：顕著な違い（显著差异）。",
+    "example": "都市部と地方の格差が顕著になっている。"
+  },
+  {
+    "id": "exam-ja-biz-ringi",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "稟議",
+    "pronunciation": "りんぎ (ringi)",
+    "translation": "（企业内部）呈批审议；传阅请示",
+    "memoryCue": "日企职场核心词：稟議書を通す（走内部审批流程）。",
+    "example": "新規ツールの導入には稟議を通す必要があります。"
+  },
+  {
+    "id": "exam-ja-biz-kijitsu",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "期日",
+    "pronunciation": "きじつ (kijitsu)",
+    "translation": "截止日期；约定日期",
+    "memoryCue": "支払期日、提出期日，商务邮件催办与约定时间必用。",
+    "example": "書類は今月二十日の期日までにご提出ください。"
+  },
+  {
+    "id": "exam-ja-biz-kenshuu",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "研修",
+    "pronunciation": "けんしゅう (kenshuu)",
+    "translation": "培训；进修",
+    "memoryCue": "新入社員研修（新员工培训），职场高频词。",
+    "example": "来週から三日間のリーダー研修に参加します。"
+  },
+  {
+    "id": "exam-ja-biz-osewa",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "恐縮",
+    "pronunciation": "きょうしゅく (kyoushuku)",
+    "translation": "惶恐；不好意思；劳驾（商务谦辞）",
+    "memoryCue": "お手数をおかけして恐縮ですが（很抱歉麻烦您），商务邮件黄金铺垫词。",
+    "example": "お忙しいところ恐縮ですが、ご確認をお願いいたします。"
+  },
+  {
+    "id": "exam-ja-biz-saiyou",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "採用",
+    "pronunciation": "さいよう (saiyou)",
+    "translation": "录用；招聘；采纳方案",
+    "memoryCue": "既指人事招聘（中途採用），也指采纳意见或技术。",
+    "example": "彼女の企画案が正式に採用されました。"
+  },
+  {
+    "id": "exam-ja-biz-unyou",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "運用",
+    "pronunciation": "うんよう (unyou)",
+    "translation": "运维；实际运作；资金运用",
+    "memoryCue": "システム運用（系统运维）、資産運用（资产管理）。",
+    "example": "来月から新しい予約システムの運用を開始します。"
+  }
+]

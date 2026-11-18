@@ -1,0 +1,302 @@
+[
+  {
+    "id": "exam-fr-beg-bibliotheque",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "bibliothèque",
+    "pronunciation": "/bi.bli.jɔ.tɛk/",
+    "translation": "图书馆；书柜（阴性）",
+    "memoryCue": "biblio-（书）+ thèque（收藏处），不要和书店 librairie 混淆！",
+    "example": "Je travaille souvent à la bibliothèque municipale."
+  },
+  {
+    "id": "exam-fr-beg-billet",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "billet",
+    "pronunciation": "/bi.jɛ/",
+    "translation": "车票；机票；纸币（阳性）",
+    "memoryCue": "双 l 读半元音 /j/，un billet de train（一张火车票）。",
+    "example": "J'ai réservé un billet d'avion pour Lyon."
+  },
+  {
+    "id": "exam-fr-beg-voisin",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "voisin",
+    "pronunciation": "/vwa.zɛ̃/",
+    "translation": "邻居；邻近的",
+    "memoryCue": "阴性形式加 e 变为 voisine，DELF A1 社区场景必背词。",
+    "example": "Notre voisin est très sympathique et serviable."
+  },
+  {
+    "id": "exam-fr-beg-vacances",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "vacances",
+    "pronunciation": "/va.kɑ̃s/",
+    "translation": "假期（常作阴性复数）",
+    "memoryCue": "表示休假度假时几乎总是用复数 les vacances。",
+    "example": "Où pars-tu pendant les vacances d'été ?"
+  },
+  {
+    "id": "exam-fr-beg-sante",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "santé",
+    "pronunciation": "/sɑ̃.te/",
+    "translation": "健康；干杯祝词（阴性）",
+    "memoryCue": "碰杯时说 « Santé ! » 就是祝身体健康、干杯。",
+    "example": "Faire du sport est excellent pour la santé."
+  },
+  {
+    "id": "exam-fr-beg-quartier",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "quartier",
+    "pronunciation": "/kaʁ.tje/",
+    "translation": "街区；社区（阳性）",
+    "memoryCue": "源自“四分之一城区”，DELF 口语介绍居住环境高频词。",
+    "example": "C'est un quartier calme avec beaucoup de parcs."
+  },
+  {
+    "id": "exam-fr-ele-environnement",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "environnement",
+    "pronunciation": "/ɑ̃.vi.ʁɔn.mɑ̃/",
+    "translation": "环境（阳性）",
+    "memoryCue": "注意法语双写 n（environne-ment），DELF A2/B1 环保主题核心词。",
+    "example": "Il faut protéger l'environnement au quotidien."
+  },
+  {
+    "id": "exam-fr-ele-quotidien",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "quotidien",
+    "pronunciation": "/kɔ.ti.djɛ̃/",
+    "translation": "日常的；每日的；日报",
+    "memoryCue": "la vie quotidienne（日常生活），写作高频替换词。",
+    "example": "Le vélo fait désormais partie de mon quotidien."
+  },
+  {
+    "id": "exam-fr-ele-conseiller",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "conseiller",
+    "pronunciation": "/kɔ̃.sɛ.je/",
+    "translation": "建议；劝告；顾问",
+    "memoryCue": "由名词 conseil（建议）派生，DELF A2 书信提建议必用动词。",
+    "example": "Je te conseille de réserver ta place à l'avance."
+  },
+  {
+    "id": "exam-fr-ele-participer",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "participer",
+    "pronunciation": "/paʁ.ti.si.pe/",
+    "translation": "参与；参加（接 à）",
+    "memoryCue": "牢记介词搭配 participer à quelque chose。",
+    "example": "Plusieurs écoles participent à ce concours culturel."
+  },
+  {
+    "id": "exam-fr-ele-avantage",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "avantage",
+    "pronunciation": "/a.vɑ̃.taʒ/",
+    "translation": "优势；好处（阳性）",
+    "memoryCue": "avant（在前）+ age → 占先机的好处，常与 inconvénient（弊端）成对论证。",
+    "example": "Le télétravail présente de nombreux avantages."
+  },
+  {
+    "id": "exam-fr-ele-disponible",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "disponible",
+    "pronunciation": "/dis.pɔ.nibl/",
+    "translation": "有空的；可获得的",
+    "memoryCue": "预约时间和询问库存都高频使用。",
+    "example": "Êtes-vous disponible mardi prochain à quatorze heures ?"
+  },
+  {
+    "id": "exam-fr-int-inconvenient",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "inconvénient",
+    "pronunciation": "/ɛ̃.kɔ̃.ve.njɑ̃/",
+    "translation": "缺点；弊端；不便之处（阳性）",
+    "memoryCue": "DELF B1/B2 正反论证万能搭配：les avantages et les inconvénients。",
+    "example": "Le principal inconvénient de ce logement est le bruit."
+  },
+  {
+    "id": "exam-fr-int-sensibiliser",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "sensibiliser",
+    "pronunciation": "/sɑ̃.si.bi.li.ze/",
+    "translation": "提高……的意识；使关注",
+    "memoryCue": "sensible（敏感的）→ 让公众对环保/健康议题产生意识，B2 高频词。",
+    "example": "Cette affiche vise à sensibiliser le public au recyclage."
+  },
+  {
+    "id": "exam-fr-int-favoriser",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "favoriser",
+    "pronunciation": "/fa.vɔ.ʁi.ze/",
+    "translation": "促进；有利于；偏袒",
+    "memoryCue": "议论文表达“促进社会交流/经济发展”的高分动词。",
+    "example": "Les espaces verts favorisent le bien-être des habitants."
+  },
+  {
+    "id": "exam-fr-int-consequence",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "conséquence",
+    "pronunciation": "/kɔ̃.se.kɑ̃s/",
+    "translation": "后果；结果（阴性）",
+    "memoryCue": "短语 en conséquence（因此），注意重音符号 é。",
+    "example": "Cette décision aura des conséquences à long terme."
+  },
+  {
+    "id": "exam-fr-int-tendance",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "tendance",
+    "pronunciation": "/tɑ̃.dɑ̃s/",
+    "translation": "趋势；倾向；潮流（阴性）",
+    "memoryCue": "avoir tendance à + 动词原形（往往会/倾向于做某事）。",
+    "example": "Les consommateurs ont tendance à privilégier la qualité."
+  },
+  {
+    "id": "exam-fr-int-remise-en-cause",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "approfondir",
+    "pronunciation": "/a.pʁɔ.fɔ̃.diʁ/",
+    "translation": "深化；深入探究",
+    "memoryCue": "profond（深的）→ 加前缀 ap- 变为第二组规则动词“加深、深入研究”。",
+    "example": "Nous devons approfondir notre analyse avant de conclure."
+  },
+  {
+    "id": "exam-fr-adv-paradoxe",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "paradoxe",
+    "pronunciation": "/pa.ʁa.dɔks/",
+    "translation": "悖论；矛盾现象（阳性）",
+    "memoryCue": "DELF B2 / DALF C1 思辨口语常用词：soulever un paradoxe。",
+    "example": "C'est tout le paradoxe de la société hyperconnectée."
+  },
+  {
+    "id": "exam-fr-adv-preconiser",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "préconiser",
+    "pronunciation": "/pʁe.kɔ.ni.ze/",
+    "translation": "倡导；正式建议；推荐方案",
+    "memoryCue": "比 conseiller 更正式，常用于专家报告或政策建议。",
+    "example": "Les experts préconisent une réduction progressive des émissions."
+  },
+  {
+    "id": "exam-fr-adv-omnipresent",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "omniprésent",
+    "pronunciation": "/ɔm.ni.pʁe.zɑ̃/",
+    "translation": "无处不在的",
+    "memoryCue": "omni-（全/到处）+ présent（在场），对应英语 ubiquitous。",
+    "example": "Les écrans sont devenus omniprésents dans notre vie."
+  },
+  {
+    "id": "exam-fr-adv-entraver",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "entraver",
+    "pronunciation": "/ɑ̃.tʁa.ve/",
+    "translation": "阻碍；妨碍；束缚",
+    "memoryCue": "entrave 原指绊马索 → 引申为阻碍发展或进程。",
+    "example": "Le manque de financement risque d'entraver les recherches."
+  },
+  {
+    "id": "exam-fr-adv-perennite",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "pérennité",
+    "pronunciation": "/pe.ʁɛ.ni.te/",
+    "translation": "持久性；永续；长久稳固（阴性）",
+    "memoryCue": "pérenne（长久的）的名词，探讨企业与生态长期延续的书面高分词。",
+    "example": "Cet investissement garantit la pérennité du projet."
+  },
+  {
+    "id": "exam-fr-adv-corroborer",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "corroborer",
+    "pronunciation": "/kɔ.ʁɔ.bɔ.ʁe/",
+    "translation": "证实；佐证",
+    "memoryCue": "学术与新闻报道高频词：新证据佐证先前的判断。",
+    "example": "Les nouvelles observations corroborent cette théorie."
+  },
+  {
+    "id": "exam-fr-biz-fournisseur",
+    "language": "french",
+    "difficulty": "business",
+    "term": "fournisseur",
+    "pronunciation": "/fuʁ.ni.sœʁ/",
+    "translation": "供应商；供货方（阳性）",
+    "memoryCue": "fournir（提供/供应）+ -isseur → 供应链合作伙伴。",
+    "example": "Nous avons sélectionné un nouveau fournisseur local."
+  },
+  {
+    "id": "exam-fr-biz-conformite",
+    "language": "french",
+    "difficulty": "business",
+    "term": "conformité",
+    "pronunciation": "/kɔ̃.fɔʁ.mi.te/",
+    "translation": "合规；符合标准（阴性）",
+    "memoryCue": "en conformité avec（符合……规定），法企合规部门即 la conformité。",
+    "example": "Le produit a passé tous les tests de conformité."
+  },
+  {
+    "id": "exam-fr-biz-cahier-des-charges",
+    "language": "french",
+    "difficulty": "business",
+    "term": "appel d'offres",
+    "pronunciation": "/a.pɛl dɔfʁ/",
+    "translation": "招标；公开征集报价（阳性）",
+    "memoryCue": "appel（呼吁/征集）+ offres（报价方案）→ 商业招投标。",
+    "example": "La mairie a lancé un appel d'offres pour rénover la gare."
+  },
+  {
+    "id": "exam-fr-biz-tresorerie",
+    "language": "french",
+    "difficulty": "business",
+    "term": "trésorerie",
+    "pronunciation": "/tʁe.zɔ.ʁə.ʁi/",
+    "translation": "现金流；司库资金（阴性）",
+    "memoryCue": "trésor（财宝/金库）→ 企业日常可支配的流动资金。",
+    "example": "Une bonne gestion de la trésorerie évite les découverts."
+  },
+  {
+    "id": "exam-fr-biz-compte-rendu",
+    "language": "french",
+    "difficulty": "business",
+    "term": "compte rendu",
+    "pronunciation": "/kɔ̃t ʁɑ̃.dy/",
+    "translation": "会议纪要；工作汇报（阳性）",
+    "memoryCue": "rendre compte（汇报情况）的名词化，开完会必发的纪要。",
+    "example": "Je vous enverrai le compte rendu de la réunion cet après-midi."
+  },
+  {
+    "id": "exam-fr-biz-polyvalent",
+    "language": "french",
+    "difficulty": "business",
+    "term": "polyvalent",
+    "pronunciation": "/pɔ.li.va.lɑ̃/",
+    "translation": "多面手的；一专多能的；多用途的",
+    "memoryCue": "poly-（多）+ valent（价值/能力），法语招聘启事最高频形容词之一。",
+    "example": "Nous recherchons un profil polyvalent pour rejoindre l'équipe."
+  }
+]

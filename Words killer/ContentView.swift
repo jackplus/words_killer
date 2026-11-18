@@ -22,6 +22,7 @@ struct ContentView: View {
     @AppStorage("challengeSize") private var challengeSize = 10
     @AppStorage("isPreferenceExpanded") private var isPreferenceExpanded = false
     @AppStorage("accentTheme") private var accentThemeRawValue = AccentTheme.forest.rawValue
+    @AppStorage(WordLibrary.disabledPacksStorageKey) private var disabledPacksRaw = ""
 
     @State private var speechService = SpeechService()
     @State private var audioController = AudioLearningController()
@@ -83,7 +84,10 @@ struct ContentView: View {
     }
 
     private var allWords: [WordItem] {
-        WordLibrary.mergedWords(with: customWords)
+        WordLibrary.mergedWords(
+            with: customWords,
+            disabledPackIDs: WordLibrary.parseDisabledPackIDs(disabledPacksRaw)
+        )
     }
 
     private var availableWords: [WordItem] {
@@ -211,6 +215,11 @@ struct ContentView: View {
                 }
             }
             .onChange(of: challengeSize) {
+                if completedIDs.isEmpty {
+                    startNewChallenge()
+                }
+            }
+            .onChange(of: disabledPacksRaw) {
                 if completedIDs.isEmpty {
                     startNewChallenge()
                 }
