@@ -9,6 +9,7 @@ import SwiftUI
 struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Query private var allProgress: [WordProgress]
 
     let sourceWords: [WordItem]
     let allAvailableWords: [WordItem]
@@ -16,6 +17,7 @@ struct QuizView: View {
 
     @State private var speechService = SpeechService()
     @State private var quizMode: QuizMode = .multipleChoice
+    @State private var activeWords: [WordItem] = []
     @State private var questions: [QuizQuestion] = []
     @State private var currentIndex: Int = 0
     @State private var selectedOptionIndex: Int? = nil
@@ -26,12 +28,18 @@ struct QuizView: View {
     // Spelling mode state
     @State private var spellingInput: String = ""
     @State private var isSpellingRevealed: Bool = false
+    @State private var usedSpellingHint: Bool = false
+    @State private var hadWrongAttempt: Bool = false
     @State private var spellingFeedback: (isCorrect: Bool, message: String)? = nil
     @FocusState private var isInputFocused: Bool
 
+    private var progressMap: [String: WordProgress] {
+        Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
+    }
+
     private var currentWord: WordItem? {
-        guard !sourceWords.isEmpty, currentIndex < sourceWords.count else { return nil }
-        return sourceWords[currentIndex]
+        guard !activeWords.isEmpty, currentIndex < activeWords.count else { return nil }
+        return activeWords[currentIndex]
     }
 
     private var currentQuestion: QuizQuestion? {
@@ -40,12 +48,12 @@ struct QuizView: View {
     }
 
     private var isFinished: Bool {
-        let total = quizMode == .multipleChoice ? questions.count : sourceWords.count
+        let total = quizMode == .multipleChoice ? questions.count : activeWords.count
         return total > 0 && currentIndex >= total
     }
 
     private var totalCount: Int {
-        quizMode == .multipleChoice ? questions.count : sourceWords.count
+        quizMode == .multipleChoice ? questions.count : activeWords.count
     }
 
     private var progress: Double {
@@ -87,7 +95,7 @@ struct QuizView: View {
                 }
             }
             .onAppear {
-                restartQuiz()
+                restartQuiz(using: sourceWords)
             }
         }
     }
@@ -101,7 +109,7 @@ struct QuizView: View {
             }
             .pickerStyle(.segmented)
             .onChange(of: quizMode) {
-                restartQuiz()
+                restartQuiz(using: activeWords.isEmpty ? sourceWords : activeWords)
             }
 
             HStack {
@@ -132,7 +140,6 @@ struct QuizView: View {
     // MARK: - Multiple Choice
     private func multipleChoiceSection(question: QuizQuestion) -> some View {
         VStack(spacing: 16) {
-            // Prompt Card
             VStack(spacing: 12) {
                 HStack {
                     Text(question.subtype.rawValue)
@@ -194,7 +201,6 @@ struct QuizView: View {
             .padding(18)
             .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
 
-            // Options
             VStack(spacing: 10) {
                 ForEach(0..<question.options.count, id: \.self) { index in
                     let optionText = question.options[index]
@@ -224,7 +230,10 @@ struct QuizView: View {
                         }
                         .padding(14)
                         .frame(maxWidth: .infinity)
-                        .background(optionBackgroundColor(isSelected: isSelected, isCorrect: isCorrectOption), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .background(
+                            optionBackgroundColor(isSelected: isSelected, isCorrect: isCorrectOption),
+                            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        )
                         .overlay(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .stroke(optionBorderColor(isSelected: isSelected, isCorrect: isCorrectOption), lineWidth: 1.5)
@@ -259,8 +268,12 @@ struct QuizView: View {
         let isCorrect = (index == question.correctOptionIndex)
         if isCorrect {
             correctCount += 1
+            recordQuizOutcome(word: question.word, rating: .known)
         } else {
-            wrongWords.append(question.word)
+            if !wrongWords.contains(where: { $0.id == question.word.id }) {
+                wrongWords.append(question.word)
+            }
+            recordQuizOutcome(word: question.word, rating: .unknown)
         }
     }
 
@@ -322,14 +335,13 @@ struct QuizView: View {
                         .foregroundStyle(AppTheme.accent)
                 }
 
-                Text("字母数：\(word.term.count) 个字母")
+                Text("字符长度：\(word.term.count)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
             .padding(18)
             .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
 
-            // Input card
             VStack(spacing: 12) {
                 TextField("请输入单词拼写", text: $spellingInput)
                     .textFieldStyle(.plain)
@@ -358,6 +370,7 @@ struct QuizView: View {
                 HStack(spacing: 10) {
                     Button {
                         if !word.term.isEmpty {
+                            usedSpellingHint = true
                             spellingInput = String(word.term.prefix(max(1, spellingInput.count + 1)))
                         }
                     } label: {
@@ -366,20 +379,24 @@ struct QuizView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
+                    .disabled(isSpellingRevealed || spellingFeedback?.isCorrect == true)
 
                     Button {
+                        guard !isSpellingRevealed, spellingFeedback?.isCorrect != true else { return }
                         isSpellingRevealed = true
                         spellingInput = word.term
                         spellingFeedback = (false, "答案已揭晓：\(word.term)")
                         if !wrongWords.contains(where: { $0.id == word.id }) {
                             wrongWords.append(word)
                         }
+                        recordQuizOutcome(word: word, rating: .unknown)
                     } label: {
                         Label("看答案", systemImage: "eye")
                             .font(.caption)
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
+                    .disabled(isSpellingRevealed || spellingFeedback?.isCorrect == true)
                 }
 
                 Button {
@@ -416,15 +433,30 @@ struct QuizView: View {
         let trimmedTarget = word.term.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 
         if trimmedInput == trimmedTarget {
-            correctCount += 1
-            spellingFeedback = (true, "拼写正确！")
+            if !hadWrongAttempt {
+                correctCount += 1
+            }
+            let rating: RecallRating = (usedSpellingHint || hadWrongAttempt) ? .fuzzy : .known
+            spellingFeedback = (true, rating == .known ? "拼写完全正确！已记入掌握进度" : "拼写正确！已记为待巩固（12小时后复习）")
+            recordQuizOutcome(word: word, rating: rating)
             speechService.speak(word.term, language: word.language)
         } else {
+            hadWrongAttempt = true
             spellingFeedback = (false, "拼写有误，再试一次或点击“看答案”")
             if !wrongWords.contains(where: { $0.id == word.id }) {
                 wrongWords.append(word)
             }
         }
+    }
+
+    private func recordQuizOutcome(word: WordItem, rating: RecallRating) {
+        SpacedRepetitionEngine.recordReview(
+            for: word,
+            rating: rating,
+            source: .quiz,
+            existingProgress: progressMap[word.id],
+            in: modelContext
+        )
     }
 
     // MARK: - Answer Explanation
@@ -472,6 +504,8 @@ struct QuizView: View {
         hasAnswered = false
         spellingInput = ""
         isSpellingRevealed = false
+        usedSpellingHint = false
+        hadWrongAttempt = false
         spellingFeedback = nil
 
         if quizMode == .multipleChoice, let question = currentQuestion, question.subtype == .audioToWord {
@@ -482,7 +516,7 @@ struct QuizView: View {
         }
     }
 
-    private func restartQuiz() {
+    private func restartQuiz(using wordsPool: [WordItem]) {
         currentIndex = 0
         correctCount = 0
         wrongWords.removeAll()
@@ -490,9 +524,12 @@ struct QuizView: View {
         hasAnswered = false
         spellingInput = ""
         isSpellingRevealed = false
+        usedSpellingHint = false
+        hadWrongAttempt = false
         spellingFeedback = nil
 
-        let target = Array(sourceWords.prefix(10))
+        let target = Array(wordsPool.prefix(20))
+        activeWords = target
         questions = QuizEngine.buildQuestions(from: target, distractorPool: allAvailableWords)
 
         if quizMode == .multipleChoice, let first = questions.first, first.subtype == .audioToWord {
@@ -518,10 +555,14 @@ struct QuizView: View {
                     .font(.title2.monospacedDigit().weight(.semibold))
                     .foregroundStyle(AppTheme.accent)
 
-                Text(wrongWords.isEmpty ? "所有单词均已准确掌握，继续保持！" : "本次共有 \(wrongWords.count) 个词出现失误，建议重点复习。")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
+                Text(
+                    wrongWords.isEmpty
+                        ? "所有单词均已准确掌握，记忆进度与今日打卡已同步更新！"
+                        : "本次共有 \(wrongWords.count) 个词出现失误，已自动加入待重学队列。"
+                )
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
             }
             .padding(24)
             .frame(maxWidth: .infinity)
@@ -555,10 +596,24 @@ struct QuizView: View {
             }
 
             VStack(spacing: 10) {
+                if !wrongWords.isEmpty {
+                    Button {
+                        let mistakesToRetry = wrongWords
+                        restartQuiz(using: mistakesToRetry)
+                    } label: {
+                        Label("只重测错题 (\(wrongWords.count) 词)", systemImage: "flame.fill")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 48)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.orange)
+                }
+
                 Button {
-                    restartQuiz()
+                    restartQuiz(using: sourceWords)
                 } label: {
-                    Label("再测一次", systemImage: "arrow.clockwise")
+                    Label("完整再测一次", systemImage: "arrow.clockwise")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .frame(height: 48)

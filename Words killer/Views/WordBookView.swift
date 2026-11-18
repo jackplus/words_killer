@@ -30,6 +30,7 @@ struct WordBookView: View {
     @State private var selectedWord: WordItem?
     @State private var isShowingAddWordSheet = false
     @State private var isShowingAudioPlayerSheet = false
+    @State private var isShowingQuizSheet = false
 
     private var progressMap: [String: WordProgress] {
         Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
@@ -189,14 +190,22 @@ struct WordBookView: View {
                             }
                         }
                     } header: {
-                        HStack {
+                        HStack(spacing: 14) {
                             Text("共 \(filteredWords.count) 词")
                             Spacer()
+                            Button {
+                                isShowingQuizSheet = true
+                            } label: {
+                                Label("测验", systemImage: "list.bullet.clipboard")
+                                    .font(.caption.weight(.medium))
+                                    .foregroundStyle(AppTheme.accent)
+                            }
+
                             Button {
                                 audioController.startPlayback(words: filteredWords)
                                 isShowingAudioPlayerSheet = true
                             } label: {
-                                Label("听学这组词", systemImage: "headphones")
+                                Label("听学", systemImage: "headphones")
                                     .font(.caption.weight(.medium))
                                     .foregroundStyle(AppTheme.accent)
                             }
@@ -219,6 +228,12 @@ struct WordBookView: View {
             }
             .sheet(isPresented: $isShowingAddWordSheet) {
                 AddCustomWordView()
+            }
+            .sheet(isPresented: $isShowingQuizSheet) {
+                QuizView(
+                    sourceWords: filteredWords,
+                    allAvailableWords: allWords
+                )
             }
             .sheet(isPresented: $isShowingAudioPlayerSheet) {
                 AudioPlayerView(
@@ -274,15 +289,13 @@ struct WordBookView: View {
     }
 
     private func rateWord(_ word: WordItem, rating: RecallRating) {
-        let record: WordProgress
-        if let existing = progressMap[word.id] {
-            record = existing
-        } else {
-            record = WordProgress(wordID: word.id, language: word.language)
-            modelContext.insert(record)
-        }
-        SpacedRepetitionEngine.apply(rating: rating, to: record)
-        try? modelContext.save()
+        SpacedRepetitionEngine.recordReview(
+            for: word,
+            rating: rating,
+            source: .wordbook,
+            existingProgress: progressMap[word.id],
+            in: modelContext
+        )
     }
 }
 
@@ -463,5 +476,5 @@ private struct WordDetailSheet: View {
 
 #Preview {
     WordBookView()
-        .modelContainer(for: [WordProgress.self, CustomWordRecord.self], inMemory: true)
+        .modelContainer(for: [WordProgress.self, CustomWordRecord.self, ReviewEvent.self], inMemory: true)
 }

@@ -4,8 +4,39 @@
 //
 
 import Foundation
+import SwiftData
 
 enum SpacedRepetitionEngine {
+    @MainActor
+    static func recordReview(
+        for word: WordItem,
+        rating: RecallRating,
+        source: ReviewSource = .card,
+        existingProgress: WordProgress?,
+        in modelContext: ModelContext,
+        now: Date = .now
+    ) {
+        let record: WordProgress
+        if let existing = existingProgress {
+            record = existing
+        } else {
+            record = WordProgress(wordID: word.id, language: word.language)
+            modelContext.insert(record)
+        }
+
+        apply(rating: rating, to: record, now: now)
+
+        let event = ReviewEvent(
+            wordID: word.id,
+            language: word.language,
+            rating: rating,
+            source: source,
+            reviewedAt: now
+        )
+        modelContext.insert(event)
+        try? modelContext.save()
+    }
+
     static func apply(rating: RecallRating, to progress: WordProgress, now: Date = .now) {
         progress.reviewCount += 1
         progress.lastReviewedAt = now
@@ -61,7 +92,7 @@ enum SpacedRepetitionEngine {
 
             let dueWords = pool.filter { word in
                 guard let progress = progressMap[word.id] else { return false }
-                return progress.isDue(at: now)
+                return progress.reviewCount > 0 && progress.isDue(at: now)
             }.sorted { lhs, rhs in
                 let lDate = progressMap[lhs.id]?.nextReviewDate ?? .distantPast
                 let rDate = progressMap[rhs.id]?.nextReviewDate ?? .distantPast
@@ -69,11 +100,25 @@ enum SpacedRepetitionEngine {
             }
 
             let dueIDs = Set(dueWords.map(\.id))
-            let unseenWords = pool.filter { !dueIDs.contains($0.id) && progressMap[$0.id] == nil }.shuffled()
-            let unseenIDs = Set(unseenWords.map(\.id))
-            let scheduledWords = pool.filter { !dueIDs.contains($0.id) && !unseenIDs.contains($0.id) }.shuffled()
+            let starredUnseen = pool.filter { word in
+                !dueIDs.contains(word.id)
+                    && (progressMap[word.id]?.isFavorite == true)
+                    && (progressMap[word.id]?.reviewCount ?? 0) == 0
+            }.shuffled()
+            let starredIDs = Set(starredUnseen.map(\.id))
 
-            return dueWords + unseenWords + scheduledWords
+            let unseenWords = pool.filter { word in
+                !dueIDs.contains(word.id)
+                    && !starredIDs.contains(word.id)
+                    && (progressMap[word.id]?.reviewCount ?? 0) == 0
+            }.shuffled()
+            let unseenIDs = Set(unseenWords.map(\.id))
+
+            let scheduledWords = pool.filter {
+                !dueIDs.contains($0.id) && !starredIDs.contains($0.id) && !unseenIDs.contains($0.id)
+            }.shuffled()
+
+            return dueWords + starredUnseen + unseenWords + scheduledWords
         }
 
         let orderedPreferred = sortCandidates(preferredPool)

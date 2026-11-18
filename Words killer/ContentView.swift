@@ -12,11 +12,16 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var allProgress: [WordProgress]
     @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
+    @Query(sort: \ReviewEvent.reviewedAt, order: .reverse) private var reviewEvents: [ReviewEvent]
 
     @AppStorage("selectedLanguage") private var selectedLanguageRawValue = TargetLanguage.english.rawValue
     @AppStorage("selectedDifficulty") private var selectedDifficultyRawValue = DifficultyLevel.beginner.rawValue
     @AppStorage("autoSpeakOnCard") private var autoSpeakOnCard = true
     @AppStorage("speechSpeed") private var speechSpeedRawValue = SpeechSpeed.normal.rawValue
+    @AppStorage("dailyGoal") private var dailyGoal = 20
+    @AppStorage("challengeSize") private var challengeSize = 10
+    @AppStorage("isPreferenceExpanded") private var isPreferenceExpanded = false
+    @AppStorage("accentTheme") private var accentThemeRawValue = AccentTheme.forest.rawValue
 
     @State private var speechService = SpeechService()
     @State private var audioController = AudioLearningController()
@@ -33,8 +38,6 @@ struct ContentView: View {
     @State private var requeuedIDs: Set<String> = []
     @State private var previousChallengeIDs: Set<String> = []
     @State private var feedbackTrigger = 0
-
-    private let challengeSize = 10
 
     private var selectedLanguage: TargetLanguage {
         TargetLanguage(rawValue: selectedLanguageRawValue) ?? .english
@@ -91,11 +94,19 @@ struct ContentView: View {
         Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
     }
 
+    private var todayStudiedWords: Int {
+        StudyAnalytics.todayUniqueWordsCount(events: reviewEvents, progress: allProgress)
+    }
+
+    private var streakDays: Int {
+        StudyAnalytics.streakDays(events: reviewEvents, progress: allProgress)
+    }
+
     private var languageProgressStats: (mastered: Int, due: Int) {
         let now = Date.now
         let langProgress = allProgress.filter { $0.languageRawValue == selectedLanguage.rawValue }
         let mastered = langProgress.filter(\.isMastered).count
-        let due = langProgress.filter { $0.isDue(at: now) }.count
+        let due = langProgress.filter { $0.reviewCount > 0 && $0.isDue(at: now) }.count
         return (mastered, due)
     }
 
@@ -120,8 +131,13 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    header
+                VStack(alignment: .leading, spacing: 16) {
+                    DailyGoalBanner(
+                        studiedToday: todayStudiedWords,
+                        dailyGoal: dailyGoal,
+                        streakDays: streakDays
+                    )
+
                     selectionPanel
                     dailyProgressPanel
 
@@ -194,6 +210,15 @@ struct ContentView: View {
                     startNewChallenge()
                 }
             }
+            .onChange(of: challengeSize) {
+                if completedIDs.isEmpty {
+                    startNewChallenge()
+                }
+            }
+            .onChange(of: speechSpeedRawValue) {
+                speechService.speed = selectedSpeechSpeed
+                audioController.speechService.speed = selectedSpeechSpeed
+            }
             .onDisappear {
                 speechService.stop()
                 audioController.stopPlayback()
@@ -201,42 +226,11 @@ struct ContentView: View {
         }
     }
 
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("给中文母语者的快速背词训练")
-                .font(.title2.weight(.bold))
-                .foregroundStyle(.primary)
-
-            Text("按记忆曲线优先推送到期词与新词。支持手势滑词、多维测验自测、随身听学与自建词库。")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .lineSpacing(3)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
     private var selectionPanel: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            SectionTitle(icon: "slider.horizontal.3", title: "学习设置")
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text("目标语言")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.secondary)
-
-                Picker("目标语言", selection: languageSelection) {
-                    ForEach(TargetLanguage.allCases) { language in
-                        Text(language.title).tag(language)
-                    }
-                }
-                .pickerStyle(.segmented)
-            }
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text("难度")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.secondary)
-
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                SectionTitle(icon: "slider.horizontal.3", title: "语种与难度")
+                Spacer()
                 Picker("难度", selection: difficultySelection) {
                     ForEach(DifficultyLevel.allCases) { level in
                         Text(level.shortTitle).tag(level)
@@ -244,28 +238,51 @@ struct ContentView: View {
                 }
                 .pickerStyle(.menu)
 
-                DifficultyScaleView(selectedDifficulty: selectedDifficulty)
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isPreferenceExpanded.toggle()
+                    }
+                } label: {
+                    Image(systemName: isPreferenceExpanded ? "chevron.up.circle.fill" : "chevron.down.circle")
+                        .font(.body)
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("展开或折叠语音设置")
             }
 
-            Toggle("切卡自动朗读单词", isOn: $autoSpeakOnCard)
-                .font(.subheadline)
-                .tint(AppTheme.accent)
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text("朗读语速")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.secondary)
-
-                Picker("朗读语速", selection: speechSpeedSelection) {
-                    ForEach(SpeechSpeed.allCases) { speed in
-                        Text(speed.title).tag(speed)
-                    }
+            Picker("目标语言", selection: languageSelection) {
+                ForEach(TargetLanguage.allCases) { language in
+                    Text(language.title).tag(language)
                 }
-                .pickerStyle(.segmented)
+            }
+            .pickerStyle(.segmented)
+
+            if isPreferenceExpanded {
+                Divider()
+
+                DifficultyScaleView(selectedDifficulty: selectedDifficulty)
+
+                Toggle("切卡自动朗读单词", isOn: $autoSpeakOnCard)
+                    .font(.subheadline)
+                    .tint(AppTheme.accent)
+
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("朗读语速")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.secondary)
+
+                    Picker("朗读语速", selection: speechSpeedSelection) {
+                        ForEach(SpeechSpeed.allCases) { speed in
+                            Text(speed.title).tag(speed)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
             }
         }
         .padding(16)
-        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 
     private var dailyProgressPanel: some View {
@@ -323,7 +340,7 @@ struct ContentView: View {
             }
         }
         .padding(16)
-        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 
     private var actionPanel: some View {
@@ -359,8 +376,11 @@ struct ContentView: View {
             Button {
                 startNewChallenge()
             } label: {
-                Label(isChallengeFinished ? "再来一轮智能组卡" : "换一组10词", systemImage: "arrow.clockwise")
-                    .frame(maxWidth: .infinity)
+                Label(
+                    isChallengeFinished ? "再来一轮智能组卡" : "换一组 \(challengeSize) 词",
+                    systemImage: "arrow.clockwise"
+                )
+                .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
         }
@@ -379,7 +399,7 @@ struct ContentView: View {
                 .lineSpacing(4)
         }
         .padding(16)
-        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 
     private var completionMessage: String {
@@ -433,16 +453,13 @@ struct ContentView: View {
     }
 
     private func persistRating(_ rating: RecallRating, for word: WordItem) {
-        let record: WordProgress
-        if let existing = progressMap[word.id] {
-            record = existing
-        } else {
-            record = WordProgress(wordID: word.id, language: word.language)
-            modelContext.insert(record)
-        }
-
-        SpacedRepetitionEngine.apply(rating: rating, to: record)
-        try? modelContext.save()
+        SpacedRepetitionEngine.recordReview(
+            for: word,
+            rating: rating,
+            source: .card,
+            existingProgress: progressMap[word.id],
+            in: modelContext
+        )
     }
 
     private func startNewChallenge() {
@@ -476,5 +493,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [WordProgress.self, CustomWordRecord.self], inMemory: true)
+        .modelContainer(for: [WordProgress.self, CustomWordRecord.self, ReviewEvent.self], inMemory: true)
 }
