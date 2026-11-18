@@ -65,12 +65,14 @@ Words killerTests/                     # Swift Testing 自动化单元测试套�
 ├── SpacedRepetitionTests.swift        # SM-2 记忆曲线、收藏优先组卡与持久化闭环测试
 ├── WordBankParserTests.swift          # 6 册内置词书校验、坏数据容错与 4 类开源词库格式解析测试
 ├── StudyAnalyticsTests.swift          # 去重打卡、连续天数、14天趋势、12周热力图与到期预测测试
-└── QuizAndBackupTests.swift           # 四选一出题不变量与 JSON 备份导出/幂等恢复测试
+├── QuizAndBackupTests.swift           # 四选一出题不变量与 JSON 备份导出/幂等恢复测试
+└── ReleaseReadinessTests.swift        # Info.plist、PrivacyInfo.xcprivacy 与语音兜底合规测试
 ```
 
 ## 运行与打包要求
 
 - **Xcode**：支持 Swift 5.0 与 SwiftData 的 Xcode（建议 Xcode 16+）
 - **系统要求**：最低支持 `iOS 17.0` / `iPadOS 17.0` 及以上设备
+- **开发交接文档**：详见 [`HANDOFF.md`](HANDOFF.md)
 - **上架清单**：详见 [`APP_STORE_CHECKLIST.md`](APP_STORE_CHECKLIST.md)
 - **隐私政策**：纯本地存储，已内置 `PrivacyInfo.xcprivacy`，详见 [`PRIVACY.md`](PRIVACY.md)
