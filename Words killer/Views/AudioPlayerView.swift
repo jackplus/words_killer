@@ -16,6 +16,12 @@ struct AudioPlayerView: View {
                 VStack(spacing: 24) {
                     playerStatusHeader
 
+                    if let warning = controller.speechService.voiceWarningMessage {
+                        VoicePackNoticeBanner(message: warning) {
+                            controller.speechService.dismissVoiceWarning()
+                        }
+                    }
+
                     if let word = controller.currentWord {
                         currentWordDisplay(word: word)
                     } else {

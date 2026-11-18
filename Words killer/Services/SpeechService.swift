@@ -31,17 +31,24 @@ enum SpeechSpeed: String, CaseIterable, Identifiable {
     }
 }
 
+@MainActor
 @Observable
 final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
     private let synthesizer = AVSpeechSynthesizer()
     private(set) var isSpeaking = false
     private(set) var activeText: String?
+    private(set) var voiceWarningMessage: String?
     var speed: SpeechSpeed = .normal
+    var isContinuousBackgroundMode: Bool = false
     private var utteranceCompletion: (() -> Void)?
 
     override init() {
         super.init()
         synthesizer.delegate = self
+    }
+
+    func dismissVoiceWarning() {
+        voiceWarningMessage = nil
     }
 
     func speak(
@@ -50,7 +57,13 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
         rate: Float? = nil,
         completion: (() -> Void)? = nil
     ) {
-        speak(text: text, locale: language.speechLocale, rate: rate, completion: completion)
+        speak(
+            text: text,
+            locale: language.speechLocale,
+            languageLabel: language.title,
+            rate: rate,
+            completion: completion
+        )
     }
 
     func speakChinese(
@@ -58,12 +71,19 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
         rate: Float? = nil,
         completion: (() -> Void)? = nil
     ) {
-        speak(text: text, locale: "zh-CN", rate: rate, completion: completion)
+        speak(
+            text: text,
+            locale: "zh-CN",
+            languageLabel: "中文",
+            rate: rate,
+            completion: completion
+        )
     }
 
     func speak(
         text: String,
         locale: String,
+        languageLabel: String? = nil,
         rate: Float? = nil,
         completion: (() -> Void)? = nil
     ) {
@@ -80,8 +100,16 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
 
         configureAudioSession()
 
+        let resolution = Self.resolveBestVoice(forLocale: locale)
+        if resolution.isMissingLanguagePack {
+            let name = languageLabel ?? locale
+            voiceWarningMessage = "当前设备未检测到「\(name)」系统语音包，如无发声请前往「系统设置 → 辅助功能 → 朗读内容 → 声音」下载。"
+        } else {
+            voiceWarningMessage = nil
+        }
+
         let utterance = AVSpeechUtterance(string: trimmed)
-        utterance.voice = AVSpeechSynthesisVoice(language: locale) ?? AVSpeechSynthesisVoice(language: "en-US")
+        utterance.voice = resolution.voice
         utterance.rate = rate ?? speed.utteranceRate
         utterance.pitchMultiplier = 1.0
 
@@ -102,10 +130,36 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
         comp?()
     }
 
+    static func resolveBestVoice(
+        forLocale locale: String,
+        installedVoices: [AVSpeechSynthesisVoice] = AVSpeechSynthesisVoice.speechVoices()
+    ) -> (voice: AVSpeechSynthesisVoice?, isMissingLanguagePack: Bool) {
+        let normalizedLocale = locale.lowercased()
+        let langPrefix = String(normalizedLocale.split(separator: "-").first ?? Substring(normalizedLocale))
+
+        // Simulator or restricted environments may report an empty voice catalog; fall back directly without false warning.
+        guard !installedVoices.isEmpty else {
+            return (AVSpeechSynthesisVoice(language: locale) ?? AVSpeechSynthesisVoice(language: "en-US"), false)
+        }
+
+        if let exact = installedVoices.first(where: { $0.language.lowercased() == normalizedLocale }) {
+            return (exact, false)
+        }
+
+        if let sameLanguageFamily = installedVoices.first(where: {
+            $0.language.lowercased().hasPrefix(langPrefix + "-") || $0.language.lowercased() == langPrefix
+        }) {
+            return (sameLanguageFamily, false)
+        }
+
+        return (AVSpeechSynthesisVoice(language: locale), true)
+    }
+
     private func configureAudioSession() {
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
+            let options: AVAudioSession.CategoryOptions = isContinuousBackgroundMode ? [] : [.duckOthers]
+            try session.setCategory(.playback, mode: .spokenAudio, options: options)
             try session.setActive(true)
         } catch {
             // Audio session configuration failure should not crash playback attempts.

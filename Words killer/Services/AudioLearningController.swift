@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import MediaPlayer
 import Observation
 
 enum PlaybackPhase: String {
@@ -39,6 +40,7 @@ final class AudioLearningController {
     var readExample: Bool = false
 
     private var playbackTask: Task<Void, Never>?
+    private var remoteCommandsConfigured = false
     var speechService: SpeechService
 
     var speechSpeed: SpeechSpeed {
@@ -46,8 +48,8 @@ final class AudioLearningController {
         set { speechService.speed = newValue }
     }
 
-    init(speechService: SpeechService = SpeechService()) {
-        self.speechService = speechService
+    init(speechService: SpeechService? = nil) {
+        self.speechService = speechService ?? SpeechService()
     }
 
     var currentWord: WordItem? {
@@ -62,11 +64,14 @@ final class AudioLearningController {
 
     func startPlayback(words: [WordItem], startIndex: Int = 0) {
         guard !words.isEmpty else { return }
-        stopPlayback()
+        haltLoopOnly()
         self.words = words
         self.currentIndex = min(max(0, startIndex), words.count - 1)
         self.isPlaying = true
         self.currentRepeat = 1
+        speechService.isContinuousBackgroundMode = true
+        configureRemoteCommandsIfNeeded()
+        updateNowPlayingInfo()
         runPlaybackLoop()
     }
 
@@ -81,14 +86,16 @@ final class AudioLearningController {
     func pausePlayback() {
         isPlaying = false
         currentPhase = .idle
-        playbackTask?.cancel()
-        playbackTask = nil
-        speechService.stop()
+        haltLoopOnly()
+        updateNowPlayingInfo()
     }
 
     func resumePlayback() {
         guard !words.isEmpty else { return }
         isPlaying = true
+        speechService.isContinuousBackgroundMode = true
+        configureRemoteCommandsIfNeeded()
+        updateNowPlayingInfo()
         runPlaybackLoop()
     }
 
@@ -96,20 +103,23 @@ final class AudioLearningController {
         isPlaying = false
         currentPhase = .idle
         currentRepeat = 1
-        playbackTask?.cancel()
-        playbackTask = nil
-        speechService.stop()
+        haltLoopOnly()
+        speechService.isContinuousBackgroundMode = false
+        tearDownRemoteCommands()
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
     }
 
     func nextWord() {
         guard !words.isEmpty else { return }
         let wasPlaying = isPlaying
-        stopPlayback()
+        haltLoopOnly()
+        currentRepeat = 1
         if currentIndex + 1 < words.count {
             currentIndex += 1
         } else {
             currentIndex = 0
         }
+        updateNowPlayingInfo()
         if wasPlaying {
             isPlaying = true
             runPlaybackLoop()
@@ -119,16 +129,24 @@ final class AudioLearningController {
     func previousWord() {
         guard !words.isEmpty else { return }
         let wasPlaying = isPlaying
-        stopPlayback()
+        haltLoopOnly()
+        currentRepeat = 1
         if currentIndex > 0 {
             currentIndex -= 1
         } else {
             currentIndex = max(0, words.count - 1)
         }
+        updateNowPlayingInfo()
         if wasPlaying {
             isPlaying = true
             runPlaybackLoop()
         }
+    }
+
+    private func haltLoopOnly() {
+        playbackTask?.cancel()
+        playbackTask = nil
+        speechService.stop()
     }
 
     private func runPlaybackLoop() {
@@ -141,6 +159,7 @@ final class AudioLearningController {
                 }
 
                 let word = words[currentIndex]
+                updateNowPlayingInfo()
 
                 // Phase 1: Speak Term
                 currentPhase = .speakingTerm
@@ -182,7 +201,7 @@ final class AudioLearningController {
                     if currentIndex + 1 < words.count {
                         currentIndex += 1
                     } else {
-                        currentIndex = 0 // Loop back to start
+                        currentIndex = 0
                     }
                 }
             }
@@ -203,5 +222,84 @@ final class AudioLearningController {
                 continuation.resume()
             }
         }
+    }
+
+    // MARK: - Lock Screen & Control Center Media Integration
+
+    private func updateNowPlayingInfo() {
+        guard let word = currentWord else {
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+            return
+        }
+
+        var info: [String: Any] = [
+            MPMediaItemPropertyTitle: word.term,
+            MPMediaItemPropertyArtist: word.translation,
+            MPMediaItemPropertyAlbumTitle: "Words Killer · 随身听学 (\(progressText))",
+            MPNowPlayingInfoPropertyPlaybackRate: isPlaying ? 1.0 : 0.0
+        ]
+        if !word.pronunciation.isEmpty {
+            info[MPMediaItemPropertyComposer] = word.pronunciation
+        }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+    }
+
+    private func configureRemoteCommandsIfNeeded() {
+        guard !remoteCommandsConfigured else { return }
+        remoteCommandsConfigured = true
+
+        let commandCenter = MPRemoteCommandCenter.shared()
+
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.playCommand.addTarget { [weak self] _ in
+            Task { @MainActor in
+                self?.resumePlayback()
+            }
+            return .success
+        }
+
+        commandCenter.pauseCommand.isEnabled = true
+        commandCenter.pauseCommand.addTarget { [weak self] _ in
+            Task { @MainActor in
+                self?.pausePlayback()
+            }
+            return .success
+        }
+
+        commandCenter.togglePlayPauseCommand.isEnabled = true
+        commandCenter.togglePlayPauseCommand.addTarget { [weak self] _ in
+            Task { @MainActor in
+                self?.togglePlayPause()
+            }
+            return .success
+        }
+
+        commandCenter.nextTrackCommand.isEnabled = true
+        commandCenter.nextTrackCommand.addTarget { [weak self] _ in
+            Task { @MainActor in
+                self?.nextWord()
+            }
+            return .success
+        }
+
+        commandCenter.previousTrackCommand.isEnabled = true
+        commandCenter.previousTrackCommand.addTarget { [weak self] _ in
+            Task { @MainActor in
+                self?.previousWord()
+            }
+            return .success
+        }
+    }
+
+    private func tearDownRemoteCommands() {
+        guard remoteCommandsConfigured else { return }
+        remoteCommandsConfigured = false
+
+        let commandCenter = MPRemoteCommandCenter.shared()
+        commandCenter.playCommand.removeTarget(nil)
+        commandCenter.pauseCommand.removeTarget(nil)
+        commandCenter.togglePlayPauseCommand.removeTarget(nil)
+        commandCenter.nextTrackCommand.removeTarget(nil)
+        commandCenter.previousTrackCommand.removeTarget(nil)
     }
 }

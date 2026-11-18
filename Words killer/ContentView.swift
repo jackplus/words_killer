@@ -145,6 +145,12 @@ struct ContentView: View {
                     selectionPanel
                     dailyProgressPanel
 
+                    if let warning = speechService.voiceWarningMessage {
+                        VoicePackNoticeBanner(message: warning) {
+                            speechService.dismissVoiceWarning()
+                        }
+                    }
+
                     if let word = currentWord {
                         WordCardView(
                             word: word,
