@@ -46,7 +46,9 @@ struct WordBookView: View {
         )
     }
 
-    private var filteredWords: [WordItem] {
+    /// Takes the word list and progress map as parameters: they are computed properties, and reading
+    /// `progressMap` inside the per-word closure used to rebuild the whole dictionary for every word.
+    private func filterWords(_ allWords: [WordItem], progressMap: [String: WordProgress]) -> [WordItem] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 
         return allWords.filter { word in
@@ -92,6 +94,11 @@ struct WordBookView: View {
     }
 
     var body: some View {
+        // Derived once per render; the list, rows, toolbar and sheets below all read these locals.
+        let progressMap = self.progressMap
+        let allWords = self.allWords
+        let filteredWords = filterWords(allWords, progressMap: progressMap)
+
         NavigationStack {
             List {
                 Section {

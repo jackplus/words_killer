@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import SwiftData
 import Testing
 @testable import Words_killer
 
@@ -129,5 +130,58 @@ struct StudyAnalyticsTests {
         #expect(buckets[0].count == 1)
         #expect(buckets[1].label == "明天")
         #expect(buckets[1].count == 1)
+    }
+
+    @Test("长连续打卡：近期窗口外的打卡日由按需加载补齐，结果与全量计算一致")
+    func streakBeyondRecentWindowMatchesFullHistory() throws {
+        let config = ModelConfiguration("streak-window", isStoredInMemoryOnly: true)
+        let container = try ModelContainer(
+            for: WordProgress.self, CustomWordRecord.self, ReviewEvent.self,
+            configurations: config
+        )
+        let context = container.mainContext
+
+        // 120 consecutive active days ending today, then a gap, then one more isolated day.
+        let streakLength = StudyAnalytics.recentWindowDays + 29
+        var allEvents: [ReviewEvent] = []
+        for offset in 0..<streakLength {
+            let date = calendar.date(byAdding: .day, value: -offset, to: anchorNow)!
+            allEvents.append(ReviewEvent(wordID: "w\(offset)", language: .english, rating: .known, reviewedAt: date))
+        }
+        let isolated = calendar.date(byAdding: .day, value: -(streakLength + 1), to: anchorNow)!
+        allEvents.append(ReviewEvent(wordID: "isolated", language: .english, rating: .known, reviewedAt: isolated))
+        for event in allEvents {
+            context.insert(event)
+        }
+        try context.save()
+
+        let windowStart = StudyAnalytics.recentWindowStart(calendar: calendar, now: anchorNow)
+        let recentEvents = try context.fetch(
+            FetchDescriptor(predicate: StudyAnalytics.recentEventsPredicate(since: windowStart))
+        )
+        #expect(recentEvents.count == StudyAnalytics.recentWindowDays + 1)
+
+        let windowOnly = StudyAnalytics.streakDays(events: recentEvents, progress: [], calendar: calendar, now: anchorNow)
+        #expect(windowOnly == StudyAnalytics.recentWindowDays + 1)
+        #expect(StudyAnalytics.streakMayExceedWindow(windowOnly))
+
+        let older = StudyAnalytics.olderActiveDays(before: windowStart, in: context, calendar: calendar)
+        let full = StudyAnalytics.streakDays(
+            events: recentEvents,
+            progress: [],
+            extraActiveDays: older,
+            calendar: calendar,
+            now: anchorNow
+        )
+        let expected = StudyAnalytics.streakDays(events: allEvents, progress: [], calendar: calendar, now: anchorNow)
+        #expect(full == streakLength)
+        #expect(full == expected)
+    }
+
+    @Test("短连续打卡：未触及窗口边界时无需加载更早的历史")
+    func shortStreakDoesNotNeedOlderHistory() {
+        #expect(!StudyAnalytics.streakMayExceedWindow(0))
+        #expect(!StudyAnalytics.streakMayExceedWindow(StudyAnalytics.recentWindowDays - 1))
+        #expect(StudyAnalytics.streakMayExceedWindow(StudyAnalytics.recentWindowDays))
     }
 }

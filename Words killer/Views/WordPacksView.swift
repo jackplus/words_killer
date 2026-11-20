@@ -17,6 +17,7 @@ struct WordPacksView: View {
     @State private var importLanguage: TargetLanguage = .english
     @State private var importDifficulty: DifficultyLevel = .elementary
     @State private var isImportingFile = false
+    @State private var isParsingImport = false
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
@@ -38,6 +39,14 @@ struct WordPacksView: View {
                 builtInPacksSection
                 fileImportSection
                 openSourceCatalogSection
+            }
+            .disabled(isParsingImport)
+            .overlay {
+                if isParsingImport {
+                    ProgressView("正在解析词库…")
+                        .padding(20)
+                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("词书与开源词库")
@@ -213,69 +222,95 @@ struct WordPacksView: View {
         switch result {
         case .success(let urls):
             guard let url = urls.first else { return }
-            let accessed = url.startAccessingSecurityScopedResource()
-            defer {
-                if accessed { url.stopAccessingSecurityScopedResource() }
-            }
+            let language = importLanguage
+            let difficulty = importDifficulty
+            isParsingImport = true
 
-            guard let data = try? Data(contentsOf: url),
-                  let text = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .utf16) else {
-                presentAlert(title: "读取失败", message: "无法以 UTF-8 文本编码读取所选文件。")
-                return
-            }
+            Task {
+                // Reading and parsing a large dictionary (e.g. ECDICT) can take seconds; keep it off the main actor.
+                let report = await Task.detached(priority: .userInitiated) {
+                    Self.readAndParseDictionary(at: url, language: language, difficulty: difficulty)
+                }.value
+                isParsingImport = false
 
-            let report = WordBankParser.parseExternalDictionary(
-                text: text,
-                fileExtension: url.pathExtension,
-                defaultLanguage: importLanguage,
-                defaultDifficulty: importDifficulty,
-                packID: "custom"
-            )
-
-            guard !report.items.isEmpty else {
-                presentAlert(title: "未识别到有效词条", message: "请确认文件包含单词与释义字段（支持 JSON / CSV / TSV / 行文本）。")
-                return
-            }
-
-            let existingKeys = Set(
-                customWords.map { "\($0.languageRawValue)|\($0.term.trimmingCharacters(in: .whitespacesAndNewlines).lowercased())" }
-            )
-            let existingIDs = Set(customWords.map(\.id))
-
-            var inserted = 0
-            var skippedExisting = 0
-
-            for item in report.items.prefix(maxSingleFileImportCount) {
-                let key = "\(item.language.rawValue)|\(item.term.lowercased())"
-                if existingIDs.contains(item.id) || existingKeys.contains(key) {
-                    skippedExisting += 1
-                    continue
+                guard let report else {
+                    presentAlert(title: "读取失败", message: "无法以 UTF-8 文本编码读取所选文件。")
+                    return
                 }
-
-                let record = CustomWordRecord(
-                    id: item.id.hasPrefix("custom-") ? item.id : "custom-\(item.id)",
-                    language: item.language,
-                    difficulty: item.difficulty,
-                    term: item.term,
-                    pronunciation: item.pronunciation,
-                    translation: item.translation,
-                    memoryCue: item.memoryCue,
-                    example: item.example
-                )
-                modelContext.insert(record)
-                inserted += 1
+                insertImportedWords(report)
             }
-
-            try? modelContext.save()
-            let totalSkipped = report.skippedCount + report.duplicateCount + skippedExisting
-            presentAlert(
-                title: "词库导入完成",
-                message: "识别格式：\(report.detectedFormat.rawValue)\n新增入库：\(inserted) 词\n过滤重复或无效项：\(totalSkipped) 条"
-            )
 
         case .failure(let error):
             presentAlert(title: "未能打开文件", message: error.localizedDescription)
         }
+    }
+
+    /// Returns `nil` when the file can't be read as text.
+    nonisolated private static func readAndParseDictionary(
+        at url: URL,
+        language: TargetLanguage,
+        difficulty: DifficultyLevel
+    ) -> WordBankParseReport? {
+        let accessed = url.startAccessingSecurityScopedResource()
+        defer {
+            if accessed { url.stopAccessingSecurityScopedResource() }
+        }
+
+        guard let data = try? Data(contentsOf: url),
+              let text = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .utf16) else {
+            return nil
+        }
+
+        return WordBankParser.parseExternalDictionary(
+            text: text,
+            fileExtension: url.pathExtension,
+            defaultLanguage: language,
+            defaultDifficulty: difficulty,
+            packID: "custom"
+        )
+    }
+
+    private func insertImportedWords(_ report: WordBankParseReport) {
+        guard !report.items.isEmpty else {
+            presentAlert(title: "未识别到有效词条", message: "请确认文件包含单词与释义字段（支持 JSON / CSV / TSV / 行文本）。")
+            return
+        }
+
+        let existingKeys = Set(
+            customWords.map { "\($0.languageRawValue)|\($0.term.trimmingCharacters(in: .whitespacesAndNewlines).lowercased())" }
+        )
+        let existingIDs = Set(customWords.map(\.id))
+
+        var inserted = 0
+        var skippedExisting = 0
+
+        for item in report.items.prefix(maxSingleFileImportCount) {
+            let key = "\(item.language.rawValue)|\(item.term.lowercased())"
+            if existingIDs.contains(item.id) || existingKeys.contains(key) {
+                skippedExisting += 1
+                continue
+            }
+
+            let record = CustomWordRecord(
+                id: item.id.hasPrefix("custom-") ? item.id : "custom-\(item.id)",
+                language: item.language,
+                difficulty: item.difficulty,
+                term: item.term,
+                pronunciation: item.pronunciation,
+                translation: item.translation,
+                memoryCue: item.memoryCue,
+                example: item.example
+            )
+            modelContext.insert(record)
+            inserted += 1
+        }
+
+        try? modelContext.save()
+        let totalSkipped = report.skippedCount + report.duplicateCount + skippedExisting
+        presentAlert(
+            title: "词库导入完成",
+            message: "识别格式：\(report.detectedFormat.rawValue)\n新增入库：\(inserted) 词\n过滤重复或无效项：\(totalSkipped) 条"
+        )
     }
 
     private func presentAlert(title: String, message: String) {

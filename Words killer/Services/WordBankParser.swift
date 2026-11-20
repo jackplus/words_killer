@@ -5,7 +5,7 @@
 
 import Foundation
 
-enum DetectedDictionaryFormat: String, Sendable {
+nonisolated enum DetectedDictionaryFormat: String, Sendable {
     case wordsKillerJSON = "Words Killer 标准词包 JSON"
     case kyleBingJSON = "KyleBing 开源词库 JSON"
     case qwertyLearnerJSON = "Qwerty-Learner 词典 JSON"
@@ -13,14 +13,14 @@ enum DetectedDictionaryFormat: String, Sendable {
     case delimitedTable = "ECDICT / CSV / TSV / 文本词表"
 }
 
-struct WordBankParseReport: Sendable {
+nonisolated struct WordBankParseReport: Sendable {
     let items: [WordItem]
     let skippedCount: Int
     let duplicateCount: Int
     let detectedFormat: DetectedDictionaryFormat
 }
 
-private struct LossyElement<T: Decodable>: Decodable {
+nonisolated private struct LossyElement<T: Decodable>: Decodable {
     let value: T?
 
     init(from decoder: Decoder) throws {
@@ -28,12 +28,13 @@ private struct LossyElement<T: Decodable>: Decodable {
     }
 }
 
-private struct WrappedWordsEnvelope: Decodable {
+nonisolated private struct WrappedWordsEnvelope: Decodable {
     let words: [LossyElement<WordItem>]?
     let items: [LossyElement<WordItem>]?
 }
 
-enum WordBankParser {
+/// Pure parsing with no UI dependencies; `nonisolated` so large dictionary files can be parsed off the main actor.
+nonisolated enum WordBankParser {
     // MARK: - Resilient Native Pack Decoding
 
     static func decodeResilientPack(from data: Data, packID: String) -> WordBankParseReport {

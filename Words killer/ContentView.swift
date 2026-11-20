@@ -12,7 +12,8 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var allProgress: [WordProgress]
     @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
-    @Query(sort: \ReviewEvent.reviewedAt, order: .reverse) private var reviewEvents: [ReviewEvent]
+    /// Only recent events are loaded; the full log grows without bound. See `StudyAnalytics.recentWindowDays`.
+    @Query private var recentEvents: [ReviewEvent]
 
     @AppStorage("selectedLanguage") private var selectedLanguageRawValue = TargetLanguage.english.rawValue
     @AppStorage("selectedDifficulty") private var selectedDifficultyRawValue = DifficultyLevel.beginner.rawValue
@@ -39,6 +40,16 @@ struct ContentView: View {
     @State private var requeuedIDs: Set<String> = []
     @State private var previousChallengeIDs: Set<String> = []
     @State private var feedbackTrigger = 0
+    /// Active days older than the recent window, loaded only when the streak reaches that far back.
+    @State private var olderActiveDays: Set<Date> = []
+
+    private let windowStart: Date
+
+    init() {
+        let start = StudyAnalytics.recentWindowStart()
+        windowStart = start
+        _recentEvents = Query(filter: StudyAnalytics.recentEventsPredicate(since: start))
+    }
 
     private var selectedLanguage: TargetLanguage {
         TargetLanguage(rawValue: selectedLanguageRawValue) ?? .english
@@ -99,11 +110,11 @@ struct ContentView: View {
     }
 
     private var todayStudiedWords: Int {
-        StudyAnalytics.todayUniqueWordsCount(events: reviewEvents, progress: allProgress)
+        StudyAnalytics.todayUniqueWordsCount(events: recentEvents, progress: allProgress)
     }
 
     private var streakDays: Int {
-        StudyAnalytics.streakDays(events: reviewEvents, progress: allProgress)
+        StudyAnalytics.streakDays(events: recentEvents, progress: allProgress, extraActiveDays: olderActiveDays)
     }
 
     private var languageProgressStats: (mastered: Int, due: Int) {
@@ -213,6 +224,10 @@ struct ContentView: View {
                 )
             }
             .sensoryFeedback(.impact(weight: .light), trigger: feedbackTrigger)
+            .task(id: StudyAnalytics.streakMayExceedWindow(streakDays)) {
+                guard StudyAnalytics.streakMayExceedWindow(streakDays) else { return }
+                olderActiveDays = StudyAnalytics.olderActiveDays(before: windowStart, in: modelContext)
+            }
             .onAppear {
                 speechService.speed = selectedSpeechSpeed
                 audioController.speechService.speed = selectedSpeechSpeed

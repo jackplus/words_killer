@@ -85,11 +85,21 @@ enum WordLibrary {
         packWordsMap[packID] ?? []
     }
 
+    /// Bundled packs never change at runtime, so the deduplicated result for a given set of enabled packs
+    /// is cached; views call this on every render.
+    private static var activeBuiltInCache: [Set<String>: [WordItem]] = [:]
+
     static func activeBuiltInWords(disabledPackIDs: Set<String>) -> [WordItem] {
         let activePacks = builtInPacks.filter { $0.isCore || !disabledPackIDs.contains($0.id) }
+        let cacheKey = Set(activePacks.map(\.id))
+        if let cached = activeBuiltInCache[cacheKey] {
+            return cached
+        }
         let combined = activePacks.flatMap { packWordsMap[$0.id] ?? [] }
         let deduped = WordBankParser.deduplicate(combined).unique
-        return deduped.isEmpty ? fallbackWords : deduped
+        let result = deduped.isEmpty ? fallbackWords : deduped
+        activeBuiltInCache[cacheKey] = result
+        return result
     }
 
     static func mergedWords(

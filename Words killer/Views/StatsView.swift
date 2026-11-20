@@ -10,13 +10,25 @@ import SwiftUI
 struct StatsView: View {
     @Query private var allProgress: [WordProgress]
     @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
-    @Query(sort: \ReviewEvent.reviewedAt, order: .reverse) private var reviewEvents: [ReviewEvent]
+    /// Only recent events are loaded; the full log grows without bound. See `StudyAnalytics.recentWindowDays`.
+    @Query private var recentEvents: [ReviewEvent]
+    @Environment(\.modelContext) private var modelContext
 
     @AppStorage("dailyGoal") private var dailyGoal = 20
     @AppStorage("accentTheme") private var accentThemeRawValue = AccentTheme.forest.rawValue
     @AppStorage(WordLibrary.disabledPacksStorageKey) private var disabledPacksRaw = ""
 
     @State private var selectedHeatmapDay: HeatmapDay?
+    /// Active days older than the recent window, loaded only when the streak reaches that far back.
+    @State private var olderActiveDays: Set<Date> = []
+
+    private let windowStart: Date
+
+    init() {
+        let start = StudyAnalytics.recentWindowStart()
+        windowStart = start
+        _recentEvents = Query(filter: StudyAnalytics.recentEventsPredicate(since: start))
+    }
 
     private var themeColor: Color {
         (AccentTheme(rawValue: accentThemeRawValue) ?? .forest).color
@@ -27,10 +39,6 @@ struct StatsView: View {
             with: customWords,
             disabledPackIDs: WordLibrary.parseDisabledPackIDs(disabledPacksRaw)
         )
-    }
-
-    private var wordLookup: [String: WordItem] {
-        Dictionary(uniqueKeysWithValues: allWords.map { ($0.id, $0) })
     }
 
     private var studiedCount: Int {
@@ -52,24 +60,24 @@ struct StatsView: View {
 
     private var totalReviews: Int {
         let progressSum = allProgress.reduce(0) { $0 + $1.reviewCount }
-        return max(progressSum, reviewEvents.count)
+        return max(progressSum, recentEvents.count)
     }
 
     private var todayStudiedWords: Int {
-        StudyAnalytics.todayUniqueWordsCount(events: reviewEvents, progress: allProgress)
+        StudyAnalytics.todayUniqueWordsCount(events: recentEvents, progress: allProgress)
     }
 
     private var streakDays: Int {
-        StudyAnalytics.streakDays(events: reviewEvents, progress: allProgress)
+        StudyAnalytics.streakDays(events: recentEvents, progress: allProgress, extraActiveDays: olderActiveDays)
     }
 
     private var last14DaysSeries: [DailyRatingPoint] {
-        StudyAnalytics.last14DaysSeries(events: reviewEvents, progress: allProgress)
+        StudyAnalytics.last14DaysSeries(events: recentEvents, progress: allProgress)
     }
 
-    private var visible14DayLabels: [String] {
+    private func visibleDayLabels(for series: [DailyRatingPoint]) -> [String] {
         var unique: [String] = []
-        for point in last14DaysSeries where !unique.contains(point.dayLabel) {
+        for point in series where !unique.contains(point.dayLabel) {
             unique.append(point.dayLabel)
         }
         return unique.enumerated().compactMap { offset, label in
@@ -78,7 +86,7 @@ struct StatsView: View {
     }
 
     private var heatmapColumns: [[HeatmapDay]] {
-        StudyAnalytics.heatmapWeeks(events: reviewEvents, progress: allProgress, weeks: 12)
+        StudyAnalytics.heatmapWeeks(events: recentEvents, progress: allProgress, weeks: 12)
     }
 
     private var upcomingForecast: [UpcomingDueBucket] {
@@ -94,16 +102,19 @@ struct StatsView: View {
     }
 
     var body: some View {
+        let streak = streakDays
+        let studiedToday = todayStudiedWords
+
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     DailyGoalBanner(
-                        studiedToday: todayStudiedWords,
+                        studiedToday: studiedToday,
                         dailyGoal: dailyGoal,
-                        streakDays: streakDays
+                        streakDays: streak
                     )
 
-                    overviewGrid
+                    overviewGrid(streak: streak, studiedToday: studiedToday)
                     trendChartSection
                     heatmapSection
                     upcomingForecastSection
@@ -114,16 +125,20 @@ struct StatsView: View {
             }
             .background(AppTheme.background.ignoresSafeArea())
             .navigationTitle("学习统计")
+            .task(id: StudyAnalytics.streakMayExceedWindow(streak)) {
+                guard StudyAnalytics.streakMayExceedWindow(streak) else { return }
+                olderActiveDays = StudyAnalytics.olderActiveDays(before: windowStart, in: modelContext)
+            }
         }
     }
 
-    private var overviewGrid: some View {
+    private func overviewGrid(streak: Int, studiedToday: Int) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             SectionTitle(icon: "chart.line.uptrend.xyaxis", title: "总体进度")
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                StatPill(title: "连续打卡", value: "\(streakDays) 天", color: .purple)
-                StatPill(title: "今日已学", value: "\(todayStudiedWords) 词", color: .teal)
+                StatPill(title: "连续打卡", value: "\(streak) 天", color: .purple)
+                StatPill(title: "今日已学", value: "\(studiedToday) 词", color: .teal)
                 StatPill(title: "已学习词数", value: "\(studiedCount)", color: themeColor)
                 StatPill(title: "已掌握词数", value: "\(masteredCount)", color: .green)
                 StatPill(title: "当前待复习", value: "\(dueCount)", color: .orange)
@@ -146,8 +161,10 @@ struct StatsView: View {
                     .foregroundStyle(.secondary)
             }
 
+            let series = last14DaysSeries
+
             Chart {
-                ForEach(last14DaysSeries) { item in
+                ForEach(series) { item in
                     BarMark(
                         x: .value("日期", item.dayLabel),
                         y: .value("复习次数", item.count)
@@ -173,7 +190,7 @@ struct StatsView: View {
                 RecallRating.unknown.title: Color.red
             ])
             .chartXAxis {
-                AxisMarks(values: visible14DayLabels) { value in
+                AxisMarks(values: visibleDayLabels(for: series)) { value in
                     AxisValueLabel {
                         if let label = value.as(String.self) {
                             Text(label)
@@ -296,9 +313,12 @@ struct StatsView: View {
         VStack(alignment: .leading, spacing: 14) {
             SectionTitle(icon: "globe.asia.australia.fill", title: "各语种掌握度")
 
+            let wordCountByLanguage = Dictionary(grouping: allWords, by: \.language).mapValues(\.count)
+            let progressByLanguage = Dictionary(grouping: allProgress, by: \.languageRawValue)
+
             ForEach(TargetLanguage.allCases) { language in
-                let total = allWords.filter { $0.language == language }.count
-                let records = allProgress.filter { $0.languageRawValue == language.rawValue }
+                let total = wordCountByLanguage[language] ?? 0
+                let records = progressByLanguage[language.rawValue] ?? []
                 let mastered = records.filter(\.isMastered).count
                 let due = records.filter { $0.reviewCount > 0 && $0.isDue() }.count
                 let ratio = total > 0 ? Double(mastered) / Double(total) : 0
@@ -331,12 +351,19 @@ struct StatsView: View {
         VStack(alignment: .leading, spacing: 12) {
             SectionTitle(icon: "clock.arrow.circlepath", title: "最近复习记录")
 
-            if recentReviewed.isEmpty {
+            let recent = recentReviewed
+            let recentIDs = Set(recent.map(\.wordID))
+            let wordLookup = Dictionary(
+                allWords.filter { recentIDs.contains($0.id) }.map { ($0.id, $0) },
+                uniquingKeysWith: { first, _ in first }
+            )
+
+            if recent.isEmpty {
                 Text("完成第一轮背词后，这里会展示你的最近复习轨迹。")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             } else {
-                ForEach(recentReviewed, id: \.wordID) { record in
+                ForEach(recent, id: \.wordID) { record in
                     let word = wordLookup[record.wordID]
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
@@ -370,7 +397,7 @@ struct StatsView: View {
                     }
                     .padding(.vertical, 4)
 
-                    if record.wordID != recentReviewed.last?.wordID {
+                    if record.wordID != recent.last?.wordID {
                         Divider()
                     }
                 }

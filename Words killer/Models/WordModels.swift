@@ -5,7 +5,7 @@
 
 import Foundation
 
-enum TargetLanguage: String, CaseIterable, Identifiable, Codable {
+nonisolated enum TargetLanguage: String, CaseIterable, Identifiable, Codable {
     case english
     case japanese
     case korean
@@ -73,7 +73,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable, Codable {
     }
 }
 
-enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
+nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
     case beginner
     case elementary
     case intermediate
@@ -175,7 +175,7 @@ enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
     }
 }
 
-enum RecallRating: String, CaseIterable, Codable {
+nonisolated enum RecallRating: String, CaseIterable, Codable {
     case unknown
     case fuzzy
     case known
@@ -189,7 +189,7 @@ enum RecallRating: String, CaseIterable, Codable {
     }
 }
 
-struct WordItem: Identifiable, Hashable, Codable {
+nonisolated struct WordItem: Identifiable, Hashable, Codable {
     let id: String
     let language: TargetLanguage
     let difficulty: DifficultyLevel

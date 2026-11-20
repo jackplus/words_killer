@@ -58,6 +58,20 @@ struct WordBankParserTests {
         }
     }
 
+    @Test("内置词表缓存：重复读取与首次计算结果一致，且不同开关组合互不串扰")
+    func activeBuiltInWordsCacheIsConsistent() {
+        let disabled: Set<String> = ["exam-ko"]
+        let first = WordLibrary.activeBuiltInWords(disabledPackIDs: disabled)
+        let second = WordLibrary.activeBuiltInWords(disabledPackIDs: disabled)
+        #expect(first == second)
+        #expect(first.count == 620)
+
+        let all = WordLibrary.activeBuiltInWords(disabledPackIDs: [])
+        #expect(all.count == 650)
+        // Unknown IDs and the core pack can't be disabled, so they map to the same cached result.
+        #expect(WordLibrary.activeBuiltInWords(disabledPackIDs: ["core-500", "not-a-pack"]) == all)
+    }
+
     @Test("词书开关过滤：停用扩展包后仅保留核心包与已启用包")
     func disablingExpansionPackFiltersCorrectly() {
         let disabled: Set<String> = ["exam-en", "exam-ja"]
