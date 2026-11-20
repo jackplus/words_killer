@@ -8,8 +8,8 @@
 - **公开免费词库无缝接入（多格式开源词典适配）**：内置通用开源词典解析引擎，支持一键从本地文件（`.json` / `.csv` / `.tsv` / `.txt`）或剪贴板导入主流宽松协议开源词库（兼容 **skywind3000/ECDICT CSV**、**KyleBing/english-vocabulary JSON**、**Qwerty-Learner JSON**、**Bluskyo/JLPT_Vocabulary JSON** 等，自动映射 `cet4/cet6/ielts/N5–N1` 等难度标签）。
 - **SwiftData 持久化与 SM-2 间隔重复**：通过 [`WordProgress`](Words%20killer/Models/WordProgress.swift)、[`ReviewEvent`](Words%20killer/Models/ReviewEvent.swift) 与 [`SpacedRepetitionEngine`](Words%20killer/Services/SpacedRepetitionEngine.swift) 统一记录卡片、测验与词库的三档记忆反馈：
   - **不认识**：重置掌握阶数并追加至本轮队列末尾二次重测。
-  - **模糊**：标记为待巩固状态，设定 12 小时后到期复习。
-  - **认识**：递进掌握阶数，按 `1 天 → 3 天 → interval × easeFactor` 动态推算下次复习时间。
+  - **模糊**：新词或学习中的词标记为待巩固，12 小时后到期复习；已掌握的词则间隔减半、回退一阶，不再整体打回。
+  - **认识**：递进掌握阶数，按 `1 天 → 3 天 → interval × easeFactor` 动态推算下次复习时间。首次「认识」只进入「学习中」，需在间隔复习中再次认出才计为「已掌握」。
 - **原生多语种语音朗读**：基于 `AVSpeechSynthesizer` 封装 [`SpeechService`](Words%20killer/Services/SpeechService.swift)，支持切卡自动朗读单词、点击喇叭单独朗读单词或例句。
 - **多维自测与拼写练习**：内置 [`QuizView`](Words%20killer/Views/QuizView.swift) 与 [`QuizEngine`](Words%20killer/Services/QuizEngine.swift)，支持四选一速测（看词选义、看义选词、听音辨词）及听音拼写填空，测验结果自动同步 SRS 记忆进度并支持一键专练错题。
 - **随身听学磨耳朵**：基于 [`AudioLearningController`](Words%20killer/Services/AudioLearningController.swift) 与 [`AudioPlayerView`](Words%20killer/Views/AudioPlayerView.swift)，支持后台循环自动朗读单词外语、中文释义与例句，可自定义每词朗读次数（1~3遍）、词间停顿与播放语速。

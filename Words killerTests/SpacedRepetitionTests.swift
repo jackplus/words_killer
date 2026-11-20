@@ -51,14 +51,43 @@ struct SpacedRepetitionTests {
         #expect(!progress.isMastered)
     }
 
+    @Test("评分：已掌握的词点模糊 -> 间隔减半并回退一阶，而非打回 12 小时")
+    func fuzzyOnMatureWordShrinksIntervalInsteadOfResetting() {
+        let progress = WordProgress(
+            wordID: "en-int-diligent",
+            language: .english,
+            masteryLevel: 5,
+            easeFactor: 2.5,
+            intervalDays: 30,
+            reviewCount: 6,
+            nextReviewDate: baseDate
+        )
+
+        SpacedRepetitionEngine.apply(rating: .fuzzy, to: progress, now: baseDate)
+
+        #expect(progress.masteryLevel == 4)
+        #expect(progress.isMastered)
+        #expect(progress.intervalDays == 15)
+        #expect(abs(progress.easeFactor - 2.35) < 0.0001)
+        #expect(progress.nextReviewDate == baseDate.addingTimeInterval(15 * 86400))
+        #expect(progress.lastRating == .fuzzy)
+
+        // At the mastery floor the word stays mastered and the interval never drops below 1 day.
+        let floorCase = WordProgress(wordID: "en-int-brief", language: .english, masteryLevel: 3, intervalDays: 1, reviewCount: 2)
+        SpacedRepetitionEngine.apply(rating: .fuzzy, to: floorCase, now: baseDate)
+        #expect(floorCase.masteryLevel == 3)
+        #expect(floorCase.intervalDays == 1)
+    }
+
     @Test("评分：连续认识 -> 按 1天 -> 3天 -> interval*easeFactor 递增且上限 2.8")
     func knownRatingProgressesIntervalsAndCapsEaseFactor() {
         let progress = WordProgress(wordID: "ja-beg-water", language: .japanese, easeFactor: 2.75)
 
-        // 1st known: 1 day, mastery 2
+        // 1st known: 1 day, mastery 2 ("学习中", not yet mastered)
         SpacedRepetitionEngine.apply(rating: .known, to: progress, now: baseDate)
         #expect(progress.masteryLevel == 2)
-        #expect(progress.isMastered)
+        #expect(!progress.isMastered)
+        #expect(progress.statusLabel == "学习中")
         #expect(progress.intervalDays == 1)
         #expect(progress.easeFactor == 2.8)
         #expect(progress.nextReviewDate == baseDate.addingTimeInterval(86400))
@@ -67,6 +96,8 @@ struct SpacedRepetitionTests {
         let day1 = baseDate.addingTimeInterval(86400)
         SpacedRepetitionEngine.apply(rating: .known, to: progress, now: day1)
         #expect(progress.masteryLevel == 3)
+        #expect(progress.isMastered)
+        #expect(progress.statusLabel == "已掌握 1 阶")
         #expect(progress.intervalDays == 3)
         #expect(progress.easeFactor == 2.8)
 
@@ -164,7 +195,8 @@ struct SpacedRepetitionTests {
 
         #expect(savedProgress.count == 1)
         #expect(savedProgress.first?.wordID == "fr-beg-merci")
-        #expect(savedProgress.first?.isMastered == true)
+        #expect(savedProgress.first?.masteryLevel == 2)
+        #expect(savedProgress.first?.isMastered == false)
 
         #expect(savedEvents.count == 1)
         #expect(savedEvents.first?.source == .quiz)

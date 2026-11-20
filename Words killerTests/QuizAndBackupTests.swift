@@ -35,6 +35,32 @@ struct QuizAndBackupTests {
         }
     }
 
+    @Test("四选一测验生成：干扰项释义与正确答案重复时自动去重，正确索引不歧义")
+    func quizEngineDeduplicatesIdenticalOptionTexts() {
+        func word(_ id: String, _ term: String, _ translation: String) -> WordItem {
+            WordItem(id: id, language: .english, difficulty: .beginner, term: term, pronunciation: "", translation: translation, memoryCue: "", example: "")
+        }
+        let target = word("t", "big", "大的")
+        // Synonyms sharing the target's translation, plus duplicated distractor translations.
+        let pool = [
+            target,
+            word("s1", "large", "大的"),
+            word("s2", "huge", " 大的 "),
+            word("d1", "small", "小的"),
+            word("d2", "tiny", "小的"),
+            word("d3", "fast", "快的"),
+            word("d4", "slow", "慢的")
+        ]
+
+        for _ in 0..<50 {
+            let question = QuizEngine.buildQuestions(from: [target], distractorPool: pool, subtype: .wordToMeaning)[0]
+            #expect(question.options.count == 4)
+            #expect(Set(question.options.map(QuizEngine.normalizedOptionKey)).count == 4)
+            #expect(question.options[question.correctOptionIndex] == "大的")
+            #expect(question.options.filter { QuizEngine.normalizedOptionKey($0) == "大的" }.count == 1)
+        }
+    }
+
     @Test("JSON 备份导出与幂等恢复：学习进度、收藏状态、自建词与打卡日志无损往返")
     func backupExportAndIdempotentRestoreRoundTrip() throws {
         let sourceConfig = ModelConfiguration("source", isStoredInMemoryOnly: true)

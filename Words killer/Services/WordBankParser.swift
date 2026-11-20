@@ -312,7 +312,6 @@ enum WordBankParser {
             let prefix = packID == "custom" ? "custom" : packID
             finalID = WordItem.makeDeterministicID(
                 language: language,
-                difficulty: difficulty,
                 term: term,
                 prefix: prefix
             )
@@ -393,7 +392,7 @@ enum WordBankParser {
                     if !term.isEmpty, !trans.isEmpty {
                         results.append(
                             WordItem(
-                                id: WordItem.makeDeterministicID(language: defaultLanguage, difficulty: defaultDifficulty, term: term, prefix: prefix),
+                                id: WordItem.makeDeterministicID(language: defaultLanguage, term: term, prefix: prefix),
                                 language: defaultLanguage,
                                 difficulty: defaultDifficulty,
                                 term: term,
@@ -419,7 +418,7 @@ enum WordBankParser {
                     if !trans.isEmpty {
                         results.append(
                             WordItem(
-                                id: WordItem.makeDeterministicID(language: defaultLanguage, difficulty: defaultDifficulty, term: term, prefix: prefix),
+                                id: WordItem.makeDeterministicID(language: defaultLanguage, term: term, prefix: prefix),
                                 language: defaultLanguage,
                                 difficulty: defaultDifficulty,
                                 term: term,
@@ -446,7 +445,7 @@ enum WordBankParser {
                     if !trans.isEmpty {
                         results.append(
                             WordItem(
-                                id: WordItem.makeDeterministicID(language: defaultLanguage, difficulty: defaultDifficulty, term: term, prefix: prefix),
+                                id: WordItem.makeDeterministicID(language: defaultLanguage, term: term, prefix: prefix),
                                 language: defaultLanguage,
                                 difficulty: defaultDifficulty,
                                 term: term,
@@ -535,7 +534,7 @@ enum WordBankParser {
 
             results.append(
                 WordItem(
-                    id: WordItem.makeDeterministicID(language: language, difficulty: difficulty, term: term, prefix: prefix),
+                    id: WordItem.makeDeterministicID(language: language, term: term, prefix: prefix),
                     language: language,
                     difficulty: difficulty,
                     term: term,

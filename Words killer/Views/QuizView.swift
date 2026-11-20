@@ -437,7 +437,7 @@ struct QuizView: View {
                 correctCount += 1
             }
             let rating: RecallRating = (usedSpellingHint || hadWrongAttempt) ? .fuzzy : .known
-            spellingFeedback = (true, rating == .known ? "拼写完全正确！已记入掌握进度" : "拼写正确！已记为待巩固（12小时后复习）")
+            spellingFeedback = (true, rating == .known ? "拼写完全正确！已记入掌握进度" : "拼写正确！已记为待巩固（将提前复习）")
             recordQuizOutcome(word: word, rating: rating)
             speechService.speak(word.term, language: word.language)
         } else {

@@ -378,7 +378,7 @@ struct ContentView: View {
                     rateCurrentWord(.unknown)
                 }
 
-                MemoryActionButton(title: "模糊", subtitle: "12小时后", systemImage: "questionmark.circle", tint: .orange) {
+                MemoryActionButton(title: "模糊", subtitle: "提前复习", systemImage: "questionmark.circle", tint: .orange) {
                     rateCurrentWord(.fuzzy)
                 }
 
@@ -421,7 +421,7 @@ struct ContentView: View {
         if unknownCount == 0 && fuzzyCount == 0 {
             return "本轮 \(initialBatchCount) 个词全部掌握，已自动推迟下次复习时间。"
         }
-        return "本轮完成 \(initialBatchCount) 个词：认识 \(knownCount) 个、模糊 \(fuzzyCount) 个（12 小时后复现）、不认识 \(unknownCount) 次（已重置记忆间隔）。"
+        return "本轮完成 \(initialBatchCount) 个词：认识 \(knownCount) 个、模糊 \(fuzzyCount) 个（已提前下次复习）、不认识 \(unknownCount) 次（已重置记忆间隔）。"
     }
 
     private func toggleFavorite(_ word: WordItem) {

@@ -50,8 +50,12 @@ final class WordProgress {
         RecallRating(rawValue: lastRatingRawValue) ?? .unknown
     }
 
+    /// Level 2 means "recalled once, first 1-day review pending". A word only counts as mastered after it
+    /// has also been recalled across a real spaced interval, i.e. reached level 3.
+    static let masteredThreshold = 3
+
     var isMastered: Bool {
-        masteryLevel >= 2
+        masteryLevel >= Self.masteredThreshold
     }
 
     func isDue(at date: Date = .now) -> Bool {
@@ -64,8 +68,10 @@ final class WordProgress {
             return reviewCount == 0 ? "新词" : "待重学"
         case 1:
             return "模糊"
+        case 2:
+            return "学习中"
         default:
-            return "已掌握 \(masteryLevel - 1) 阶"
+            return "已掌握 \(masteryLevel - 2) 阶"
         }
     }
 }
