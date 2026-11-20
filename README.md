@@ -73,6 +73,7 @@ Words killerTests/                     # Swift Testing 自动化单元测试套�
 
 - **Xcode**：支持 Swift 5.0 与 SwiftData 的 Xcode（建议 Xcode 16+）
 - **系统要求**：最低支持 `iOS 17.0` / `iPadOS 17.0` 及以上设备
+- **持续集成**：[`.github/workflows/ios-tests.yml`](.github/workflows/ios-tests.yml) 在每次 push 与 PR 时于 macOS 26 / Xcode 26 模拟器上编译并运行全部单元测试，失败时上传 `.xcresult` 与构建日志
 - **开发交接文档**：详见 [`HANDOFF.md`](HANDOFF.md)
 - **上架清单**：详见 [`APP_STORE_CHECKLIST.md`](APP_STORE_CHECKLIST.md)
 - **隐私政策**：纯本地存储，已内置 `PrivacyInfo.xcprivacy`，详见 [`PRIVACY.md`](PRIVACY.md)
