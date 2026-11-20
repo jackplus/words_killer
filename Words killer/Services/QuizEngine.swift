@@ -49,31 +49,28 @@ enum QuizEngine {
                 index % 3 == 1 ? .meaningToWord : .audioToWord
             )
 
-            // Pick 3 distractors from same language if possible
-            let pool = distractorPool.filter { $0.id != word.id && $0.language == word.language }
-            let chosenDistractors: [WordItem]
-            if pool.count >= 3 {
-                chosenDistractors = Array(pool.shuffled().prefix(3))
-            } else {
-                let broaderPool = distractorPool.filter { $0.id != word.id }
-                chosenDistractors = Array(broaderPool.shuffled().prefix(3))
+            let correctText = optionText(for: word, subtype: actualSubtype)
+
+            // Distinct option texts: imported dictionaries often share translations (synonyms) or terms,
+            // and identical options would make the correct answer ambiguous.
+            var seenKeys: Set<String> = [normalizedOptionKey(correctText)]
+            var distractorTexts: [String] = []
+            let sameLanguage = distractorPool.filter { $0.id != word.id && $0.language == word.language }.shuffled()
+            let otherLanguages = distractorPool.filter { $0.id != word.id && $0.language != word.language }.shuffled()
+            for candidate in sameLanguage + otherLanguages {
+                guard distractorTexts.count < 3 else { break }
+                let text = optionText(for: candidate, subtype: actualSubtype)
+                let key = normalizedOptionKey(text)
+                guard !key.isEmpty, !seenKeys.contains(key) else { continue }
+                seenKeys.insert(key)
+                distractorTexts.append(text)
             }
 
-            let correctText: String
-            let distractorTexts: [String]
-
-            switch actualSubtype {
-            case .wordToMeaning:
-                correctText = word.translation
-                distractorTexts = chosenDistractors.map(\.translation)
-            case .meaningToWord, .audioToWord:
-                correctText = word.term
-                distractorTexts = chosenDistractors.map(\.term)
-            }
-
-            var allOptions = [correctText] + distractorTexts
-            allOptions.shuffle()
-            let correctIndex = allOptions.firstIndex(of: correctText) ?? 0
+            // Track the correct option by position rather than by text lookup.
+            let unshuffled = [correctText] + distractorTexts
+            let order = Array(unshuffled.indices).shuffled()
+            let allOptions = order.map { unshuffled[$0] }
+            let correctIndex = order.firstIndex(of: 0) ?? 0
 
             return QuizQuestion(
                 id: "\(word.id)-q\(index)",
@@ -83,5 +80,16 @@ enum QuizEngine {
                 correctOptionIndex: correctIndex
             )
         }
+    }
+
+    private static func optionText(for word: WordItem, subtype: QuestionSubtype) -> String {
+        switch subtype {
+        case .wordToMeaning: word.translation
+        case .meaningToWord, .audioToWord: word.term
+        }
+    }
+
+    static func normalizedOptionKey(_ text: String) -> String {
+        text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
     }
 }

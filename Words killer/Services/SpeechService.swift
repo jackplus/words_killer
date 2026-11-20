@@ -40,7 +40,10 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
     private(set) var voiceWarningMessage: String?
     var speed: SpeechSpeed = .normal
     var isContinuousBackgroundMode: Bool = false
-    private var utteranceCompletion: (() -> Void)?
+    /// Completion handlers keyed by the utterance they belong to. Holding the utterance keeps its
+    /// ObjectIdentifier from being reused while a delegate callback for it may still be in flight.
+    @ObservationIgnored private var pendingUtterances: [ObjectIdentifier: (utterance: AVSpeechUtterance, completion: (() -> Void)?)] = [:]
+    @ObservationIgnored private var currentUtteranceID: ObjectIdentifier?
 
     override init() {
         super.init()
@@ -93,10 +96,9 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
             return
         }
 
-        if synthesizer.isSpeaking {
-            synthesizer.stopSpeaking(at: .immediate)
-            utteranceCompletion = nil
-        }
+        // Interrupting an utterance must still resolve its completion, otherwise callers awaiting it
+        // (e.g. AudioLearningController's continuations) hang forever.
+        interruptPendingUtterances()
 
         configureAudioSession()
 
@@ -113,21 +115,41 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
         utterance.rate = rate ?? speed.utteranceRate
         utterance.pitchMultiplier = 1.0
 
+        let key = ObjectIdentifier(utterance)
+        pendingUtterances[key] = (utterance, completion)
+        currentUtteranceID = key
         activeText = trimmed
         isSpeaking = true
-        utteranceCompletion = completion
         synthesizer.speak(utterance)
     }
 
     func stop() {
-        if synthesizer.isSpeaking {
-            synthesizer.stopSpeaking(at: .immediate)
-        }
-        let comp = utteranceCompletion
-        utteranceCompletion = nil
+        interruptPendingUtterances()
         activeText = nil
         isSpeaking = false
-        comp?()
+    }
+
+    /// Stops the synthesizer and fires every outstanding completion exactly once.
+    private func interruptPendingUtterances() {
+        if synthesizer.isSpeaking || synthesizer.isPaused {
+            synthesizer.stopSpeaking(at: .immediate)
+        }
+        currentUtteranceID = nil
+        let completions = pendingUtterances.values.compactMap(\.completion)
+        pendingUtterances.removeAll()
+        completions.forEach { $0() }
+    }
+
+    /// Resolves a delegate callback for a specific utterance. Late callbacks for utterances that were
+    /// already interrupted find nothing pending and leave the current utterance untouched.
+    private func finishUtterance(_ key: ObjectIdentifier) {
+        let entry = pendingUtterances.removeValue(forKey: key)
+        if currentUtteranceID == key {
+            currentUtteranceID = nil
+            isSpeaking = false
+            activeText = nil
+        }
+        entry?.completion?()
     }
 
     static func resolveBestVoice(
@@ -167,20 +189,16 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
     }
 
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        let key = ObjectIdentifier(utterance)
         Task { @MainActor in
-            self.isSpeaking = false
-            self.activeText = nil
-            let comp = self.utteranceCompletion
-            self.utteranceCompletion = nil
-            comp?()
+            self.finishUtterance(key)
         }
     }
 
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        let key = ObjectIdentifier(utterance)
         Task { @MainActor in
-            self.isSpeaking = false
-            self.activeText = nil
-            self.utteranceCompletion = nil
+            self.finishUtterance(key)
         }
     }
 }

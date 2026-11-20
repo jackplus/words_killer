@@ -31,6 +31,47 @@ struct WordBankParserTests {
         }
     }
 
+    @Test("确定性 ID：仅由语种与词形决定，调整难度不会改变 ID")
+    func deterministicIDIgnoresDifficulty() {
+        let id = WordItem.makeDeterministicID(language: .english, term: "Resilience")
+        #expect(id == WordItem.makeDeterministicID(language: .english, term: "  resilience "))
+        #expect(id != WordItem.makeDeterministicID(language: .french, term: "resilience"))
+
+        let decoder = JSONDecoder()
+        let easy = try? decoder.decode(WordItem.self, from: Data(#"{"language":"en","difficulty":"beginner","term":"resilience","translation":"韧性"}"#.utf8))
+        let hard = try? decoder.decode(WordItem.self, from: Data(#"{"language":"en","difficulty":"advanced","term":"resilience","translation":"韧性"}"#.utf8))
+        #expect(easy != nil)
+        #expect(easy?.id == hard?.id)
+    }
+
+    @Test("内置词书资源：每个词条都显式声明 id，避免由内容推导的 ID 随词书编辑漂移")
+    func bundledPackEntriesDeclareExplicitIDs() throws {
+        final class Anchor {}
+        let bundles = [Bundle.main, Bundle(for: Anchor.self)] + Bundle.allBundles
+        for pack in WordLibrary.builtInPacks {
+            let url = bundles.lazy.compactMap { $0.url(forResource: pack.resourceName, withExtension: "json") }.first
+            #expect(url != nil, "找不到词包资源 \(pack.resourceName).json")
+            guard let url else { continue }
+            let entries = try #require(JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [[String: Any]])
+            let missing = entries.filter { (($0["id"] as? String) ?? "").trimmingCharacters(in: .whitespaces).isEmpty }
+            #expect(missing.isEmpty, "\(pack.resourceName).json 有 \(missing.count) 个词条缺少 id")
+        }
+    }
+
+    @Test("内置词表缓存：重复读取与首次计算结果一致，且不同开关组合互不串扰")
+    func activeBuiltInWordsCacheIsConsistent() {
+        let disabled: Set<String> = ["exam-ko"]
+        let first = WordLibrary.activeBuiltInWords(disabledPackIDs: disabled)
+        let second = WordLibrary.activeBuiltInWords(disabledPackIDs: disabled)
+        #expect(first == second)
+        #expect(first.count == 620)
+
+        let all = WordLibrary.activeBuiltInWords(disabledPackIDs: [])
+        #expect(all.count == 650)
+        // Unknown IDs and the core pack can't be disabled, so they map to the same cached result.
+        #expect(WordLibrary.activeBuiltInWords(disabledPackIDs: ["core-500", "not-a-pack"]) == all)
+    }
+
     @Test("词书开关过滤：停用扩展包后仅保留核心包与已启用包")
     func disablingExpansionPackFiltersCorrectly() {
         let disabled: Set<String> = ["exam-en", "exam-ja"]

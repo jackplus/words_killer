@@ -206,6 +206,7 @@ struct WordCardView: View {
         switch progress.masteryLevel {
         case 0: return progress.reviewCount == 0 ? AppTheme.accent : .red
         case 1: return .orange
+        case 2: return .teal
         default: return .green
         }
     }

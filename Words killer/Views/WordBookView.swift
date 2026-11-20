@@ -46,7 +46,9 @@ struct WordBookView: View {
         )
     }
 
-    private var filteredWords: [WordItem] {
+    /// Takes the word list and progress map as parameters: they are computed properties, and reading
+    /// `progressMap` inside the per-word closure used to rebuild the whole dictionary for every word.
+    private func filterWords(_ allWords: [WordItem], progressMap: [String: WordProgress]) -> [WordItem] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 
         return allWords.filter { word in
@@ -59,7 +61,7 @@ struct WordBookView: View {
             case .all:
                 break
             case .mistakes:
-                guard let progress, progress.reviewCount > 0, progress.masteryLevel <= 1 else {
+                guard let progress, progress.reviewCount > 0, progress.masteryLevel <= 1 || progress.lastRating != .known else {
                     return false
                 }
             case .mastered:
@@ -92,6 +94,11 @@ struct WordBookView: View {
     }
 
     var body: some View {
+        // Derived once per render; the list, rows, toolbar and sheets below all read these locals.
+        let progressMap = self.progressMap
+        let allWords = self.allWords
+        let filteredWords = filterWords(allWords, progressMap: progressMap)
+
         NavigationStack {
             List {
                 Section {
@@ -370,6 +377,7 @@ private struct WordBookRow: View {
         switch progress.masteryLevel {
         case 0: return .red
         case 1: return .orange
+        case 2: return .teal
         default: return .green
         }
     }
@@ -468,7 +476,7 @@ private struct WordDetailSheet: View {
                             onRate(.unknown)
                             dismiss()
                         }
-                        MemoryActionButton(title: "模糊", subtitle: "12小时后", systemImage: "questionmark.circle", tint: .orange) {
+                        MemoryActionButton(title: "模糊", subtitle: "提前复习", systemImage: "questionmark.circle", tint: .orange) {
                             onRate(.fuzzy)
                             dismiss()
                         }

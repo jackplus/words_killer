@@ -25,6 +25,12 @@ struct AddCustomWordView: View {
     // Batch import state
     @State private var batchText: String = ""
     @State private var parsedPreview: [WordItem] = []
+    /// The input `parsedPreview` was produced from; import is disabled while it lags behind the editor.
+    @State private var parsedInput: BatchParseInput?
+
+    private var currentBatchInput: BatchParseInput {
+        BatchParseInput(text: batchText, language: language, difficulty: difficulty)
+    }
     @State private var showSuccessAlert: Bool = false
     @State private var alertMessage: String = ""
 
@@ -126,14 +132,8 @@ struct AddCustomWordView: View {
                 TextEditor(text: $batchText)
                     .frame(minHeight: 140)
                     .font(.body.monospaced())
-                    .onChange(of: batchText) {
-                        parseBatchText()
-                    }
-                    .onChange(of: language) {
-                        parseBatchText()
-                    }
-                    .onChange(of: difficulty) {
-                        parseBatchText()
+                    .task(id: currentBatchInput) {
+                        await parseBatchText(currentBatchInput)
                     }
             } header: {
                 Text("粘贴文本内容")
@@ -167,6 +167,7 @@ struct AddCustomWordView: View {
                     .buttonStyle(.borderedProminent)
                     .tint(AppTheme.accent)
                     .listRowBackground(Color.clear)
+                    .disabled(parsedInput != currentBatchInput)
                 }
             }
         }
@@ -192,14 +193,26 @@ struct AddCustomWordView: View {
         dismiss()
     }
 
-    private func parseBatchText() {
-        let report = WordBankParser.parseExternalDictionary(
-            text: batchText,
-            defaultLanguage: language,
-            defaultDifficulty: difficulty,
-            packID: "custom"
-        )
+    /// Debounced and run off the main actor: this used to re-parse the whole pasted text on every keystroke.
+    /// `.task(id:)` cancels the previous run whenever the input changes.
+    private func parseBatchText(_ input: BatchParseInput) async {
+        if !input.text.isEmpty {
+            try? await Task.sleep(for: .milliseconds(250))
+            guard !Task.isCancelled else { return }
+        }
+
+        let report = await Task.detached(priority: .userInitiated) {
+            WordBankParser.parseExternalDictionary(
+                text: input.text,
+                defaultLanguage: input.language,
+                defaultDifficulty: input.difficulty,
+                packID: "custom"
+            )
+        }.value
+        guard !Task.isCancelled else { return }
+
         parsedPreview = report.items
+        parsedInput = input
     }
 
     private func confirmBatchImport() {
@@ -237,4 +250,10 @@ struct AddCustomWordView: View {
             : "成功导入 \(inserted) 个单词！"
         showSuccessAlert = true
     }
+}
+
+nonisolated private struct BatchParseInput: Hashable, Sendable {
+    let text: String
+    let language: TargetLanguage
+    let difficulty: DifficultyLevel
 }

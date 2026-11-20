@@ -5,7 +5,7 @@
 
 import Foundation
 
-enum TargetLanguage: String, CaseIterable, Identifiable, Codable {
+nonisolated enum TargetLanguage: String, CaseIterable, Identifiable, Codable {
     case english
     case japanese
     case korean
@@ -73,7 +73,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable, Codable {
     }
 }
 
-enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
+nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
     case beginner
     case elementary
     case intermediate
@@ -175,7 +175,7 @@ enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
     }
 }
 
-enum RecallRating: String, CaseIterable, Codable {
+nonisolated enum RecallRating: String, CaseIterable, Codable {
     case unknown
     case fuzzy
     case known
@@ -189,7 +189,7 @@ enum RecallRating: String, CaseIterable, Codable {
     }
 }
 
-struct WordItem: Identifiable, Hashable, Codable {
+nonisolated struct WordItem: Identifiable, Hashable, Codable {
     let id: String
     let language: TargetLanguage
     let difficulty: DifficultyLevel
@@ -279,7 +279,7 @@ struct WordItem: Identifiable, Hashable, Codable {
             .trimmingCharacters(in: .whitespacesAndNewlines)
         self.packID = effectivePackID
         self.id = decodedID.isEmpty
-            ? Self.makeDeterministicID(language: parsedLanguage, difficulty: parsedDifficulty, term: rawTerm)
+            ? Self.makeDeterministicID(language: parsedLanguage, term: rawTerm)
             : decodedID
     }
 
@@ -297,9 +297,10 @@ struct WordItem: Identifiable, Hashable, Codable {
         )
     }
 
+    /// Identity is (language, term) only — the same key `WordBankParser.deduplicate` uses. Difficulty is
+    /// deliberately excluded so re-levelling a word never changes its ID and orphans its progress.
     static func makeDeterministicID(
         language: TargetLanguage,
-        difficulty: DifficultyLevel,
         term: String,
         prefix: String? = nil
     ) -> String {
@@ -319,9 +320,9 @@ struct WordItem: Identifiable, Hashable, Codable {
             .joined()
         let slug = asciiSlug.isEmpty ? String(format: "%08x", hash) : "\(asciiSlug.prefix(20))-\(String(format: "%04x", hash & 0xFFFF))"
         if let prefix, !prefix.isEmpty {
-            return "\(prefix)-\(language.shortCode)-\(difficulty.shortCode)-\(slug)"
+            return "\(prefix)-\(language.shortCode)-\(slug)"
         }
-        return "\(language.shortCode)-\(difficulty.shortCode)-\(slug)"
+        return "\(language.shortCode)-\(slug)"
     }
 }
 

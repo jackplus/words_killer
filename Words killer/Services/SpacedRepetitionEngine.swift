@@ -51,10 +51,19 @@ enum SpacedRepetitionEngine {
             progress.nextReviewDate = now
 
         case .fuzzy:
-            progress.masteryLevel = 1
-            progress.intervalDays = 0.5
-            progress.easeFactor = max(1.3, progress.easeFactor - 0.05)
-            progress.nextReviewDate = now.addingTimeInterval(12 * 3600)
+            if progress.isMastered {
+                // A mature word that was only hesitantly recalled: shrink the interval instead of
+                // throwing away weeks of spacing, and step back one mastery stage.
+                progress.masteryLevel = max(WordProgress.masteredThreshold, progress.masteryLevel - 1)
+                progress.intervalDays = max(1, (progress.intervalDays * 0.5).rounded())
+                progress.easeFactor = max(1.3, progress.easeFactor - 0.15)
+                progress.nextReviewDate = now.addingTimeInterval(progress.intervalDays * 86400)
+            } else {
+                progress.masteryLevel = 1
+                progress.intervalDays = 0.5
+                progress.easeFactor = max(1.3, progress.easeFactor - 0.05)
+                progress.nextReviewDate = now.addingTimeInterval(12 * 3600)
+            }
 
         case .known:
             if progress.masteryLevel < 2 {

@@ -13,7 +13,9 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var allProgress: [WordProgress]
     @Query private var customWords: [CustomWordRecord]
-    @Query private var reviewEvents: [ReviewEvent]
+    /// The event log grows without bound, so it is not held by a `@Query`: only its count is shown, and the
+    /// full log is fetched on demand for export, restore and reset.
+    @State private var reviewEventCount = 0
 
     @AppStorage("dailyGoal") private var dailyGoal = 20
     @AppStorage("challengeSize") private var challengeSize = 10
@@ -294,7 +296,7 @@ struct SettingsView: View {
                 backupDocument = BackupService.makeDocument(
                     progress: allProgress,
                     customWords: customWords,
-                    events: reviewEvents
+                    events: fetchAllReviewEvents()
                 )
                 isExportingBackup = true
             } label: {
@@ -315,8 +317,19 @@ struct SettingsView: View {
         } header: {
             Text("本地数据备份与恢复")
         } footer: {
-            Text("当前已存：\(allProgress.count) 条单词进度 · \(customWords.count) 个自建词 · \(reviewEvents.count) 条学习事件。")
+            Text("当前已存：\(allProgress.count) 条单词进度 · \(customWords.count) 个自建词 · \(reviewEventCount) 条学习事件。")
         }
+        .onAppear {
+            refreshReviewEventCount()
+        }
+    }
+
+    private func fetchAllReviewEvents() -> [ReviewEvent] {
+        (try? modelContext.fetch(FetchDescriptor<ReviewEvent>())) ?? []
+    }
+
+    private func refreshReviewEventCount() {
+        reviewEventCount = (try? modelContext.fetchCount(FetchDescriptor<ReviewEvent>())) ?? 0
     }
 
     private var aboutSection: some View {
@@ -340,9 +353,10 @@ struct SettingsView: View {
                     from: url,
                     existingProgress: allProgress,
                     existingCustomWords: customWords,
-                    existingEvents: reviewEvents,
+                    existingEvents: fetchAllReviewEvents(),
                     in: modelContext
                 )
+                refreshReviewEventCount()
                 presentAlert(
                     title: "数据恢复成功",
                     message: "已合并恢复 \(stats.progressCount) 条单词进度、\(stats.customWordCount) 个自建词与 \(stats.eventCount) 条新增打卡记录。"
@@ -359,10 +373,11 @@ struct SettingsView: View {
         for item in allProgress {
             modelContext.delete(item)
         }
-        for event in reviewEvents {
+        for event in fetchAllReviewEvents() {
             modelContext.delete(event)
         }
         try? modelContext.save()
+        refreshReviewEventCount()
         presentAlert(title: "已重置学习进度", message: "所有单词记忆记录与打卡历史已清空，自建词库已完整保留。")
     }
 

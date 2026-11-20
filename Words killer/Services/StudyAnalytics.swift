@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import SwiftData
 
 struct DailyRatingPoint: Identifiable {
     let id: String
@@ -30,6 +31,42 @@ struct UpcomingDueBucket: Identifiable {
 }
 
 enum StudyAnalytics {
+    /// How far back views load `ReviewEvent`s. Covers the 12-week heatmap and 14-day trend with room to
+    /// spare; older history is only touched when a streak runs past this window.
+    static let recentWindowDays = 91
+
+    static func recentWindowStart(calendar: Calendar = .current, now: Date = .now) -> Date {
+        let today = calendar.startOfDay(for: now)
+        return calendar.date(byAdding: .day, value: -recentWindowDays, to: today) ?? today
+    }
+
+    /// Predicate for a bounded `@Query` of recent events, so views never load the full, ever-growing log.
+    static func recentEventsPredicate(since start: Date) -> Predicate<ReviewEvent> {
+        #Predicate<ReviewEvent> { $0.reviewedAt >= start }
+    }
+
+    /// A streak computed from recent events alone may be cut off at the window boundary only when it is
+    /// at least as long as the window. Erring on the side of fetching is harmless: the full computation
+    /// below is exact either way.
+    static func streakMayExceedWindow(_ windowStreak: Int) -> Bool {
+        windowStreak >= recentWindowDays
+    }
+
+    /// Distinct active days from events older than `windowStart`, fetching only the `reviewedAt` column.
+    /// Called rarely: only when the recent-window streak may run past the window boundary.
+    static func olderActiveDays(
+        before windowStart: Date,
+        in modelContext: ModelContext,
+        calendar: Calendar = .current
+    ) -> Set<Date> {
+        var descriptor = FetchDescriptor<ReviewEvent>(
+            predicate: #Predicate<ReviewEvent> { $0.reviewedAt < windowStart }
+        )
+        descriptor.propertiesToFetch = [\.reviewedAt]
+        let olderEvents = (try? modelContext.fetch(descriptor)) ?? []
+        return Set(olderEvents.map { calendar.startOfDay(for: $0.reviewedAt) })
+    }
+
     /// Today's unique studied words count (combining ReviewEvent and legacy WordProgress).
     static func todayUniqueWordsCount(
         events: [ReviewEvent],
@@ -55,10 +92,11 @@ enum StudyAnalytics {
     static func streakDays(
         events: [ReviewEvent],
         progress: [WordProgress],
+        extraActiveDays: Set<Date> = [],
         calendar: Calendar = .current,
         now: Date = .now
     ) -> Int {
-        var activeDays = Set<Date>()
+        var activeDays = extraActiveDays
         for event in events {
             activeDays.insert(calendar.startOfDay(for: event.reviewedAt))
         }
