@@ -43,20 +43,69 @@ struct ReleaseReadinessTests {
         #expect(reasons.contains("CA92.1"))
     }
 
-    @Test("TTS 语音包检测：空列表不误报，缺失目标语种时准确触发提示")
+    @Test("隐私政策正文已打包，可在离线状态下读取")
+    func privacyPolicyIsAvailableOffline() throws {
+        let url = try #require(Bundle.main.url(forResource: "PrivacyPolicy", withExtension: "md"))
+        let text = try String(contentsOf: url, encoding: .utf8)
+        #expect(text.contains("2026-11-18"))
+        #expect(text.contains("导入、导出与系统备份"))
+        #expect(text.contains("https://github.com/jackplus/words_killer/issues"))
+    }
+
+    @Test("朗读准备不阻塞调用方，停止后取消待播请求")
+    func pendingSpeechCanBeStoppedBeforePlayback() async throws {
+        let service = SpeechService()
+        var completionCount = 0
+        service.speak("hello", language: .english) { completionCount += 1 }
+        #expect(service.isSpeaking)
+        #expect(service.activeText == "hello")
+        service.stop()
+        #expect(!service.isSpeaking)
+        #expect(service.activeText == nil)
+        #expect(completionCount == 1)
+        try await Task.sleep(for: .milliseconds(100))
+        #expect(!service.isSpeaking)
+        #expect(completionCount == 1)
+    }
+
+    @Test("旧朗读的延迟取消回调不清除当前待播请求")
+    func staleSpeechCallbackDoesNotFinishNewRequest() async {
+        let service = SpeechService()
+        var completionCount = 0
+        service.speak("new request", language: .english) { completionCount += 1 }
+        service.speechSynthesizer(AVSpeechSynthesizer(), didCancel: AVSpeechUtterance(string: "old request"))
+        await Task.yield()
+        #expect(service.isSpeaking)
+        #expect(service.activeText == "new request")
+        #expect(completionCount == 0)
+        service.stop()
+        #expect(completionCount == 1)
+    }
+
+    @Test("连续发起新朗读时，被中断的上一条朗读回调仅触发一次，不挂起异步等待")
+    func interruptingSpeakResolvesPreviousCompletionExactlyOnce() async {
+        let service = SpeechService()
+        var firstCompletions = 0
+        var secondCompletions = 0
+
+        service.speak("first", language: .english) { firstCompletions += 1 }
+        service.speak("second", language: .english) { secondCompletions += 1 }
+
+        #expect(firstCompletions == 1)
+        #expect(secondCompletions == 0)
+        #expect(service.isSpeaking)
+        #expect(service.activeText == "second")
+
+        service.stop()
+        #expect(firstCompletions == 1)
+        #expect(secondCompletions == 1)
+    }
+
+    @Test("语音选择：空列表、精确匹配、同语系回退与缺失语种")
     func speechVoiceResolutionHandlesEmptyAndMissingCatalogs() {
-        // Simulator / empty catalog should not emit false-positive missing pack warning
-        let emptyCatalogResult = SpeechService.resolveBestVoice(forLocale: "ko-KR", installedVoices: [])
-        #expect(!emptyCatalogResult.isMissingLanguagePack)
-
-        // If device only has an English voice installed, requesting a fictional/uninstalled language triggers warning
-        if let englishVoice = AVSpeechSynthesisVoice(language: "en-US") {
-            let matchResult = SpeechService.resolveBestVoice(forLocale: "en-GB", installedVoices: [englishVoice])
-            #expect(!matchResult.isMissingLanguagePack)
-            #expect(matchResult.voice != nil)
-
-            let missingResult = SpeechService.resolveBestVoice(forLocale: "fr-FR", installedVoices: [englishVoice])
-            #expect(missingResult.isMissingLanguagePack)
-        }
+        #expect(SpeechService.bestVoiceIndex(forLocale: "ko-KR", availableLocales: []) == nil)
+        #expect(SpeechService.bestVoiceIndex(forLocale: "en-GB", availableLocales: ["en-US"]) == 0)
+        #expect(SpeechService.bestVoiceIndex(forLocale: "en-GB", availableLocales: ["en-US", "EN-gb"]) == 1)
+        #expect(SpeechService.bestVoiceIndex(forLocale: "fr-FR", availableLocales: ["en-US"]) == nil)
     }
 }

@@ -30,6 +30,7 @@ struct WordBookView: View {
     @State private var filterScope: WordFilterScope = .all
     @State private var searchText = ""
     @State private var selectedWord: WordItem?
+    @State private var editingCustomWord: CustomWordRecord?
     @State private var isShowingAddWordSheet = false
     @State private var isShowingWordPacksSheet = false
     @State private var isShowingAudioPlayerSheet = false
@@ -86,7 +87,8 @@ struct WordBookView: View {
                 let matchesTerm = word.term.lowercased().contains(query)
                 let matchesTranslation = word.translation.lowercased().contains(query)
                 let matchesExample = word.example.lowercased().contains(query)
-                return matchesTerm || matchesTranslation || matchesExample
+                let matchesNote = progress?.customNote.lowercased().contains(query) ?? false
+                return matchesTerm || matchesTranslation || matchesExample || matchesNote
             }
 
             return true
@@ -176,12 +178,20 @@ struct WordBookView: View {
                                 .tint(.orange)
                             }
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                if word.id.hasPrefix("custom-") {
+                                if word.id.hasPrefix("custom-"),
+                                   let customRecord = customWords.first(where: { $0.id == word.id }) {
                                     Button(role: .destructive) {
                                         deleteCustomWord(word.id)
                                     } label: {
                                         Label("删除自建", systemImage: "trash")
                                     }
+
+                                    Button {
+                                        editingCustomWord = customRecord
+                                    } label: {
+                                        Label("编辑", systemImage: "pencil")
+                                    }
+                                    .tint(.indigo)
                                 }
 
                                 if let progress = progressMap[word.id] {
@@ -228,7 +238,7 @@ struct WordBookView: View {
             }
             .listStyle(.insetGrouped)
             .navigationTitle("词库与错题本")
-            .searchable(text: $searchText, prompt: "搜索单词、释义或例句")
+            .searchable(text: $searchText, prompt: "搜索单词、释义、例句或笔记")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 12) {
@@ -254,6 +264,9 @@ struct WordBookView: View {
             .sheet(isPresented: $isShowingAddWordSheet) {
                 AddCustomWordView()
             }
+            .sheet(item: $editingCustomWord) { record in
+                AddCustomWordView(editingRecord: record)
+            }
             .sheet(isPresented: $isShowingQuizSheet) {
                 QuizView(
                     sourceWords: filteredWords,
@@ -267,12 +280,24 @@ struct WordBookView: View {
                 )
             }
             .sheet(item: $selectedWord) { word in
+                let customRecord = word.id.hasPrefix("custom-")
+                    ? customWords.first(where: { $0.id == word.id })
+                    : nil
                 WordDetailSheet(
                     word: word,
                     progress: progressMap[word.id],
                     speechService: speechService,
                     onToggleFavorite: {
                         toggleFavorite(word)
+                    },
+                    onSaveNote: { note in
+                        saveCustomNote(note, for: word)
+                    },
+                    onEditCustomWord: customRecord.map { record in
+                        {
+                            selectedWord = nil
+                            editingCustomWord = record
+                        }
                     },
                     onRate: { rating in
                         rateWord(word, rating: rating)
@@ -296,6 +321,17 @@ struct WordBookView: View {
             modelContext.insert(record)
         }
         record.isFavorite.toggle()
+        try? modelContext.save()
+    }
+
+    private func saveCustomNote(_ note: String, for word: WordItem) {
+        let trimmed = note.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let existing = progressMap[word.id] {
+            existing.customNote = trimmed
+        } else if !trimmed.isEmpty {
+            let record = WordProgress(wordID: word.id, language: word.language, customNote: trimmed)
+            modelContext.insert(record)
+        }
         try? modelContext.save()
     }
 
@@ -415,6 +451,11 @@ private struct WordBookRow: View {
                     Text("·")
                     Text(progress?.statusLabel ?? "新词")
                         .foregroundStyle(statusColor)
+                    if let note = progress?.customNote.trimmingCharacters(in: .whitespacesAndNewlines), !note.isEmpty {
+                        Image(systemName: "note.text")
+                            .foregroundStyle(AppTheme.accent)
+                            .accessibilityLabel("含助记笔记")
+                    }
                 }
                 .font(.caption2)
                 .foregroundStyle(.secondary)
@@ -452,10 +493,14 @@ private struct WordBookRow: View {
 
 private struct WordDetailSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var isEditingNote = false
+
     let word: WordItem
     let progress: WordProgress?
     let speechService: SpeechService
     var onToggleFavorite: (() -> Void)? = nil
+    var onSaveNote: ((String) -> Void)? = nil
+    var onEditCustomWord: (() -> Void)? = nil
     let onRate: (RecallRating) -> Void
 
     var body: some View {
@@ -468,19 +513,35 @@ private struct WordDetailSheet: View {
                         isTranslationVisible: true,
                         isRequeuedInSession: false,
                         speechService: speechService,
-                        onToggleFavorite: onToggleFavorite
+                        onToggleFavorite: onToggleFavorite,
+                        onEditNote: onSaveNote != nil ? { isEditingNote = true } : nil
                     )
 
                     HStack(spacing: 10) {
-                        MemoryActionButton(title: "不认识", subtitle: "重置间隔", systemImage: "xmark.circle", tint: .red) {
+                        MemoryActionButton(
+                            title: "不认识",
+                            subtitle: SpacedRepetitionEngine.previewIntervalLabel(for: .unknown, current: progress, isAlreadyRequeued: true),
+                            systemImage: "xmark.circle",
+                            tint: .red
+                        ) {
                             onRate(.unknown)
                             dismiss()
                         }
-                        MemoryActionButton(title: "模糊", subtitle: "提前复习", systemImage: "questionmark.circle", tint: .orange) {
+                        MemoryActionButton(
+                            title: "模糊",
+                            subtitle: SpacedRepetitionEngine.previewIntervalLabel(for: .fuzzy, current: progress),
+                            systemImage: "questionmark.circle",
+                            tint: .orange
+                        ) {
                             onRate(.fuzzy)
                             dismiss()
                         }
-                        MemoryActionButton(title: "认识", subtitle: "提升掌握", systemImage: "checkmark.circle", tint: .green) {
+                        MemoryActionButton(
+                            title: "认识",
+                            subtitle: SpacedRepetitionEngine.previewIntervalLabel(for: .known, current: progress),
+                            systemImage: "checkmark.circle",
+                            tint: .green
+                        ) {
                             onRate(.known)
                             dismiss()
                         }
@@ -492,8 +553,21 @@ private struct WordDetailSheet: View {
             .navigationTitle("词条详情")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                if let onEditCustomWord {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("编辑词条", action: onEditCustomWord)
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("关闭") { dismiss() }
+                }
+            }
+            .sheet(isPresented: $isEditingNote) {
+                PersonalNoteSheet(
+                    word: word,
+                    initialNote: progress?.customNote ?? ""
+                ) { updatedNote in
+                    onSaveNote?(updatedNote)
                 }
             }
         }

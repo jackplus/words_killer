@@ -202,4 +202,111 @@ struct SpacedRepetitionTests {
         #expect(savedEvents.first?.source == .quiz)
         #expect(savedEvents.first?.rating == .known)
     }
+
+    @Test("间隔预览：准确预测新词、学习中与已掌握词的三档下次复习间隔")
+    func previewIntervalLabelsMatchSchedulingRules() {
+        // Unseen word
+        #expect(SpacedRepetitionEngine.previewIntervalLabel(for: .unknown, current: nil) == "本轮重测")
+        #expect(SpacedRepetitionEngine.previewIntervalLabel(for: .unknown, current: nil, isAlreadyRequeued: true) == "重置间隔")
+        #expect(SpacedRepetitionEngine.previewIntervalLabel(for: .fuzzy, current: nil) == "12小时后")
+        #expect(SpacedRepetitionEngine.previewIntervalLabel(for: .known, current: nil) == "1天后")
+
+        // Learning word (level 2, interval 1)
+        let learning = WordProgress(wordID: "w1", language: .english, masteryLevel: 2, easeFactor: 2.5, intervalDays: 1, reviewCount: 1)
+        #expect(SpacedRepetitionEngine.previewIntervalLabel(for: .fuzzy, current: learning) == "12小时后")
+        #expect(SpacedRepetitionEngine.previewIntervalLabel(for: .known, current: learning) == "3天后")
+
+        // Mature word (level 4, interval 10, ease 2.6)
+        let mature = WordProgress(wordID: "w2", language: .english, masteryLevel: 4, easeFactor: 2.6, intervalDays: 10, reviewCount: 4)
+        #expect(SpacedRepetitionEngine.previewIntervalLabel(for: .fuzzy, current: mature) == "5天后")
+        #expect(SpacedRepetitionEngine.previewIntervalLabel(for: .known, current: mature) == "26天后")
+    }
+
+    @Test("撤回判词：精准回滚新词与旧词进度、删除误记事件且保留收藏与笔记")
+    func undoReviewRestoresProgressAndRemovesEvent() throws {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(
+            for: WordProgress.self, CustomWordRecord.self, ReviewEvent.self,
+            configurations: config
+        )
+        let context = container.mainContext
+
+        // Case 1: Brand-new word without favorite/note -> undo deletes progress and event completely
+        let freshWord = WordItem(
+            id: "es-beg-hola",
+            language: .spanish,
+            difficulty: .beginner,
+            term: "hola",
+            pronunciation: "/ˈo.la/",
+            translation: "你好",
+            memoryCue: "",
+            example: ""
+        )
+        let freshSnapshot = SpacedRepetitionEngine.recordReview(
+            for: freshWord,
+            rating: .known,
+            source: .card,
+            existingProgress: nil,
+            in: context,
+            now: baseDate
+        )
+        let createdProgress = try context.fetch(FetchDescriptor<WordProgress>()).first
+        #expect(createdProgress != nil)
+        #expect(try context.fetch(FetchDescriptor<ReviewEvent>()).count == 1)
+
+        SpacedRepetitionEngine.undoReview(freshSnapshot, progress: createdProgress, in: context)
+        #expect(try context.fetch(FetchDescriptor<WordProgress>()).isEmpty)
+        #expect(try context.fetch(FetchDescriptor<ReviewEvent>()).isEmpty)
+
+        // Case 2: Existing mature word with note -> undo restores exact SRS fields and keeps note/favorite
+        let existing = WordProgress(
+            wordID: "en-adv-nuance",
+            language: .english,
+            masteryLevel: 4,
+            easeFactor: 2.6,
+            intervalDays: 10,
+            reviewCount: 4,
+            lapseCount: 0,
+            lastReviewedAt: baseDate.addingTimeInterval(-86400),
+            nextReviewDate: baseDate,
+            lastRating: .known,
+            isFavorite: true,
+            customNote: "细微差别"
+        )
+        context.insert(existing)
+        try context.save()
+
+        let existingWord = WordItem(
+            id: "en-adv-nuance",
+            language: .english,
+            difficulty: .advanced,
+            term: "nuance",
+            pronunciation: "",
+            translation: "细微差别",
+            memoryCue: "",
+            example: ""
+        )
+        let mistakenSnapshot = SpacedRepetitionEngine.recordReview(
+            for: existingWord,
+            rating: .unknown,
+            source: .card,
+            existingProgress: existing,
+            in: context,
+            now: baseDate
+        )
+        #expect(existing.masteryLevel == 0)
+        #expect(existing.lapseCount == 1)
+        #expect(existing.reviewCount == 5)
+
+        SpacedRepetitionEngine.undoReview(mistakenSnapshot, progress: existing, in: context)
+        #expect(existing.masteryLevel == 4)
+        #expect(existing.easeFactor == 2.6)
+        #expect(existing.intervalDays == 10)
+        #expect(existing.reviewCount == 4)
+        #expect(existing.lapseCount == 0)
+        #expect(existing.lastRating == .known)
+        #expect(existing.isFavorite == true)
+        #expect(existing.customNote == "细微差别")
+        #expect(try context.fetch(FetchDescriptor<ReviewEvent>()).isEmpty)
+    }
 }

@@ -20,6 +20,35 @@ struct BackupProgressDTO: Codable, Sendable {
     let nextReviewDate: Date
     let lastRatingRawValue: String
     let isFavorite: Bool
+    let customNote: String?
+
+    init(
+        wordID: String,
+        languageRawValue: String,
+        masteryLevel: Int,
+        easeFactor: Double,
+        intervalDays: Double,
+        reviewCount: Int,
+        lapseCount: Int,
+        lastReviewedAt: Date?,
+        nextReviewDate: Date,
+        lastRatingRawValue: String,
+        isFavorite: Bool,
+        customNote: String? = nil
+    ) {
+        self.wordID = wordID
+        self.languageRawValue = languageRawValue
+        self.masteryLevel = masteryLevel
+        self.easeFactor = easeFactor
+        self.intervalDays = intervalDays
+        self.reviewCount = reviewCount
+        self.lapseCount = lapseCount
+        self.lastReviewedAt = lastReviewedAt
+        self.nextReviewDate = nextReviewDate
+        self.lastRatingRawValue = lastRatingRawValue
+        self.isFavorite = isFavorite
+        self.customNote = customNote
+    }
 }
 
 struct BackupCustomWordDTO: Codable, Sendable {
@@ -88,7 +117,8 @@ enum BackupService {
                 lastReviewedAt: $0.lastReviewedAt,
                 nextReviewDate: $0.nextReviewDate,
                 lastRatingRawValue: $0.lastRatingRawValue,
-                isFavorite: $0.isFavorite
+                isFavorite: $0.isFavorite,
+                customNote: $0.customNote.isEmpty ? nil : $0.customNote
             )
         }
 
@@ -192,6 +222,11 @@ enum BackupService {
                 if dto.isFavorite {
                     existing.isFavorite = true
                 }
+                if let note = dto.customNote?.trimmingCharacters(in: .whitespacesAndNewlines),
+                   !note.isEmpty,
+                   existing.customNote.isEmpty || dto.reviewCount >= existing.reviewCount {
+                    existing.customNote = note
+                }
             } else {
                 let record = WordProgress(
                     wordID: dto.wordID,
@@ -204,7 +239,8 @@ enum BackupService {
                     lastReviewedAt: dto.lastReviewedAt,
                     nextReviewDate: dto.nextReviewDate,
                     lastRating: RecallRating(rawValue: dto.lastRatingRawValue) ?? .unknown,
-                    isFavorite: dto.isFavorite
+                    isFavorite: dto.isFavorite,
+                    customNote: dto.customNote ?? ""
                 )
                 modelContext.insert(record)
             }

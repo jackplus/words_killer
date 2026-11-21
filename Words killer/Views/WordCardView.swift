@@ -13,6 +13,7 @@ struct WordCardView: View {
     let speechService: SpeechService
     var onSwipeRate: ((RecallRating) -> Void)? = nil
     var onToggleFavorite: (() -> Void)? = nil
+    var onEditNote: (() -> Void)? = nil
 
     @State private var dragOffset: CGSize = .zero
 
@@ -166,10 +167,12 @@ struct WordCardView: View {
                     InfoRow(
                         icon: "quote.bubble",
                         title: "例句",
-                        content: isTranslationVisible ? word.example : "释义显示后自动出现例句"
+                        content: isTranslationVisible
+                            ? (word.example.isEmpty ? "暂无例句" : word.example)
+                            : "释义显示后自动出现例句"
                     )
 
-                    if isTranslationVisible {
+                    if isTranslationVisible && !word.example.isEmpty {
                         Spacer(minLength: 4)
                         Button {
                             speechService.speak(word.example, language: word.language)
@@ -182,6 +185,42 @@ struct WordCardView: View {
                         }
                         .buttonStyle(.plain)
                         .accessibilityLabel("朗读例句")
+                    }
+                }
+
+                if isTranslationVisible {
+                    let trimmedNote = progress?.customNote.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                    if !trimmedNote.isEmpty {
+                        HStack(alignment: .top, spacing: 8) {
+                            InfoRow(
+                                icon: "note.text",
+                                title: "我的助记笔记",
+                                content: trimmedNote
+                            )
+
+                            if let onEditNote {
+                                Spacer(minLength: 4)
+                                Button(action: onEditNote) {
+                                    Image(systemName: "pencil")
+                                        .font(.caption.weight(.semibold))
+                                        .foregroundStyle(AppTheme.accent)
+                                        .padding(7)
+                                        .background(AppTheme.accent.opacity(0.12), in: Circle())
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel("编辑助记笔记")
+                            }
+                        }
+                        .padding(10)
+                        .background(AppTheme.accent.opacity(0.06), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    } else if let onEditNote {
+                        Button(action: onEditNote) {
+                            Label("添加我的助记笔记", systemImage: "square.and.pencil")
+                                .font(.caption.weight(.medium))
+                                .foregroundStyle(AppTheme.accent)
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.top, 2)
                     }
                 }
             }

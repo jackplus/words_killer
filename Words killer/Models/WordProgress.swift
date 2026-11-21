@@ -19,6 +19,7 @@ final class WordProgress {
     var nextReviewDate: Date
     var lastRatingRawValue: String
     var isFavorite: Bool = false
+    var customNote: String = ""
 
     init(
         wordID: String,
@@ -31,7 +32,8 @@ final class WordProgress {
         lastReviewedAt: Date? = nil,
         nextReviewDate: Date = .now,
         lastRating: RecallRating = .unknown,
-        isFavorite: Bool = false
+        isFavorite: Bool = false,
+        customNote: String = ""
     ) {
         self.wordID = wordID
         self.languageRawValue = language.rawValue
@@ -44,6 +46,7 @@ final class WordProgress {
         self.nextReviewDate = nextReviewDate
         self.lastRatingRawValue = lastRating.rawValue
         self.isFavorite = isFavorite
+        self.customNote = customNote
     }
 
     var lastRating: RecallRating {

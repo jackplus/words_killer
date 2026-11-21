@@ -17,3 +17,6 @@ xcuserdata/
 !default.perspectivev3
 *.xccheckout
 *.xcscmblueprint
+
+# Local release evidence and screenshots
+/artifacts/

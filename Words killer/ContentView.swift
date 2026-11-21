@@ -8,6 +8,17 @@
 import SwiftData
 import SwiftUI
 
+private struct SessionUndoEntry {
+    let reviewSnapshot: ReviewUndoSnapshot
+    let previousIndex: Int
+    let previousKnownCount: Int
+    let previousFuzzyCount: Int
+    let previousUnknownCount: Int
+    let previousCompletedIDs: Set<String>
+    let previousRequeuedIDs: Set<String>
+    let appendedRequeueAtEnd: Bool
+}
+
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var allProgress: [WordProgress]
@@ -29,6 +40,8 @@ struct ContentView: View {
     @State private var audioController = AudioLearningController()
     @State private var isShowingQuizSheet = false
     @State private var isShowingAudioSheet = false
+    @State private var noteEditingWord: WordItem?
+    @State private var undoStack: [SessionUndoEntry] = []
 
     @State private var sessionQueue: [WordItem] = []
     @State private var currentIndex = 0
@@ -144,13 +157,17 @@ struct ContentView: View {
     }
 
     var body: some View {
+        let currentProgressMap = progressMap
+        let currentProgress = currentWord.flatMap { currentProgressMap[$0.id] }
+        let streak = streakDays
+
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     DailyGoalBanner(
                         studiedToday: todayStudiedWords,
                         dailyGoal: dailyGoal,
-                        streakDays: streakDays
+                        streakDays: streak
                     )
 
                     selectionPanel
@@ -165,7 +182,7 @@ struct ContentView: View {
                     if let word = currentWord {
                         WordCardView(
                             word: word,
-                            progress: progressMap[word.id],
+                            progress: currentProgress,
                             isTranslationVisible: isTranslationVisible,
                             isRequeuedInSession: requeuedIDs.contains(word.id),
                             speechService: speechService,
@@ -174,13 +191,16 @@ struct ContentView: View {
                             },
                             onToggleFavorite: {
                                 toggleFavorite(word)
+                            },
+                            onEditNote: {
+                                noteEditingWord = word
                             }
                         )
                     } else {
                         EmptyStateView()
                     }
 
-                    actionPanel
+                    actionPanel(currentProgress: currentProgress)
                     summaryPanel
                 }
                 .padding(20)
@@ -223,9 +243,17 @@ struct ContentView: View {
                     playlistTitle: "\(selectedLanguage.title) · 本轮挑战 (\(sessionQueue.count)词)"
                 )
             }
+            .sheet(item: $noteEditingWord) { word in
+                PersonalNoteSheet(
+                    word: word,
+                    initialNote: currentProgressMap[word.id]?.customNote ?? ""
+                ) { updatedNote in
+                    saveCustomNote(updatedNote, for: word)
+                }
+            }
             .sensoryFeedback(.impact(weight: .light), trigger: feedbackTrigger)
-            .task(id: StudyAnalytics.streakMayExceedWindow(streakDays)) {
-                guard StudyAnalytics.streakMayExceedWindow(streakDays) else { return }
+            .task(id: StudyAnalytics.streakMayExceedWindow(streak)) {
+                guard StudyAnalytics.streakMayExceedWindow(streak) else { return }
                 olderActiveDays = StudyAnalytics.olderActiveDays(before: windowStart, in: modelContext)
             }
             .onAppear {
@@ -320,6 +348,18 @@ struct ContentView: View {
             HStack {
                 SectionTitle(icon: "calendar.badge.checkmark", title: "本轮挑战")
                 Spacer()
+                if !undoStack.isEmpty {
+                    Button {
+                        undoLastRating()
+                    } label: {
+                        Label("撤回", systemImage: "arrow.uturn.backward")
+                            .font(.caption.weight(.semibold))
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.mini)
+                    .tint(AppTheme.accent)
+                    .accessibilityLabel("撤回上一次判词")
+                }
                 Text("\(completedIDs.count)/\(max(initialBatchCount, challengeSize))")
                     .font(.headline.monospacedDigit())
                     .foregroundStyle(AppTheme.accent)
@@ -373,8 +413,10 @@ struct ContentView: View {
         .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 
-    private var actionPanel: some View {
-        VStack(spacing: 12) {
+    private func actionPanel(currentProgress: WordProgress?) -> some View {
+        let isAlreadyRequeued = currentWord.map { requeuedIDs.contains($0.id) } ?? false
+
+        return VStack(spacing: 12) {
             Button {
                 isTranslationVisible.toggle()
             } label: {
@@ -389,15 +431,40 @@ struct ContentView: View {
             .disabled(currentWord == nil || isChallengeFinished)
 
             HStack(spacing: 10) {
-                MemoryActionButton(title: "不认识", subtitle: "本轮重测", systemImage: "xmark.circle", tint: .red) {
+                MemoryActionButton(
+                    title: "不认识",
+                    subtitle: SpacedRepetitionEngine.previewIntervalLabel(
+                        for: .unknown,
+                        current: currentProgress,
+                        isAlreadyRequeued: isAlreadyRequeued
+                    ),
+                    systemImage: "xmark.circle",
+                    tint: .red
+                ) {
                     rateCurrentWord(.unknown)
                 }
 
-                MemoryActionButton(title: "模糊", subtitle: "提前复习", systemImage: "questionmark.circle", tint: .orange) {
+                MemoryActionButton(
+                    title: "模糊",
+                    subtitle: SpacedRepetitionEngine.previewIntervalLabel(
+                        for: .fuzzy,
+                        current: currentProgress
+                    ),
+                    systemImage: "questionmark.circle",
+                    tint: .orange
+                ) {
                     rateCurrentWord(.fuzzy)
                 }
 
-                MemoryActionButton(title: "认识", subtitle: "间隔递增", systemImage: "checkmark.circle", tint: .green) {
+                MemoryActionButton(
+                    title: "认识",
+                    subtitle: SpacedRepetitionEngine.previewIntervalLabel(
+                        for: .known,
+                        current: currentProgress
+                    ),
+                    systemImage: "checkmark.circle",
+                    tint: .green
+                ) {
                     rateCurrentWord(.known)
                 }
             }
@@ -451,12 +518,32 @@ struct ContentView: View {
         try? modelContext.save()
     }
 
+    private func saveCustomNote(_ note: String, for word: WordItem) {
+        let trimmed = note.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let existing = progressMap[word.id] {
+            existing.customNote = trimmed
+        } else if !trimmed.isEmpty {
+            let record = WordProgress(wordID: word.id, language: word.language, customNote: trimmed)
+            modelContext.insert(record)
+        }
+        try? modelContext.save()
+    }
+
     private func rateCurrentWord(_ rating: RecallRating) {
         guard let word = currentWord, !isChallengeFinished else { return }
 
         feedbackTrigger += 1
         speechService.stop()
-        persistRating(rating, for: word)
+
+        let previousIndex = currentIndex
+        let previousKnown = knownCount
+        let previousFuzzy = fuzzyCount
+        let previousUnknown = unknownCount
+        let previousCompleted = completedIDs
+        let previousRequeued = requeuedIDs
+
+        let reviewSnapshot = persistRating(rating, for: word)
+        var appendedRequeue = false
 
         switch rating {
         case .unknown:
@@ -464,6 +551,7 @@ struct ContentView: View {
             if !requeuedIDs.contains(word.id) {
                 requeuedIDs.insert(word.id)
                 sessionQueue.append(word)
+                appendedRequeue = true
             } else {
                 completedIDs.insert(word.id)
             }
@@ -475,6 +563,19 @@ struct ContentView: View {
             completedIDs.insert(word.id)
         }
 
+        undoStack.append(
+            SessionUndoEntry(
+                reviewSnapshot: reviewSnapshot,
+                previousIndex: previousIndex,
+                previousKnownCount: previousKnown,
+                previousFuzzyCount: previousFuzzy,
+                previousUnknownCount: previousUnknown,
+                previousCompletedIDs: previousCompleted,
+                previousRequeuedIDs: previousRequeued,
+                appendedRequeueAtEnd: appendedRequeue
+            )
+        )
+
         isTranslationVisible = false
         if currentIndex < sessionQueue.count - 1 {
             currentIndex += 1
@@ -482,7 +583,31 @@ struct ContentView: View {
         }
     }
 
-    private func persistRating(_ rating: RecallRating, for word: WordItem) {
+    private func undoLastRating() {
+        guard let entry = undoStack.popLast() else { return }
+
+        feedbackTrigger += 1
+        speechService.stop()
+        SpacedRepetitionEngine.undoReview(
+            entry.reviewSnapshot,
+            progress: progressMap[entry.reviewSnapshot.wordID],
+            in: modelContext
+        )
+
+        if entry.appendedRequeueAtEnd && !sessionQueue.isEmpty {
+            sessionQueue.removeLast()
+        }
+        currentIndex = min(entry.previousIndex, max(0, sessionQueue.count - 1))
+        knownCount = entry.previousKnownCount
+        fuzzyCount = entry.previousFuzzyCount
+        unknownCount = entry.previousUnknownCount
+        completedIDs = entry.previousCompletedIDs
+        requeuedIDs = entry.previousRequeuedIDs
+        isTranslationVisible = false
+        speakCurrentWordIfNeeded()
+    }
+
+    private func persistRating(_ rating: RecallRating, for word: WordItem) -> ReviewUndoSnapshot {
         SpacedRepetitionEngine.recordReview(
             for: word,
             rating: rating,
@@ -511,6 +636,7 @@ struct ContentView: View {
         isTranslationVisible = false
         completedIDs.removeAll()
         requeuedIDs.removeAll()
+        undoStack.removeAll()
 
         speakCurrentWordIfNeeded()
     }

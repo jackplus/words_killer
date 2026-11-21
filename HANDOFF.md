@@ -3,7 +3,7 @@
 - **仓库地址**: `https://github.com/jackplus/words_killer.git`
 - **主分支**: `main`
 - **接手基线 Commit**: `81da4ea`（初始 500 词单文件词库 + 基础三标签卡片背词）
-- **当前状态**: App Store 提审就绪（4 轮完整功能与合规迭代，累计变更 **41 个文件，`+7,477 / -187` 行**，Swift 编译 **0 警告**，**5 大测试套件共 21 项 Swift Testing 单元测试全部通过**）
+- **当前状态**: 已整合 PR #1（性能优化、CI 测试流与 SRS 精度修复）与发行准备改动（发布团队 `Y382F52F3K`、离线隐私政策页、后台语音查询与导出配置），并完成第 5 轮核心体验迭代（个人助记笔记、闪卡误触撤回、动态复习间隔预览、自建词编辑）。**35/35 项 Swift Testing 单元测试全部通过，Swift 编译 0 警告**。最新商店提审进度见 [APP_STORE_CHECKLIST.md](APP_STORE_CHECKLIST.md)。
 
 ---
 
@@ -167,7 +167,7 @@ xcodebuild -scheme "Words killer" \
   -derivedDataPath /tmp/WordsKillerDerivedData \
   build CODE_SIGNING_ALLOWED=NO
 
-# 2. 运行全部 21 项 Swift Testing 单元测试（请将 name 替换为本机已安装的模拟器名称）
+# 2. 运行全部 35 项 Swift Testing 单元测试（请将 name 替换为本机已安装的模拟器名称）
 xcodebuild test -scheme "Words killer" \
   -destination "platform=iOS Simulator,name=iPhone 18 Pro" \
   -derivedDataPath /tmp/WordsKillerDerivedData \
@@ -178,8 +178,8 @@ xcodebuild test -scheme "Words killer" \
 
 ---
 
-## 五、后续版本演进建议（v1.1+ Roadmap）
+## 五、后续版本演进建议（v1.2+ Roadmap）
 
 1. **iOS 桌面与锁屏小组件（WidgetKit）**：通过 App Group 共享当前待复习词数、连续打卡天数与「每日一词」卡片。
-2. **个人助记笔记编辑**：在 `WordProgress` 增加 `customNote: String = ""`，支持用户为任意内置词编写专属记忆口诀。
-3. **iCloud（CloudKit）可选同步**：在保持免登录纯苹果生态隐私的前提下，为同 Apple ID 下的 iPhone 与 iPad 自动同步学习进度与自建词库。
+2. **iCloud（CloudKit）可选同步**：在保持免登录纯苹果生态隐私的前提下，为同 Apple ID 下的 iPhone 与 iPad 自动同步学习进度、助记笔记与自建词库。
+3. **多维复习过滤（仅复习到期 / 仅复习收藏）**：在背词主页提供一键切换「智能综合 / 专攻到期 / 专攻收藏」训练模式。

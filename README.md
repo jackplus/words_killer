@@ -13,12 +13,12 @@
 - **原生多语种语音朗读**：基于 `AVSpeechSynthesizer` 封装 [`SpeechService`](Words%20killer/Services/SpeechService.swift)，支持切卡自动朗读单词、点击喇叭单独朗读单词或例句。
 - **多维自测与拼写练习**：内置 [`QuizView`](Words%20killer/Views/QuizView.swift) 与 [`QuizEngine`](Words%20killer/Services/QuizEngine.swift)，支持四选一速测（看词选义、看义选词、听音辨词）及听音拼写填空，测验结果自动同步 SRS 记忆进度并支持一键专练错题。
 - **随身听学磨耳朵**：基于 [`AudioLearningController`](Words%20killer/Services/AudioLearningController.swift) 与 [`AudioPlayerView`](Words%20killer/Views/AudioPlayerView.swift)，支持后台循环自动朗读单词外语、中文释义与例句，可自定义每词朗读次数（1~3遍）、词间停顿与播放语速。
-- **重点收藏与自建词库**：支持卡片一键星标收藏（Favorite，未学收藏词优先组卡）；支持通过 [`AddCustomWordView`](Words%20killer/Views/AddCustomWordView.swift) 手动录入单词或批量粘贴文本导入本地 SwiftData，与内置 500 词库无缝混排训练。
+- **重点收藏、个人助记笔记与自建词库**：支持卡片一键星标收藏（Favorite，未学收藏词优先组卡）；支持为任意单词编写个人助记笔记（支持词库全文检索与 JSON 备份导出）；支持通过 [`AddCustomWordView`](Words%20killer/Views/AddCustomWordView.swift) 手动录入/编辑单词或批量粘贴文本导入本地 SwiftData，与内置词库无缝混排训练。
 - **学习可视化与打卡热力图**：基于 Apple `Charts` 与 [`StudyAnalytics`](Words%20killer/Services/StudyAnalytics.swift) 渲染近 14 天堆叠学习趋势图（含每日目标基准线）、GitHub 风格近 12 周打卡热力图以及未来 7 天待复习预测。
 - **每日目标、本地提醒与 JSON 备份**：在 [`SettingsView`](Words%20killer/Views/SettingsView.swift) 中支持设定每日目标与单轮组卡数、基于 [`NotificationService`](Words%20killer/Services/NotificationService.swift) 的本地定时打卡提醒、四套主题配色与深浅外观切换，以及基于 [`BackupService`](Words%20killer/Services/BackupService.swift) 的本地 JSON 全量备份导出与恢复。
 - **四标签学习闭环**：
-  - **背词**：顶部实时展示今日目标进度环与连续打卡天数，支持智能组卡、左右滑卡判词、测验与听学联动。
-  - **词库**：支持按语种、掌握状态（全部 / 错题与模糊 / 已掌握 / 已收藏 / 未学习 / 自建词）筛选与全文搜索，支持对当前筛选词表直接发起测验或听学。
+  - **背词**：顶部实时展示今日目标进度环与连续打卡天数，支持智能组卡、左右滑卡判词、实时预测下次复习间隔、误触一键撤回、个人助记笔记、测验与听学联动。
+  - **词库**：支持按语种、掌握状态（全部 / 错题与模糊 / 已掌握 / 已收藏 / 未学习 / 自建词）筛选与全文搜索（含个人笔记），支持编辑/删除自建词，以及对当前筛选词表直接发起测验或听学。
   - **统计**：汇总核心指标、14 天趋势柱状图、12 周热力图、7 天到期预测与各语种掌握进度。
   - **设置**：管理每日计划、本地通知提醒、个性化主题外观及 JSON 数据导入导出。
 

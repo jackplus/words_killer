@@ -81,7 +81,8 @@ struct QuizAndBackupTests {
             lastReviewedAt: now,
             nextReviewDate: now.addingTimeInterval(3 * 86400),
             lastRating: .known,
-            isFavorite: true
+            isFavorite: true,
+            customNote: "见面第一句问候"
         )
         let customWord = CustomWordRecord(
             id: "custom-en-adv-serendipity",
@@ -144,6 +145,7 @@ struct QuizAndBackupTests {
 
         #expect(fetchedProgress.first?.isFavorite == true)
         #expect(fetchedProgress.first?.masteryLevel == 3)
+        #expect(fetchedProgress.first?.customNote == "见面第一句问候")
         #expect(fetchedCustom.first?.term == "serendipity")
         #expect(fetchedEvents.count == 1)
 
@@ -158,5 +160,58 @@ struct QuizAndBackupTests {
         #expect(secondRestore.eventCount == 0)
         #expect(try targetContext.fetch(FetchDescriptor<ReviewEvent>()).count == 1)
         #expect(try targetContext.fetch(FetchDescriptor<CustomWordRecord>()).count == 1)
+    }
+
+    @Test("JSON 备份向下兼容：不含 customNote 字段的旧版 v1 备份仍可正常恢复")
+    func legacyV1BackupWithoutCustomNoteRestoresCleanly() throws {
+        let legacyJSON = """
+        {
+          "version": 1,
+          "exportedAt": "2026-11-18T00:00:00Z",
+          "progressRecords": [
+            {
+              "wordID": "en-beg-water",
+              "languageRawValue": "english",
+              "masteryLevel": 3,
+              "easeFactor": 2.5,
+              "intervalDays": 3,
+              "reviewCount": 2,
+              "lapseCount": 0,
+              "lastReviewedAt": "2026-11-18T00:00:00Z",
+              "nextReviewDate": "2026-11-21T00:00:00Z",
+              "lastRatingRawValue": "known",
+              "isFavorite": true
+            }
+          ],
+          "customWords": [],
+          "reviewEvents": []
+        }
+        """
+
+        let tempURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("words_killer_legacy_backup_\(UUID().uuidString).json")
+        try Data(legacyJSON.utf8).write(to: tempURL)
+        defer { try? FileManager.default.removeItem(at: tempURL) }
+
+        let config = ModelConfiguration("legacy-target", isStoredInMemoryOnly: true)
+        let container = try ModelContainer(
+            for: WordProgress.self, CustomWordRecord.self, ReviewEvent.self,
+            configurations: config
+        )
+        let context = container.mainContext
+
+        let result = try BackupService.restore(
+            from: tempURL,
+            existingProgress: [],
+            existingCustomWords: [],
+            existingEvents: [],
+            in: context
+        )
+        #expect(result.progressCount == 1)
+
+        let restored = try context.fetch(FetchDescriptor<WordProgress>())
+        #expect(restored.count == 1)
+        #expect(restored.first?.wordID == "en-beg-water")
+        #expect(restored.first?.customNote == "")
     }
 }

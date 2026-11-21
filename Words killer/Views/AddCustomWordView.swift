@@ -11,16 +11,18 @@ struct AddCustomWordView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var existingCustomWords: [CustomWordRecord]
 
+    let editingRecord: CustomWordRecord?
+
     @State private var mode: Int = 0 // 0: 单词录入, 1: 批量导入
-    @State private var language: TargetLanguage = .english
-    @State private var difficulty: DifficultyLevel = .beginner
+    @State private var language: TargetLanguage
+    @State private var difficulty: DifficultyLevel
 
     // Single word state
-    @State private var term: String = ""
-    @State private var pronunciation: String = ""
-    @State private var translation: String = ""
-    @State private var memoryCue: String = ""
-    @State private var example: String = ""
+    @State private var term: String
+    @State private var pronunciation: String
+    @State private var translation: String
+    @State private var memoryCue: String
+    @State private var example: String
 
     // Batch import state
     @State private var batchText: String = ""
@@ -34,18 +36,35 @@ struct AddCustomWordView: View {
     @State private var showSuccessAlert: Bool = false
     @State private var alertMessage: String = ""
 
+    init(editingRecord: CustomWordRecord? = nil) {
+        self.editingRecord = editingRecord
+        self._language = State(initialValue: editingRecord?.language ?? .english)
+        self._difficulty = State(initialValue: editingRecord?.difficulty ?? .beginner)
+        self._term = State(initialValue: editingRecord?.term ?? "")
+        self._pronunciation = State(initialValue: editingRecord?.pronunciation ?? "")
+        self._translation = State(initialValue: editingRecord?.translation ?? "")
+        self._memoryCue = State(initialValue: editingRecord?.memoryCue ?? "")
+        self._example = State(initialValue: editingRecord?.example ?? "")
+    }
+
+    private var isEditing: Bool {
+        editingRecord != nil
+    }
+
     var body: some View {
         NavigationStack {
             Form {
-                Section {
-                    Picker("添加方式", selection: $mode) {
-                        Text("单词录入").tag(0)
-                        Text("批量导入").tag(1)
+                if !isEditing {
+                    Section {
+                        Picker("添加方式", selection: $mode) {
+                            Text("单词录入").tag(0)
+                            Text("批量导入").tag(1)
+                        }
+                        .pickerStyle(.segmented)
                     }
-                    .pickerStyle(.segmented)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
 
                 Section("基本归类") {
                     Picker("所属语言", selection: $language) {
@@ -61,13 +80,13 @@ struct AddCustomWordView: View {
                     }
                 }
 
-                if mode == 0 {
+                if isEditing || mode == 0 {
                     singleWordForm
                 } else {
                     batchImportForm
                 }
             }
-            .navigationTitle("添加词汇")
+            .navigationTitle(isEditing ? "编辑自建词汇" : "添加词汇")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -77,7 +96,7 @@ struct AddCustomWordView: View {
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
-                    if mode == 0 {
+                    if isEditing || mode == 0 {
                         Button("保存") {
                             saveSingleWord()
                         }
@@ -178,17 +197,27 @@ struct AddCustomWordView: View {
         let trimmedTranslation = translation.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTerm.isEmpty && !trimmedTranslation.isEmpty else { return }
 
-        let custom = CustomWordRecord(
-            language: language,
-            difficulty: difficulty,
-            term: trimmedTerm,
-            pronunciation: pronunciation.trimmingCharacters(in: .whitespacesAndNewlines),
-            translation: trimmedTranslation,
-            memoryCue: memoryCue.trimmingCharacters(in: .whitespacesAndNewlines),
-            example: example.trimmingCharacters(in: .whitespacesAndNewlines)
-        )
+        if let editingRecord {
+            editingRecord.languageRawValue = language.rawValue
+            editingRecord.difficultyRawValue = difficulty.rawValue
+            editingRecord.term = trimmedTerm
+            editingRecord.pronunciation = pronunciation.trimmingCharacters(in: .whitespacesAndNewlines)
+            editingRecord.translation = trimmedTranslation
+            editingRecord.memoryCue = memoryCue.trimmingCharacters(in: .whitespacesAndNewlines)
+            editingRecord.example = example.trimmingCharacters(in: .whitespacesAndNewlines)
+        } else {
+            let custom = CustomWordRecord(
+                language: language,
+                difficulty: difficulty,
+                term: trimmedTerm,
+                pronunciation: pronunciation.trimmingCharacters(in: .whitespacesAndNewlines),
+                translation: trimmedTranslation,
+                memoryCue: memoryCue.trimmingCharacters(in: .whitespacesAndNewlines),
+                example: example.trimmingCharacters(in: .whitespacesAndNewlines)
+            )
+            modelContext.insert(custom)
+        }
 
-        modelContext.insert(custom)
         try? modelContext.save()
         dismiss()
     }

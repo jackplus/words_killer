@@ -340,7 +340,15 @@ struct SettingsView: View {
             LabeledContent("当前启用词量", value: "\(activeBuiltIn + customWords.count) 词")
             LabeledContent("内置全库总量", value: "\(WordLibrary.allBuiltInWords.count) 词（\(WordLibrary.builtInPacks.count) 册）")
             LabeledContent("支持语种", value: "英 / 日 / 韩 / 法 / 西")
-            LabeledContent("隐私架构", value: "100% 纯本地离线存储")
+            LabeledContent("隐私架构", value: "学习数据保存在本机")
+            NavigationLink {
+                PrivacyPolicyView()
+            } label: {
+                Label("隐私政策", systemImage: "hand.raised")
+            }
+            Link(destination: URL(string: "https://github.com/jackplus/words_killer/issues")!) {
+                Label("帮助与反馈", systemImage: "questionmark.circle")
+            }
         }
     }
 

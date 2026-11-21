@@ -6,8 +6,23 @@
 import Foundation
 import SwiftData
 
+struct ReviewUndoSnapshot: Sendable {
+    let wordID: String
+    let wasNewProgress: Bool
+    let previousMasteryLevel: Int
+    let previousEaseFactor: Double
+    let previousIntervalDays: Double
+    let previousReviewCount: Int
+    let previousLapseCount: Int
+    let previousLastReviewedAt: Date?
+    let previousNextReviewDate: Date
+    let previousLastRatingRawValue: String
+    let eventID: String
+}
+
 enum SpacedRepetitionEngine {
     @MainActor
+    @discardableResult
     static func recordReview(
         for word: WordItem,
         rating: RecallRating,
@@ -15,7 +30,8 @@ enum SpacedRepetitionEngine {
         existingProgress: WordProgress?,
         in modelContext: ModelContext,
         now: Date = .now
-    ) {
+    ) -> ReviewUndoSnapshot {
+        let wasNew = existingProgress == nil
         let record: WordProgress
         if let existing = existingProgress {
             record = existing
@@ -24,9 +40,25 @@ enum SpacedRepetitionEngine {
             modelContext.insert(record)
         }
 
+        let eventID = UUID().uuidString
+        let snapshot = ReviewUndoSnapshot(
+            wordID: word.id,
+            wasNewProgress: wasNew,
+            previousMasteryLevel: record.masteryLevel,
+            previousEaseFactor: record.easeFactor,
+            previousIntervalDays: record.intervalDays,
+            previousReviewCount: record.reviewCount,
+            previousLapseCount: record.lapseCount,
+            previousLastReviewedAt: record.lastReviewedAt,
+            previousNextReviewDate: record.nextReviewDate,
+            previousLastRatingRawValue: record.lastRatingRawValue,
+            eventID: eventID
+        )
+
         apply(rating: rating, to: record, now: now)
 
         let event = ReviewEvent(
+            id: eventID,
             wordID: word.id,
             language: word.language,
             rating: rating,
@@ -35,6 +67,72 @@ enum SpacedRepetitionEngine {
         )
         modelContext.insert(event)
         try? modelContext.save()
+        return snapshot
+    }
+
+    @MainActor
+    static func undoReview(
+        _ snapshot: ReviewUndoSnapshot,
+        progress: WordProgress?,
+        in modelContext: ModelContext
+    ) {
+        if let progress {
+            let hasUserMetadata = progress.isFavorite
+                || !progress.customNote.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            if snapshot.wasNewProgress && !hasUserMetadata {
+                modelContext.delete(progress)
+            } else {
+                progress.masteryLevel = snapshot.previousMasteryLevel
+                progress.easeFactor = snapshot.previousEaseFactor
+                progress.intervalDays = snapshot.previousIntervalDays
+                progress.reviewCount = snapshot.previousReviewCount
+                progress.lapseCount = snapshot.previousLapseCount
+                progress.lastReviewedAt = snapshot.previousLastReviewedAt
+                progress.nextReviewDate = snapshot.previousNextReviewDate
+                progress.lastRatingRawValue = snapshot.previousLastRatingRawValue
+            }
+        }
+
+        let targetEventID = snapshot.eventID
+        var descriptor = FetchDescriptor<ReviewEvent>(
+            predicate: #Predicate { $0.id == targetEventID }
+        )
+        descriptor.fetchLimit = 1
+        if let event = try? modelContext.fetch(descriptor).first {
+            modelContext.delete(event)
+        }
+        try? modelContext.save()
+    }
+
+    /// Computes the human-readable next review interval preview shown on the three rating buttons.
+    static func previewIntervalLabel(
+        for rating: RecallRating,
+        current progress: WordProgress?,
+        isAlreadyRequeued: Bool = false
+    ) -> String {
+        switch rating {
+        case .unknown:
+            return isAlreadyRequeued ? "重置间隔" : "本轮重测"
+        case .fuzzy:
+            if let progress, progress.isMastered {
+                let days = Int(max(1, (progress.intervalDays * 0.5).rounded()))
+                return "\(days)天后"
+            }
+            return "12小时后"
+        case .known:
+            let level = progress?.masteryLevel ?? 0
+            let currentInterval = progress?.intervalDays ?? 0
+            let ease = progress?.easeFactor ?? 2.5
+            let nextDays: Int
+            if level < 2 || currentInterval < 1 {
+                nextDays = 1
+            } else if currentInterval < 3 {
+                nextDays = 3
+            } else {
+                nextDays = Int((currentInterval * ease).rounded())
+            }
+            return "\(nextDays)天后"
+        }
     }
 
     static func apply(rating: RecallRating, to progress: WordProgress, now: Date = .now) {

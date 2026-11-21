@@ -40,10 +40,14 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
     private(set) var voiceWarningMessage: String?
     var speed: SpeechSpeed = .normal
     var isContinuousBackgroundMode: Bool = false
+
     /// Completion handlers keyed by the utterance they belong to. Holding the utterance keeps its
     /// ObjectIdentifier from being reused while a delegate callback for it may still be in flight.
     @ObservationIgnored private var pendingUtterances: [ObjectIdentifier: (utterance: AVSpeechUtterance, completion: (() -> Void)?)] = [:]
     @ObservationIgnored private var currentUtteranceID: ObjectIdentifier?
+    @ObservationIgnored private var pendingSpeechTask: Task<Void, Never>?
+    @ObservationIgnored private var pendingPreSpeakCompletion: (() -> Void)?
+    @ObservationIgnored private var requestToken: UInt64 = 0
 
     override init() {
         super.init()
@@ -96,48 +100,77 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
             return
         }
 
-        // Interrupting an utterance must still resolve its completion, otherwise callers awaiting it
-        // (e.g. AudioLearningController's continuations) hang forever.
-        interruptPendingUtterances()
+        // Interrupting an in-flight or preparing utterance must still resolve its completion,
+        // otherwise callers awaiting it (e.g. AudioLearningController's continuations) hang forever.
+        interruptPendingSpeech()
 
-        configureAudioSession()
-
-        let resolution = Self.resolveBestVoice(forLocale: locale)
-        if resolution.isMissingLanguagePack {
-            let name = languageLabel ?? locale
-            voiceWarningMessage = "当前设备未检测到「\(name)」系统语音包，如无发声请前往「系统设置 → 辅助功能 → 朗读内容 → 声音」下载。"
-        } else {
-            voiceWarningMessage = nil
-        }
-
-        let utterance = AVSpeechUtterance(string: trimmed)
-        utterance.voice = resolution.voice
-        utterance.rate = rate ?? speed.utteranceRate
-        utterance.pitchMultiplier = 1.0
-
-        let key = ObjectIdentifier(utterance)
-        pendingUtterances[key] = (utterance, completion)
-        currentUtteranceID = key
+        requestToken &+= 1
+        let token = requestToken
         activeText = trimmed
         isSpeaking = true
-        synthesizer.speak(utterance)
+        pendingPreSpeakCompletion = completion
+        let requestedRate = rate ?? speed.utteranceRate
+
+        pendingSpeechTask = Task { @MainActor [weak self] in
+            // System voice discovery can wait on an unavailable voice service.
+            // Keep that wait off the UI thread, including during first launch.
+            let resolution = await Task.detached(priority: .userInitiated) {
+                Self.resolveBestVoice(forLocale: locale)
+            }.value
+
+            guard let self, !Task.isCancelled, self.requestToken == token else { return }
+
+            let comp = self.pendingPreSpeakCompletion
+            self.pendingPreSpeakCompletion = nil
+            self.pendingSpeechTask = nil
+
+            if resolution.isMissingLanguagePack {
+                let name = languageLabel ?? locale
+                self.voiceWarningMessage = "当前设备未检测到「\(name)」系统语音包，如无发声请前往「系统设置 → 辅助功能 → 朗读内容 → 声音」下载。"
+            } else {
+                self.voiceWarningMessage = nil
+            }
+
+            self.configureAudioSession()
+
+            let utterance = AVSpeechUtterance(string: trimmed)
+            utterance.voice = resolution.voice
+            utterance.rate = requestedRate
+            utterance.pitchMultiplier = 1.0
+
+            let key = ObjectIdentifier(utterance)
+            self.pendingUtterances[key] = (utterance, comp)
+            self.currentUtteranceID = key
+            self.synthesizer.speak(utterance)
+        }
     }
 
     func stop() {
-        interruptPendingUtterances()
+        interruptPendingSpeech()
         activeText = nil
         isSpeaking = false
     }
 
-    /// Stops the synthesizer and fires every outstanding completion exactly once.
-    private func interruptPendingUtterances() {
+    /// Cancels any pending voice lookup, stops the synthesizer, and fires every outstanding
+    /// completion handler exactly once.
+    private func interruptPendingSpeech() {
+        requestToken &+= 1
+        pendingSpeechTask?.cancel()
+        pendingSpeechTask = nil
+
+        let preSpeakCompletion = pendingPreSpeakCompletion
+        pendingPreSpeakCompletion = nil
+
         if synthesizer.isSpeaking || synthesizer.isPaused {
             synthesizer.stopSpeaking(at: .immediate)
         }
         currentUtteranceID = nil
-        let completions = pendingUtterances.values.compactMap(\.completion)
+
+        let utteranceCompletions = pendingUtterances.values.compactMap(\.completion)
         pendingUtterances.removeAll()
-        completions.forEach { $0() }
+
+        preSpeakCompletion?()
+        utteranceCompletions.forEach { $0() }
     }
 
     /// Resolves a delegate callback for a specific utterance. Late callbacks for utterances that were
@@ -152,29 +185,29 @@ final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
         entry?.completion?()
     }
 
-    static func resolveBestVoice(
+    nonisolated static func resolveBestVoice(
         forLocale locale: String,
         installedVoices: [AVSpeechSynthesisVoice] = AVSpeechSynthesisVoice.speechVoices()
     ) -> (voice: AVSpeechSynthesisVoice?, isMissingLanguagePack: Bool) {
-        let normalizedLocale = locale.lowercased()
-        let langPrefix = String(normalizedLocale.split(separator: "-").first ?? Substring(normalizedLocale))
-
         // Simulator or restricted environments may report an empty voice catalog; fall back directly without false warning.
         guard !installedVoices.isEmpty else {
             return (AVSpeechSynthesisVoice(language: locale) ?? AVSpeechSynthesisVoice(language: "en-US"), false)
         }
 
-        if let exact = installedVoices.first(where: { $0.language.lowercased() == normalizedLocale }) {
-            return (exact, false)
-        }
-
-        if let sameLanguageFamily = installedVoices.first(where: {
-            $0.language.lowercased().hasPrefix(langPrefix + "-") || $0.language.lowercased() == langPrefix
-        }) {
-            return (sameLanguageFamily, false)
+        if let index = bestVoiceIndex(forLocale: locale, availableLocales: installedVoices.map(\.language)) {
+            return (installedVoices[index], false)
         }
 
         return (AVSpeechSynthesisVoice(language: locale), true)
+    }
+
+    nonisolated static func bestVoiceIndex(forLocale locale: String, availableLocales: [String]) -> Int? {
+        let normalizedLocale = locale.lowercased()
+        let language = String(normalizedLocale.split(separator: "-").first ?? Substring(normalizedLocale))
+        return availableLocales.firstIndex { $0.lowercased() == normalizedLocale }
+            ?? availableLocales.firstIndex {
+                $0.lowercased().hasPrefix(language + "-") || $0.lowercased() == language
+            }
     }
 
     private func configureAudioSession() {

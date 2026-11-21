@@ -273,6 +273,78 @@ struct VoicePackNoticeBanner: View {
     }
 }
 
+struct PersonalNoteSheet: View {
+    @Environment(\.dismiss) private var dismiss
+
+    let word: WordItem
+    @State private var noteText: String
+    let onSave: (String) -> Void
+
+    init(word: WordItem, initialNote: String, onSave: @escaping (String) -> Void) {
+        self.word = word
+        self._noteText = State(initialValue: initialNote)
+        self.onSave = onSave
+    }
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack(spacing: 8) {
+                            Text(word.term)
+                                .font(.headline)
+                            if !word.pronunciation.isEmpty {
+                                Text(word.pronunciation)
+                                    .font(.caption)
+                                    .foregroundStyle(AppTheme.accent)
+                            }
+                        }
+                        Text(word.translation)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 2)
+                }
+
+                Section {
+                    TextEditor(text: $noteText)
+                        .frame(minHeight: 120)
+                } header: {
+                    Text("我的助记笔记")
+                } footer: {
+                    Text("可记录个人词根拆解、易混词对比或专属例句；支持词库搜索与 JSON 备份导出。")
+                }
+
+                if !noteText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Section {
+                        Button(role: .destructive) {
+                            noteText = ""
+                        } label: {
+                            Label("清空笔记内容", systemImage: "trash")
+                        }
+                    }
+                }
+            }
+            .navigationTitle("助记笔记")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("取消") { dismiss() }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("保存") {
+                        onSave(noteText.trimmingCharacters(in: .whitespacesAndNewlines))
+                        dismiss()
+                    }
+                    .font(.body.weight(.semibold))
+                }
+            }
+        }
+        .presentationDetents([.medium, .large])
+    }
+}
+
 struct EmptyStateView: View {
     var body: some View {
         VStack(spacing: 12) {
