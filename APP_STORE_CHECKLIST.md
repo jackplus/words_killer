@@ -2,6 +2,8 @@
 
 本文档整理了当前工程已完成的合规配置，以及在 **App Store Connect** 网页后台可直接复制使用的元数据文案与打包步骤。
 
+**最新状态（2026-11-23）**：当前本地最新改动已作为 `1.0 (3)` 上传 TestFlight，37 项测试通过；Apple 二进制「已验证」、构建「准备提交」，现有 internal 群组（2 名测试员）自动关联，测试说明已保存。详见第十一节。
+
 ---
 
 ## 一、工程配置（仍需发行签名、真机与商店后台验证）
@@ -139,7 +141,7 @@ xcodebuild archive -project "Words killer.xcodeproj" -scheme "Words killer" \
 
 本次签名归档和发行导出均已成功。持久化归档：`artifacts/release-1.0/testflight/WordsKiller-1.0.xcarchive`（原始归档 `/tmp/WordsKiller-1.0-Y382F52F3K.xcarchive`）。历史失败日志保留在 `artifacts/release-1.0/testflight/archive-attempt.log`。
 
-### 当前可交付产物
+### 11 月 18 日历史产物
 
 - **发行 IPA**：`artifacts/release-1.0/testflight/export/Words killer.ipa`。
 - **版本**：`1.0 (1)`，最低系统 `iOS 17.0`。
@@ -213,3 +215,49 @@ xcodebuild -exportArchive \
 - [上传工具链要求](https://developer.apple.com/news/upcoming-requirements/)：当前要求 Xcode 26+ 与 iOS 26+ SDK；本机 Xcode 27.2 / iOS 27.2 SDK 满足该最低工具链要求。
 - [审核指南 5.1.1](https://developer.apple.com/app-store/review/guidelines/#privacy)：商店与 App 内均需可访问的隐私政策。
 - [年龄分级问卷](https://developer.apple.com/help/app-store-connect/manage-app-information/set-an-app-age-rating/)：按功能和内容作答，由系统计算分级。
+
+
+## 九、最新 GitHub 版本验证与上传尝试（2026-11-21）
+
+- GitHub 与本地基线一致：`c59dca1284c4814292ac40e6fa9947265215066b`。新增个人助记笔记、评分撤回、动态复习间隔、自建词编辑，合入 PR #1 的性能、语音回调、测验选项及 SRS 修复。
+- 为区分 11 月 18 日的旧产物，本轮将工程构建号从 `1` 更新为 `2`，版本仍为 `1.0`，发布团队仍为 `Y382F52F3K`；未修改业务逻辑。
+- 本机 Xcode 27.2 / iPhone 18 Pro iOS 27.2 模拟器：35/35 测试通过，0 失败、0 跳过、无记录到的运行时警告。Swift 编译无警告；工具提示未使用 AppIntents，跳过对应元数据提取。
+- Release 签名归档和发行导出成功。IPA 解包后签名、团队、明确 App ID、非调试 Store profile、版本 `1.0 (2)`、隐私清单及隐私正文验证通过；在运行过旧版的 iPhone 模拟器安装启动，自动朗读开启时首屏正常。
+- 本地产物与证据：`artifacts/testflight-2026-11-21/`，包含 `WordsKiller-1.0-2.xcarchive`、`export/Words killer.ipa`、`Tests.xcresult`、`test-summary.json`、`verification.json`、`launch-iphone.png`、`what-to-test.txt` 及构建/导出/上传日志。
+- 本地 IPA SHA-256：`fcc006b8756ed4ac47c26d0744151d2bba6486bb98b57813503e759c1596aa58`。
+- 已通过本机 Xcode 执行真实上传尝试；Apple 返回 `App record with bundle identifier "com.tedji.Words-killer" not found on App Store Connect`，上传未成功。该错误确认当前上传团队下缺少匹配商店记录；尚无 TestFlight 构建处理结果。
+- 用户正在 Codex 内置浏览器登录并确认/创建记录。记录需为 JI CHUNKAI 团队、iOS、简体中文、Bundle ID `com.tedji.Words-killer`、SKU 建议 `words-killer-ios`。取得记录后可直接重试现有签名归档，无需重建。
+- GitHub 最新 CI 任务最终为 cancelled，本地完整测试结果与远端结果分别保留，不将其标为远端通过。运行链接：https://github.com/jackplus/words_killer/actions/runs/44879932305 。
+
+- 用户确认内置浏览器登录后，使用同一签名归档再次上传，仍报相同匹配记录不存在错误（`upload-retry.log`）。当前浏览器打开了一个 App 的 TestFlight 页面，但其 Bundle ID / 团队归属尚未核对；需读取该记录的 App 信息，区分记录缺失、Bundle ID 不一致和账号访问问题。
+
+
+## 十、商店记录已创建，重新上传中（2026-11-21）
+
+- 已直接连接 Codex 当前内置浏览器并读取真实已登录页面，确认当前 App Store Connect 团队为 JI CHUNKAI；此前使用的 TinyFish 是独立会话，不能代表内置浏览器状态。
+- 已确认旧页面 Apple ID `6824498979` 属于“语音笔记与纪要”，不是 Words Killer。团队原 Apps 列表中没有 Words Killer，导致上传接口返回匹配记录缺失。
+- 用户在最终提交时明确确认建档字段，随后已成功创建 `Words Killer - 多语种极简背单词`。新 Apple ID：`6837619955`；主要语言：简体中文；SKU：`words-killer-ios`；Bundle ID：`com.tedji.Words-killer`；平台：iOS。均已在新记录 App 信息页核验。
+- Apple 提示用户访问权限设置保存失败，记录当前为所有团队用户可访问，与确认的完全访问范围一致，未额外添加用户。
+- App 信息链接：https://appstoreconnect.apple.com/apps/6837619955/distribution/info 。
+- TestFlight 链接：https://appstoreconnect.apple.com/teams/87c2efdb-0337-4b83-b4bd-95ef36cb5a8d/apps/6837619955/testflight 。
+- 已对同一验证通过的 `1.0 (2)` 签名归档重试上传，2026-11-21 16:05:32（Asia/Taipei）Xcode 返回 `Upload succeeded`、`EXPORT SUCCEEDED`，Apple 已开始处理安装包。日志为本地 `artifacts/testflight-2026-11-21/upload-after-create.log`。TestFlight 已完成处理，列表状态为「准备提交」；构建元数据页二进制状态为「已验证」。
+
+- 已读取 Apple 构建元数据：版本 `1.0`、构建号 `2`、Bundle ID `com.tedji.Words-killer`、最低 iOS `17.0`、架构 `arm64`、符号包含、非豁免加密为「否」。服务端签名权限 `application-identifier = Y382F52F3K.com.tedji.Words-killer`、`com.apple.developer.team-identifier = Y382F52F3K`、`get-task-allow = false`，与本地发行配置一致。
+- 构建 ID：`e33b28ad-fdc4-484b-ac2c-6d227a127a95`。构建详情：https://appstoreconnect.apple.com/teams/87c2efdb-0337-4b83-b4bd-95ef36cb5a8d/apps/6837619955/testflight/ios/e33b28ad-fdc4-484b-ac2c-6d227a127a95 。
+- 已保存简体中文「测试内容」，包含本次笔记、撤回、复习间隔、自建词编辑及语音/导入回归重点。尚未添加测试群组或测试员，也未提交 Beta 外部审核或正式商店审核。后续需确定测试人员后分配构建。
+
+
+## 十一、最新本地改动与构建 1.0 (3)（2026-11-23）
+
+- **代码来源**：GitHub 与本地 HEAD 仍为 `c59dca1284c4814292ac40e6fa9947265215066b`。本轮打包时包含此基线之上的本地改动和新增文件；本次 Git 提交包含这些改动及更新后的发布文档，归档、IPA 和日志保留本地。
+- **新增功能**：智能综合/专攻到期/专攻收藏训练模式；听学队列点击跳词并保留播放状态；卡片堆叠、滑动评分动效、触感、撤回 Toast、完成庆祝、测验反馈；全局界面与主题重设计；默认/深色/着色三套图标。
+- **版本确认**：用户明确确认上传 `1.0 (3)` 并将工程构建号由 2 更新为 3。Bundle ID `com.tedji.Words-killer`、团队 `Y382F52F3K`、最低系统 iOS 17.0 保持一致。未改动导出/上传 plist 配置或既有词条 ID。
+- **本机验证**：37/37 测试通过，0 失败、0 跳过；Swift 编译 0 警告，仅有未使用 AppIntents 的工具提示。新增测试覆盖到期/收藏筛选和听学跳转边界。签名 Release 归档和本地发行导出通过；IPA 解包验签、明确 Store profile、非调试签名、版本、隐私清单及隐私正文校验通过。
+- **界面与资源**：iPhone 浅/深色、iPad 浅色首屏检查通过；三套图标均为 1024×1024 且无 Alpha。真机触感、锁屏音频及完整辅助功能仍需 TestFlight 实测，不将截图检查等同于完整交互验收。
+- **发布证据**：新目录 `artifacts/testflight-2026-11-23/` 保存源码二进制补丁、新增文件副本、逐文件哈希、`Tests.xcresult`、`test-summary.json`、`WordsKiller-1.0-3.xcarchive`、`export/Words killer.ipa`、`verification.json`、三张首屏截图、`what-to-test.txt` 与构建/导出/上传日志。历史发布目录没有删除或覆盖。
+- **IPA SHA-256**：`92e5b822ba64778c5f11a296529da6e0d6ef2388986cbb8594f699bfc717e516`。
+- **上传结果**：2026-11-23 13:23:36（Asia/Taipei），Xcode 返回 `Upload succeeded` 和 `EXPORT SUCCEEDED`。内置浏览器已看到版本 1.0 构建 3「正在处理」。Apple 后续已处理完成，二进制「已验证」、构建「准备提交」。
+
+- **服务端最终核对**：构建 ID `e8b9af31-fe0b-4bf7-8271-7e72bab2b1cb`，版本 `1.0`、构建 `3`、Bundle ID `com.tedji.Words-killer`、Team `Y382F52F3K`、最低 iOS `17.0`、架构 `arm64`、包含符号、非豁免加密为「否」，与发行归档一致。
+- **测试分配**：现有 `internal` 内部群组自动关联本构建，页面显示 2 名测试员；没有手动修改群组或测试员。已保存本轮简体中文测试内容。未提交外部 Beta 或正式商店审核。
+- **构建详情**：https://appstoreconnect.apple.com/teams/87c2efdb-0337-4b83-b4bd-95ef36cb5a8d/apps/6837619955/testflight/ios/e8b9af31-fe0b-4bf7-8271-7e72bab2b1cb 。

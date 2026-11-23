@@ -7,34 +7,62 @@ import SwiftUI
 
 struct AudioPlayerView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     @Bindable var controller: AudioLearningController
     let playlistTitle: String
 
+    @State private var isQueueExpanded = false
+    @State private var controlFeedbackTrigger = 0
+
+    private var themeColor: Color {
+        accentTheme.adaptiveColor(for: colorScheme)
+    }
+
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    playerStatusHeader
+            ZStack {
+                AppAmbientBackground()
 
-                    if let warning = controller.speechService.voiceWarningMessage {
-                        VoicePackNoticeBanner(message: warning) {
-                            controller.speechService.dismissVoiceWarning()
+                ScrollView {
+                    VStack(spacing: 18) {
+                        playerStatusHeader
+
+                        if let warning = controller.speechService.voiceWarningMessage {
+                            VoicePackNoticeBanner(message: warning) {
+                                controller.speechService.dismissVoiceWarning()
+                            }
+                        }
+
+                        if let word = controller.currentWord {
+                            currentWordDisplay(word: word)
+                                .id("\(controller.currentIndex)-\(word.id)")
+                                .transition(
+                                    reduceMotion
+                                        ? .opacity
+                                        : .asymmetric(
+                                            insertion: .move(edge: .trailing).combined(with: .opacity),
+                                            removal: .opacity
+                                        )
+                                )
+                        } else {
+                            EmptyStateView()
+                        }
+
+                        controlsSection
+
+                        settingsSection
+
+                        if !controller.words.isEmpty {
+                            queueSection
                         }
                     }
-
-                    if let word = controller.currentWord {
-                        currentWordDisplay(word: word)
-                    } else {
-                        EmptyStateView()
-                    }
-
-                    controlsSection
-
-                    settingsSection
+                    .padding(20)
+                    .readableColumn()
                 }
-                .padding(20)
             }
-            .background(AppTheme.background.ignoresSafeArea())
             .navigationTitle("随身听学")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -43,24 +71,34 @@ struct AudioPlayerView: View {
                         controller.stopPlayback()
                         dismiss()
                     }
-                    .font(.body.weight(.medium))
+                    .font(.body.weight(.semibold))
                 }
             }
+            .sensoryFeedback(.impact(weight: .light), trigger: controlFeedbackTrigger)
         }
     }
 
     private var playerStatusHeader: some View {
-        HStack {
+        HStack(spacing: 12) {
+            SpeakingWaveView(
+                isAnimating: controller.isPlaying && controller.currentPhase != .waitingInterval,
+                color: themeColor,
+                barCount: 5,
+                height: 20
+            )
+            .frame(width: 28)
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(playlistTitle)
-                    .font(.headline)
+                    .font(.subheadline.weight(.bold))
                     .foregroundStyle(.primary)
+                    .lineLimit(1)
 
                 HStack(spacing: 6) {
                     Image(systemName: controller.currentPhase.icon)
-                        .foregroundStyle(AppTheme.accent)
+                        .foregroundStyle(themeColor)
                     Text("\(controller.currentPhase.rawValue) · 第 \(controller.currentRepeat)/\(controller.repeatCount) 遍")
-                        .font(.caption)
+                        .font(.caption.monospacedDigit())
                         .foregroundStyle(.secondary)
                 }
             }
@@ -68,117 +106,164 @@ struct AudioPlayerView: View {
             Spacer()
 
             Text(controller.progressText)
-                .font(.title3.monospacedDigit().weight(.semibold))
-                .foregroundStyle(AppTheme.accent)
+                .font(.subheadline.monospacedDigit().weight(.bold))
+                .foregroundStyle(themeColor)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
-                .background(AppTheme.accent.opacity(0.12), in: Capsule())
+                .background(themeColor.opacity(0.13), in: Capsule())
+                .contentTransition(.numericText())
         }
-        .padding(16)
-        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .padding(14)
+        .surfacePanel(radius: AppMetrics.panelRadius)
     }
 
     private func currentWordDisplay(word: WordItem) -> some View {
         VStack(spacing: 16) {
             HStack {
-                Text(word.difficulty.shortTitle)
+                Text("\(word.language.badgeCode) · \(word.difficulty.shortTitle)")
                     .font(.caption2.weight(.bold))
-                    .padding(.horizontal, 8)
+                    .padding(.horizontal, 9)
                     .padding(.vertical, 4)
-                    .background(AppTheme.accent.opacity(0.14), in: Capsule())
-                    .foregroundStyle(AppTheme.accent)
+                    .background(themeColor.opacity(0.14), in: Capsule())
+                    .foregroundStyle(themeColor)
 
                 Spacer()
 
-                Image(systemName: word.language.systemImage)
-                    .font(.caption)
+                Text(word.language.nativeTag)
+                    .font(.caption.weight(.medium))
                     .foregroundStyle(.secondary)
             }
 
             Text(word.term)
-                .font(.system(size: 42, weight: .bold, design: .rounded))
+                .font(.system(size: 40, weight: .bold, design: .rounded))
+                .minimumScaleFactor(0.65)
+                .lineLimit(2)
                 .multilineTextAlignment(.center)
-                .foregroundStyle(controller.currentPhase == .speakingTerm ? AppTheme.accent : .primary)
+                .foregroundStyle(controller.currentPhase == .speakingTerm ? themeColor : .primary)
                 .animation(.easeInOut(duration: 0.2), value: controller.currentPhase)
 
             if !word.pronunciation.isEmpty {
                 Text(word.pronunciation)
                     .font(.title3.weight(.medium))
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(themeColor)
             }
 
-            Divider()
+            // Phase stepper pills
+            phasePillsRow
 
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .top, spacing: 8) {
                     Image(systemName: "character.book.closed")
-                        .foregroundStyle(controller.currentPhase == .speakingTranslation ? AppTheme.accent : .secondary)
+                        .foregroundStyle(controller.currentPhase == .speakingTranslation ? themeColor : .secondary)
                     Text(word.translation)
                         .font(.body.weight(controller.currentPhase == .speakingTranslation ? .semibold : .regular))
-                        .foregroundStyle(controller.currentPhase == .speakingTranslation ? AppTheme.accent : .primary)
+                        .foregroundStyle(controller.currentPhase == .speakingTranslation ? themeColor : .primary)
                 }
 
                 if !word.example.isEmpty {
                     HStack(alignment: .top, spacing: 8) {
                         Image(systemName: "quote.bubble")
-                            .foregroundStyle(controller.currentPhase == .speakingExample ? AppTheme.accent : .secondary)
+                            .foregroundStyle(controller.currentPhase == .speakingExample ? themeColor : .secondary)
                         Text(word.example)
                             .font(.subheadline)
-                            .foregroundStyle(controller.currentPhase == .speakingExample ? AppTheme.accent : .secondary)
+                            .foregroundStyle(controller.currentPhase == .speakingExample ? themeColor : .secondary)
                     }
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(14)
-            .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .background(Color(.tertiarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .padding(20)
-        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .stroke(AppTheme.accent.opacity(controller.isPlaying ? 0.35 : 0.1), lineWidth: 1.5)
+        .surfacePanel(
+            radius: AppMetrics.cardRadius,
+            borderColor: themeColor.opacity(controller.isPlaying ? 0.36 : 0.12)
         )
+        .shadow(color: themeColor.opacity(controller.isPlaying ? 0.14 : 0.04), radius: 16, y: 6)
+    }
+
+    private var phasePillsRow: some View {
+        let phases: [(PlaybackPhase, String)] = [
+            (.speakingTerm, "单词"),
+            (.speakingTranslation, "释义"),
+            (.speakingExample, "例句"),
+            (.waitingInterval, "停顿")
+        ]
+
+        return HStack(spacing: 6) {
+            ForEach(phases, id: \.1) { phase, label in
+                let isActive = controller.currentPhase == phase
+                Text(label)
+                    .font(.caption2.weight(isActive ? .bold : .medium))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(isActive ? themeColor : Color(.tertiarySystemFill), in: Capsule())
+                    .foregroundStyle(isActive ? .white : .secondary)
+                    .animation(MotionTokens.snappy, value: controller.currentPhase)
+            }
+        }
     }
 
     private var controlsSection: some View {
-        HStack(spacing: 36) {
+        HStack(spacing: 34) {
             Button {
-                controller.previousWord()
+                controlFeedbackTrigger += 1
+                withAnimation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion)) {
+                    controller.previousWord()
+                }
             } label: {
                 Image(systemName: "backward.fill")
                     .font(.title2)
                     .foregroundStyle(.primary)
-                    .frame(width: 52, height: 52)
-                    .background(Color(.secondarySystemBackground), in: Circle())
+                    .frame(width: 54, height: 54)
+                    .surfacePanel(radius: 27)
             }
+            .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+            .accessibilityLabel("上一个词")
 
             Button {
+                controlFeedbackTrigger += 1
                 controller.togglePlayPause()
             } label: {
                 Image(systemName: controller.isPlaying ? "pause.fill" : "play.fill")
                     .font(.title)
                     .foregroundStyle(.white)
-                    .frame(width: 72, height: 72)
-                    .background(AppTheme.accent, in: Circle())
-                    .shadow(color: AppTheme.accent.opacity(0.35), radius: 8, y: 4)
+                    .frame(width: 74, height: 74)
+                    .background(
+                        LinearGradient(
+                            colors: accentTheme.gradientColors,
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        in: Circle()
+                    )
+                    .shadow(color: themeColor.opacity(0.36), radius: 12, y: 5)
+                    .contentTransition(.symbolEffect(.replace))
             }
+            .buttonStyle(PressScaleButtonStyle(scale: 0.92))
+            .accessibilityLabel(controller.isPlaying ? "暂停播放" : "开始播放")
 
             Button {
-                controller.nextWord()
+                controlFeedbackTrigger += 1
+                withAnimation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion)) {
+                    controller.nextWord()
+                }
             } label: {
                 Image(systemName: "forward.fill")
                     .font(.title2)
                     .foregroundStyle(.primary)
-                    .frame(width: 52, height: 52)
-                    .background(Color(.secondarySystemBackground), in: Circle())
+                    .frame(width: 54, height: 54)
+                    .surfacePanel(radius: 27)
             }
+            .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+            .accessibilityLabel("下一个词")
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
+        .padding(.vertical, 6)
     }
 
     private var settingsSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
+        VStack(alignment: .leading, spacing: 12) {
             SectionTitle(icon: "gearshape.fill", title: "播放与朗读偏好")
 
             VStack(spacing: 12) {
@@ -213,11 +298,11 @@ struct AudioPlayerView: View {
 
                 Toggle("朗读中文释义", isOn: $controller.readTranslation)
                     .font(.subheadline)
-                    .tint(AppTheme.accent)
+                    .tint(themeColor)
 
                 Toggle("朗读双语例句", isOn: $controller.readExample)
                     .font(.subheadline)
-                    .tint(AppTheme.accent)
+                    .tint(themeColor)
 
                 Divider()
 
@@ -235,7 +320,67 @@ struct AudioPlayerView: View {
                 }
             }
             .padding(16)
-            .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .surfacePanel(radius: AppMetrics.panelRadius)
         }
+    }
+
+    private var queueSection: some View {
+        DisclosureGroup(isExpanded: $isQueueExpanded) {
+            VStack(spacing: 6) {
+                ForEach(Array(controller.words.enumerated()), id: \.offset) { index, word in
+                    let isCurrent = index == controller.currentIndex
+                    Button {
+                        controlFeedbackTrigger += 1
+                        withAnimation(MotionTokens.snappy) {
+                            controller.jumpToWord(at: index)
+                        }
+                    } label: {
+                        HStack(spacing: 10) {
+                            Text("\(index + 1)")
+                                .font(.caption2.monospacedDigit().weight(.bold))
+                                .foregroundStyle(isCurrent ? themeColor : .secondary)
+                                .frame(width: 22)
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(word.term)
+                                    .font(.subheadline.weight(isCurrent ? .bold : .medium))
+                                    .foregroundStyle(isCurrent ? themeColor : .primary)
+                                Text(word.translation)
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                                    .lineLimit(1)
+                            }
+
+                            Spacer()
+
+                            if isCurrent {
+                                SpeakingWaveView(isAnimating: controller.isPlaying, color: themeColor, barCount: 3, height: 12)
+                            }
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 8)
+                        .background(
+                            isCurrent ? themeColor.opacity(0.11) : Color.clear,
+                            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.top, 8)
+        } label: {
+            HStack {
+                Label("播放队列 (\(controller.words.count) 词)", systemImage: "list.bullet")
+                    .font(.subheadline.weight(.bold))
+                    .foregroundStyle(.primary)
+                Spacer()
+                Text("点击词条跳转")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .tint(themeColor)
+        .padding(14)
+        .surfacePanel(radius: AppMetrics.panelRadius)
     }
 }

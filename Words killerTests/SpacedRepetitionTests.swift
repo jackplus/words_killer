@@ -309,4 +309,93 @@ struct SpacedRepetitionTests {
         #expect(existing.customNote == "细微差别")
         #expect(try context.fetch(FetchDescriptor<ReviewEvent>()).isEmpty)
     }
+
+    @Test("多维训练模式：专攻到期仅返回已到期旧词，专攻收藏仅返回星标收藏词")
+    func buildChallengeSupportsDueOnlyAndFavoritesOnlyModes() {
+        let words = [
+            WordItem(id: "w-due-early", language: .english, difficulty: .beginner, term: "early", pronunciation: "", translation: "较早到期", memoryCue: "", example: ""),
+            WordItem(id: "w-due-late", language: .english, difficulty: .intermediate, term: "late", pronunciation: "", translation: "较晚到期", memoryCue: "", example: ""),
+            WordItem(id: "w-fav-unseen", language: .english, difficulty: .advanced, term: "favUnseen", pronunciation: "", translation: "收藏未学", memoryCue: "", example: ""),
+            WordItem(id: "w-fav-scheduled", language: .english, difficulty: .beginner, term: "favSched", pronunciation: "", translation: "收藏已排期", memoryCue: "", example: ""),
+            WordItem(id: "w-plain-unseen", language: .english, difficulty: .beginner, term: "plain", pronunciation: "", translation: "普通新词", memoryCue: "", example: "")
+        ]
+
+        let progressMap: [String: WordProgress] = [
+            "w-due-early": WordProgress(
+                wordID: "w-due-early",
+                language: .english,
+                masteryLevel: 2,
+                reviewCount: 1,
+                nextReviewDate: baseDate.addingTimeInterval(-3600)
+            ),
+            "w-due-late": WordProgress(
+                wordID: "w-due-late",
+                language: .english,
+                masteryLevel: 1,
+                reviewCount: 1,
+                nextReviewDate: baseDate.addingTimeInterval(-300),
+                isFavorite: true
+            ),
+            "w-fav-unseen": WordProgress(
+                wordID: "w-fav-unseen",
+                language: .english,
+                reviewCount: 0,
+                nextReviewDate: baseDate,
+                isFavorite: true
+            ),
+            "w-fav-scheduled": WordProgress(
+                wordID: "w-fav-scheduled",
+                language: .english,
+                masteryLevel: 3,
+                reviewCount: 2,
+                nextReviewDate: baseDate.addingTimeInterval(2 * 86400),
+                isFavorite: true
+            )
+        ]
+
+        let dueOnly = SpacedRepetitionEngine.buildChallenge(
+            from: words,
+            difficulty: .beginner,
+            progressMap: progressMap,
+            excluding: [],
+            limit: 10,
+            mode: .dueOnly,
+            now: baseDate
+        )
+        #expect(dueOnly.map(\.id) == ["w-due-early", "w-due-late"])
+
+        let favoritesOnly = SpacedRepetitionEngine.buildChallenge(
+            from: words,
+            difficulty: .beginner,
+            progressMap: progressMap,
+            excluding: [],
+            limit: 10,
+            mode: .favoritesOnly,
+            now: baseDate
+        )
+        #expect(favoritesOnly.map(\.id) == ["w-due-late", "w-fav-unseen", "w-fav-scheduled"])
+
+        // When no due or favorite words exist, filtered modes return empty instead of falling back to unseen words.
+        let emptyDue = SpacedRepetitionEngine.buildChallenge(
+            from: words,
+            difficulty: .beginner,
+            progressMap: [:],
+            excluding: [],
+            limit: 10,
+            mode: .dueOnly,
+            now: baseDate
+        )
+        #expect(emptyDue.isEmpty)
+
+        let emptyFav = SpacedRepetitionEngine.buildChallenge(
+            from: words,
+            difficulty: .beginner,
+            progressMap: [:],
+            excluding: [],
+            limit: 10,
+            mode: .favoritesOnly,
+            now: baseDate
+        )
+        #expect(emptyFav.isEmpty)
+    }
 }

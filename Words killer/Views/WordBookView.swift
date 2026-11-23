@@ -19,6 +19,10 @@ private enum WordFilterScope: String, CaseIterable, Identifiable {
 
 struct WordBookView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     @Query private var allProgress: [WordProgress]
     @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
 
@@ -35,6 +39,11 @@ struct WordBookView: View {
     @State private var isShowingWordPacksSheet = false
     @State private var isShowingAudioPlayerSheet = false
     @State private var isShowingQuizSheet = false
+    @State private var filterFeedbackTrigger = 0
+
+    private var themeColor: Color {
+        accentTheme.adaptiveColor(for: colorScheme)
+    }
 
     private var progressMap: [String: WordProgress] {
         Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
@@ -47,59 +56,70 @@ struct WordBookView: View {
         )
     }
 
-    /// Takes the word list and progress map as parameters: they are computed properties, and reading
-    /// `progressMap` inside the per-word closure used to rebuild the whole dictionary for every word.
-    private func filterWords(_ allWords: [WordItem], progressMap: [String: WordProgress]) -> [WordItem] {
+    /// Computes filtered list and per-scope badge counts in one pass over `allWords`.
+    private func computeFiltered(
+        allWords: [WordItem],
+        progressMap: [String: WordProgress]
+    ) -> (filtered: [WordItem], counts: [WordFilterScope: Int]) {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        var counts: [WordFilterScope: Int] = [:]
+        var result: [WordItem] = []
 
-        return allWords.filter { word in
+        for word in allWords {
             if let selectedLanguage, word.language != selectedLanguage {
-                return false
+                continue
             }
 
             let progress = progressMap[word.id]
-            switch filterScope {
-            case .all:
-                break
-            case .mistakes:
-                guard let progress, progress.reviewCount > 0, progress.masteryLevel <= 1 || progress.lastRating != .known else {
-                    return false
-                }
-            case .mastered:
-                guard let progress, progress.isMastered else {
-                    return false
-                }
-            case .favorites:
-                guard let progress, progress.isFavorite else {
-                    return false
-                }
-            case .unseen:
-                if let progress, progress.reviewCount > 0 {
-                    return false
-                }
-            case .custom:
-                if !word.id.hasPrefix("custom-") {
-                    return false
-                }
-            }
 
             if !query.isEmpty {
                 let matchesTerm = word.term.lowercased().contains(query)
                 let matchesTranslation = word.translation.lowercased().contains(query)
                 let matchesExample = word.example.lowercased().contains(query)
                 let matchesNote = progress?.customNote.lowercased().contains(query) ?? false
-                return matchesTerm || matchesTranslation || matchesExample || matchesNote
+                if !(matchesTerm || matchesTranslation || matchesExample || matchesNote) {
+                    continue
+                }
             }
 
-            return true
+            counts[.all, default: 0] += 1
+
+            let isMistake = progress.map { $0.reviewCount > 0 && ($0.masteryLevel <= 1 || $0.lastRating != .known) } ?? false
+            let isMastered = progress?.isMastered ?? false
+            let isFavorite = progress?.isFavorite ?? false
+            let isUnseen = (progress?.reviewCount ?? 0) == 0
+            let isCustom = word.id.hasPrefix("custom-")
+
+            if isMistake { counts[.mistakes, default: 0] += 1 }
+            if isMastered { counts[.mastered, default: 0] += 1 }
+            if isFavorite { counts[.favorites, default: 0] += 1 }
+            if isUnseen { counts[.unseen, default: 0] += 1 }
+            if isCustom { counts[.custom, default: 0] += 1 }
+
+            let matchesScope: Bool = switch filterScope {
+            case .all: true
+            case .mistakes: isMistake
+            case .mastered: isMastered
+            case .favorites: isFavorite
+            case .unseen: isUnseen
+            case .custom: isCustom
+            }
+
+            if matchesScope {
+                result.append(word)
+            }
         }
+
+        return (result, counts)
     }
 
     var body: some View {
-        // Derived once per render; the list, rows, toolbar and sheets below all read these locals.
+        // Derived once per render; the list, rows, toolbar, badges and sheets below all read these locals.
         let progressMap = self.progressMap
         let allWords = self.allWords
-        let filteredWords = filterWords(allWords, progressMap: progressMap)
+        let computed = computeFiltered(allWords: allWords, progressMap: progressMap)
+        let filteredWords = computed.filtered
+        let scopeCounts = computed.counts
 
         NavigationStack {
             List {
@@ -109,9 +129,14 @@ struct WordBookView: View {
                             ForEach(WordFilterScope.allCases) { scope in
                                 FilterScopeChip(
                                     title: scope.rawValue,
-                                    isSelected: filterScope == scope
+                                    count: scopeCounts[scope] ?? 0,
+                                    isSelected: filterScope == scope,
+                                    themeColor: themeColor
                                 ) {
-                                    filterScope = scope
+                                    filterFeedbackTrigger += 1
+                                    withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                                        filterScope = scope
+                                    }
                                 }
                             }
                         }
@@ -124,17 +149,25 @@ struct WordBookView: View {
                         HStack(spacing: 8) {
                             LanguageChip(
                                 title: "全部语种",
-                                isSelected: selectedLanguage == nil
+                                isSelected: selectedLanguage == nil,
+                                themeColor: themeColor
                             ) {
-                                selectedLanguage = nil
+                                filterFeedbackTrigger += 1
+                                withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                                    selectedLanguage = nil
+                                }
                             }
 
                             ForEach(TargetLanguage.allCases) { language in
                                 LanguageChip(
                                     title: language.title,
-                                    isSelected: selectedLanguage == language
+                                    isSelected: selectedLanguage == language,
+                                    themeColor: themeColor
                                 ) {
-                                    selectedLanguage = language
+                                    filterFeedbackTrigger += 1
+                                    withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                                        selectedLanguage = language
+                                    }
                                 }
                             }
                         }
@@ -158,6 +191,7 @@ struct WordBookView: View {
                                 word: word,
                                 progress: progressMap[word.id],
                                 speechService: speechService,
+                                themeColor: themeColor,
                                 onToggleFavorite: {
                                     toggleFavorite(word)
                                 }
@@ -215,13 +249,14 @@ struct WordBookView: View {
                     } header: {
                         HStack(spacing: 14) {
                             Text("共 \(filteredWords.count) 词")
+                                .contentTransition(.numericText())
                             Spacer()
                             Button {
                                 isShowingQuizSheet = true
                             } label: {
                                 Label("测验", systemImage: "list.bullet.clipboard")
-                                    .font(.caption.weight(.medium))
-                                    .foregroundStyle(AppTheme.accent)
+                                    .font(.caption.weight(.semibold))
+                                    .foregroundStyle(themeColor)
                             }
 
                             Button {
@@ -229,8 +264,8 @@ struct WordBookView: View {
                                 isShowingAudioPlayerSheet = true
                             } label: {
                                 Label("听学", systemImage: "headphones")
-                                    .font(.caption.weight(.medium))
-                                    .foregroundStyle(AppTheme.accent)
+                                    .font(.caption.weight(.semibold))
+                                    .foregroundStyle(themeColor)
                             }
                         }
                     }
@@ -239,6 +274,7 @@ struct WordBookView: View {
             .listStyle(.insetGrouped)
             .navigationTitle("词库与错题本")
             .searchable(text: $searchText, prompt: "搜索单词、释义、例句或笔记")
+            .sensoryFeedback(.selection, trigger: filterFeedbackTrigger)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 12) {
@@ -362,28 +398,42 @@ struct WordBookView: View {
 
 private struct FilterScopeChip: View {
     let title: String
+    let count: Int
     let isSelected: Bool
+    let themeColor: Color
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            Text(title)
-                .font(.caption.weight(.semibold))
-                .padding(.horizontal, 12)
-                .padding(.vertical, 6)
-                .background(
-                    isSelected ? AppTheme.accent : Color(.secondarySystemGroupedBackground),
-                    in: Capsule()
-                )
-                .foregroundStyle(isSelected ? .white : .primary)
+            HStack(spacing: 4) {
+                Text(title)
+                if count > 0 {
+                    Text("\(count)")
+                        .font(.caption2.monospacedDigit().weight(.bold))
+                        .opacity(isSelected ? 0.9 : 0.65)
+                }
+            }
+            .font(.caption.weight(.semibold))
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(
+                isSelected ? themeColor : Color(.secondarySystemGroupedBackground),
+                in: Capsule()
+            )
+            .overlay(
+                Capsule()
+                    .stroke(isSelected ? Color.clear : Color.primary.opacity(0.06), lineWidth: 1)
+            )
+            .foregroundStyle(isSelected ? .white : .primary)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PressScaleButtonStyle())
     }
 }
 
 private struct LanguageChip: View {
     let title: String
     let isSelected: Bool
+    let themeColor: Color
     let action: () -> Void
 
     var body: some View {
@@ -393,12 +443,12 @@ private struct LanguageChip: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
                 .background(
-                    isSelected ? AppTheme.accent.opacity(0.8) : Color(.tertiarySystemGroupedBackground),
+                    isSelected ? themeColor.opacity(0.85) : Color(.tertiarySystemGroupedBackground),
                     in: Capsule()
                 )
                 .foregroundStyle(isSelected ? .white : .primary)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PressScaleButtonStyle())
     }
 }
 
@@ -406,7 +456,14 @@ private struct WordBookRow: View {
     let word: WordItem
     let progress: WordProgress?
     let speechService: SpeechService
+    let themeColor: Color
     var onToggleFavorite: (() -> Void)? = nil
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private var isSpeakingThisTerm: Bool {
+        speechService.isSpeaking && speechService.activeText == word.term
+    }
 
     private var statusColor: Color {
         guard let progress, progress.reviewCount > 0 else { return .secondary }
@@ -419,7 +476,11 @@ private struct WordBookRow: View {
     }
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 11) {
+            RoundedRectangle(cornerRadius: 2, style: .continuous)
+                .fill(statusColor.opacity(0.85))
+                .frame(width: 3.5, height: 42)
+
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 8) {
                     Text(word.term)
@@ -437,7 +498,7 @@ private struct WordBookRow: View {
                     if !word.pronunciation.isEmpty {
                         Text(word.pronunciation)
                             .font(.caption)
-                            .foregroundStyle(AppTheme.accent)
+                            .foregroundStyle(themeColor)
                     }
                 }
 
@@ -453,7 +514,7 @@ private struct WordBookRow: View {
                         .foregroundStyle(statusColor)
                     if let note = progress?.customNote.trimmingCharacters(in: .whitespacesAndNewlines), !note.isEmpty {
                         Image(systemName: "note.text")
-                            .foregroundStyle(AppTheme.accent)
+                            .foregroundStyle(themeColor)
                             .accessibilityLabel("含助记笔记")
                     }
                 }
@@ -464,27 +525,30 @@ private struct WordBookRow: View {
             Spacer()
 
             if let onToggleFavorite {
+                let isFav = progress?.isFavorite == true
                 Button {
                     onToggleFavorite()
                 } label: {
-                    Image(systemName: (progress?.isFavorite == true) ? "star.fill" : "star")
+                    Image(systemName: isFav ? "star.fill" : "star")
                         .font(.subheadline)
-                        .foregroundStyle((progress?.isFavorite == true) ? Color.orange : Color.secondary.opacity(0.4))
+                        .foregroundStyle(isFav ? Color.orange : Color.secondary.opacity(0.4))
                         .frame(width: 32, height: 32)
+                        .symbolEffect(.bounce, value: isFav)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PressScaleButtonStyle(scale: 0.88))
             }
 
             Button {
                 speechService.speak(word.term, language: word.language)
             } label: {
-                Image(systemName: "speaker.wave.2.fill")
+                Image(systemName: isSpeakingThisTerm ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
                     .font(.body)
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(themeColor)
                     .frame(width: 36, height: 36)
-                    .background(AppTheme.accent.opacity(0.12), in: Circle())
+                    .background(themeColor.opacity(0.12), in: Circle())
+                    .symbolEffect(.variableColor.iterative, isActive: isSpeakingThisTerm && !reduceMotion)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PressScaleButtonStyle(scale: 0.90))
             .accessibilityLabel("朗读 \(word.term)")
         }
         .padding(.vertical, 4)
@@ -505,51 +569,55 @@ private struct WordDetailSheet: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    WordCardView(
-                        word: word,
-                        progress: progress,
-                        isTranslationVisible: true,
-                        isRequeuedInSession: false,
-                        speechService: speechService,
-                        onToggleFavorite: onToggleFavorite,
-                        onEditNote: onSaveNote != nil ? { isEditingNote = true } : nil
-                    )
+            ZStack {
+                AppAmbientBackground()
 
-                    HStack(spacing: 10) {
-                        MemoryActionButton(
-                            title: "不认识",
-                            subtitle: SpacedRepetitionEngine.previewIntervalLabel(for: .unknown, current: progress, isAlreadyRequeued: true),
-                            systemImage: "xmark.circle",
-                            tint: .red
-                        ) {
-                            onRate(.unknown)
-                            dismiss()
-                        }
-                        MemoryActionButton(
-                            title: "模糊",
-                            subtitle: SpacedRepetitionEngine.previewIntervalLabel(for: .fuzzy, current: progress),
-                            systemImage: "questionmark.circle",
-                            tint: .orange
-                        ) {
-                            onRate(.fuzzy)
-                            dismiss()
-                        }
-                        MemoryActionButton(
-                            title: "认识",
-                            subtitle: SpacedRepetitionEngine.previewIntervalLabel(for: .known, current: progress),
-                            systemImage: "checkmark.circle",
-                            tint: .green
-                        ) {
-                            onRate(.known)
-                            dismiss()
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 18) {
+                        WordCardView(
+                            word: word,
+                            progress: progress,
+                            isTranslationVisible: true,
+                            isRequeuedInSession: false,
+                            speechService: speechService,
+                            onToggleFavorite: onToggleFavorite,
+                            onEditNote: onSaveNote != nil ? { isEditingNote = true } : nil
+                        )
+
+                        HStack(spacing: 10) {
+                            MemoryActionButton(
+                                title: "不认识",
+                                subtitle: SpacedRepetitionEngine.previewIntervalLabel(for: .unknown, current: progress, isAlreadyRequeued: true),
+                                systemImage: "xmark.circle.fill",
+                                tint: .red
+                            ) {
+                                onRate(.unknown)
+                                dismiss()
+                            }
+                            MemoryActionButton(
+                                title: "模糊",
+                                subtitle: SpacedRepetitionEngine.previewIntervalLabel(for: .fuzzy, current: progress),
+                                systemImage: "questionmark.circle.fill",
+                                tint: .orange
+                            ) {
+                                onRate(.fuzzy)
+                                dismiss()
+                            }
+                            MemoryActionButton(
+                                title: "认识",
+                                subtitle: SpacedRepetitionEngine.previewIntervalLabel(for: .known, current: progress),
+                                systemImage: "checkmark.circle.fill",
+                                tint: .green
+                            ) {
+                                onRate(.known)
+                                dismiss()
+                            }
                         }
                     }
+                    .padding(20)
+                    .readableColumn()
                 }
-                .padding(20)
             }
-            .background(AppTheme.background.ignoresSafeArea())
             .navigationTitle("词条详情")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

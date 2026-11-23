@@ -40,8 +40,11 @@ struct MainTabView: View {
                     Label("设置", systemImage: "gearshape.fill")
                 }
         }
+        .environment(\.accentTheme, selectedTheme)
         .tint(selectedTheme.color)
         .preferredColorScheme(selectedAppearance.colorScheme)
+        .animation(.easeInOut(duration: 0.25), value: selectedTheme)
+        .animation(.easeInOut(duration: 0.25), value: selectedAppearance)
     }
 }
 

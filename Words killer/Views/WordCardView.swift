@@ -11,11 +11,22 @@ struct WordCardView: View {
     let isTranslationVisible: Bool
     let isRequeuedInSession: Bool
     let speechService: SpeechService
+    var onTapToggleTranslation: (() -> Void)? = nil
+    var onSwipeDragChanged: ((CGFloat) -> Void)? = nil
     var onSwipeRate: ((RecallRating) -> Void)? = nil
     var onToggleFavorite: (() -> Void)? = nil
     var onEditNote: (() -> Void)? = nil
+    var isPreviewOnly: Bool = false
+
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var dragOffset: CGSize = .zero
+    @State private var crossedThresholdSide: Int = 0 // -1 left, 0 none, +1 right
+    @State private var thresholdFeedbackTrigger = 0
+
+    private let swipeThreshold: CGFloat = 95
 
     private var isSpeakingTerm: Bool {
         speechService.isSpeaking && speechService.activeText == word.term
@@ -25,225 +36,370 @@ struct WordCardView: View {
         speechService.isSpeaking && speechService.activeText == word.example
     }
 
-    private var swipeHint: (label: String, color: Color)? {
-        if dragOffset.width > 28 {
-            return ("认识", .green)
-        } else if dragOffset.width < -28 {
-            return ("不认识", .red)
+    private var dragProgress: CGFloat {
+        min(1.0, abs(dragOffset.width) / swipeThreshold)
+    }
+
+    private var swipeHint: (label: String, icon: String, color: Color, isKnown: Bool)? {
+        if dragOffset.width > 24 {
+            return ("认识", "checkmark.circle.fill", .green, true)
+        } else if dragOffset.width < -24 {
+            return ("不认识", "xmark.circle.fill", .red, false)
         }
         return nil
     }
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            cardContent
+        let themeColor = accentTheme.adaptiveColor(for: colorScheme)
+        let cardSurface = colorScheme == .dark
+            ? Color(.secondarySystemGroupedBackground)
+            : Color(.systemBackground)
 
-            if let swipeHint {
-                Text(swipeHint.label)
-                    .font(.caption.weight(.bold))
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(swipeHint.color.opacity(0.18), in: Capsule())
-                    .foregroundStyle(swipeHint.color)
-                    .padding(14)
+        ZStack(alignment: .top) {
+            cardContent(themeColor: themeColor)
+                .background(
+                    ZStack {
+                        RoundedRectangle(cornerRadius: AppMetrics.cardRadius, style: .continuous)
+                            .fill(cardSurface)
+                        if let hint = swipeHint {
+                            RoundedRectangle(cornerRadius: AppMetrics.cardRadius, style: .continuous)
+                                .fill(hint.color.opacity(0.08 * Double(dragProgress)))
+                        }
+                    }
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: AppMetrics.cardRadius, style: .continuous)
+                        .stroke(
+                            swipeHint?.color.opacity(0.25 + 0.45 * Double(dragProgress))
+                                ?? themeColor.opacity(colorScheme == .dark ? 0.28 : 0.16),
+                            lineWidth: swipeHint == nil ? 1.1 : 1.8
+                        )
+                )
+                .shadow(
+                    color: (swipeHint?.color ?? Color.black).opacity(colorScheme == .dark ? 0.22 : (swipeHint == nil ? 0.08 : 0.16)),
+                    radius: swipeHint == nil ? 16 : 20,
+                    y: swipeHint == nil ? 6 : 10
+                )
+
+            // Corner stamp positioned safely below the top control bar so it never blocks star/speak buttons
+            if let hint = swipeHint {
+                HStack {
+                    if hint.isKnown {
+                        swipeStamp(label: hint.label, icon: hint.icon, color: hint.color)
+                            .rotationEffect(.degrees(-8))
+                        Spacer()
+                    } else {
+                        Spacer()
+                        swipeStamp(label: hint.label, icon: hint.icon, color: hint.color)
+                            .rotationEffect(.degrees(8))
+                    }
+                }
+                .padding(.horizontal, 18)
+                .padding(.top, 54)
+                .allowsHitTesting(false)
+                .transition(.opacity)
+            }
+        }
+        .offset(x: dragOffset.width, y: dragOffset.height * 0.12)
+        .rotationEffect(.degrees(reduceMotion ? 0 : Double(dragOffset.width / 22)))
+        .contentShape(RoundedRectangle(cornerRadius: AppMetrics.cardRadius, style: .continuous))
+        .onTapGesture {
+            guard !isPreviewOnly, let onTapToggleTranslation else { return }
+            withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                onTapToggleTranslation()
+            }
+        }
+        .gesture(
+            DragGesture(minimumDistance: 16)
+                .onChanged { value in
+                    guard !isPreviewOnly,
+                          onSwipeRate != nil,
+                          abs(value.translation.width) > abs(value.translation.height) * 0.85 else { return }
+                    dragOffset = value.translation
+                    onSwipeDragChanged?(value.translation.width)
+
+                    let newSide = value.translation.width > swipeThreshold ? 1 : (value.translation.width < -swipeThreshold ? -1 : 0)
+                    if newSide != 0 && newSide != crossedThresholdSide {
+                        thresholdFeedbackTrigger += 1
+                    }
+                    crossedThresholdSide = newSide
+                }
+                .onEnded { value in
+                    guard !isPreviewOnly, let onSwipeRate else { return }
+                    let horizontal = value.translation.width
+                    crossedThresholdSide = 0
+
+                    if horizontal > swipeThreshold {
+                        onSwipeRate(.known)
+                    } else if horizontal < -swipeThreshold {
+                        onSwipeRate(.unknown)
+                    } else {
+                        withAnimation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion)) {
+                            dragOffset = .zero
+                        }
+                        onSwipeDragChanged?(0)
+                    }
+                }
+        )
+        .sensoryFeedback(.selection, trigger: thresholdFeedbackTrigger)
+        .onChange(of: word.id) {
+            dragOffset = .zero
+            crossedThresholdSide = 0
+        }
+    }
+
+    private func swipeStamp(label: String, icon: String, color: Color) -> some View {
+        Label(label, systemImage: icon)
+            .font(.subheadline.weight(.bold))
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(color.opacity(0.16), in: Capsule())
+            .overlay(Capsule().stroke(color.opacity(0.65), lineWidth: 1.5))
+            .foregroundStyle(color)
+            .scaleEffect(0.86 + 0.16 * dragProgress)
+            .opacity(Double(min(1.0, 0.35 + dragProgress * 0.65)))
+    }
+
+    private func cardContent(themeColor: Color) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            // Top badge & controls row
+            HStack(alignment: .center, spacing: 8) {
+                Text(progress?.statusLabel ?? "新词")
+                    .font(.caption2.weight(.bold))
+                    .padding(.horizontal, 9)
+                    .padding(.vertical, 4)
+                    .background(statusColor(themeColor: themeColor).opacity(0.14), in: Capsule())
+                    .foregroundStyle(statusColor(themeColor: themeColor))
+
+                if isRequeuedInSession {
+                    Text("本轮重测")
+                        .font(.caption2.weight(.bold))
+                        .padding(.horizontal, 9)
+                        .padding(.vertical, 4)
+                        .background(Color.red.opacity(0.14), in: Capsule())
+                        .foregroundStyle(.red)
+                }
+
+                Spacer(minLength: 4)
+
+                Text("\(word.language.badgeCode) · \(word.difficulty.shortTitle)")
+                    .font(.caption2.weight(.semibold))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color(.tertiarySystemFill), in: Capsule())
+                    .foregroundStyle(.secondary)
+
+                if onToggleFavorite != nil {
+                    let isFav = progress?.isFavorite == true
+                    Button {
+                        onToggleFavorite?()
+                    } label: {
+                        Image(systemName: isFav ? "star.fill" : "star")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(isFav ? Color.orange : Color.secondary)
+                            .frame(width: 34, height: 34)
+                            .background(
+                                isFav ? Color.orange.opacity(0.15) : Color(.tertiarySystemFill),
+                                in: Circle()
+                            )
+                            .symbolEffect(.bounce, value: isFav)
+                    }
+                    .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                    .accessibilityLabel("收藏单词")
+                }
+
+                Button {
+                    speechService.speak(word.term, language: word.language)
+                } label: {
+                    Image(systemName: isSpeakingTerm ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(themeColor)
+                        .frame(width: 36, height: 36)
+                        .background(themeColor.opacity(isSpeakingTerm ? 0.22 : 0.13), in: Circle())
+                        .overlay(
+                            Circle()
+                                .stroke(themeColor.opacity(isSpeakingTerm ? 0.45 : 0), lineWidth: 1.5)
+                        )
+                        .symbolEffect(.variableColor.iterative, isActive: isSpeakingTerm && !reduceMotion)
+                }
+                .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                .accessibilityLabel("朗读单词")
+            }
+
+            // Main word & pronunciation hero
+            VStack(alignment: .leading, spacing: 6) {
+                Text(word.term)
+                    .font(.system(size: 38, weight: .bold, design: .rounded))
+                    .minimumScaleFactor(0.65)
+                    .lineLimit(2)
+                    .foregroundStyle(.primary)
+
+                HStack(spacing: 8) {
+                    if !word.pronunciation.isEmpty {
+                        Text(word.pronunciation)
+                            .font(.headline.weight(.medium))
+                            .foregroundStyle(themeColor)
+                    }
+
+                    if isSpeakingTerm {
+                        SpeakingWaveView(isAnimating: true, color: themeColor, barCount: 4, height: 12)
+                    }
+                }
+            }
+            .padding(.top, 2)
+
+            Divider()
+                .opacity(0.6)
+
+            if isTranslationVisible {
+                revealedSection(themeColor: themeColor)
+                    .transition(
+                        reduceMotion
+                            ? .opacity
+                            : .asymmetric(
+                                insertion: .opacity.combined(with: .move(edge: .bottom)),
+                                removal: .opacity
+                            )
+                    )
+            } else {
+                hiddenPromptSection(themeColor: themeColor)
                     .transition(.opacity)
             }
         }
-        .offset(x: dragOffset.width)
-        .rotationEffect(.degrees(Double(dragOffset.width / 24)))
-        .gesture(
-            DragGesture(minimumDistance: 20)
-                .onChanged { value in
-                    guard onSwipeRate != nil,
-                          abs(value.translation.width) > abs(value.translation.height) else { return }
-                    dragOffset = value.translation
-                }
-                .onEnded { value in
-                    guard let onSwipeRate else { return }
-                    let horizontal = value.translation.width
-                    if horizontal > 95 {
-                        withAnimation(.spring(response: 0.25, dampingFraction: 0.8)) {
-                            dragOffset = .zero
-                        }
-                        onSwipeRate(.known)
-                    } else if horizontal < -95 {
-                        withAnimation(.spring(response: 0.25, dampingFraction: 0.8)) {
-                            dragOffset = .zero
-                        }
-                        onSwipeRate(.unknown)
-                    } else {
-                        withAnimation(.spring(response: 0.25, dampingFraction: 0.8)) {
-                            dragOffset = .zero
-                        }
-                    }
-                }
-        )
-        .onChange(of: word.id) {
-            dragOffset = .zero
-        }
+        .padding(18)
     }
 
-    private var cardContent: some View {
-        VStack(alignment: .leading, spacing: 18) {
-            HStack(alignment: .top, spacing: 12) {
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack(spacing: 8) {
-                        Text(progress?.statusLabel ?? "新词")
-                            .font(.caption2.weight(.semibold))
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(statusColor.opacity(0.14), in: Capsule())
-                            .foregroundStyle(statusColor)
+    private func hiddenPromptSection(themeColor: Color) -> some View {
+        VStack(spacing: 12) {
+            Spacer(minLength: 10)
 
-                        if isRequeuedInSession {
-                            Text("本轮重测")
-                                .font(.caption2.weight(.semibold))
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(Color.red.opacity(0.14), in: Capsule())
-                                .foregroundStyle(.red)
-                        }
-                    }
-
-                    Text(word.term)
-                        .font(.system(size: 40, weight: .bold, design: .rounded))
-                        .minimumScaleFactor(0.7)
-                        .lineLimit(2)
-
-                    Text(word.pronunciation)
-                        .font(.headline)
-                        .foregroundStyle(AppTheme.accent)
-                }
-
-                Spacer()
-
-                VStack(spacing: 10) {
-                    if onToggleFavorite != nil {
-                        Button {
-                            onToggleFavorite?()
-                        } label: {
-                            Image(systemName: (progress?.isFavorite == true) ? "star.fill" : "star")
-                                .font(.body)
-                                .foregroundStyle((progress?.isFavorite == true) ? Color.orange : Color.secondary)
-                                .frame(width: 36, height: 36)
-                                .background((progress?.isFavorite == true) ? Color.orange.opacity(0.15) : Color(.tertiarySystemFill), in: Circle())
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("收藏单词")
-                    }
-
-                    Button {
-                        speechService.speak(word.term, language: word.language)
-                    } label: {
-                        Image(systemName: isSpeakingTerm ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
-                            .font(.title3)
-                            .foregroundStyle(AppTheme.accent)
-                            .frame(width: 44, height: 44)
-                            .background(AppTheme.accent.opacity(0.14), in: Circle())
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel("朗读单词")
-
-                    Image(systemName: word.language.systemImage)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+            HStack(spacing: 8) {
+                Image(systemName: "hand.tap")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(themeColor)
+                Text("先回忆词义，轻触卡片即可揭晓")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.secondary)
             }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 9)
+            .background(themeColor.opacity(0.08), in: Capsule())
 
-            Divider()
-
-            VStack(alignment: .leading, spacing: 12) {
-                InfoRow(
-                    icon: "character.book.closed",
-                    title: "中文释义",
-                    content: isTranslationVisible ? word.translation : "先回忆含义，再点下方按钮查看"
-                )
-                InfoRow(
-                    icon: "sparkles",
-                    title: "记忆点",
-                    content: isTranslationVisible ? word.memoryCue : "用词形、场景或近义词做快速联想"
-                )
-                HStack(alignment: .top, spacing: 8) {
-                    InfoRow(
-                        icon: "quote.bubble",
-                        title: "例句",
-                        content: isTranslationVisible
-                            ? (word.example.isEmpty ? "暂无例句" : word.example)
-                            : "释义显示后自动出现例句"
-                    )
-
-                    if isTranslationVisible && !word.example.isEmpty {
-                        Spacer(minLength: 4)
-                        Button {
-                            speechService.speak(word.example, language: word.language)
-                        } label: {
-                            Image(systemName: isSpeakingExample ? "speaker.wave.3.fill" : "speaker.wave.2")
-                                .font(.body)
-                                .foregroundStyle(AppTheme.accent)
-                                .padding(8)
-                                .background(AppTheme.accent.opacity(0.12), in: Circle())
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("朗读例句")
-                    }
-                }
-
-                if isTranslationVisible {
-                    let trimmedNote = progress?.customNote.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-                    if !trimmedNote.isEmpty {
-                        HStack(alignment: .top, spacing: 8) {
-                            InfoRow(
-                                icon: "note.text",
-                                title: "我的助记笔记",
-                                content: trimmedNote
-                            )
-
-                            if let onEditNote {
-                                Spacer(minLength: 4)
-                                Button(action: onEditNote) {
-                                    Image(systemName: "pencil")
-                                        .font(.caption.weight(.semibold))
-                                        .foregroundStyle(AppTheme.accent)
-                                        .padding(7)
-                                        .background(AppTheme.accent.opacity(0.12), in: Circle())
-                                }
-                                .buttonStyle(.plain)
-                                .accessibilityLabel("编辑助记笔记")
-                            }
-                        }
-                        .padding(10)
-                        .background(AppTheme.accent.opacity(0.06), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                    } else if let onEditNote {
-                        Button(action: onEditNote) {
-                            Label("添加我的助记笔记", systemImage: "square.and.pencil")
-                                .font(.caption.weight(.medium))
-                                .foregroundStyle(AppTheme.accent)
-                        }
-                        .buttonStyle(.plain)
-                        .padding(.top, 2)
-                    }
-                }
-            }
-
-            if onSwipeRate != nil {
-                Text("支持左右滑动：左滑不认识 · 右滑认识")
+            if !word.memoryCue.isEmpty {
+                Text("含记忆联想与例句 · 支持左右滑卡判词")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
-                    .frame(maxWidth: .infinity, alignment: .center)
             }
+
+            Spacer(minLength: 10)
         }
-        .padding(20)
-        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .stroke((swipeHint?.color ?? AppTheme.accent).opacity(swipeHint == nil ? 0.18 : 0.45), lineWidth: 1)
-        )
+        .frame(maxWidth: .infinity, minHeight: 112)
     }
 
-    private var statusColor: Color {
-        guard let progress else { return AppTheme.accent }
+    private func revealedSection(themeColor: Color) -> some View {
+        VStack(alignment: .leading, spacing: 11) {
+            Text(word.translation)
+                .font(.title3.weight(.bold))
+                .foregroundStyle(.primary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            if !word.memoryCue.isEmpty {
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "sparkles")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(themeColor)
+                        .padding(.top, 2)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("记忆点")
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(themeColor)
+                        Text(word.memoryCue)
+                            .font(.subheadline)
+                            .foregroundStyle(.primary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(11)
+                .background(accentTheme.softTint(for: colorScheme), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            }
+
+            if !word.example.isEmpty {
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "quote.bubble")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                        .padding(.top, 3)
+
+                    Text(word.example)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Spacer(minLength: 6)
+
+                    Button {
+                        speechService.speak(word.example, language: word.language)
+                    } label: {
+                        Image(systemName: isSpeakingExample ? "speaker.wave.3.fill" : "speaker.wave.2")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(themeColor)
+                            .frame(width: 32, height: 32)
+                            .background(themeColor.opacity(0.12), in: Circle())
+                            .symbolEffect(.variableColor.iterative, isActive: isSpeakingExample && !reduceMotion)
+                    }
+                    .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                    .accessibilityLabel("朗读例句")
+                }
+            }
+
+            let trimmedNote = progress?.customNote.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            if !trimmedNote.isEmpty {
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "note.text")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(themeColor)
+                        .padding(.top, 2)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("我的助记笔记")
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                        Text(trimmedNote)
+                            .font(.caption)
+                            .foregroundStyle(.primary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    Spacer(minLength: 4)
+                    if let onEditNote {
+                        Button(action: onEditNote) {
+                            Image(systemName: "pencil")
+                                .font(.caption2.weight(.semibold))
+                                .foregroundStyle(themeColor)
+                                .frame(width: 28, height: 28)
+                                .background(themeColor.opacity(0.12), in: Circle())
+                        }
+                        .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                        .accessibilityLabel("编辑助记笔记")
+                    }
+                }
+                .padding(10)
+                .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            } else if let onEditNote {
+                Button(action: onEditNote) {
+                    Label("添加助记笔记", systemImage: "square.and.pencil")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(themeColor)
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 2)
+            }
+        }
+    }
+
+    private func statusColor(themeColor: Color) -> Color {
+        guard let progress else { return themeColor }
         switch progress.masteryLevel {
-        case 0: return progress.reviewCount == 0 ? AppTheme.accent : .red
+        case 0: return progress.reviewCount == 0 ? themeColor : .red
         case 1: return .orange
         case 2: return .teal
         default: return .green

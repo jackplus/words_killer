@@ -4,6 +4,9 @@
 
 ## 核心特性
 
+- **多维训练与听学跳词**：背词支持「智能综合 / 专攻到期 / 专攻收藏」三种模式；随身听学可展开队列并跳转到指定单词。
+- **界面与交互更新**：统一主题设计、深浅色适配、卡片堆叠与滑动动效、触感和撤回提示，支持减少动态效果，并提供默认 / 深色 / 着色图标。
+
 - **五语种模块化词书体系（6 册 650 词 + 容错加载）**：内置核心词库 [`word_bank.json`](Words%20killer/Resources/word_bank.json)（500 词）及五套考级扩展词包（**英语 CET/雅思托福、日语 JLPT、韩语 TOPIK、法语 DELF、西语 DELE**，各 30 词），通过 [`WordBankParser`](Words%20killer/Services/WordBankParser.swift) 实现逐条容错解码、确定性 ID 生成与自动去重，支持在 [`WordPacksView`](Words%20killer/Views/WordPacksView.swift) 按需独立开关词书。
 - **公开免费词库无缝接入（多格式开源词典适配）**：内置通用开源词典解析引擎，支持一键从本地文件（`.json` / `.csv` / `.tsv` / `.txt`）或剪贴板导入主流宽松协议开源词库（兼容 **skywind3000/ECDICT CSV**、**KyleBing/english-vocabulary JSON**、**Qwerty-Learner JSON**、**Bluskyo/JLPT_Vocabulary JSON** 等，自动映射 `cet4/cet6/ielts/N5–N1` 等难度标签）。
 - **SwiftData 持久化与 SM-2 间隔重复**：通过 [`WordProgress`](Words%20killer/Models/WordProgress.swift)、[`ReviewEvent`](Words%20killer/Models/ReviewEvent.swift) 与 [`SpacedRepetitionEngine`](Words%20killer/Services/SpacedRepetitionEngine.swift) 统一记录卡片、测验与词库的三档记忆反馈：

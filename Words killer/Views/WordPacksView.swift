@@ -10,6 +10,8 @@ import UniformTypeIdentifiers
 struct WordPacksView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
     @Query private var customWords: [CustomWordRecord]
 
     @AppStorage(WordLibrary.disabledPacksStorageKey) private var disabledPacksRaw = ""
@@ -30,6 +32,10 @@ struct WordPacksView: View {
 
     private var activeBuiltInCount: Int {
         WordLibrary.activeBuiltInWords(disabledPackIDs: disabledPackIDs).count
+    }
+
+    private var themeColor: Color {
+        accentTheme.adaptiveColor(for: colorScheme)
     }
 
     var body: some View {
@@ -79,7 +85,7 @@ struct WordPacksView: View {
                 StatPill(
                     title: "已启用内置词",
                     value: "\(activeBuiltInCount)",
-                    color: AppTheme.accent
+                    color: themeColor
                 )
                 StatPill(
                     title: "自建与外部导入",
@@ -108,8 +114,8 @@ struct WordPacksView: View {
                                 .font(.caption2.monospacedDigit().weight(.bold))
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 2)
-                                .background(AppTheme.accent.opacity(0.14), in: Capsule())
-                                .foregroundStyle(AppTheme.accent)
+                                .background(themeColor.opacity(0.14), in: Capsule())
+                                .foregroundStyle(themeColor)
                         }
 
                         Text(pack.subtitle)
@@ -135,7 +141,7 @@ struct WordPacksView: View {
                             }
                         ))
                         .labelsHidden()
-                        .tint(AppTheme.accent)
+                        .tint(themeColor)
                     }
                 }
                 .padding(.vertical, 4)

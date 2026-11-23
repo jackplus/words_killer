@@ -22,6 +22,15 @@ enum AccentTheme: String, CaseIterable, Identifiable {
         }
     }
 
+    var subtitle: String {
+        switch self {
+        case .forest: "沉静专注"
+        case .ocean: "通透理性"
+        case .indigo: "深邃记忆"
+        case .sunset: "温暖活力"
+        }
+    }
+
     var color: Color {
         switch self {
         case .forest: Color(red: 0.09, green: 0.42, blue: 0.38)
@@ -58,7 +67,7 @@ enum AppearanceMode: String, CaseIterable, Identifiable {
 
 enum AppTheme {
     static let background = Color(.systemGroupedBackground)
-    static let panelBackground = Color(.systemBackground)
+    static let panelBackground = Color(.secondarySystemGroupedBackground)
     static var accent: Color {
         let raw = UserDefaults.standard.string(forKey: "accentTheme") ?? AccentTheme.forest.rawValue
         return (AccentTheme(rawValue: raw) ?? .forest).color
@@ -70,6 +79,9 @@ struct DailyGoalBanner: View {
     let dailyGoal: Int
     let streakDays: Int
 
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
+
     private var ratio: Double {
         guard dailyGoal > 0 else { return 0 }
         return min(1.0, Double(studiedToday) / Double(dailyGoal))
@@ -80,25 +92,29 @@ struct DailyGoalBanner: View {
     }
 
     var body: some View {
+        let themeColor = accentTheme.adaptiveColor(for: colorScheme)
+        let ringColor = isCompleted ? Color.green : themeColor
+
         HStack(spacing: 14) {
             ZStack {
                 Circle()
-                    .stroke(AppTheme.accent.opacity(0.16), lineWidth: 6)
-                    .frame(width: 48, height: 48)
+                    .stroke(ringColor.opacity(0.16), lineWidth: 6)
+                    .frame(width: 50, height: 50)
 
                 Circle()
                     .trim(from: 0, to: ratio)
                     .stroke(
-                        isCompleted ? Color.green : AppTheme.accent,
+                        ringColor,
                         style: StrokeStyle(lineWidth: 6, lineCap: .round)
                     )
                     .rotationEffect(.degrees(-90))
-                    .frame(width: 48, height: 48)
-                    .animation(.spring(response: 0.4, dampingFraction: 0.8), value: ratio)
+                    .frame(width: 50, height: 50)
+                    .animation(MotionTokens.gentle, value: ratio)
 
                 Image(systemName: isCompleted ? "checkmark" : "flame.fill")
                     .font(.subheadline.weight(.bold))
-                    .foregroundStyle(isCompleted ? .green : AppTheme.accent)
+                    .foregroundStyle(ringColor)
+                    .contentTransition(.symbolEffect(.replace))
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -108,37 +124,43 @@ struct DailyGoalBanner: View {
                         .foregroundStyle(.primary)
 
                     if streakDays > 0 {
-                        Text("连续 \(streakDays) 天")
+                        Label("连续 \(streakDays) 天", systemImage: "flame.fill")
                             .font(.caption2.weight(.semibold))
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 2)
-                            .background(Color.purple.opacity(0.14), in: Capsule())
-                            .foregroundStyle(.purple)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 3)
+                            .background(Color.orange.opacity(0.15), in: Capsule())
+                            .foregroundStyle(.orange)
                     }
                 }
 
                 Text("今日已学 \(studiedToday) / \(dailyGoal) 词（\(Int(ratio * 100))%）")
-                    .font(.caption)
+                    .font(.caption.monospacedDigit())
                     .foregroundStyle(.secondary)
+                    .contentTransition(.numericText())
             }
 
             Spacer()
         }
         .padding(14)
-        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .surfacePanel(radius: AppMetrics.panelRadius, borderColor: ringColor.opacity(isCompleted ? 0.30 : 0.08))
     }
 }
 
 struct DifficultyScaleView: View {
     let selectedDifficulty: DifficultyLevel
 
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
+        let themeColor = accentTheme.adaptiveColor(for: colorScheme)
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
                 ForEach(DifficultyLevel.allCases) { level in
-                    RoundedRectangle(cornerRadius: 3, style: .continuous)
-                        .fill(level.index <= selectedDifficulty.index ? AppTheme.accent : Color(.tertiarySystemFill))
-                        .frame(height: 8)
+                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                        .fill(level.index <= selectedDifficulty.index ? themeColor : Color(.tertiarySystemFill))
+                        .frame(height: 7)
+                        .animation(MotionTokens.snappy, value: selectedDifficulty)
                 }
             }
 
@@ -156,26 +178,39 @@ struct MemoryActionButton: View {
     let tint: Color
     let action: () -> Void
 
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.isEnabled) private var isEnabled
+
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 4) {
+            VStack(spacing: 3) {
                 Image(systemName: systemImage)
-                    .font(.title3)
+                    .font(.title3.weight(.semibold))
                 Text(title)
-                    .font(.caption.weight(.semibold))
+                    .font(.caption.weight(.bold))
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
                 Text(subtitle)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
+                    .font(.caption2.monospacedDigit())
+                    .foregroundStyle(tint.opacity(0.85))
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
+                    .contentTransition(.numericText())
             }
+            .foregroundStyle(tint)
             .frame(maxWidth: .infinity)
-            .frame(height: 70)
+            .frame(height: 66)
+            .background(
+                tint.opacity(colorScheme == .dark ? 0.17 : 0.10),
+                in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous)
+                    .stroke(tint.opacity(colorScheme == .dark ? 0.34 : 0.24), lineWidth: 1)
+            )
+            .opacity(isEnabled ? 1.0 : 0.45)
         }
-        .buttonStyle(.bordered)
-        .tint(tint)
+        .buttonStyle(PressScaleButtonStyle())
     }
 }
 
@@ -184,13 +219,16 @@ struct StatPill: View {
     let value: String
     let color: Color
 
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
         VStack(spacing: 4) {
             Text(value)
-                .font(.headline.weight(.bold))
+                .font(.headline.monospacedDigit().weight(.bold))
                 .foregroundStyle(color)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
+                .contentTransition(.numericText())
 
             Text(title)
                 .font(.caption2.weight(.medium))
@@ -199,7 +237,14 @@ struct StatPill: View {
         }
         .frame(maxWidth: .infinity)
         .frame(height: 56)
-        .background(color.opacity(0.1), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .background(
+            color.opacity(colorScheme == .dark ? 0.16 : 0.10),
+            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(color.opacity(0.18), lineWidth: 1)
+        )
     }
 }
 
@@ -208,19 +253,25 @@ struct InfoRow: View {
     let title: String
     let content: String
 
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
+        let themeColor = accentTheme.adaptiveColor(for: colorScheme)
         HStack(alignment: .top, spacing: 10) {
             Image(systemName: icon)
-                .font(.body)
-                .foregroundStyle(AppTheme.accent)
-                .frame(width: 24)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(themeColor)
+                .frame(width: 22, height: 22)
+                .background(themeColor.opacity(0.12), in: Circle())
+                .padding(.top, 1)
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(title)
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Text(content)
-                    .font(.body)
+                    .font(.subheadline)
                     .foregroundStyle(.primary)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -232,10 +283,18 @@ struct SectionTitle: View {
     let icon: String
     let title: String
 
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
-        Label(title, systemImage: icon)
-            .font(.headline.weight(.bold))
-            .foregroundStyle(.primary)
+        Label {
+            Text(title)
+        } icon: {
+            Image(systemName: icon)
+                .foregroundStyle(accentTheme.adaptiveColor(for: colorScheme))
+        }
+        .font(.headline.weight(.bold))
+        .foregroundStyle(.primary)
     }
 }
 
@@ -265,9 +324,9 @@ struct VoicePackNoticeBanner: View {
             .accessibilityLabel("关闭语音包提示")
         }
         .padding(12)
-        .background(Color.orange.opacity(0.10), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(Color.orange.opacity(0.10), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .stroke(Color.orange.opacity(0.28), lineWidth: 1)
         )
     }
@@ -275,6 +334,8 @@ struct VoicePackNoticeBanner: View {
 
 struct PersonalNoteSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
 
     let word: WordItem
     @State private var noteText: String
@@ -287,6 +348,7 @@ struct PersonalNoteSheet: View {
     }
 
     var body: some View {
+        let themeColor = accentTheme.adaptiveColor(for: colorScheme)
         NavigationStack {
             Form {
                 Section {
@@ -297,7 +359,7 @@ struct PersonalNoteSheet: View {
                             if !word.pronunciation.isEmpty {
                                 Text(word.pronunciation)
                                     .font(.caption)
-                                    .foregroundStyle(AppTheme.accent)
+                                    .foregroundStyle(themeColor)
                             }
                         }
                         Text(word.translation)
@@ -346,19 +408,51 @@ struct PersonalNoteSheet: View {
 }
 
 struct EmptyStateView: View {
+    var title: String = "当前设置暂无词卡"
+    var subtitle: String = "请选择其他语言、难度或切换训练模式。"
+    var icon: String = "tray"
+    var actionTitle: String? = nil
+    var action: (() -> Void)? = nil
+
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "tray")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-            Text("当前设置暂无词卡")
-                .font(.headline)
-            Text("请选择其他语言或难度。")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+        let themeColor = accentTheme.adaptiveColor(for: colorScheme)
+        VStack(spacing: 14) {
+            ZStack {
+                Circle()
+                    .fill(themeColor.opacity(0.12))
+                    .frame(width: 60, height: 60)
+                Image(systemName: icon)
+                    .font(.title2.weight(.semibold))
+                    .foregroundStyle(themeColor)
+            }
+
+            VStack(spacing: 6) {
+                Text(title)
+                    .font(.headline)
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+
+            if let actionTitle, let action {
+                Button(action: action) {
+                    Text(actionTitle)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 10)
+                        .background(themeColor, in: Capsule())
+                }
+                .buttonStyle(PressScaleButtonStyle())
+                .padding(.top, 2)
+            }
         }
         .frame(maxWidth: .infinity)
-        .padding(32)
-        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .padding(28)
+        .surfacePanel(radius: AppMetrics.cardRadius)
     }
 }

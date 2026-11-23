@@ -39,6 +39,16 @@ struct SettingsView: View {
     @State private var alertTitle = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var themeSwitchTrigger = 0
+
+    private var currentTheme: AccentTheme {
+        AccentTheme(rawValue: accentThemeRawValue) ?? .forest
+    }
+
+    private var appVersionLabel: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+        return "v\(version)"
+    }
 
     private let dailyGoalOptions = [10, 20, 30, 50, 80]
     private let challengeSizeOptions = [5, 10, 15, 20]
@@ -95,6 +105,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                brandIdentitySection
                 studyPlanSection
                 reminderSection
                 appearanceSection
@@ -102,6 +113,7 @@ struct SettingsView: View {
                 aboutSection
             }
             .navigationTitle("学习设置")
+            .sensoryFeedback(.selection, trigger: themeSwitchTrigger)
             .task {
                 await notificationService.refreshAuthorizationStatus()
             }
@@ -152,6 +164,36 @@ struct SettingsView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         return "WordsKiller_Backup_\(formatter.string(from: .now))"
+    }
+
+    private var brandIdentitySection: some View {
+        Section {
+            HStack(spacing: 14) {
+                BrandLogoView(size: 56, theme: currentTheme)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 6) {
+                        Text("Words Killer")
+                            .font(.headline.weight(.bold))
+                        Text(appVersionLabel)
+                            .font(.caption2.monospacedDigit().weight(.semibold))
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color(.tertiarySystemFill), in: Capsule())
+                            .foregroundStyle(.secondary)
+                    }
+
+                    Text("五语种极简离线记忆闪卡")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+
+                    Label("纯本地存储 · 零广告零追踪", systemImage: "checkmark.shield.fill")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(.green)
+                }
+            }
+            .padding(.vertical, 4)
+        }
     }
 
     private var studyPlanSection: some View {
@@ -243,33 +285,56 @@ struct SettingsView: View {
                 Text("主题强调色")
                     .font(.subheadline)
 
-                HStack(spacing: 12) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
                     ForEach(AccentTheme.allCases) { theme in
                         let isSelected = accentThemeRawValue == theme.rawValue
                         Button {
+                            guard !isSelected else { return }
+                            themeSwitchTrigger += 1
                             accentThemeRawValue = theme.rawValue
                         } label: {
-                            HStack(spacing: 6) {
+                            HStack(spacing: 10) {
                                 Circle()
-                                    .fill(theme.color)
-                                    .frame(width: 16, height: 16)
-                                Text(theme.title)
-                                    .font(.caption.weight(isSelected ? .bold : .medium))
-                                    .foregroundStyle(isSelected ? theme.color : .primary)
+                                    .fill(
+                                        LinearGradient(
+                                            colors: theme.gradientColors,
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
+                                    .frame(width: 24, height: 24)
+                                    .overlay {
+                                        if isSelected {
+                                            Image(systemName: "checkmark")
+                                                .font(.caption2.weight(.bold))
+                                                .foregroundStyle(.white)
+                                                .transition(.scale.combined(with: .opacity))
+                                        }
+                                    }
+
+                                VStack(alignment: .leading, spacing: 1) {
+                                    Text(theme.title)
+                                        .font(.caption.weight(.bold))
+                                        .foregroundStyle(isSelected ? theme.color : .primary)
+                                    Text(theme.subtitle)
+                                        .font(.caption2)
+                                        .foregroundStyle(.secondary)
+                                }
+
+                                Spacer(minLength: 0)
                             }
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 7)
-                            .frame(maxWidth: .infinity)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 10)
                             .background(
                                 isSelected ? theme.color.opacity(0.14) : Color(.secondarySystemGroupedBackground),
-                                in: RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                             )
                             .overlay(
-                                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                    .stroke(isSelected ? theme.color : Color.clear, lineWidth: 1.5)
+                                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    .stroke(isSelected ? theme.color : Color.primary.opacity(0.06), lineWidth: isSelected ? 1.5 : 1)
                             )
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressScaleButtonStyle())
                     }
                 }
             }

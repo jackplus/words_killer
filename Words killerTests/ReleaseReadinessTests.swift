@@ -108,4 +108,23 @@ struct ReleaseReadinessTests {
         #expect(SpeechService.bestVoiceIndex(forLocale: "en-GB", availableLocales: ["en-US", "EN-gb"]) == 1)
         #expect(SpeechService.bestVoiceIndex(forLocale: "fr-FR", availableLocales: ["en-US"]) == nil)
     }
+
+    @Test("随身听学跳转：jumpToWord 正确切换索引并拦截越界")
+    func audioControllerJumpToWordValidatesBounds() {
+        let controller = AudioLearningController()
+        controller.words = [
+            WordItem(id: "w1", language: .english, difficulty: .beginner, term: "one", pronunciation: "", translation: "一", memoryCue: "", example: ""),
+            WordItem(id: "w2", language: .english, difficulty: .beginner, term: "two", pronunciation: "", translation: "二", memoryCue: "", example: ""),
+            WordItem(id: "w3", language: .english, difficulty: .beginner, term: "three", pronunciation: "", translation: "三", memoryCue: "", example: "")
+        ]
+        controller.currentIndex = 0
+
+        controller.jumpToWord(at: 2)
+        #expect(controller.currentIndex == 2)
+        #expect(controller.currentWord?.id == "w3")
+
+        controller.jumpToWord(at: 99)
+        controller.jumpToWord(at: -1)
+        #expect(controller.currentIndex == 2)
+    }
 }

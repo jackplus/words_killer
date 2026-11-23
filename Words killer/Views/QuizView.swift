@@ -9,6 +9,9 @@ import SwiftUI
 struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.accentTheme) private var accentTheme
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Query private var allProgress: [WordProgress]
 
     let sourceWords: [WordItem]
@@ -25,6 +28,13 @@ struct QuizView: View {
     @State private var correctCount: Int = 0
     @State private var wrongWords: [WordItem] = []
 
+    // Animation & sensory triggers
+    @State private var optionShakeCount: Int = 0
+    @State private var spellingShakeCount: Int = 0
+    @State private var successTrigger: Int = 0
+    @State private var errorTrigger: Int = 0
+    @State private var celebrateTrigger: Int = 0
+
     // Spelling mode state
     @State private var spellingInput: String = ""
     @State private var isSpellingRevealed: Bool = false
@@ -32,6 +42,10 @@ struct QuizView: View {
     @State private var hadWrongAttempt: Bool = false
     @State private var spellingFeedback: (isCorrect: Bool, message: String)? = nil
     @FocusState private var isInputFocused: Bool
+
+    private var themeColor: Color {
+        accentTheme.adaptiveColor(for: colorScheme)
+    }
 
     private var progressMap: [String: WordProgress] {
         Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
@@ -63,27 +77,53 @@ struct QuizView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    if !isFinished {
-                        modeAndProgressBar
+            ZStack(alignment: .top) {
+                AppAmbientBackground()
 
-                        if quizMode == .multipleChoice {
-                            if let question = currentQuestion {
-                                multipleChoiceSection(question: question)
+                ScrollView {
+                    VStack(spacing: 18) {
+                        if !isFinished {
+                            modeAndProgressBar
+
+                            if quizMode == .multipleChoice {
+                                if let question = currentQuestion {
+                                    multipleChoiceSection(question: question)
+                                        .id(question.id)
+                                        .transition(
+                                            reduceMotion
+                                                ? .opacity
+                                                : .asymmetric(
+                                                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                                                    removal: .opacity
+                                                )
+                                        )
+                                }
+                            } else {
+                                if let word = currentWord {
+                                    spellingSection(word: word)
+                                        .id("\(currentIndex)-\(word.id)")
+                                        .transition(
+                                            reduceMotion
+                                                ? .opacity
+                                                : .asymmetric(
+                                                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                                                    removal: .opacity
+                                                )
+                                        )
+                                }
                             }
                         } else {
-                            if let word = currentWord {
-                                spellingSection(word: word)
-                            }
+                            quizSummaryView
+                                .transition(.scale(scale: 0.96).combined(with: .opacity))
                         }
-                    } else {
-                        quizSummaryView
                     }
+                    .padding(20)
+                    .readableColumn()
                 }
-                .padding(20)
+
+                ConfettiBurstView(trigger: celebrateTrigger)
+                    .allowsHitTesting(false)
             }
-            .background(AppTheme.background.ignoresSafeArea())
             .navigationTitle("测验练习")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -94,6 +134,8 @@ struct QuizView: View {
                     }
                 }
             }
+            .sensoryFeedback(.success, trigger: successTrigger)
+            .sensoryFeedback(.error, trigger: errorTrigger)
             .onAppear {
                 restartQuiz(using: sourceWords)
             }
@@ -116,101 +158,147 @@ struct QuizView: View {
                 Text("题目 \(min(currentIndex + 1, totalCount)) / \(totalCount)")
                     .font(.caption.monospacedDigit().weight(.bold))
                     .foregroundStyle(.secondary)
+                    .contentTransition(.numericText())
 
                 Spacer()
 
-                HStack(spacing: 8) {
-                    Text("✓ \(correctCount)")
+                HStack(spacing: 10) {
+                    Label("\(correctCount)", systemImage: "checkmark.circle.fill")
                         .font(.caption.monospacedDigit().weight(.bold))
                         .foregroundStyle(.green)
+                        .contentTransition(.numericText())
 
-                    Text("✗ \(wrongWords.count)")
+                    Label("\(wrongWords.count)", systemImage: "xmark.circle.fill")
                         .font(.caption.monospacedDigit().weight(.bold))
                         .foregroundStyle(.red)
+                        .contentTransition(.numericText())
                 }
             }
 
-            ProgressView(value: progress)
-                .tint(AppTheme.accent)
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    Capsule().fill(Color(.tertiarySystemFill))
+                    Capsule()
+                        .fill(
+                            LinearGradient(
+                                colors: accentTheme.gradientColors,
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .frame(width: max(0, geo.size.width * progress))
+                        .animation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion), value: progress)
+                }
+            }
+            .frame(height: 6)
         }
         .padding(14)
-        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .surfacePanel(radius: AppMetrics.panelRadius)
     }
 
     // MARK: - Multiple Choice
     private func multipleChoiceSection(question: QuizQuestion) -> some View {
-        VStack(spacing: 16) {
+        let isSpeaking = speechService.isSpeaking && speechService.activeText == question.word.term
+
+        return VStack(spacing: 16) {
             VStack(spacing: 12) {
                 HStack {
                     Text(question.subtype.rawValue)
                         .font(.caption2.weight(.bold))
-                        .padding(.horizontal, 8)
+                        .padding(.horizontal, 9)
                         .padding(.vertical, 4)
-                        .background(AppTheme.accent.opacity(0.14), in: Capsule())
-                        .foregroundStyle(AppTheme.accent)
+                        .background(themeColor.opacity(0.14), in: Capsule())
+                        .foregroundStyle(themeColor)
+
                     Spacer()
+
                     Button {
                         speechService.speak(question.word.term, language: question.word.language)
                     } label: {
-                        Image(systemName: "speaker.wave.2.fill")
-                            .font(.title3)
-                            .foregroundStyle(AppTheme.accent)
+                        Image(systemName: isSpeaking ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(themeColor)
+                            .frame(width: 34, height: 34)
+                            .background(themeColor.opacity(0.12), in: Circle())
+                            .symbolEffect(.variableColor.iterative, isActive: isSpeaking && !reduceMotion)
                     }
+                    .buttonStyle(PressScaleButtonStyle(scale: 0.90))
                 }
 
                 switch question.subtype {
                 case .wordToMeaning:
                     Text(question.word.term)
                         .font(.system(size: 36, weight: .bold, design: .rounded))
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 6)
                     if !question.word.pronunciation.isEmpty {
                         Text(question.word.pronunciation)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(themeColor)
                     }
 
                 case .meaningToWord:
                     Text(question.word.translation)
                         .font(.title2.weight(.bold))
                         .multilineTextAlignment(.center)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 6)
                     Text("请选择正确的拼写：")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
 
                 case .audioToWord:
-                    VStack(spacing: 8) {
-                        Button {
-                            speechService.speak(question.word.term, language: question.word.language)
-                        } label: {
-                            VStack(spacing: 6) {
-                                Image(systemName: "speaker.wave.3.fill")
-                                    .font(.system(size: 32))
-                                    .foregroundStyle(AppTheme.accent)
-                                Text("点击播放读音")
-                                    .font(.caption.weight(.medium))
-                                    .foregroundStyle(.secondary)
+                    Button {
+                        speechService.speak(question.word.term, language: question.word.language)
+                    } label: {
+                        VStack(spacing: 10) {
+                            ZStack {
+                                Circle()
+                                    .fill(themeColor.opacity(isSpeaking ? 0.22 : 0.12))
+                                    .frame(width: 68, height: 68)
+                                Image(systemName: isSpeaking ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
+                                    .font(.system(size: 28, weight: .semibold))
+                                    .foregroundStyle(themeColor)
+                                    .symbolEffect(.variableColor.iterative, isActive: isSpeaking && !reduceMotion)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(AppTheme.accent.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
+
+                            HStack(spacing: 8) {
+                                Text(isSpeaking ? "正在朗读单词…" : "点击播放读音")
+                                    .font(.caption.weight(.semibold))
+                                    .foregroundStyle(themeColor)
+                                if isSpeaking {
+                                    SpeakingWaveView(isAnimating: true, color: themeColor, barCount: 4, height: 12)
+                                }
+                            }
                         }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(themeColor.opacity(0.06), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     }
+                    .buttonStyle(PressScaleButtonStyle())
                 }
             }
             .padding(18)
-            .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .surfacePanel(radius: AppMetrics.cardRadius, borderColor: themeColor.opacity(0.14))
 
             VStack(spacing: 10) {
                 ForEach(0..<question.options.count, id: \.self) { index in
                     let optionText = question.options[index]
                     let isSelected = selectedOptionIndex == index
                     let isCorrectOption = index == question.correctOptionIndex
+                    let shouldShake = hasAnswered && isSelected && !isCorrectOption
 
                     Button {
                         handleOptionTap(index: index, question: question)
                     } label: {
-                        HStack {
+                        HStack(spacing: 12) {
+                            Text(optionLetter(index))
+                                .font(.caption.weight(.bold))
+                                .frame(width: 24, height: 24)
+                                .background(
+                                    optionLetterBg(isSelected: isSelected, isCorrect: isCorrectOption),
+                                    in: Circle()
+                                )
+                                .foregroundStyle(optionLetterFg(isSelected: isSelected, isCorrect: isCorrectOption))
+
                             Text(optionText)
                                 .font(.body.weight(isSelected ? .bold : .regular))
                                 .foregroundStyle(optionTextColor(isSelected: isSelected, isCorrect: isCorrectOption))
@@ -222,9 +310,11 @@ struct QuizView: View {
                                 if isCorrectOption {
                                     Image(systemName: "checkmark.circle.fill")
                                         .foregroundStyle(.green)
+                                        .transition(.scale.combined(with: .opacity))
                                 } else if isSelected {
                                     Image(systemName: "xmark.circle.fill")
                                         .foregroundStyle(.red)
+                                        .transition(.scale.combined(with: .opacity))
                                 }
                             }
                         }
@@ -232,44 +322,75 @@ struct QuizView: View {
                         .frame(maxWidth: .infinity)
                         .background(
                             optionBackgroundColor(isSelected: isSelected, isCorrect: isCorrectOption),
-                            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous)
                         )
                         .overlay(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous)
                                 .stroke(optionBorderColor(isSelected: isSelected, isCorrect: isCorrectOption), lineWidth: 1.5)
                         )
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PressScaleButtonStyle())
+                    .modifier(ShakeEffect(shakes: shouldShake && !reduceMotion ? CGFloat(optionShakeCount) : 0, amplitude: 6))
+                    .scaleEffect(hasAnswered && isCorrectOption && !reduceMotion ? 1.01 : 1.0)
+                    .animation(MotionTokens.bouncy, value: hasAnswered)
                     .disabled(hasAnswered)
                 }
             }
 
             if hasAnswered {
                 answerExplanationCard(word: question.word)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
 
                 Button {
                     nextQuestion()
                 } label: {
                     Label(currentIndex + 1 < totalCount ? "下一题" : "查看成绩", systemImage: "arrow.right")
                         .font(.headline)
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 48)
+                        .background(themeColor, in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(AppTheme.accent)
+                .buttonStyle(PressScaleButtonStyle())
+                .transition(.opacity)
             }
         }
     }
 
-    private func handleOptionTap(index: Int, question: QuizQuestion) {
-        selectedOptionIndex = index
-        hasAnswered = true
+    private func optionLetter(_ index: Int) -> String {
+        ["A", "B", "C", "D"][safe: index] ?? "\(index + 1)"
+    }
 
+    private func optionLetterBg(isSelected: Bool, isCorrect: Bool) -> Color {
+        guard hasAnswered else { return Color(.tertiarySystemFill) }
+        if isCorrect { return .green }
+        if isSelected { return .red }
+        return Color(.tertiarySystemFill)
+    }
+
+    private func optionLetterFg(isSelected: Bool, isCorrect: Bool) -> Color {
+        guard hasAnswered else { return .secondary }
+        if isCorrect || isSelected { return .white }
+        return .secondary
+    }
+
+    private func handleOptionTap(index: Int, question: QuizQuestion) {
         let isCorrect = (index == question.correctOptionIndex)
+
+        withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+            selectedOptionIndex = index
+            hasAnswered = true
+        }
+
         if isCorrect {
             correctCount += 1
+            successTrigger += 1
             recordQuizOutcome(word: question.word, rating: .known)
         } else {
+            errorTrigger += 1
+            withAnimation(.easeInOut(duration: 0.32)) {
+                optionShakeCount += 2
+            }
             if !wrongWords.contains(where: { $0.id == question.word.id }) {
                 wrongWords.append(question.word)
             }
@@ -285,43 +406,51 @@ struct QuizView: View {
     }
 
     private func optionBackgroundColor(isSelected: Bool, isCorrect: Bool) -> Color {
-        guard hasAnswered else { return AppTheme.panelBackground }
-        if isCorrect { return Color.green.opacity(0.12) }
-        if isSelected { return Color.red.opacity(0.12) }
-        return AppTheme.panelBackground
+        guard hasAnswered else { return Color(.secondarySystemGroupedBackground) }
+        if isCorrect { return Color.green.opacity(0.13) }
+        if isSelected { return Color.red.opacity(0.13) }
+        return Color(.secondarySystemGroupedBackground)
     }
 
     private func optionBorderColor(isSelected: Bool, isCorrect: Bool) -> Color {
-        guard hasAnswered else { return Color(.separator).opacity(0.3) }
+        guard hasAnswered else { return Color.primary.opacity(0.08) }
         if isCorrect { return .green }
         if isSelected { return .red }
-        return Color(.separator).opacity(0.3)
+        return Color.primary.opacity(0.06)
     }
 
     // MARK: - Spelling Mode
     private func spellingSection(word: WordItem) -> some View {
-        VStack(spacing: 16) {
+        let isSpeaking = speechService.isSpeaking && speechService.activeText == word.term
+        let slotCount = min(14, max(1, word.term.count))
+
+        return VStack(spacing: 16) {
             VStack(spacing: 12) {
                 HStack {
-                    Text(word.difficulty.shortTitle)
+                    Text("\(word.language.badgeCode) · \(word.difficulty.shortTitle)")
                         .font(.caption2.weight(.bold))
-                        .padding(.horizontal, 8)
+                        .padding(.horizontal, 9)
                         .padding(.vertical, 4)
-                        .background(AppTheme.accent.opacity(0.14), in: Capsule())
-                        .foregroundStyle(AppTheme.accent)
+                        .background(themeColor.opacity(0.14), in: Capsule())
+                        .foregroundStyle(themeColor)
 
                     Spacer()
 
                     Button {
                         speechService.speak(word.term, language: word.language)
                     } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: "speaker.wave.3.fill")
+                        HStack(spacing: 5) {
+                            Image(systemName: isSpeaking ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
+                                .symbolEffect(.variableColor.iterative, isActive: isSpeaking && !reduceMotion)
                             Text("播放读音")
                         }
-                        .font(.caption.weight(.medium))
-                        .foregroundStyle(AppTheme.accent)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(themeColor)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(themeColor.opacity(0.12), in: Capsule())
                     }
+                    .buttonStyle(PressScaleButtonStyle())
                 }
 
                 Text(word.translation)
@@ -331,16 +460,29 @@ struct QuizView: View {
 
                 if !word.pronunciation.isEmpty {
                     Text(word.pronunciation)
-                        .font(.subheadline)
-                        .foregroundStyle(AppTheme.accent)
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(themeColor)
                 }
 
-                Text("字符长度：\(word.term.count)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                // Letter progress dots indicating word length
+                HStack(spacing: 5) {
+                    ForEach(0..<slotCount, id: \.self) { idx in
+                        let filled = idx < spellingInput.trimmingCharacters(in: .whitespacesAndNewlines).count
+                        Capsule()
+                            .fill(filled ? themeColor : Color(.tertiarySystemFill))
+                            .frame(width: 14, height: 4)
+                            .animation(MotionTokens.snappy, value: spellingInput)
+                    }
+                    if word.term.count > 14 {
+                        Text("+\(word.term.count - 14)")
+                            .font(.caption2.monospacedDigit())
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .padding(.top, 2)
             }
             .padding(18)
-            .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .surfacePanel(radius: AppMetrics.cardRadius, borderColor: themeColor.opacity(0.14))
 
             VStack(spacing: 12) {
                 TextField("请输入单词拼写", text: $spellingInput)
@@ -350,7 +492,16 @@ struct QuizView: View {
                     .font(.system(size: 24, weight: .bold, design: .monospaced))
                     .multilineTextAlignment(.center)
                     .padding(14)
-                    .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 8))
+                    .background(Color(.tertiarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            .stroke(
+                                spellingFeedback?.isCorrect == true ? Color.green :
+                                (spellingFeedback?.isCorrect == false ? Color.red.opacity(0.6) : themeColor.opacity(0.25)),
+                                lineWidth: 1.5
+                            )
+                    )
+                    .modifier(ShakeEffect(shakes: reduceMotion ? 0 : CGFloat(spellingShakeCount), amplitude: 7))
                     .focused($isInputFocused)
                     .onSubmit {
                         checkSpelling(word: word)
@@ -365,6 +516,7 @@ struct QuizView: View {
                             .foregroundStyle(feedback.isCorrect ? .green : .red)
                     }
                     .padding(.vertical, 4)
+                    .transition(.opacity)
                 }
 
                 HStack(spacing: 10) {
@@ -374,11 +526,13 @@ struct QuizView: View {
                             spellingInput = String(word.term.prefix(max(1, spellingInput.count + 1)))
                         }
                     } label: {
-                        Label("提示首字母", systemImage: "lightbulb")
-                            .font(.caption)
+                        Label("提示字母", systemImage: "lightbulb")
+                            .font(.caption.weight(.semibold))
                             .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(PressScaleButtonStyle())
                     .disabled(isSpellingRevealed || spellingFeedback?.isCorrect == true)
 
                     Button {
@@ -386,16 +540,19 @@ struct QuizView: View {
                         isSpellingRevealed = true
                         spellingInput = word.term
                         spellingFeedback = (false, "答案已揭晓：\(word.term)")
+                        errorTrigger += 1
                         if !wrongWords.contains(where: { $0.id == word.id }) {
                             wrongWords.append(word)
                         }
                         recordQuizOutcome(word: word, rating: .unknown)
                     } label: {
                         Label("看答案", systemImage: "eye")
-                            .font(.caption)
+                            .font(.caption.weight(.semibold))
                             .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(PressScaleButtonStyle())
                     .disabled(isSpellingRevealed || spellingFeedback?.isCorrect == true)
                 }
 
@@ -404,17 +561,19 @@ struct QuizView: View {
                 } label: {
                     Text(spellingFeedback?.isCorrect == true || isSpellingRevealed ? "下一题" : "检查拼写")
                         .font(.headline)
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 48)
+                        .background(themeColor, in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(AppTheme.accent)
+                .buttonStyle(PressScaleButtonStyle())
             }
             .padding(16)
-            .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .surfacePanel(radius: AppMetrics.panelRadius)
 
             if isSpellingRevealed || spellingFeedback?.isCorrect == true {
                 answerExplanationCard(word: word)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
         .onAppear {
@@ -436,13 +595,20 @@ struct QuizView: View {
             if !hadWrongAttempt {
                 correctCount += 1
             }
+            successTrigger += 1
             let rating: RecallRating = (usedSpellingHint || hadWrongAttempt) ? .fuzzy : .known
-            spellingFeedback = (true, rating == .known ? "拼写完全正确！已记入掌握进度" : "拼写正确！已记为待巩固（将提前复习）")
+            withAnimation(MotionTokens.snappy) {
+                spellingFeedback = (true, rating == .known ? "拼写完全正确！已记入掌握进度" : "拼写正确！已记为待巩固（将提前复习）")
+            }
             recordQuizOutcome(word: word, rating: rating)
             speechService.speak(word.term, language: word.language)
         } else {
             hadWrongAttempt = true
-            spellingFeedback = (false, "拼写有误，再试一次或点击“看答案”")
+            errorTrigger += 1
+            withAnimation(.easeInOut(duration: 0.32)) {
+                spellingShakeCount += 2
+                spellingFeedback = (false, "拼写有误，再试一次或点击“看答案”")
+            }
             if !wrongWords.contains(where: { $0.id == word.id }) {
                 wrongWords.append(word)
             }
@@ -461,19 +627,19 @@ struct QuizView: View {
 
     // MARK: - Answer Explanation
     private func answerExplanationCard(word: WordItem) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(word.term)
                     .font(.headline.weight(.bold))
                 Text(word.pronunciation)
                     .font(.subheadline)
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(themeColor)
                 Spacer()
                 Button {
                     speechService.speak(word.term, language: word.language)
                 } label: {
                     Image(systemName: "speaker.wave.2")
-                        .foregroundStyle(AppTheme.accent)
+                        .foregroundStyle(themeColor)
                 }
             }
 
@@ -494,19 +660,25 @@ struct QuizView: View {
         }
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .surfacePanel(radius: AppMetrics.controlRadius, borderColor: themeColor.opacity(0.18))
     }
 
     // MARK: - Navigation
     private func nextQuestion() {
-        currentIndex += 1
-        selectedOptionIndex = nil
-        hasAnswered = false
-        spellingInput = ""
-        isSpellingRevealed = false
-        usedSpellingHint = false
-        hadWrongAttempt = false
-        spellingFeedback = nil
+        withAnimation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion)) {
+            currentIndex += 1
+            selectedOptionIndex = nil
+            hasAnswered = false
+            spellingInput = ""
+            isSpellingRevealed = false
+            usedSpellingHint = false
+            hadWrongAttempt = false
+            spellingFeedback = nil
+        }
+
+        if isFinished && wrongWords.isEmpty {
+            celebrateTrigger += 1
+        }
 
         if quizMode == .multipleChoice, let question = currentQuestion, question.subtype == .audioToWord {
             speechService.speak(question.word.term, language: question.word.language)
@@ -542,21 +714,36 @@ struct QuizView: View {
 
     // MARK: - Summary
     private var quizSummaryView: some View {
-        VStack(spacing: 20) {
-            VStack(spacing: 12) {
-                Image(systemName: wrongWords.isEmpty ? "trophy.fill" : "checkmark.seal.fill")
-                    .font(.system(size: 60))
-                    .foregroundStyle(wrongWords.isEmpty ? .yellow : AppTheme.accent)
+        let ratio = totalCount > 0 ? Double(correctCount) / Double(totalCount) : 0
+        let isPerfect = wrongWords.isEmpty
 
-                Text(wrongWords.isEmpty ? "满分达成！" : "测验完成")
+        return VStack(spacing: 18) {
+            VStack(spacing: 14) {
+                ZStack {
+                    Circle()
+                        .stroke((isPerfect ? Color.orange : themeColor).opacity(0.18), lineWidth: 8)
+                        .frame(width: 90, height: 90)
+                    Circle()
+                        .trim(from: 0, to: ratio)
+                        .stroke(isPerfect ? Color.orange : themeColor, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                        .rotationEffect(.degrees(-90))
+                        .frame(width: 90, height: 90)
+                        .animation(MotionTokens.gentle, value: ratio)
+
+                    Image(systemName: isPerfect ? "trophy.fill" : "checkmark.seal.fill")
+                        .font(.system(size: 34))
+                        .foregroundStyle(isPerfect ? .orange : themeColor)
+                }
+
+                Text(isPerfect ? "满分达成！" : "测验完成")
                     .font(.title.weight(.bold))
 
-                Text("本次得分：\(correctCount) / \(totalCount)")
-                    .font(.title2.monospacedDigit().weight(.semibold))
-                    .foregroundStyle(AppTheme.accent)
+                Text("本次得分：\(correctCount) / \(totalCount)（\(Int(ratio * 100))%）")
+                    .font(.title3.monospacedDigit().weight(.semibold))
+                    .foregroundStyle(themeColor)
 
                 Text(
-                    wrongWords.isEmpty
+                    isPerfect
                         ? "所有单词均已准确掌握，记忆进度与今日打卡已同步更新！"
                         : "本次共有 \(wrongWords.count) 个词出现失误，已自动加入待重学队列。"
                 )
@@ -566,7 +753,7 @@ struct QuizView: View {
             }
             .padding(24)
             .frame(maxWidth: .infinity)
-            .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .surfacePanel(radius: AppMetrics.cardRadius, borderColor: themeColor.opacity(0.20))
 
             if !wrongWords.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
@@ -586,11 +773,11 @@ struct QuizView: View {
                                 speechService.speak(word.term, language: word.language)
                             } label: {
                                 Image(systemName: "speaker.wave.2")
-                                    .foregroundStyle(AppTheme.accent)
+                                    .foregroundStyle(themeColor)
                             }
                         }
                         .padding(12)
-                        .background(AppTheme.panelBackground, in: RoundedRectangle(cornerRadius: 8))
+                        .surfacePanel(radius: 12)
                     }
                 }
             }
@@ -603,11 +790,12 @@ struct QuizView: View {
                     } label: {
                         Label("只重测错题 (\(wrongWords.count) 词)", systemImage: "flame.fill")
                             .font(.headline)
+                            .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .frame(height: 48)
+                            .background(Color.orange, in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.orange)
+                    .buttonStyle(PressScaleButtonStyle())
                 }
 
                 Button {
@@ -615,22 +803,37 @@ struct QuizView: View {
                 } label: {
                     Label("完整再测一次", systemImage: "arrow.clockwise")
                         .font(.headline)
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 48)
+                        .background(themeColor, in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(AppTheme.accent)
+                .buttonStyle(PressScaleButtonStyle())
 
                 Button {
                     dismiss()
                     onComplete?()
                 } label: {
                     Text("返回背词")
-                        .font(.body)
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(themeColor)
                         .frame(maxWidth: .infinity)
+                        .frame(height: 44)
+                        .background(themeColor.opacity(0.12), in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(PressScaleButtonStyle())
             }
         }
+        .onAppear {
+            if isPerfect {
+                celebrateTrigger += 1
+            }
+        }
+    }
+}
+
+private extension Array {
+    subscript(safe index: Int) -> Element? {
+        indices.contains(index) ? self[index] : nil
     }
 }

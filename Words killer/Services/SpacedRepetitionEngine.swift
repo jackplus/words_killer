@@ -20,6 +20,46 @@ struct ReviewUndoSnapshot: Sendable {
     let eventID: String
 }
 
+enum StudyMode: String, CaseIterable, Identifiable, Sendable {
+    case smart
+    case dueOnly
+    case favoritesOnly
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .smart: "智能综合"
+        case .dueOnly: "专攻到期"
+        case .favoritesOnly: "专攻收藏"
+        }
+    }
+
+    var shortBadge: String {
+        switch self {
+        case .smart: "综合"
+        case .dueOnly: "到期"
+        case .favoritesOnly: "收藏"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .smart: "到期优先 · 自动混排新词"
+        case .dueOnly: "仅复习当前已到期的旧词"
+        case .favoritesOnly: "仅训练星标收藏词汇"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .smart: "sparkles"
+        case .dueOnly: "clock.badge.exclamationmark"
+        case .favoritesOnly: "star.fill"
+        }
+    }
+}
+
 enum SpacedRepetitionEngine {
     @MainActor
     @discardableResult
@@ -188,16 +228,31 @@ enum SpacedRepetitionEngine {
         progressMap: [String: WordProgress],
         excluding previousIDs: Set<String>,
         limit: Int = 10,
+        mode: StudyMode = .smart,
         now: Date = .now
     ) -> [WordItem] {
-        let preferredPool = availableWords.filter { $0.difficulty.index <= difficulty.index }
-        let fallbackPool = availableWords.filter { $0.difficulty.index > difficulty.index }
+        switch mode {
+        case .dueOnly:
+            let dueWords = availableWords.filter { word in
+                guard let progress = progressMap[word.id] else { return false }
+                return progress.reviewCount > 0 && progress.isDue(at: now)
+            }.sorted { lhs, rhs in
+                let lDate = progressMap[lhs.id]?.nextReviewDate ?? .distantPast
+                let rDate = progressMap[rhs.id]?.nextReviewDate ?? .distantPast
+                if lDate != rDate { return lDate < rDate }
+                return lhs.term < rhs.term
+            }
+            let fresh = dueWords.filter { !previousIDs.contains($0.id) }
+            let ordered = fresh.count >= limit ? fresh : dueWords
+            return Array(ordered.prefix(limit))
 
-        func sortCandidates(_ words: [WordItem]) -> [WordItem] {
-            let fresh = words.filter { !previousIDs.contains($0.id) }
-            let pool = fresh.count >= limit ? fresh : words
+        case .favoritesOnly:
+            let starred = availableWords.filter { progressMap[$0.id]?.isFavorite == true }
+            guard !starred.isEmpty else { return [] }
+            let fresh = starred.filter { !previousIDs.contains($0.id) }
+            let pool = fresh.count >= limit ? fresh : starred
 
-            let dueWords = pool.filter { word in
+            let dueStarred = pool.filter { word in
                 guard let progress = progressMap[word.id] else { return false }
                 return progress.reviewCount > 0 && progress.isDue(at: now)
             }.sorted { lhs, rhs in
@@ -205,33 +260,63 @@ enum SpacedRepetitionEngine {
                 let rDate = progressMap[rhs.id]?.nextReviewDate ?? .distantPast
                 return lDate < rDate
             }
+            let dueIDs = Set(dueStarred.map(\.id))
 
-            let dueIDs = Set(dueWords.map(\.id))
-            let starredUnseen = pool.filter { word in
-                !dueIDs.contains(word.id)
-                    && (progressMap[word.id]?.isFavorite == true)
-                    && (progressMap[word.id]?.reviewCount ?? 0) == 0
+            let unseenStarred = pool.filter { word in
+                !dueIDs.contains(word.id) && (progressMap[word.id]?.reviewCount ?? 0) == 0
             }.shuffled()
-            let starredIDs = Set(starredUnseen.map(\.id))
+            let unseenIDs = Set(unseenStarred.map(\.id))
 
-            let unseenWords = pool.filter { word in
-                !dueIDs.contains(word.id)
-                    && !starredIDs.contains(word.id)
-                    && (progressMap[word.id]?.reviewCount ?? 0) == 0
-            }.shuffled()
-            let unseenIDs = Set(unseenWords.map(\.id))
-
-            let scheduledWords = pool.filter {
-                !dueIDs.contains($0.id) && !starredIDs.contains($0.id) && !unseenIDs.contains($0.id)
+            let scheduledStarred = pool.filter {
+                !dueIDs.contains($0.id) && !unseenIDs.contains($0.id)
             }.shuffled()
 
-            return dueWords + starredUnseen + unseenWords + scheduledWords
+            return Array((dueStarred + unseenStarred + scheduledStarred).prefix(limit))
+
+        case .smart:
+            let preferredPool = availableWords.filter { $0.difficulty.index <= difficulty.index }
+            let fallbackPool = availableWords.filter { $0.difficulty.index > difficulty.index }
+
+            func sortCandidates(_ words: [WordItem]) -> [WordItem] {
+                let fresh = words.filter { !previousIDs.contains($0.id) }
+                let pool = fresh.count >= limit ? fresh : words
+
+                let dueWords = pool.filter { word in
+                    guard let progress = progressMap[word.id] else { return false }
+                    return progress.reviewCount > 0 && progress.isDue(at: now)
+                }.sorted { lhs, rhs in
+                    let lDate = progressMap[lhs.id]?.nextReviewDate ?? .distantPast
+                    let rDate = progressMap[rhs.id]?.nextReviewDate ?? .distantPast
+                    return lDate < rDate
+                }
+
+                let dueIDs = Set(dueWords.map(\.id))
+                let starredUnseen = pool.filter { word in
+                    !dueIDs.contains(word.id)
+                        && (progressMap[word.id]?.isFavorite == true)
+                        && (progressMap[word.id]?.reviewCount ?? 0) == 0
+                }.shuffled()
+                let starredIDs = Set(starredUnseen.map(\.id))
+
+                let unseenWords = pool.filter { word in
+                    !dueIDs.contains(word.id)
+                        && !starredIDs.contains(word.id)
+                        && (progressMap[word.id]?.reviewCount ?? 0) == 0
+                }.shuffled()
+                let unseenIDs = Set(unseenWords.map(\.id))
+
+                let scheduledWords = pool.filter {
+                    !dueIDs.contains($0.id) && !starredIDs.contains($0.id) && !unseenIDs.contains($0.id)
+                }.shuffled()
+
+                return dueWords + starredUnseen + unseenWords + scheduledWords
+            }
+
+            let orderedPreferred = sortCandidates(preferredPool)
+            let preferredIDs = Set(orderedPreferred.map(\.id))
+            let orderedFallback = sortCandidates(fallbackPool).filter { !preferredIDs.contains($0.id) }
+
+            return Array((orderedPreferred + orderedFallback).prefix(limit))
         }
-
-        let orderedPreferred = sortCandidates(preferredPool)
-        let preferredIDs = Set(orderedPreferred.map(\.id))
-        let orderedFallback = sortCandidates(fallbackPool).filter { !preferredIDs.contains($0.id) }
-
-        return Array((orderedPreferred + orderedFallback).prefix(limit))
     }
 }

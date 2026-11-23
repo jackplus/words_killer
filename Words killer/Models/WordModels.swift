@@ -34,6 +34,26 @@ nonisolated enum TargetLanguage: String, CaseIterable, Identifiable, Codable {
         }
     }
 
+    var badgeCode: String {
+        switch self {
+        case .english: "EN"
+        case .japanese: "JP"
+        case .korean: "KR"
+        case .french: "FR"
+        case .spanish: "ES"
+        }
+    }
+
+    var nativeTag: String {
+        switch self {
+        case .english: "English"
+        case .japanese: "日本語"
+        case .korean: "한국어"
+        case .french: "Français"
+        case .spanish: "Español"
+        }
+    }
+
     var systemImage: String {
         switch self {
         case .english: "textformat.abc"

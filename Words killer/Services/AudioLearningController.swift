@@ -143,6 +143,19 @@ final class AudioLearningController {
         }
     }
 
+    func jumpToWord(at index: Int) {
+        guard words.indices.contains(index) else { return }
+        let wasPlaying = isPlaying
+        haltLoopOnly()
+        currentRepeat = 1
+        currentIndex = index
+        updateNowPlayingInfo()
+        if wasPlaying {
+            isPlaying = true
+            runPlaybackLoop()
+        }
+    }
+
     private func haltLoopOnly() {
         playbackTask?.cancel()
         playbackTask = nil
