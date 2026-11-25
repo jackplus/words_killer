@@ -340,8 +340,7 @@ struct ContentView: View {
             } message: {
                 Text(todayError ?? "")
             }
-        return NavigationStack {
-            screen
+        let lifecycleScreen = screen
             .task(id: StudyAnalytics.streakMayExceedWindow(streak)) {
                 guard StudyAnalytics.streakMayExceedWindow(streak) else { return }
                 olderActiveDays = StudyAnalytics.olderActiveDays(before: windowStart, in: modelContext)
@@ -361,6 +360,7 @@ struct ContentView: View {
             .onChange(of: dailyGoal) { refreshToday() }
             .onChange(of: accentThemeRawValue) { refreshToday() }
             .onChange(of: hideWidgetTranslation) { refreshToday() }
+        let preferenceScreen = lifecycleScreen
             .onChange(of: scenePhase) {
                 if scenePhase == .active && quizEntry == nil { refreshToday() }
             }
@@ -370,6 +370,7 @@ struct ContentView: View {
             .onChange(of: selectedDifficultyRawValue) { refreshToday() }
             .onChange(of: difficultyScopeRawValue) { refreshToday() }
             .onChange(of: customWordsSignature) { refreshToday() }
+        let progressScreen = preferenceScreen
             .onChange(of: allProgress.count) {
                 if quizEntry == nil { refreshToday() }
             }
@@ -381,6 +382,8 @@ struct ContentView: View {
                     startNewChallenge()
                 }
             }
+        return NavigationStack {
+            progressScreen
             .onChange(of: disabledPacksRaw) {
                 if !selectedStudyPackID.isEmpty && disabledPackIDSet.contains(selectedStudyPackID) {
                     selectedStudyPackID = ""
