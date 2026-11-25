@@ -281,4 +281,11 @@ xcodebuild -exportArchive \
 
 - 本轮新增首页「复习 / 背新词」并行入口与听音选词自动朗读，包含此前上传后补充的 Xcode 26 编译兼容修复；不改持久化模型、词条 ID、隐私与签名配置。
 - 重新运行 iPhone 18 Pro Max 模拟器全量 66 项测试通过，Swift 编译 0 警告，未签名 Release arm64 归档通过；隐私双副本零差异，发行 plist 校验通过。
-- 发布准备、测试、未签名归档及测试说明位于 `artifacts/testflight-2026-11-25-build5/`，历史目录保留。用户明确确认上传 1.0 (5)，工程构建号已由 4 递增为 5；签名归档和上传结果待后续核实。
+- 发布准备、测试、归档及测试说明位于 `artifacts/testflight-2026-11-25-build5/`，历史目录保留。用户明确确认上传 1.0 (5)，工程构建号已由 4 递增为 5。
+- 签名 Release 归档、本地发行导出及 IPA 验签通过。版本 1.0 (5)、最低 iOS 17.0、Team `Y382F52F3K` 与 Bundle ID 一致；Store profile 无设备列表且 `get-task-allow = false`，隐私资源与源码一致。
+- 二进制源码提交 `abf20a2cb71f4f1ba38d1852360be5fa940a2671` 已推送 GitHub。IPA SHA-256：`a03039f6c2c3169478e0f080ae01fd4ac51ea9da0c4c27f7bf642d20881db88b`。
+- 2026-11-25 19:53:52（Asia/Taipei），Xcode 返回 `Upload succeeded` 与 `EXPORT SUCCEEDED`，Apple 已接收安装包并开始处理。
+- Apple 处理完成，二进制「已验证」、构建「准备提交」。已逐项核对版本 1.0 (5)、Bundle ID、Team、最低 iOS 17.0、arm64、包含符号及非豁免加密为「否」。
+- internal 内部群组自动关联 2 名测试员；本轮简体中文「测试内容」已保存，并重新打开页面确认持久化。未提交外部 Beta 或正式商店审核。
+- 构建 ID 为 `5ee7246a-bebb-4d16-a23f-b4ebd30aab25`。[构建详情](https://appstoreconnect.apple.com/teams/87c2efdb-0337-4b83-b4bd-95ef36cb5a8d/apps/6837619955/testflight/ios/5ee7246a-bebb-4d16-a23f-b4ebd30aab25)
+- 本地全量 66 项测试通过；[二进制源码对应的 GitHub Actions](https://github.com/jackplus/words_killer/actions/runs/45608181779)仍在运行，云端结果未确认。

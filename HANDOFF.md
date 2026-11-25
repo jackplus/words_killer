@@ -265,3 +265,4 @@ xcodebuild test -scheme "Words killer" \
   - 新增 `QuizEngine.shouldAutoSpeak(question:hasAnswered:)`；当首次呈现或切入未作答的「听音选词」题（含首轮、续练恢复及错题补练）时，按全局 `speechSpeed` 自动朗读当前单词；已作答反馈态、非听音题或切换「不便听音，换文字题」后不重复触发，切题前先停止旧朗读防止串音。
 - **验证**：新增 `autoSpeakRuleTargetsOnlyUnansweredAudioQuestions` 与 `switchingFromDueReviewToNewWordsPreservesCompletedReviewProgress` 两项测试，iPhone 18 Pro 模拟器全量通过 **66/66 项** Swift Testing 单元测试，Swift 编译 0 警告，`PRIVACY.md` 与内置副本零差异。
 - **发布准备**：本轮发布前在 iPhone 18 Pro Max 重新运行全量 66 项测试，0 失败、0 跳过；未签名 Release arm64 归档通过。用户已确认上传 1.0 (5)，发行结果见 `APP_STORE_CHECKLIST.md` 第十三节。
+- **发布结果**：二进制源码 `abf20a2` 已推送 GitHub，1.0 (5) 于 2026-11-25 19:53:52（Asia/Taipei）上传成功。Apple 二进制「已验证」、构建「准备提交」，internal 自动关联 2 名测试员，测试说明已保存并重新打开核实。本地证据位于 `artifacts/testflight-2026-11-25-build5/`，GitHub 云端回归尚在运行。
