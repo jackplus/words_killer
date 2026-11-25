@@ -22,11 +22,13 @@ struct WordBookView: View {
     @Environment(\.accentTheme) private var accentTheme
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(AppRouter.self) private var router: AppRouter?
 
     @Query private var allProgress: [WordProgress]
     @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
 
     @AppStorage(WordLibrary.disabledPacksStorageKey) private var disabledPacksRaw = ""
+    @AppStorage("speechSpeed") private var speechSpeedRawValue = SpeechSpeed.normal.rawValue
 
     @State private var speechService = SpeechService()
     @State private var audioController = AudioLearningController()
@@ -43,6 +45,10 @@ struct WordBookView: View {
 
     private var themeColor: Color {
         accentTheme.adaptiveColor(for: colorScheme)
+    }
+
+    private var selectedSpeechSpeed: SpeechSpeed {
+        SpeechSpeed(rawValue: speechSpeedRawValue) ?? .normal
     }
 
     private var progressMap: [String: WordProgress] {
@@ -341,10 +347,31 @@ struct WordBookView: View {
                 )
                 .presentationDetents([.medium, .large])
             }
+            .onAppear {
+                speechService.speed = selectedSpeechSpeed
+                audioController.speechService.speed = selectedSpeechSpeed
+                consumePendingWordRoute(in: allWords)
+            }
+            .onChange(of: router?.pendingWordDetailID) {
+                consumePendingWordRoute(in: allWords)
+            }
+            .onChange(of: speechSpeedRawValue) {
+                speechService.speed = selectedSpeechSpeed
+                audioController.speechService.speed = selectedSpeechSpeed
+            }
             .onDisappear {
                 speechService.stop()
                 audioController.stopPlayback()
             }
+        }
+    }
+
+    private func consumePendingWordRoute(in words: [WordItem]) {
+        guard let targetID = router?.pendingWordDetailID else { return }
+        router?.pendingWordDetailID = nil
+        if let matched = words.first(where: { $0.id == targetID })
+            ?? WordLibrary.allBuiltInWords.first(where: { $0.id == targetID }) {
+            selectedWord = matched
         }
     }
 

@@ -261,3 +261,11 @@ xcodebuild -exportArchive \
 - **服务端最终核对**：构建 ID `e8b9af31-fe0b-4bf7-8271-7e72bab2b1cb`，版本 `1.0`、构建 `3`、Bundle ID `com.tedji.Words-killer`、Team `Y382F52F3K`、最低 iOS `17.0`、架构 `arm64`、包含符号、非豁免加密为「否」，与发行归档一致。
 - **测试分配**：现有 `internal` 内部群组自动关联本构建，页面显示 2 名测试员；没有手动修改群组或测试员。已保存本轮简体中文测试内容。未提交外部 Beta 或正式商店审核。
 - **构建详情**：https://appstoreconnect.apple.com/teams/87c2efdb-0337-4b83-b4bd-95ef36cb5a8d/apps/6837619955/testflight/ios/e8b9af31-fe0b-4bf7-8271-7e72bab2b1cb 。
+
+## 十二、构建 1.0 (4) 发布验证（2026-11-25）
+
+- 用户明确确认上传版本 1.0、构建号 4。Bundle ID、发布团队、最低 iOS 版本和发行导出配置沿用现有工程。
+- 本轮包含 18 册 1,800 词、六档难度、今日复习与退出续练、错词专练、听音转文字、拼写容错和提示、解析收藏与笔记、每日一词和 App 内小组件预览。桌面与锁屏小组件的 Extension 仍为模板，外部 URL scheme 尚未注册，当前通过 App 内路由预览跳转。
+- 发布前 64 项 Swift Testing 测试全部通过，Swift 编译无警告。签名 Release 归档成功，核实版本 1.0 (4)、Bundle ID、Team 和最低 iOS 17.0。
+- 新发布目录为 `artifacts/testflight-2026-11-25/`，包含测试结果、归档、发行导出和日志。原有 650 个词条 ID 保留，隐私政策双副本一致。
+- 当前正在导出验证与上传，Apple 服务端处理状态待核实。

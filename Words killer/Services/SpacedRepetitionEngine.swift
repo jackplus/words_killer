@@ -60,6 +60,34 @@ enum StudyMode: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
+enum DifficultyScope: String, CaseIterable, Identifiable, Sendable {
+    case exact
+    case upTo
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .exact: "仅当前级别"
+        case .upTo: "含更低级别"
+        }
+    }
+
+    var shortTitle: String {
+        switch self {
+        case .exact: "精准当前"
+        case .upTo: "向下兼容"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .exact: "100% 精准匹配所选难度，绝不混入基础入门词"
+        case .upTo: "循序渐进，涵盖当前及更低级别词汇"
+        }
+    }
+}
+
 enum SpacedRepetitionEngine {
     @MainActor
     @discardableResult
@@ -69,7 +97,8 @@ enum SpacedRepetitionEngine {
         source: ReviewSource = .card,
         existingProgress: WordProgress?,
         in modelContext: ModelContext,
-        now: Date = .now
+        now: Date = .now,
+        saveImmediately: Bool = true
     ) -> ReviewUndoSnapshot {
         let wasNew = existingProgress == nil
         let record: WordProgress
@@ -103,6 +132,61 @@ enum SpacedRepetitionEngine {
             language: word.language,
             rating: rating,
             source: source,
+            reviewedAt: now
+        )
+        modelContext.insert(event)
+        if saveImmediately { try? modelContext.save() }
+        return snapshot
+    }
+
+    /// Marks an overly familiar word as mastered immediately (level >= 5, 60-day interval),
+    /// returning a full undo snapshot so accidental taps remain reversible.
+    @MainActor
+    @discardableResult
+    static func masterImmediately(
+        for word: WordItem,
+        existingProgress: WordProgress?,
+        in modelContext: ModelContext,
+        now: Date = .now
+    ) -> ReviewUndoSnapshot {
+        let wasNew = existingProgress == nil
+        let record: WordProgress
+        if let existing = existingProgress {
+            record = existing
+        } else {
+            record = WordProgress(wordID: word.id, language: word.language)
+            modelContext.insert(record)
+        }
+
+        let eventID = UUID().uuidString
+        let snapshot = ReviewUndoSnapshot(
+            wordID: word.id,
+            wasNewProgress: wasNew,
+            previousMasteryLevel: record.masteryLevel,
+            previousEaseFactor: record.easeFactor,
+            previousIntervalDays: record.intervalDays,
+            previousReviewCount: record.reviewCount,
+            previousLapseCount: record.lapseCount,
+            previousLastReviewedAt: record.lastReviewedAt,
+            previousNextReviewDate: record.nextReviewDate,
+            previousLastRatingRawValue: record.lastRatingRawValue,
+            eventID: eventID
+        )
+
+        record.reviewCount += 1
+        record.lastReviewedAt = now
+        record.lastRatingRawValue = RecallRating.known.rawValue
+        record.masteryLevel = max(record.masteryLevel, 5)
+        record.intervalDays = max(record.intervalDays, 60)
+        record.easeFactor = 2.8
+        record.nextReviewDate = now.addingTimeInterval(record.intervalDays * 86400)
+
+        let event = ReviewEvent(
+            id: eventID,
+            wordID: word.id,
+            language: word.language,
+            rating: .known,
+            source: .card,
             reviewedAt: now
         )
         modelContext.insert(event)
@@ -229,6 +313,7 @@ enum SpacedRepetitionEngine {
         excluding previousIDs: Set<String>,
         limit: Int = 10,
         mode: StudyMode = .smart,
+        difficultyScope: DifficultyScope = .upTo,
         now: Date = .now
     ) -> [WordItem] {
         switch mode {
@@ -274,9 +359,6 @@ enum SpacedRepetitionEngine {
             return Array((dueStarred + unseenStarred + scheduledStarred).prefix(limit))
 
         case .smart:
-            let preferredPool = availableWords.filter { $0.difficulty.index <= difficulty.index }
-            let fallbackPool = availableWords.filter { $0.difficulty.index > difficulty.index }
-
             func sortCandidates(_ words: [WordItem]) -> [WordItem] {
                 let fresh = words.filter { !previousIDs.contains($0.id) }
                 let pool = fresh.count >= limit ? fresh : words
@@ -311,6 +393,14 @@ enum SpacedRepetitionEngine {
 
                 return dueWords + starredUnseen + unseenWords + scheduledWords
             }
+
+            if difficultyScope == .exact {
+                let exactPool = availableWords.filter { $0.difficulty == difficulty }
+                return Array(sortCandidates(exactPool).prefix(limit))
+            }
+
+            let preferredPool = availableWords.filter { $0.difficulty.index <= difficulty.index }
+            let fallbackPool = availableWords.filter { $0.difficulty.index > difficulty.index }
 
             let orderedPreferred = sortCandidates(preferredPool)
             let preferredIDs = Set(orderedPreferred.map(\.id))

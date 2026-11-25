@@ -12,10 +12,14 @@ struct WordPacksView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.accentTheme) private var accentTheme
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Query private var customWords: [CustomWordRecord]
+    @Query private var allProgress: [WordProgress]
 
     @AppStorage(WordLibrary.disabledPacksStorageKey) private var disabledPacksRaw = ""
 
+    @State private var selectedLanguageFilter: TargetLanguage? = nil
+    @State private var filterFeedbackTrigger = 0
     @State private var importLanguage: TargetLanguage = .english
     @State private var importDifficulty: DifficultyLevel = .elementary
     @State private var isImportingFile = false
@@ -38,11 +42,26 @@ struct WordPacksView: View {
         accentTheme.adaptiveColor(for: colorScheme)
     }
 
+    private var filteredPacks: [WordPackDescriptor] {
+        guard let selectedLanguageFilter else { return WordLibrary.builtInPacks }
+        return WordLibrary.builtInPacks.filter { $0.languages.contains(selectedLanguageFilter) }
+    }
+
     var body: some View {
+        // Derived once per render so pack rows never rebuild the progress dictionary.
+        let progressMap = Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
+        let currentDisabled = disabledPackIDs
+        let enabledPackCount = WordLibrary.builtInPacks.filter { $0.isCore || !currentDisabled.contains($0.id) }.count
+        let totalMastered = allProgress.filter(\.isMastered).count
+
         NavigationStack {
             List {
-                summarySection
-                builtInPacksSection
+                summarySection(
+                    enabledPackCount: enabledPackCount,
+                    totalPackCount: WordLibrary.builtInPacks.count,
+                    totalMastered: totalMastered
+                )
+                builtInPacksSection(progressMap: progressMap, disabledIDs: currentDisabled)
                 fileImportSection
                 openSourceCatalogSection
             }
@@ -57,6 +76,7 @@ struct WordPacksView: View {
             .listStyle(.insetGrouped)
             .navigationTitle("词书与开源词库")
             .navigationBarTitleDisplayMode(.inline)
+            .sensoryFeedback(.selection, trigger: filterFeedbackTrigger)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("完成") {
@@ -79,18 +99,23 @@ struct WordPacksView: View {
         }
     }
 
-    private var summarySection: some View {
+    private func summarySection(enabledPackCount: Int, totalPackCount: Int, totalMastered: Int) -> some View {
         Section {
-            HStack(spacing: 16) {
+            HStack(spacing: 10) {
                 StatPill(
-                    title: "已启用内置词",
-                    value: "\(activeBuiltInCount)",
+                    title: "已启用词量",
+                    value: "\(activeBuiltInCount + customWords.count)",
                     color: themeColor
                 )
                 StatPill(
-                    title: "自建与外部导入",
-                    value: "\(customWords.count)",
+                    title: "已启词书",
+                    value: "\(enabledPackCount)/\(totalPackCount)",
                     color: .indigo
+                )
+                StatPill(
+                    title: "累计已掌握",
+                    value: "\(totalMastered)",
+                    color: .green
                 )
             }
             .listRowInsets(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
@@ -98,59 +123,145 @@ struct WordPacksView: View {
         }
     }
 
-    private var builtInPacksSection: some View {
+    private func builtInPacksSection(
+        progressMap: [String: WordProgress],
+        disabledIDs: Set<String>
+    ) -> some View {
         Section {
-            ForEach(WordLibrary.builtInPacks) { pack in
-                let packCount = WordLibrary.words(forPackID: pack.id).count
-                let isEnabled = pack.isCore || !disabledPackIDs.contains(pack.id)
-
-                HStack(alignment: .center, spacing: 12) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        HStack(spacing: 6) {
-                            Text(pack.title)
-                                .font(.subheadline.weight(.semibold))
-
-                            Text("\(packCount) 词")
-                                .font(.caption2.monospacedDigit().weight(.bold))
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(themeColor.opacity(0.14), in: Capsule())
-                                .foregroundStyle(themeColor)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    packLanguageFilterChip(
+                        title: "全部 \(WordLibrary.builtInPacks.count)",
+                        isSelected: selectedLanguageFilter == nil
+                    ) {
+                        filterFeedbackTrigger += 1
+                        withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                            selectedLanguageFilter = nil
                         }
-
-                        Text(pack.subtitle)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-
-                        Text(pack.licenseBadge)
-                            .font(.caption2)
-                            .foregroundStyle(.tertiary)
                     }
 
-                    Spacer()
-
-                    if pack.isCore {
-                        Text("核心常驻")
-                            .font(.caption2.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                    } else {
-                        Toggle("", isOn: Binding(
-                            get: { isEnabled },
-                            set: { newValue in
-                                togglePack(pack.id, isEnabled: newValue)
+                    ForEach(TargetLanguage.allCases) { lang in
+                        let langPackCount = WordLibrary.builtInPacks.filter { $0.languages.contains(lang) }.count
+                        packLanguageFilterChip(
+                            title: "\(lang.title) \(langPackCount)",
+                            isSelected: selectedLanguageFilter == lang
+                        ) {
+                            filterFeedbackTrigger += 1
+                            withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                                selectedLanguageFilter = lang
                             }
-                        ))
-                        .labelsHidden()
-                        .tint(themeColor)
+                        }
+                    }
+                }
+                .padding(.vertical, 2)
+            }
+            .listRowInsets(EdgeInsets(top: 6, leading: 14, bottom: 6, trailing: 14))
+            .listRowBackground(Color.clear)
+
+            ForEach(filteredPacks) { pack in
+                let packWords = WordLibrary.words(forPackID: pack.id)
+                let packCount = packWords.count
+                let isEnabled = pack.isCore || !disabledIDs.contains(pack.id)
+                let studied = packWords.reduce(0) { count, word in
+                    count + ((progressMap[word.id]?.reviewCount ?? 0) > 0 ? 1 : 0)
+                }
+                let mastered = packWords.reduce(0) { count, word in
+                    count + ((progressMap[word.id]?.isMastered ?? false) ? 1 : 0)
+                }
+                let masteryRatio = packCount > 0 ? Double(mastered) / Double(packCount) : 0
+                let langBadge = pack.languages.count == 1 ? pack.languages[0].badgeCode : "五语种"
+
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(alignment: .center, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack(spacing: 6) {
+                                Text(langBadge)
+                                    .font(.caption2.weight(.heavy))
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 2)
+                                    .background(themeColor.opacity(isEnabled ? 0.14 : 0.08), in: Capsule())
+                                    .foregroundStyle(isEnabled ? themeColor : .secondary)
+
+                                Text(pack.title)
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(isEnabled ? .primary : .secondary)
+                                    .lineLimit(1)
+
+                                Text("\(packCount) 词")
+                                    .font(.caption2.monospacedDigit().weight(.bold))
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 2)
+                                    .background(Color(.tertiarySystemFill), in: Capsule())
+                                    .foregroundStyle(.secondary)
+                            }
+
+                            Text(pack.subtitle)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+
+                            Text(pack.licenseBadge)
+                                .font(.caption2)
+                                .foregroundStyle(.tertiary)
+                        }
+
+                        Spacer()
+
+                        if pack.isCore {
+                            Text("核心常驻")
+                                .font(.caption2.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                        } else {
+                            Toggle("", isOn: Binding(
+                                get: { isEnabled },
+                                set: { newValue in
+                                    filterFeedbackTrigger += 1
+                                    togglePack(pack.id, isEnabled: newValue)
+                                }
+                            ))
+                            .labelsHidden()
+                            .tint(themeColor)
+                        }
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        ProgressView(value: masteryRatio)
+                            .tint(isEnabled ? themeColor : .secondary)
+
+                        HStack {
+                            Text("已掌握 \(mastered)/\(packCount)")
+                            Spacer()
+                            Text("已学 \(studied) 词")
+                        }
+                        .font(.caption2.monospacedDigit())
+                        .foregroundStyle(.secondary)
                     }
                 }
                 .padding(.vertical, 4)
             }
         } header: {
-            Text("内置模块化词书")
+            Text("内置模块化词书（\(WordLibrary.allBuiltInWords.count) 词）")
         } footer: {
             Text("可按备考目标自由开关各语种扩展词书，单词记忆记录会永久保留。")
         }
+    }
+
+    private func packLanguageFilterChip(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .font(.caption.weight(.semibold))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(
+                    isSelected ? themeColor : Color(.secondarySystemGroupedBackground),
+                    in: Capsule()
+                )
+                .overlay(
+                    Capsule()
+                        .stroke(isSelected ? Color.clear : Color.primary.opacity(0.06), lineWidth: 1)
+                )
+                .foregroundStyle(isSelected ? .white : .primary)
+        }
+        .buttonStyle(PressScaleButtonStyle())
     }
 
     private var fileImportSection: some View {

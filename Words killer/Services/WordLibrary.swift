@@ -62,6 +62,114 @@ enum WordLibrary {
             licenseBadge: "MIT · CEFR 精选",
             languages: [.spanish],
             isCore: false
+        ),
+        WordPackDescriptor(
+            id: "en-cet-core",
+            title: "英语四六级核心高频词",
+            subtitle: "大学英语 CET-4/6 必考核心动词、名词与形容词（入门至进阶）",
+            resourceName: "pack_en_cet_core",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.english],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "en-ielts-toefl",
+            title: "雅思 · 托福学术读写精选",
+            subtitle: "IELTS / TOEFL 学术阅读、议论写作与听力高频进阶词汇",
+            resourceName: "pack_en_ielts_toefl",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.english],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "en-tech-workplace",
+            title: "科技互联网与外企职场词书",
+            subtitle: "软件工程、人工智能、产品协作、会议汇报与商务谈判高频词",
+            resourceName: "pack_en_tech_workplace",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.english],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "en-daily-travel",
+            title: "英语生活出行与地道表达",
+            subtitle: "海外旅行、饮食住宿、医疗购物与日常地道口语实用词汇",
+            resourceName: "pack_en_daily_travel",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.english],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "ja-daily-culture",
+            title: "日语生活旅行与文化进阶",
+            subtitle: "日本出行、美食动漫、日常会话与 JLPT 补充高频词汇",
+            resourceName: "pack_ja_daily_culture",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.japanese],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "ko-daily-culture",
+            title: "韩语日常社交与职场进阶",
+            subtitle: "韩国旅行、韩剧高频口语、校园社交与 TOPIK 补充实用词",
+            resourceName: "pack_ko_daily_culture",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.korean],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "fr-daily-culture",
+            title: "法语生活艺术与职场进阶",
+            subtitle: "法式生活、美食旅行、艺术文化与 DELF 补充核心词汇",
+            resourceName: "pack_fr_daily_culture",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.french],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "es-daily-culture",
+            title: "西语旅行文化与实用商务",
+            subtitle: "西语国家出行、美食社交、拉美文化与 DELE 补充核心词汇",
+            resourceName: "pack_es_daily_culture",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.spanish],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "en-gre-gmat",
+            title: "GRE · GMAT · 专八硬核词",
+            subtitle: "高阶逻辑推理、人文社科、辩论修辞与专八/GRE 核心难题词",
+            resourceName: "pack_en_gre_gmat",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.english],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "en-polysemy-kaoyan",
+            title: "考研 · 熟词僻义与外刊精读",
+            subtitle: "《经济学人》与考研阅读高频一词多义、熟词僻义与地道高阶动词",
+            resourceName: "pack_en_polysemy_kaoyan",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.english],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "en-stem-finance-law",
+            title: "金融 · 法律 · 医学与前沿科学",
+            subtitle: "量化金融、商法合规、生命科学、物理与系统工程高阶专业词库",
+            resourceName: "pack_en_stem_finance_law",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.english],
+            isCore: false
+        ),
+        WordPackDescriptor(
+            id: "multilang-master",
+            title: "日韩法西 N1 · TOPIK6 · C2 专家词",
+            subtitle: "四小语种高阶书面汉字、四字熟语与 DALF/DELE C1–C2 社论词",
+            resourceName: "pack_multilang_master",
+            licenseBadge: "原创精选 · 离线内置",
+            languages: [.japanese, .korean, .french, .spanish],
+            isCore: false
         )
     ]
 

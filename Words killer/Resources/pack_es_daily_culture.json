@@ -1,0 +1,502 @@
+[
+  {
+    "id": "life-es-beg-7e017b1c",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "aeropuerto",
+    "pronunciation": "/a.e.ɾoˈpweɾ.to/",
+    "translation": "机场（阳性）",
+    "memoryCue": "aero（空气）+ puerto（港口）→ 天空港湾。",
+    "example": "Llegamos al aeropuerto con tiempo suficiente para facturar."
+  },
+  {
+    "id": "life-es-beg-a458b917",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "calle",
+    "pronunciation": "/ˈka.ʎe/",
+    "translation": "街道；马路（阴性）",
+    "memoryCue": "双 ll 在多数西语区读 /ʝ/ 或 /ʎ/，简称 C/。",
+    "example": "Esta calle peatonal está llena de librerías antiguas."
+  },
+  {
+    "id": "life-es-beg-99281303",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "cocina",
+    "pronunciation": "/koˈθi.na/",
+    "translation": "厨房；烹饪（阴性）",
+    "memoryCue": "既指房间“厨房”，也指“西班牙菜/料理”。",
+    "example": "En la cocina huele a ajo, aceite de oliva y pan tostado."
+  },
+  {
+    "id": "life-es-beg-328e26f0",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "desayuno",
+    "pronunciation": "/de.saˈʝu.no/",
+    "translation": "早餐；早饭（阳性）",
+    "memoryCue": "des-（打破）+ ayuno（禁食）→ 构词与英语 breakfast 完全一致！",
+    "example": "El desayuno incluye café con leche y fruta fresca."
+  },
+  {
+    "id": "life-es-beg-c02138b9",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "dinero",
+    "pronunciation": "/diˈne.ɾo/",
+    "translation": "钱；货币（阳性）",
+    "memoryCue": "不可数名词，tener dinero（有钱），sacar dinero（取钱）。",
+    "example": "Lleva algo de dinero en efectivo para los mercados locales."
+  },
+  {
+    "id": "life-es-beg-adfa815c",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "estación",
+    "pronunciation": "/es.taˈθjon/",
+    "translation": "车站；季节（阴性）",
+    "memoryCue": "一词两义：estación de tren（火车站）/ las cuatro estaciones（四季）。",
+    "example": "La estación central queda a diez minutos andando."
+  },
+  {
+    "id": "life-es-beg-dbc3c508",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "farmacia",
+    "pronunciation": "/faɾˈma.θja/",
+    "translation": "药房；药店（阴性）",
+    "memoryCue": "西语街道同样用绿色发光十字标志表示药店。",
+    "example": "Compremos crema solar en la farmacia antes de ir a la playa."
+  },
+  {
+    "id": "life-es-beg-f669ecec",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "maleta",
+    "pronunciation": "/maˈle.ta/",
+    "translation": "手提箱；行李箱（阴性）",
+    "memoryCue": "hacer la maleta 表示“打包行李”。",
+    "example": "Todavía tengo que hacer la maleta para el viaje de mañana."
+  },
+  {
+    "id": "life-es-beg-5bd053a2",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "mercado",
+    "pronunciation": "/meɾˈka.ðo/",
+    "translation": "市场；集市（阳性）",
+    "memoryCue": "Mercado de San Miguel 是马德里经典美食市场。",
+    "example": "Compramos tomates y queso fresco en el mercado municipal."
+  },
+  {
+    "id": "life-es-beg-047c0a42",
+    "language": "spanish",
+    "difficulty": "beginner",
+    "term": "playa",
+    "pronunciation": "/ˈpla.ʝa/",
+    "translation": "海滩；沙滩（阴性）",
+    "memoryCue": "ir a la playa（去海边），西语夏日必背词。",
+    "example": "Nos encanta pasear por la playa al atardecer."
+  },
+  {
+    "id": "life-es-ele-af68c2a5",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "alojamiento",
+    "pronunciation": "/a.lo.xaˈmjen.to/",
+    "translation": "住宿；住处（阳性）",
+    "memoryCue": "动词 alojar（接待留宿）+ -miento → 旅游订房分类词。",
+    "example": "Buscamos un alojamiento tranquilo cerca del centro histórico."
+  },
+  {
+    "id": "life-es-ele-0149c308",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "ambiente",
+    "pronunciation": "/amˈbjen.te/",
+    "translation": "氛围；环境（阳性）",
+    "memoryCue": "buen ambiente 表示“气氛超棒”。",
+    "example": "El patio interior tiene un ambiente muy acogedor."
+  },
+  {
+    "id": "life-es-ele-2ed75e25",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "cuenta",
+    "pronunciation": "/ˈkwen.ta/",
+    "translation": "账单；账户；计算（阴性）",
+    "memoryCue": "餐厅买单必说：La cuenta, por favor。",
+    "example": "Camarero, ¿nos trae la cuenta cuando pueda?"
+  },
+  {
+    "id": "life-es-ele-0083f63b",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "descuento",
+    "pronunciation": "/desˈkwen.to/",
+    "translation": "折扣；优惠（阳性）",
+    "memoryCue": "des-（减去）+ cuento（数额）→ 减价打折。",
+    "example": "Hay un descuento del quince por ciento con carné joven."
+  },
+  {
+    "id": "life-es-ele-3616bd27",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "equipaje",
+    "pronunciation": "/e.kiˈpa.xe/",
+    "translation": "行李总称（阳性）",
+    "memoryCue": "equipaje de mano（手提登机行李）。",
+    "example": "Puedes dejar tu equipaje en la recepción hasta la tarde."
+  },
+  {
+    "id": "life-es-ele-ce3ad496",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "exposición",
+    "pronunciation": "/eks.po.siˈθjon/",
+    "translation": "展览；展示（阴性）",
+    "memoryCue": "后缀 -ción 几乎总是阴性：una exposición de arte。",
+    "example": "La exposición de fotografía moderna termina este domingo."
+  },
+  {
+    "id": "life-es-ele-a7f6c592",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "gastronomía",
+    "pronunciation": "/ɡas.tɾo.noˈmi.a/",
+    "translation": "美食文化；烹饪艺术（阴性）",
+    "memoryCue": "注意 í 上带重音符号，避免连读成双元音。",
+    "example": "La gastronomía peruana combina tradiciones andinas y asiáticas."
+  },
+  {
+    "id": "life-es-ele-2f287f7e",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "itinerario",
+    "pronunciation": "/i.ti.neˈɾa.ɾjo/",
+    "translation": "行程单；路线（阳性）",
+    "memoryCue": "与英语 itinerary、法语 itinéraire 同源。",
+    "example": "El guía nos entregó el itinerario completo de la semana."
+  },
+  {
+    "id": "life-es-ele-633d1cc4",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "receta",
+    "pronunciation": "/reˈθe.ta/",
+    "translation": "食谱；医生处方（阴性）",
+    "memoryCue": "一词两义：厨房菜谱（receta de cocina）与医院药方。",
+    "example": "Mi abuela guarda una receta secreta para hacer paella."
+  },
+  {
+    "id": "life-es-ele-f0122538",
+    "language": "spanish",
+    "difficulty": "elementary",
+    "term": "reserva",
+    "pronunciation": "/reˈseɾ.βa/",
+    "translation": "预订；自然保护区（阴性）",
+    "memoryCue": "hacer una reserva（订位/订房）。",
+    "example": "Tengo una reserva a nombre de García para las ocho."
+  },
+  {
+    "id": "life-es-int-843fc15f",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "anfitrión",
+    "pronunciation": "/an.fiˈtɾjon/",
+    "translation": "东道主；主人（阳性）",
+    "memoryCue": "源自希腊神话热情好客的安菲特里翁，阴性 anfitriona。",
+    "example": "Nuestros anfitriones nos enseñaron los mejores rincones del barrio."
+  },
+  {
+    "id": "life-es-int-2eae3f19",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "autenticidad",
+    "pronunciation": "/au.ten.ti.θiˈðað/",
+    "translation": "真实性；地道原味（阴性）",
+    "memoryCue": "以 -dad 结尾的抽象名词在西语中均为阴性。",
+    "example": "Los lectores valoran la autenticidad de las historias cotidianas."
+  },
+  {
+    "id": "life-es-int-ddfd7b29",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "bienestar",
+    "pronunciation": "/bje.nesˈtaɾ/",
+    "translation": "福祉；身心健康（阳性）",
+    "memoryCue": "bien（好）+ estar（状态）→ 身心处于良好状态。",
+    "example": "Dormir bien es fundamental para el bienestar diario."
+  },
+  {
+    "id": "life-es-int-1c5a2590",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "convivencia",
+    "pronunciation": "/kom.biˈβen.θja/",
+    "translation": "共处；和谐相处（阴性）",
+    "memoryCue": "con-（共同）+ vivir（生活）→ 邻里或跨文化共同生活。",
+    "example": "El respeto mutuo facilita la convivencia en comunidades diversas."
+  },
+  {
+    "id": "life-es-int-35b796e1",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "creatividad",
+    "pronunciation": "/kɾe.a.ti.βiˈðað/",
+    "translation": "创造力；创意（阴性）",
+    "memoryCue": "crear（创造）的名词，-dad 对应英语 -ty。",
+    "example": "Cambiar de rutina suele despertar la creatividad."
+  },
+  {
+    "id": "life-es-int-acbf1577",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "desarrollo",
+    "pronunciation": "/de.saˈro.ʎo/",
+    "translation": "发展；开发（阳性）",
+    "memoryCue": "des-（展开）+ arrollo（卷）→ 把卷轴展开推动发展。",
+    "example": "El desarrollo de hábitos constantes supera a los esfuerzos puntuales."
+  },
+  {
+    "id": "life-es-int-ff12c0da",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "entorno",
+    "pronunciation": "/enˈtoɾ.no/",
+    "translation": "周边环境；运行环境（阳性）",
+    "memoryCue": "en（在）+ torno（围绕）→ 环绕在周围的环境。",
+    "example": "Un entorno ordenado ayuda a mantener la atención sin distracciones."
+  },
+  {
+    "id": "life-es-int-c42d4239",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "identidad",
+    "pronunciation": "/i.ðen.tiˈðað/",
+    "translation": "身份；认同感；特性（阴性）",
+    "memoryCue": "La lengua forma parte esencial de nuestra identidad cultural.",
+    "example": "La música tradicional refuerza la identidad de cada región."
+  },
+  {
+    "id": "life-es-int-373bcdc5",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "motivación",
+    "pronunciation": "/mo.ti.βaˈθjon/",
+    "translation": "动力；动机（阴性）",
+    "memoryCue": "motivo（原因/动因）→ 坚持每天打卡的内在动力。",
+    "example": "Ver tu racha crecer mantiene alta la motivación cada mañana."
+  },
+  {
+    "id": "life-es-int-f68cdf67",
+    "language": "spanish",
+    "difficulty": "intermediate",
+    "term": "patrimonio",
+    "pronunciation": "/pa.tɾiˈmo.njo/",
+    "translation": "文化遗产；资产（阳性）",
+    "memoryCue": "Patrimonio de la Humanidad（世界文化遗产）。",
+    "example": "La Alhambra de Granada es un patrimonio admirado en todo el mundo."
+  },
+  {
+    "id": "life-es-adv-fd4b01b4",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "ambivalencia",
+    "pronunciation": "/am.bi.βaˈlen.θja/",
+    "translation": "矛盾心理；双重态度（阴性）",
+    "memoryCue": "ambi-（双）+ valencia → 同时存在正反两种情绪。",
+    "example": "El ensayo analiza la ambivalencia frente a las nuevas tecnologías."
+  },
+  {
+    "id": "life-es-adv-6e90cffb",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "contingencia",
+    "pronunciation": "/kon.tiŋˈxen.θja/",
+    "translation": "偶然事件；应急情况（阴性）",
+    "memoryCue": "plan de contingencia（应急预案）。",
+    "example": "Contar con un plan de contingencia reduce riesgos en la ruta."
+  },
+  {
+    "id": "life-es-adv-75f52a90",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "elocuencia",
+    "pronunciation": "/e.loˈkwen.θja/",
+    "translation": "雄辩；表达感染力（阴性）",
+    "memoryCue": "与英语 eloquence 同源，DELE C1 高分写作词汇。",
+    "example": "Defendió su postura con claridad y notable elocuencia."
+  },
+  {
+    "id": "life-es-adv-fbb68410",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "envergadura",
+    "pronunciation": "/em.beɾ.ɣaˈðu.ɾa/",
+    "translation": "规模；格局；翼展（阴性）",
+    "memoryCue": "un proyecto de gran envergadura（大型重磅项目）。",
+    "example": "Coordinar cinco idiomas en una sola aplicación es una tarea de gran envergadura."
+  },
+  {
+    "id": "life-es-adv-eccf93bb",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "hegemonía",
+    "pronunciation": "/e.xe.moˈni.a/",
+    "translation": "霸权；主导地位（阴性）",
+    "memoryCue": "注意词首 h 不发音，g 在 e 前发 /x/ 音。",
+    "example": "El artículo estudia la hegemonía lingüística en las revistas científicas."
+  },
+  {
+    "id": "life-es-adv-87ce8c5e",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "imparcialidad",
+    "pronunciation": "/im.paɾ.θja.liˈðað/",
+    "translation": "公正性；客观中立（阴性）",
+    "memoryCue": "im-（不）+ parcial（偏心）→ 评估公正无偏私。",
+    "example": "La imparcialidad del análisis fortalece la confianza del lector."
+  },
+  {
+    "id": "life-es-adv-d9e2c2a6",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "legitimidad",
+    "pronunciation": "/le.xi.ti.miˈðað/",
+    "translation": "合法性；正当性（阴性）",
+    "memoryCue": "对比 legalidad（条文合法性）与 legitimidad（公信正当性）。",
+    "example": "El diálogo abierto aporta legitimidad a cualquier acuerdo común."
+  },
+  {
+    "id": "life-es-adv-965e4f01",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "metodología",
+    "pronunciation": "/me.to.ðo.loˈxi.a/",
+    "translation": "方法论（阴性）",
+    "memoryCue": "método（方法）+ -logía（学说）。",
+    "example": "La metodología de repaso espaciado optimiza el tiempo de estudio."
+  },
+  {
+    "id": "life-es-adv-caa64af8",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "paradigma",
+    "pronunciation": "/pa.ɾaˈðiɣ.ma/",
+    "translation": "范式；典范（阳性）",
+    "memoryCue": "注意以 -ma 结尾的希腊语词源名词多为阳性：el paradigma！",
+    "example": "La inteligencia artificial está cambiando el paradigma de diseño."
+  },
+  {
+    "id": "life-es-adv-d3493464",
+    "language": "spanish",
+    "difficulty": "advanced",
+    "term": "pertinencia",
+    "pronunciation": "/peɾ.tiˈnen.θja/",
+    "translation": "贴切性；相关性（阴性）",
+    "memoryCue": "pertinente（切题中肯）的抽象名词。",
+    "example": "La pertinencia de los ejemplos acelera la comprensión real."
+  },
+  {
+    "id": "life-es-bus-2069ca79",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "balance",
+    "pronunciation": "/baˈlan.θe/",
+    "translation": "总结；资产负债表（阳性）",
+    "memoryCue": "balance general（资产负债表），hacer balance（做阶段复盘）。",
+    "example": "El equipo presentó un balance muy positivo del último trimestre."
+  },
+  {
+    "id": "life-es-bus-87c059fd",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "competitividad",
+    "pronunciation": "/kom.pe.ti.ti.βiˈðað/",
+    "translation": "竞争力（阴性）",
+    "memoryCue": "competición（竞争）家族词，企业战略高频名词。",
+    "example": "La formación continua mejora la competitividad de la plantilla."
+  },
+  {
+    "id": "life-es-bus-a3d647d1",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "contratación",
+    "pronunciation": "/kon.tɾa.taˈθjon/",
+    "translation": "招聘；签约雇佣（阴性）",
+    "memoryCue": "contrato（合同）派生词，企业 HR 核心术语。",
+    "example": "La empresa anunció nuevas contrataciones para el equipo móvil."
+  },
+  {
+    "id": "life-es-bus-ae3f40ec",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "crecimiento",
+    "pronunciation": "/kɾe.θiˈmjen.to/",
+    "translation": "增长；成长（阳性）",
+    "memoryCue": "crecer（增长）的名词，crecimiento sostenible 可持续增长。",
+    "example": "El crecimiento orgánico superó nuestras previsiones iniciales."
+  },
+  {
+    "id": "life-es-bus-651b9fae",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "inversión",
+    "pronunciation": "/im.beɾˈsjon/",
+    "translation": "投资；投入（阴性）",
+    "memoryCue": "retorno de la inversión（ROI 投资回报率）。",
+    "example": "Dedicar diez minutos diarios es una inversión segura en tu futuro."
+  },
+  {
+    "id": "life-es-bus-4a2fff6e",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "jornada",
+    "pronunciation": "/xoɾˈna.ða/",
+    "translation": "工作日；每日工时（阴性）",
+    "memoryCue": "jornada completa（全职工作制），jornada continua 连续工时。",
+    "example": "La nueva jornada flexible permite conciliar mejor la vida familiar."
+  },
+  {
+    "id": "life-es-bus-ca60bc67",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "logística",
+    "pronunciation": "/loˈxis.ti.ka/",
+    "translation": "物流；后勤统筹（阴性）",
+    "memoryCue": "电商、供应链与展会筹备常用词。",
+    "example": "Optimizamos la logística de envíos para reducir los plazos de entrega."
+  },
+  {
+    "id": "life-es-bus-627d4191",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "nómina",
+    "pronunciation": "/ˈno.mi.na/",
+    "translation": "工资单；薪资名册（阴性）",
+    "memoryCue": "西班牙发工资条就叫 recibir la nómina。",
+    "example": "El departamento de finanzas envía la nómina el último día del mes."
+  },
+  {
+    "id": "life-es-bus-b9d8a7df",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "socios",
+    "pronunciation": "/ˈso.θjos/",
+    "translation": "合伙人；会员（阳性复数）",
+    "memoryCue": "单数 socio，商业里既指公司股东合伙人也指俱乐部会员。",
+    "example": "Los socios aprobaron ampliar el catálogo de cursos digitales."
+  },
+  {
+    "id": "life-es-bus-de584fd5",
+    "language": "spanish",
+    "difficulty": "business",
+    "term": "teletrabajo",
+    "pronunciation": "/te.le.tɾaˈβa.xo/",
+    "translation": "远程办公；居家办公（阳性）",
+    "memoryCue": "tele-（远程）+ trabajo（工作），西语职场高频词。",
+    "example": "El teletrabajo parcial se ha consolidado en muchas oficinas."
+  }
+]

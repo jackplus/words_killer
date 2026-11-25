@@ -99,6 +99,7 @@ nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
     case intermediate
     case advanced
     case business
+    case master
 
     var id: String { rawValue }
 
@@ -109,6 +110,7 @@ nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
         case .intermediate: 3
         case .advanced: 4
         case .business: 5
+        case .master: 6
         }
     }
 
@@ -119,6 +121,7 @@ nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
         case .intermediate: "int"
         case .advanced: "adv"
         case .business: "biz"
+        case .master: "mst"
         }
     }
 
@@ -129,6 +132,7 @@ nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
         case .intermediate: "进阶"
         case .advanced: "高级"
         case .business: "商务"
+        case .master: "硬核专家"
         }
     }
 
@@ -139,6 +143,7 @@ nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
         case .intermediate: "进阶"
         case .advanced: "高级"
         case .business: "商务"
+        case .master: "专家"
         }
     }
 
@@ -149,6 +154,7 @@ nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
         case .intermediate: "开始训练抽象表达、短语搭配和常见场景。"
         case .advanced: "面向阅读、讨论和更复杂的语境理解。"
         case .business: "覆盖会议、汇报、谈判和职场邮件表达。"
+        case .master: "对标 GRE / GMAT / 专八 / N1 / C2 与外刊深度阅读，专攻高难抽象词与熟词僻义。"
         }
     }
 
@@ -164,6 +170,8 @@ nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
             "关注语气、抽象含义和近义词差别，把词放进讨论或写作场景里记。"
         case .business:
             "把单词和职场任务绑定，例如汇报、协商、跟进邮件，提高可直接使用的熟练度。"
+        case .master:
+            "结合词根词缀、语境逻辑与近义微差精读，推荐搭配「盲听辨词 / 无音标 / 看义回忆」模式强化主动提取。"
         }
     }
 
@@ -176,10 +184,13 @@ nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
         }
 
         let tokens = lower.split { !$0.isLetter && !$0.isNumber }.map(String.init)
+        if tokens.contains(where: { ["master", "gre", "gmat", "tem8", "c2", "专八", "专家", "硬核", "硬核专家"].contains($0) }) {
+            return .master
+        }
         if tokens.contains(where: { ["business", "bec", "toeic", "商务"].contains($0) }) {
             return .business
         }
-        if tokens.contains(where: { ["advanced", "gre", "gmat", "ielts", "toefl", "sat", "kaoyan", "ky", "n1", "n2", "topik2", "b2", "c1", "c2", "高级"].contains($0) }) {
+        if tokens.contains(where: { ["advanced", "ielts", "toefl", "sat", "kaoyan", "ky", "n1", "n2", "topik2", "b2", "c1", "高级"].contains($0) }) {
             return .advanced
         }
         if tokens.contains(where: { ["intermediate", "cet6", "n3", "b1", "进阶", "中级"].contains($0) }) {
@@ -192,6 +203,51 @@ nonisolated enum DifficultyLevel: String, CaseIterable, Identifiable, Codable {
             return .beginner
         }
         return nil
+    }
+}
+
+nonisolated enum CardChallengeMode: String, CaseIterable, Identifiable, Sendable {
+    case standard
+    case noPhonetics
+    case blindAudio
+    case meaningToTerm
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .standard: "标准闪卡"
+        case .noPhonetics: "无音标纯词"
+        case .blindAudio: "盲听辨词"
+        case .meaningToTerm: "看义回忆"
+        }
+    }
+
+    var shortTitle: String {
+        switch self {
+        case .standard: "标准"
+        case .noPhonetics: "无音标"
+        case .blindAudio: "盲听"
+        case .meaningToTerm: "看义"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .standard: "展示外语词形与音标提示"
+        case .noPhonetics: "隐藏音标注音，独立辨识读音"
+        case .blindAudio: "仅播读音隐藏拼写，训练听力反应"
+        case .meaningToTerm: "只看中文释义，主动拼出目标外语"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .standard: "rectangle.on.rectangle"
+        case .noPhonetics: "eye.slash"
+        case .blindAudio: "ear.and.waveform"
+        case .meaningToTerm: "character.book.closed"
+        }
     }
 }
 

@@ -1,0 +1,502 @@
+[
+  {
+    "id": "life-ja-beg-00cc0137",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "温泉",
+    "pronunciation": "おんせん (onsen)",
+    "translation": "温泉；温泉浴场",
+    "memoryCue": "日本旅馆标配“温泉（おんせん）”，注意“温”读 おん。",
+    "example": "箱根の温泉でゆっくり疲れを取りたいです。"
+  },
+  {
+    "id": "life-ja-beg-f7414aa8",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "お土産",
+    "pronunciation": "おみやげ (omiyage)",
+    "translation": "伴手礼；特产礼品",
+    "memoryCue": "旅行回来带给同事亲友的点心或土特产。",
+    "example": "京都駅で抹茶のお土産を買いました。"
+  },
+  {
+    "id": "life-ja-beg-11d0b073",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "切符",
+    "pronunciation": "きっぷ (kippu)",
+    "translation": "车票；入场券",
+    "memoryCue": "注意促音“きっぷ”，乘电车或新干线必用词。",
+    "example": "自動券売機で新幹線と在来線の切符を買います。"
+  },
+  {
+    "id": "life-ja-beg-437d1cf0",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "予約",
+    "pronunciation": "よやく (yoyaku)",
+    "translation": "预约；预订",
+    "memoryCue": "汉字直通中文“预约”，餐厅、酒店都能用。",
+    "example": "人気のお店なので事前に席を予約しました。"
+  },
+  {
+    "id": "life-ja-beg-37e38080",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "写真",
+    "pronunciation": "しゃしん (shashin)",
+    "translation": "照片；摄影",
+    "memoryCue": "繁体写作“寫真”，撮る（とる）表示“拍照”。",
+    "example": "桜の下で友達と一緒に写真を撮りました。"
+  },
+  {
+    "id": "life-ja-beg-ca409b15",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "地図",
+    "pronunciation": "ちず (chizu)",
+    "translation": "地图",
+    "memoryCue": "ち（地）+ ず（图），Googleマップ也很常用。",
+    "example": "道に迷ったらスマホの地図で確認しましょう。"
+  },
+  {
+    "id": "life-ja-beg-b5d2826d",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "病院",
+    "pronunciation": "びょういん (byouin)",
+    "translation": "医院",
+    "memoryCue": "注意长音“びょう”（病）+ “いん”（院），区分美容院（びよういん）。",
+    "example": "熱が出たので近くの病院へ行きました。"
+  },
+  {
+    "id": "life-ja-beg-1b197548",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "買い物",
+    "pronunciation": "かいもの (kaimono)",
+    "translation": "购物；买东西",
+    "memoryCue": "買う（买）+ 物（东西）→ 购物。",
+    "example": "日曜日の午後はデパートで買い物を楽しみます。"
+  },
+  {
+    "id": "life-ja-beg-87d3a938",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "財布",
+    "pronunciation": "さいふ (saifu)",
+    "translation": "钱包",
+    "memoryCue": "装钱财的布包，长財布（ながざいふ）指长款钱包。",
+    "example": "改札の前で財布を忘れたことに気づきました。"
+  },
+  {
+    "id": "life-ja-beg-cf2c376d",
+    "language": "japanese",
+    "difficulty": "beginner",
+    "term": "天気予報",
+    "pronunciation": "てんきよほう (tenki yohou)",
+    "translation": "天气预报",
+    "memoryCue": "天気（天气）+ 予報（预报），出门前必查。",
+    "example": "天気予報によると明日は夕方から雨だそうです。"
+  },
+  {
+    "id": "life-ja-ele-e02bf3ee",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "祭り",
+    "pronunciation": "まつり (matsuri)",
+    "translation": "祭典；庙会；节日",
+    "memoryCue": "日本各地夏秋常见花火大会与神社お祭り。",
+    "example": "夏には地元の伝統的な祭りが開かれます。"
+  },
+  {
+    "id": "life-ja-ele-d6e7697c",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "居酒屋",
+    "pronunciation": "いざかや (izakaya)",
+    "translation": "居酒屋（日式小酒馆）",
+    "memoryCue": "居（坐下）+ 酒（喝酒）+ 屋（店）→ 聚餐宵夜首选。",
+    "example": "仕事終わりに同僚と駅前の居酒屋へ行きました。"
+  },
+  {
+    "id": "life-ja-ele-eab6f6f7",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "乗り換え",
+    "pronunciation": "のりかえ (norikae)",
+    "translation": "换乘；转车",
+    "memoryCue": "乗る（乘）+ 換える（换）→ 地铁站标牌最常见词。",
+    "example": "東京駅で山手線に乗り換えてください。"
+  },
+  {
+    "id": "life-ja-ele-262fabdb",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "会計",
+    "pronunciation": "かいけい (kaikei)",
+    "translation": "结账；会计",
+    "memoryCue": "餐厅吃完饭举手说“お会計お願いします”（麻烦结账）。",
+    "example": "すみません、テーブルでお会計をお願いします。"
+  },
+  {
+    "id": "life-ja-ele-2a4649a0",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "順番",
+    "pronunciation": "じゅんばん (junban)",
+    "translation": "顺序；次序；轮流",
+    "memoryCue": "順番を待つ（排队等候轮到自己）。",
+    "example": "名前が呼ばれるまで順番にお待ちください。"
+  },
+  {
+    "id": "life-ja-ele-a246e6ac",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "季節",
+    "pronunciation": "きせつ (kisetsu)",
+    "translation": "季节",
+    "memoryCue": "春夏秋冬四季（きせつ），注意“季”清音 き。",
+    "example": "日本は季節ごとに異なる料理が楽しめます。"
+  },
+  {
+    "id": "life-ja-ele-bf097cf7",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "片付ける",
+    "pronunciation": "かたづける (katazukeru)",
+    "translation": "整理；收拾；解决",
+    "memoryCue": "把散乱在各处的东西收拢整齐。",
+    "example": "寝る前に机の上をきれいに片付けました。"
+  },
+  {
+    "id": "life-ja-ele-28940f57",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "間に合う",
+    "pronunciation": "まにあう (maniau)",
+    "translation": "赶得上；来得及",
+    "memoryCue": "間（时间缝隙）+ 合う（合上）→ 刚好赶上末班车或截止点。",
+    "example": "走れば終電にまだ間に合うかもしれません。"
+  },
+  {
+    "id": "life-ja-ele-c22b0c07",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "道案内",
+    "pronunciation": "みちあんない (michi annai)",
+    "translation": "指路；带路",
+    "memoryCue": "道（路）+ 案内（引导）→ 热心帮游客指路。",
+    "example": "親切な駅員さんが丁寧に道案内してくれました。"
+  },
+  {
+    "id": "life-ja-ele-c50e0830",
+    "language": "japanese",
+    "difficulty": "elementary",
+    "term": "思い出",
+    "pronunciation": "おもいで (omoide)",
+    "translation": "回忆；往事",
+    "memoryCue": "思う（想）+ 出る（涌现出）→ 浮上心头的珍贵记忆。",
+    "example": "沖縄での旅行は一生の大切な思い出です。"
+  },
+  {
+    "id": "life-ja-int-0e3e445b",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "伝統",
+    "pronunciation": "でんとう (dentou)",
+    "translation": "传统",
+    "memoryCue": "伝（传）+ 統（统），伝統工芸（传统工艺）。",
+    "example": "この町では古い伝統工芸が大切に守られています。"
+  },
+  {
+    "id": "life-ja-int-a76b21be",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "雰囲気",
+    "pronunciation": "ふんいき (fun'iki)",
+    "translation": "气氛；氛围",
+    "memoryCue": "注意发音是 ふんいき，常有人误读成 ふいんき！",
+    "example": "この喫茶店は落ち着いていて良い雰囲気ですね。"
+  },
+  {
+    "id": "life-ja-int-7e684528",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "感覚",
+    "pronunciation": "かんかく (kankaku)",
+    "translation": "感觉；直觉；感官",
+    "memoryCue": "音読“かんかく”，表语感或视觉听觉感受。",
+    "example": "毎日声に出して読むと語学の感覚が身につきます。"
+  },
+  {
+    "id": "life-ja-int-e97e9b11",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "価値観",
+    "pronunciation": "かちかん (kachikan)",
+    "translation": "价值观",
+    "memoryCue": "価値（价值）+ 観（观念）→ 文化交流中常见的价值观差异。",
+    "example": "海外で暮らすと多様な価値観に触れることができます。"
+  },
+  {
+    "id": "life-ja-int-c6c50148",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "工夫",
+    "pronunciation": "くふう (kufuu)",
+    "translation": "花心思；巧妙办法；改良",
+    "memoryCue": "注意中文“功夫”不同，日语表“动脑筋想好办法”。",
+    "example": "覚えやすいように語呂合わせを工夫しています。"
+  },
+  {
+    "id": "life-ja-int-79eb3d93",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "自然体",
+    "pronunciation": "しぜんたい (shizentai)",
+    "translation": "自然状态；不造作",
+    "memoryCue": "不紧张、不做作地展示本真自我。",
+    "example": "面接ではあまり緊張せず、自然体で話せました。"
+  },
+  {
+    "id": "life-ja-int-754d4810",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "表現力",
+    "pronunciation": "ひょうげんりょく (hyougenryoku)",
+    "translation": "表达能力；表现力",
+    "memoryCue": "表現（表达）+ 力（能力），写作与演讲常考。",
+    "example": "小説を多く読むことで表現力が豊かになります。"
+  },
+  {
+    "id": "life-ja-int-3068a66b",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "余裕",
+    "pronunciation": "よゆう (yoyuu)",
+    "translation": "富余；从容；余地",
+    "memoryCue": "時間的・経済的余裕（时间或精力游刃有余）。",
+    "example": "朝は少し早めに起きて、余裕を持って出発します。"
+  },
+  {
+    "id": "life-ja-int-1fe60839",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "共通点",
+    "pronunciation": "きょうつうてん (kyoutsuuten)",
+    "translation": "共同点",
+    "memoryCue": "共通（共同）+ 点（方面）→ 对比两种语言的相似点。",
+    "example": "日本語と韓国語には文法上の共通点が多くあります。"
+  },
+  {
+    "id": "life-ja-int-dc28f1f7",
+    "language": "japanese",
+    "difficulty": "intermediate",
+    "term": "達成感",
+    "pronunciation": "たっせいかん (tasseikan)",
+    "translation": "成就感",
+    "memoryCue": "達成（达成目标）+ 感（感受）→ 背完一轮单词的爽感。",
+    "example": "一日の目標を終えたときの達成感が習慣を支えます。"
+  },
+  {
+    "id": "life-ja-adv-014c3f8f",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "曖昧",
+    "pronunciation": "あいまい (aimai)",
+    "translation": "模糊；含糊不清；暧昧",
+    "memoryCue": "日语日常表达常用“曖昧な返事”（含糊其辞的回复）。",
+    "example": "誤解を防ぐため、曖昧な表現は避けるべきです。"
+  },
+  {
+    "id": "life-ja-adv-e0e09eac",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "本質",
+    "pronunciation": "ほんしつ (honshitsu)",
+    "translation": "本质；实质",
+    "memoryCue": "本（根本）+ 質（性质），JLPT N1 阅读高频词。",
+    "example": "表面的な流行ではなく、問題の本質を見極めたい。"
+  },
+  {
+    "id": "life-ja-adv-e4012127",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "客観的",
+    "pronunciation": "きゃっかんてき (kyakkanteki)",
+    "translation": "客观的",
+    "memoryCue": "反义词 主観的（しゅかんてき，主观的）。",
+    "example": "感情を交えず客観的なデータで判断しましょう。"
+  },
+  {
+    "id": "life-ja-adv-d60d38c5",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "普遍的",
+    "pronunciation": "ふへんてき (fuhenteki)",
+    "translation": "普遍的；通用的",
+    "memoryCue": "ふへん（普遍）+ てき（的），形容跨文化通用规律。",
+    "example": "思いやりの心はどの文化でも普遍的な価値です。"
+  },
+  {
+    "id": "life-ja-adv-74de83bc",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "網羅",
+    "pronunciation": "もうら (moura)",
+    "translation": "全面覆盖；网罗包罗",
+    "memoryCue": "用网一网打尽地覆盖全考点或全领域。",
+    "example": "この単語帳は試験の重要語彙を幅広く網羅しています。"
+  },
+  {
+    "id": "life-ja-adv-990f993a",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "洗練",
+    "pronunciation": "せんれん (senren)",
+    "translation": "精炼；优雅干练；考究",
+    "memoryCue": "洗（淘洗）+ 練（锤炼）→ 去掉繁杂变得高级极简。",
+    "example": "無駄を省いた洗練されたデザインが印象的です。"
+  },
+  {
+    "id": "life-ja-adv-a6ff693e",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "示唆",
+    "pronunciation": "しさ (shisa)",
+    "translation": "启示；暗示；提示",
+    "memoryCue": "论文与新闻评论高频词：重要な示唆を与える。",
+    "example": "今回の調査結果は今後の学習法に貴重な示唆を与えます。"
+  },
+  {
+    "id": "life-ja-adv-eb456741",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "相乗効果",
+    "pronunciation": "そうじょうこうか (soujou kouka)",
+    "translation": "协同效应；叠加效果（1+1>2）",
+    "memoryCue": "相（互相）+ 乗（相乘）+ 効果 → 听与读结合互相放大。",
+    "example": "読書と音声学習を組み合わせると高い相乗効果が出ます。"
+  },
+  {
+    "id": "life-ja-adv-566b1989",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "柔軟性",
+    "pronunciation": "じゅうなんせい (juunansei)",
+    "translation": "灵活性；柔韧性",
+    "memoryCue": "柔軟（柔软灵活）+ 性 → 适应变化的弹性。",
+    "example": "計画通りに進まないときは柔軟性を持って対応します。"
+  },
+  {
+    "id": "life-ja-adv-e3bc0149",
+    "language": "japanese",
+    "difficulty": "advanced",
+    "term": "定着",
+    "pronunciation": "ていちゃく (teichaku)",
+    "translation": "扎根；牢记固化；留存",
+    "memoryCue": "学習内容が記憶に定着する（知识真正扎根脑海）。",
+    "example": "間隔を空けて復習することで語彙がしっかり定着します。"
+  },
+  {
+    "id": "life-ja-bus-e12fd178",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "挨拶",
+    "pronunciation": "あいさつ (aisatsu)",
+    "translation": "寒暄；问候；致辞",
+    "memoryCue": "日本职场第一课：礼貌打招呼、开场致辞皆用挨拶。",
+    "example": "朝一番に明るい声で挨拶をするのが職場の基本です。"
+  },
+  {
+    "id": "life-ja-bus-f3d40d2d",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "名刺",
+    "pronunciation": "めいし (meishi)",
+    "translation": "名片",
+    "memoryCue": "名刺交換（交换名片），日本商务礼仪核心。",
+    "example": "初対面の取引先には両手で丁寧に名刺を渡します。"
+  },
+  {
+    "id": "life-ja-bus-84268e08",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "敬語",
+    "pronunciation": "けいご (keigo)",
+    "translation": "敬语",
+    "memoryCue": "包含丁寧語、尊敬語与謙譲語三大体系。",
+    "example": "社外のお客様には正しい敬語を使って対応します。"
+  },
+  {
+    "id": "life-ja-bus-9fc676c6",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "報連相",
+    "pronunciation": "ほうれんそう (hourensou)",
+    "translation": "汇报·联系·商量",
+    "memoryCue": "報告・連絡・相談三词首字缩写，跟“菠菜”同音好记。",
+    "example": "新人のうちに報連相の習慣を身につけると安心です。"
+  },
+  {
+    "id": "life-ja-bus-6b791f51",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "残業",
+    "pronunciation": "ざんぎょう (zangyou)",
+    "translation": "加班",
+    "memoryCue": "残（留下来）+ 業（工作）→ 加班；ノー残業デー（无加班日）。",
+    "example": "業務を効率化して、できるだけ残業を減らしたいです。"
+  },
+  {
+    "id": "life-ja-bus-458967e4",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "有給休暇",
+    "pronunciation": "ゆうきゅうきゅうか (yuukyuu kyuuka)",
+    "translation": "带薪年假",
+    "memoryCue": "简称 有休（ゆうきゅう），法律保障的带薪休假。",
+    "example": "来月は有給休暇を取って北海道へ行く予定です。"
+  },
+  {
+    "id": "life-ja-bus-92cb7614",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "幹事",
+    "pronunciation": "かんじ (kanji)",
+    "translation": "（聚会/活动）组织者；干事",
+    "memoryCue": "欢迎会、忘年会负责订店收钱的牵头人。",
+    "example": "今度の歓迎会の幹事は私が担当することになりました。"
+  },
+  {
+    "id": "life-ja-bus-59b7896b",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "配慮",
+    "pronunciation": "はいりょ (hairyo)",
+    "translation": "体贴；关照；周全考虑",
+    "memoryCue": "配（分配）+ 慮（思虑）→ 替对方周到考虑。",
+    "example": "海外からの参加者にも分かりやすい表現へ配慮しました。"
+  },
+  {
+    "id": "life-ja-bus-f796bd8c",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "折衝",
+    "pronunciation": "せっしょう (sesshou)",
+    "translation": "交涉；磋商斡旋",
+    "memoryCue": "比交渉更偏重双向折中协调的正式商务用语。",
+    "example": "関係部署との粘り強い折衝を経て合意に達しました。"
+  },
+  {
+    "id": "life-ja-bus-b652a48d",
+    "language": "japanese",
+    "difficulty": "business",
+    "term": "引き継ぎ",
+    "pronunciation": "ひきつぎ (hikitsugi)",
+    "translation": "工作交接",
+    "memoryCue": "引き継ぐ的名词形式，离职或换岗交接文档与事务。",
+    "example": "休暇に入る前に、進行中の案件をチームへ引き継ぎます。"
+  }
+]

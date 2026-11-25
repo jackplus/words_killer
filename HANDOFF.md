@@ -180,7 +180,7 @@ xcodebuild test -scheme "Words killer" \
 
 ## 五、后续版本演进建议（v1.2+ Roadmap）
 
-1. **iOS 桌面与锁屏小组件（WidgetKit）**：通过 App Group 共享当前待复习词数、连续打卡天数与「每日一词」卡片。
+1. **iOS 桌面与锁屏小组件（WidgetKit，应用端底座已就绪）**：`WidgetSnapshot`、`DailyWordSelector`、`WidgetSnapshotStore`（自动探测 App Group `group.com.tedji.Words-killer`，未配置时无警告降级）、`wordskiller://` 深度链接路由、设置页实时预览及扩展源码模板 `Config/WidgetExtensionTemplate/WordsKillerWidgetExtension.swift` 已落地；后续只需在 Xcode 开启 App Group Capability 并挂载 Widget Extension Target 即可上线。
 2. **iCloud（CloudKit）可选同步**：在保持免登录纯苹果生态隐私的前提下，为同 Apple ID 下的 iPhone 与 iPad 自动同步学习进度、助记笔记与自建词库。
 3. **多维复习过滤（已完成）**：背词主页已支持「智能综合 / 专攻到期 / 专攻收藏」训练模式，详见下节。
 
@@ -197,3 +197,59 @@ xcodebuild test -scheme "Words killer" \
 - **打包与证据**：用户明确确认版本 `1.0 (3)` 后将工程构建号 2 更新为 3。本地记录、源码补丁/新增文件、逐文件哈希、签名归档、发行 IPA、测试结果与截图保存在 `artifacts/testflight-2026-11-23/`，不覆盖历史目录。上传结果以 `APP_STORE_CHECKLIST.md` 最新记录为准。
 
 - **上传完成**：`1.0 (3)` 已通过 Apple 二进制验证，TestFlight 显示「准备提交」并自动关联 internal 群组的 2 名测试员。本轮新增功能与发布文档随本次提交一并同步 GitHub；尚未提交正式审核。
+
+## 七、词汇练习迭代（2026-11-24）
+
+- **工作区基线**：`2cc8562` 之后的本地改动将词库扩展到 18 册 1,800 词，引入六档难度、单书专攻、四种闪卡挑战以及可撤回的快速标记熟词。
+- **已实现**：背词页默认进入「词汇短练」，从当前队列抽取最多 6 个不同词，轮换形、义、音题型并即时解析。错词在轮末以同题型补练一次，重新抽取并洗牌选项。首答沿用测验来源写入 SM-2，结算分别展示首答和补练成绩。参考多邻国公开说明中的词汇、听力和错题练习。 [听力练习](https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-listening-skills/) · [错题回流](https://blog.duolingo.com/october-2026-update/)
+- **验证**：iPhone 18 Pro 模拟器通过 44 项 Swift Testing 测试和一项独立端到端测试。端到端短练完成 6 题首答和 4 题补练，SwiftData 中有 6 笔测验记录，分别对应 6 个首答词。
+
+## 八、文字替代与跨轮错词专练（2026-11-24）
+
+- **文字替代**：听音选择题由用户触发朗读，可在作答前就地切换为同一词的看词选义。切换不记分，答错后按实际题型补练。拼写听写保留原有朗读方式。
+- **错词专练**：在背词页单独进入，从当前语种和词书的学习进度筛选上次标为「不认识」且已有评分时间的词。先排已到期词，同一组内按失误时间从近到远排序，每轮最多 6 词。每轮重新读取本地进度，首答答对的词不再进入下一轮。已补练但首答答错的词会继续保留。
+- **进度一致性**：词汇短练和错词专练仅在首答写入复习计划。如果测验更新了仍可撤回卡片评分的词，结束该轮卡片的撤回历史，防止旧快照覆盖新进度。
+- **验证**：iPhone 18 Pro 模拟器通过 49 项 Swift Testing 测试和 1 项独立端到端测试，覆盖听音转文字、补练、重启后的语种与词书隔离、答对移出错词及撤回冲突。读取测试库确认 7 笔测验记录对应 7 次首答，冲突词保留后来答对后的进度。
+- **小规模试用**：已确定同人 A/B 方案、核查两项指标的可计算范围，并备好本地统计脚本。现有数据为模拟器 QA，词义配对暂缓，待真人对照达到预设门槛后再推进。 [试用方案与口径](VOCABULARY_PILOT.md)
+
+## 九、今日复习与本地续练
+
+- **背词首页**：优先提供一轮续练，其次在当前语种和词书范围内按到期时间选择最多 6 个不同词，复习覆盖该范围的所有难度。清空到期词后，用户可按所选难度范围主动学新词。闪卡、速测、听学和错词专练均可从「更多练习」打开。
+- **保存与恢复**：一份设备本地的临时练习进度保存在 SwiftData，包含题序、选项、文字替代、答案和补练位置。首答记录、排期和练习进度共用一次提交。切换语种或词书、删词、待答词在别处被评分、成功导入备份或重置进度后，旧轮次结束。备份仍导入和导出学习数据，临时练习独立保存在本机。
+- **练习结果**：结算区分首答与补练，列出错词的下次复习时间和当前范围剩余到期词。用户可以继续复习、在无到期词时开启新词，或进入错词专练。错题补练不改变排期。
+- **验证**：54 项 Swift Testing 测试通过。iPhone 18 Pro 模拟器验证未答、反馈、听音切换和补练阶段重启恢复，以及从结算进入错词专练。测试库中 4 次首答对应 4 笔测验记录，完成后临时练习已清除。iPhone 17e 在辅助功能大字号下通过首页、首题和暂停检查。端到端测试使用临时测试工程和合成学习记录。
+- **真人验收**：在同一设备和词书上对比旧版与新版，记录从背词首页可操作到首题呈现的时间、点击数、开轮与结算时间，覆盖无声场景、大字和 VoiceOver。次日首答正确率与覆盖率沿用现有 A/B 口径，词义配对仍由试用门槛决定。 [真人试用方案](VOCABULARY_PILOT.md)
+
+## 十、练习反馈与题目质量（2026-11-25）
+
+- 拼写结算显示「首次独立拼对」。使用字母提示或曾拼错的词，纠正后记为模糊并列入巩固词；空白输入不计错，已答完的输入锁定。末题可直接查看成绩。
+- 看义选词排除同语种、归一化后释义相同的干扰词。题库中没有合适的干扰项时沿用现有的少选项行为。
+- 本轮采用模拟器验收。真人次日结果继续沿用原试用方案，词义配对保留在试用原型。
+- 验证通过 56 项 Swift Testing 测试，Swift 编译无警告。临时界面工程实测三题分别使用提示、纠错和独立拼写，结算为 1/3；拼对后键盘收起。首次界面测试受键盘遮挡失败，复测覆盖键盘提交和下一题入口。
+
+## 十一、主练习闭环、拼写容错与续练加固（2026-11-25）
+
+- **拼写容错与逐字提示（`QuizEngine` + `QuizView`）**：新增 `QuizEngine.isSpellingMatch`（忽略首尾空白、折叠连续空格、兼容 iOS 智能弯撇号与连字符、不区分大小写）和 `QuizEngine.nextSpellingHint`（按最长正确前缀仅揭示下一字符，避免输错后缀时一次性剧透整词）。
+- **练习语音与收藏笔记闭环（`QuizView` + `WordBookView`）**：测验与词库同步全局 `@AppStorage("speechSpeed")` 朗读语速，并在测验页展示 `VoicePackNoticeBanner` 离线语音包缺失指引；测验解析卡新增例句朗读、星标收藏与个人助记笔记展示/编辑（按 `wordID` 直查 SwiftData 避免覆盖刚提交的 SRS 进度），结算错词列表区分「不认识 / 待巩固」并支持星标收藏，且仅在存在真正 `.unknown` 错词时展示「错词专练」入口，避免拼写仅提示巩固后点进空列表。
+- **今日复习续练加固与首页快捷入口（`TodayPractice` + `ContentView`）**：`TodayPracticeState.isValid` 补齐空题单、`index` 越界与 `retryQuestions` 词条变更校验；背词首页在保持「开始复习 / 继续复习 / 学新词」主按钮与一键直达不变的前提下，当当前范围存在错词时展示「错词专练（N 词）」次级入口，并在自建词内容编辑或进度记录数变更时即时刷新。
+- **验证**：iPhone 18 Pro 模拟器通过 **59/59 项** Swift Testing 单元测试（新增拼写归一化、逐字提示与续练越界/过期补练校验 3 项测试），Swift 编译 0 警告，`PRIVACY.md` 与内置副本零差异。词义配对继续按试用门槛暂缓。
+
+## 十二、WidgetKit 小组件底座、每日一词与深度链接（2026-11-25）
+
+- **共享快照与每日一词引擎（`WidgetSnapshotService.swift`）**：
+  - 定义主 App 与未来 Widget Extension 可共享编译的 `WidgetSnapshot`、`WidgetDailyWord`、`DailyWordSelector`、`WidgetSnapshotBuilder` 与 `WidgetSnapshotStore`。
+  - `DailyWordSelector` 按「已到期旧词 → 收藏未掌握 → 未学新词 → 兜底」分层，并以自然日 FNV-1a 种子实现同日确定性、跨日自动轮换。
+  - `WidgetSnapshotStore` 通过 `containerURL(forSecurityApplicationGroupIdentifier:)` 自动探测 App Group（`group.com.tedji.Words-killer`）：未开启权限时零沙箱警告降级到标准 `UserDefaults`，开启后无需改代码即可自动切入共享容器并触发 `WidgetCenter.shared.reloadAllTimelines()`。
+- **深度链接与全局路由（`AppDeepLink.swift` + `MainTabView` / `ContentView` / `WordBookView`）**：
+  - 支持 `wordskiller://today`、`wordskiller://mistakes`、`wordskiller://word?id=<id>`（兼容 `/word/<id>`）与 `wordskiller://stats` 路由；通过 `@Observable AppRouter` 联动四标签导航、今日复习/错词专练自动拉起与词库词条详情直达。
+  - 背词首页刷新、备份恢复与清空进度均自动同步或清理小组件快照，同时严格保持背词首页主按钮与一次点击直达体验不变。
+- **App 内实时预览与扩展模板（`WidgetPreviewView.swift` + `SettingsView.swift` + `Config/WidgetExtensionTemplate/WordsKillerWidgetExtension.swift`）**：
+  - 设置页新增「桌面与锁屏小组件」页面，提供桌面小号/中号（每日一词支持朗读、换一词与隐藏中文释义开关）、锁屏矩形与锁屏圆形实时预览，点按即可实测深度链接跳转。
+  - 在 `Config/WidgetExtensionTemplate/` 预置完整的 WidgetKit Extension 源码模板，不改动 `project.pbxproj` 签名与 Entitlements，保持现有 TestFlight 打包流程零风险。
+- **验证**：iPhone 18 Pro 模拟器通过 **64/64 项** Swift Testing 单元测试（新增 `WidgetAndDeepLinkTests` 5 项测试），Swift 编译 0 警告，`PRIVACY.md` 与内置副本零差异。
+
+## 十三、GitHub 同步与 TestFlight 1.0 (4)（2026-11-25）
+
+- 用户确认上传 1.0 (4)，本轮发布前重新运行 64 项全量测试并完成签名 Release 归档。所有本地功能、试用原型、匿名模板和多 Agent 包装脚本一并纳入 GitHub 同步范围。
+- 桌面与锁屏 Extension 目前为模板，App 内小组件预览和路由可测试。真人次日数据及真机验收仍待收集，词义配对仅在试用原型内。
+- 构建导出、上传及 Apple 处理结果以 `APP_STORE_CHECKLIST.md` 第十二节为准。归档、IPA 与日志位于新的本地发布目录 `artifacts/testflight-2026-11-25/`。

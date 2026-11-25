@@ -346,6 +346,18 @@ struct SettingsView: View {
                 }
             }
             .pickerStyle(.segmented)
+
+            NavigationLink {
+                WidgetPreviewView()
+            } label: {
+                HStack {
+                    Label("桌面与锁屏小组件", systemImage: "rectangle.3.group")
+                    Spacer()
+                    Text("每日一词 · 预览")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
         }
     }
 
@@ -427,12 +439,14 @@ struct SettingsView: View {
                     existingProgress: allProgress,
                     existingCustomWords: customWords,
                     existingEvents: fetchAllReviewEvents(),
-                    in: modelContext
+                    in: modelContext,
+                    prepareForSave: { try TodayPracticeStore.stageRemoval(in: modelContext) }
                 )
                 refreshReviewEventCount()
+                WidgetSnapshotStore.clear(reloadTimelines: true)
                 presentAlert(
                     title: "数据恢复成功",
-                    message: "已合并恢复 \(stats.progressCount) 条单词进度、\(stats.customWordCount) 个自建词与 \(stats.eventCount) 条新增打卡记录。"
+                    message: "已合并恢复 \(stats.progressCount) 条单词进度、\(stats.customWordCount) 个自建词与 \(stats.eventCount) 条新增打卡记录。未完成的今日短练已清除。"
                 )
             } catch {
                 presentAlert(title: "导入失败", message: "备份文件格式不匹配或已损坏：\(error.localizedDescription)")
@@ -443,15 +457,18 @@ struct SettingsView: View {
     }
 
     private func resetAllProgress() {
-        for item in allProgress {
-            modelContext.delete(item)
+        do {
+            try TodayPracticeStore.stageRemoval(in: modelContext)
+            for item in allProgress { modelContext.delete(item) }
+            for event in fetchAllReviewEvents() { modelContext.delete(event) }
+            try modelContext.save()
+            refreshReviewEventCount()
+            WidgetSnapshotStore.clear(reloadTimelines: true)
+            presentAlert(title: "已重置学习进度", message: "单词进度、打卡历史和未完成的今日短练已清空，自建词库已保留。")
+        } catch {
+            modelContext.rollback()
+            presentAlert(title: "未能重置学习进度", message: error.localizedDescription)
         }
-        for event in fetchAllReviewEvents() {
-            modelContext.delete(event)
-        }
-        try? modelContext.save()
-        refreshReviewEventCount()
-        presentAlert(title: "已重置学习进度", message: "所有单词记忆记录与打卡历史已清空，自建词库已完整保留。")
     }
 
     private func presentAlert(title: String, message: String) {
@@ -463,5 +480,5 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
-        .modelContainer(for: [WordProgress.self, CustomWordRecord.self, ReviewEvent.self], inMemory: true)
+        .modelContainer(for: [WordProgress.self, CustomWordRecord.self, ReviewEvent.self, TodayPracticeCheckpoint.self], inMemory: true)
 }

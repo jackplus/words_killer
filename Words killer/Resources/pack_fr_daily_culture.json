@@ -1,0 +1,502 @@
+[
+  {
+    "id": "life-fr-beg-93e3783b",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "aéroport",
+    "pronunciation": "/a.e.ʁɔ.pɔʁ/",
+    "translation": "机场（阳性）",
+    "memoryCue": "aéro-（空气）+ port（港）→ 和英语 airport 拼写近。",
+    "example": "Nous sommes arrivés à l'aéroport deux heures avant le vol."
+  },
+  {
+    "id": "life-fr-beg-b07c4014",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "boulangerie",
+    "pronunciation": "/bu.lɑ̃ʒ.ʁi/",
+    "translation": "面包店（阴性）",
+    "memoryCue": "买法棍与牛角包（croissant）必进的街角小店。",
+    "example": "Chaque matin, j'achète une baguette chaude à la boulangerie."
+  },
+  {
+    "id": "life-fr-beg-3f0cff1d",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "fromage",
+    "pronunciation": "/fʁɔ.maʒ/",
+    "translation": "奶酪；起司（阳性）",
+    "memoryCue": "法国餐桌灵魂，结尾 -age 的名词通常为阳性。",
+    "example": "Ce plateau rassemble trois sortes de fromage artisanal."
+  },
+  {
+    "id": "life-fr-beg-fcf91b27",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "gare",
+    "pronunciation": "/ɡaʁ/",
+    "translation": "火车站（阴性）",
+    "memoryCue": "注意与英语不同，法语火车站叫 la gare。",
+    "example": "Le train pour Marseille part de la gare de Lyon."
+  },
+  {
+    "id": "life-fr-beg-cfda885e",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "médecin",
+    "pronunciation": "/med.sɛ̃/",
+    "translation": "医生；医师（阳性）",
+    "memoryCue": "词根对应英语 medicine；去看医生是 aller chez le médecin。",
+    "example": "Il vaut mieux consulter un médecin si la fièvre continue."
+  },
+  {
+    "id": "life-fr-beg-a818cbb7",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "musée",
+    "pronunciation": "/my.ze/",
+    "translation": "博物馆；美术馆（阳性）",
+    "memoryCue": "注意词尾虽有 e 却是阳性名词：le musée du Louvre。",
+    "example": "Ce musée propose une entrée gratuite le premier dimanche du mois."
+  },
+  {
+    "id": "life-fr-beg-cde307fa",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "passeport",
+    "pronunciation": "/pas.pɔʁ/",
+    "translation": "护照（阳性）",
+    "memoryCue": "passer（通过）+ port（港口）→ 出入境护照。",
+    "example": "Vérifiez la date d'expiration de votre passeport avant de partir."
+  },
+  {
+    "id": "life-fr-beg-b2cd36e0",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "pharmacie",
+    "pronunciation": "/faʁ.ma.si/",
+    "translation": "药房；药店（阴性）",
+    "memoryCue": "法国街头闪烁绿色十字灯箱的便是 la pharmacie。",
+    "example": "La pharmacie du quartier reste ouverte jusqu'à vingt heures."
+  },
+  {
+    "id": "life-fr-beg-6d4b6296",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "restaurant",
+    "pronunciation": "/ʁɛs.tɔ.ʁɑ̃/",
+    "translation": "餐厅；饭馆（阳性）",
+    "memoryCue": "原意为“恢复元气的汤馆”，英语直接借用了这个词。",
+    "example": "Nous avons réservé une table dans un petit restaurant calme."
+  },
+  {
+    "id": "life-fr-beg-0a8becbe",
+    "language": "french",
+    "difficulty": "beginner",
+    "term": "valise",
+    "pronunciation": "/va.liz/",
+    "translation": "手提箱；行李箱（阴性）",
+    "memoryCue": "faire sa valise 表示“收拾行李”。",
+    "example": "Ma valise est prête pour le départ demain matin."
+  },
+  {
+    "id": "life-fr-ele-2a9e0c7b",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "accueil",
+    "pronunciation": "/a.kœj/",
+    "translation": "接待；前台；欢迎（阳性）",
+    "memoryCue": "注意拼写 u 在 e 前，发音 /œj/；机场酒店前台标牌 Accueil。",
+    "example": "Adressez-vous à l'accueil pour récupérer le plan de la ville."
+  },
+  {
+    "id": "life-fr-ele-2b2ae874",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "addition",
+    "pronunciation": "/a.di.sjɔ̃/",
+    "translation": "账单（餐厅）；加法（阴性）",
+    "memoryCue": "在法式餐厅结账必说：L'addition, s'il vous plaît.",
+    "example": "Pourriez-vous nous apporter l'addition, s'il vous plaît ?"
+  },
+  {
+    "id": "life-fr-ele-5084a840",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "ambiance",
+    "pronunciation": "/ɑ̃.bjɑ̃s/",
+    "translation": "氛围；环境情调（阴性）",
+    "memoryCue": "英语也借用了 ambience，指餐厅或社区的格调。",
+    "example": "J'adore l'ambiance chaleureuse de ce petit café."
+  },
+  {
+    "id": "life-fr-ele-c5bd03d6",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "carte",
+    "pronunciation": "/kaʁt/",
+    "translation": "菜单；地图；卡片（阴性）",
+    "memoryCue": "à la carte（按菜单单点），carte bancaire（银行卡）。",
+    "example": "Est-ce que je peux payer par carte sans contact ?"
+  },
+  {
+    "id": "life-fr-ele-2f38898c",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "correspondance",
+    "pronunciation": "/kɔ.ʁɛs.pɔ̃.dɑ̃s/",
+    "translation": "（地铁/火车）换乘；通信（阴性）",
+    "memoryCue": "巴黎地铁指示牌高频词：Correspondance（转线通道）。",
+    "example": "Il faut prendre la correspondance à Châtelet pour la ligne quatre."
+  },
+  {
+    "id": "life-fr-ele-44baa3a2",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "déguster",
+    "pronunciation": "/de.ɡys.te/",
+    "translation": "品尝；细细品味",
+    "memoryCue": "比 goûter 更优雅的“品鉴美食美酒”。",
+    "example": "Nous allons déguster des spécialités locales au marché couvert."
+  },
+  {
+    "id": "life-fr-ele-69033f19",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "exposition",
+    "pronunciation": "/ɛk.spo.zi.sjɔ̃/",
+    "translation": "展览会；陈列（阴性）",
+    "memoryCue": "口语常简称为 expo：une belle expo de photo。",
+    "example": "Cette exposition présente des affiches anciennes de cinéma."
+  },
+  {
+    "id": "life-fr-ele-80c269f5",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "itinéraire",
+    "pronunciation": "/i.ti.ne.ʁɛʁ/",
+    "translation": "路线；旅行行程（阳性）",
+    "memoryCue": "导航软件里的“路线规划”即 Itinéraire。",
+    "example": "L'application calcule l'itinéraire le plus rapide à pied."
+  },
+  {
+    "id": "life-fr-ele-78ea0d30",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "patrimoine",
+    "pronunciation": "/pa.tʁi.mwan/",
+    "translation": "文化遗产；遗产（阳性）",
+    "memoryCue": "Journées du patrimoine（法国欧洲文化遗产日）。",
+    "example": "Ce château médiéval fait partie du patrimoine régional."
+  },
+  {
+    "id": "life-fr-ele-5c3bcf01",
+    "language": "french",
+    "difficulty": "elementary",
+    "term": "réservation",
+    "pronunciation": "/ʁe.zɛʁ.va.sjɔ̃/",
+    "translation": "预订；预约（阴性）",
+    "memoryCue": "后缀 -tion 的法语名词几乎全为阴性。",
+    "example": "J'ai fait une réservation pour deux personnes à midi."
+  },
+  {
+    "id": "life-fr-int-e91a403d",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "authenticité",
+    "pronunciation": "/o.tɑ̃.ti.si.te/",
+    "translation": "真实性；原汁原味（阴性）",
+    "memoryCue": "authentique（正宗）的名词，强调本土本真魅力。",
+    "example": "Les voyageurs apprécient l'authenticité de ce village côtier."
+  },
+  {
+    "id": "life-fr-int-71e6566d",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "convivialité",
+    "pronunciation": "/kɔ̃.vi.vja.li.te/",
+    "translation": "友好融洽；热络氛围（阴性）",
+    "memoryCue": "法语文化核心词，指朋友聚会、邻里间温暖亲切的质感。",
+    "example": "La convivialité des repas partagés rapproche vite les voisins."
+  },
+  {
+    "id": "life-fr-int-7301bf1c",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "créativité",
+    "pronunciation": "/kʁe.a.ti.vi.te/",
+    "translation": "创造力；创意（阴性）",
+    "memoryCue": "créer（创造）的名词家族，末尾 -té 表抽象阴性名词。",
+    "example": "L'atelier encourage la créativité par le dessin et le jeu."
+  },
+  {
+    "id": "life-fr-int-5e963262",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "épanouissement",
+    "pronunciation": "/e.pa.nwis.mɑ̃/",
+    "translation": "自我实现；绽放成长（阳性）",
+    "memoryCue": "原意指花朵绽放，现常指职业与身心的充实成长。",
+    "example": "L'équilibre entre travail et loisirs favorise l'épanouissement."
+  },
+  {
+    "id": "life-fr-int-518d95ee",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "gastronomie",
+    "pronunciation": "/ɡas.tʁɔ.nɔ.mi/",
+    "translation": "美食学；高级烹饪文化（阴性）",
+    "memoryCue": "法国饮食文化的官方代表词。",
+    "example": "Lyon est souvent considérée comme la capitale de la gastronomie."
+  },
+  {
+    "id": "life-fr-int-2cbd11d8",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "harmonie",
+    "pronunciation": "/aʁ.mɔ.ni/",
+    "translation": "和谐；协调一致（阴性）",
+    "memoryCue": "注意词首 h 不送气（哑音 h）：en harmonie。",
+    "example": "Les couleurs de l'interface vivent en parfaite harmonie."
+  },
+  {
+    "id": "life-fr-int-d3d35b23",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "inspiration",
+    "pronunciation": "/ɛ̃s.pi.ʁa.sjɔ̃/",
+    "translation": "灵感；启发（阴性）",
+    "memoryCue": "in-（向内）+ spir（呼吸）→ 吸进来的创作灵感。",
+    "example": "Les carnets de voyage restent une source d'inspiration inépuisable."
+  },
+  {
+    "id": "life-fr-int-640636d0",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "savoir-faire",
+    "pronunciation": "/sa.vwaʁ.fɛʁ/",
+    "translation": "专业技艺；诀窍（阳性）",
+    "memoryCue": "savoir（知道）+ faire（做）→ 手艺人独到的真功夫。",
+    "example": "Ce studio défend un savoir-faire transmis depuis trois générations."
+  },
+  {
+    "id": "life-fr-int-6319e951",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "sérénité",
+    "pronunciation": "/se.ʁe.ni.te/",
+    "translation": "宁静；安详从容（阴性）",
+    "memoryCue": "serein（平静的）的名词，形容清晨散步或阅读的心境。",
+    "example": "Étudier sans publicité apporte une vraie sérénité d'esprit."
+  },
+  {
+    "id": "life-fr-int-49408dc0",
+    "language": "french",
+    "difficulty": "intermediate",
+    "term": "solidarité",
+    "pronunciation": "/sɔ.li.da.ʁi.te/",
+    "translation": "团结；互助精神（阴性）",
+    "memoryCue": "solide（牢固）同源，指社区或团队守望相助。",
+    "example": "La solidarité entre étudiants facilite l'adaptation à l'étranger."
+  },
+  {
+    "id": "life-fr-adv-9d746dc2",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "ambivalence",
+    "pronunciation": "/ɑ̃.bi.va.lɑ̃s/",
+    "translation": "矛盾心理；双重态度（阴性）",
+    "memoryCue": "ambi-（两面）+ valence（价值）→ 既向往又犹豫的复杂情绪。",
+    "example": "Le roman décrit avec finesse l'ambivalence du personnage principal."
+  },
+  {
+    "id": "life-fr-adv-6f6b789d",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "contingence",
+    "pronunciation": "/kɔ̃.tɛ̃.ʒɑ̃s/",
+    "translation": "偶然性；突发变数（阴性）",
+    "memoryCue": "与英语 contingency 同源，指难以事先预料的客观条件。",
+    "example": "Il faut prévoir une marge face aux contingences climatiques."
+  },
+  {
+    "id": "life-fr-adv-91be2ebd",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "éloquence",
+    "pronunciation": "/e.lɔ.kɑ̃s/",
+    "translation": "雄辩；口才；感染力（阴性）",
+    "memoryCue": "e-（出）+ loqu（说）→ 出口成章的表达魅力。",
+    "example": "Elle a défendu son projet artistique avec une rare éloquence."
+  },
+  {
+    "id": "life-fr-adv-ab5cb090",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "envergure",
+    "pronunciation": "/ɑ̃.vɛʁ.ɡyʁ/",
+    "translation": "规模；格局；气魄（阴性）",
+    "memoryCue": "原指鸟类展开的双翼翼展，引申为项目或人物格局大小。",
+    "example": "C'est une initiative culturelle d'envergure internationale."
+  },
+  {
+    "id": "life-fr-adv-f6d5bb8c",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "hégémonie",
+    "pronunciation": "/e.ʒe.mɔ.ni/",
+    "translation": "霸权；绝对主导地位（阴性）",
+    "memoryCue": "DELF B2/DALF 社论阅读常见学术词汇。",
+    "example": "L'essai analyse l'hégémonie culturelle à l'ère numérique."
+  },
+  {
+    "id": "life-fr-adv-a92f6baa",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "impartialité",
+    "pronunciation": "/ɛ̃.paʁ.sja.li.te/",
+    "translation": "公正；不偏不倚（阴性）",
+    "memoryCue": "im-（不）+ partial（偏袒某方）→ 绝对客观中立。",
+    "example": "L'impartialité du jury garantit la crédibilité du concours."
+  },
+  {
+    "id": "life-fr-adv-2343340e",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "légitimité",
+    "pronunciation": "/le.ʒi.ti.mi.te/",
+    "translation": "合法性；合理性；正当性（阴性）",
+    "memoryCue": "légal（合法）偏法规，légitime 更重道义与公信力。",
+    "example": "La transparence renforce la légitimité d'une démarche scientifique."
+  },
+  {
+    "id": "life-fr-adv-da91cdaa",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "méthodologie",
+    "pronunciation": "/me.tɔ.dɔ.lɔ.ʒi/",
+    "translation": "方法论；研究方法（阴性）",
+    "memoryCue": "méthode + -logie → 系统性研究或记忆方法。",
+    "example": "La méthodologie de répétition espacée double la mémorisation."
+  },
+  {
+    "id": "life-fr-adv-df00c85d",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "paradigme",
+    "pronunciation": "/pa.ʁa.diɡm/",
+    "translation": "范式；典范模式（阳性）",
+    "memoryCue": "注意末尾虽有 e 却是阳性 le paradigme。",
+    "example": "Le travail hybride a provoqué un changement de paradigme."
+  },
+  {
+    "id": "life-fr-adv-0acd5302",
+    "language": "french",
+    "difficulty": "advanced",
+    "term": "pertinence",
+    "pronunciation": "/pɛʁ.ti.nɑ̃s/",
+    "translation": "相关性；切题恰当（阴性）",
+    "memoryCue": "pertinent（中肯贴切）的名词，写作论证高频评价词。",
+    "example": "La pertinence des exemples rend l'explication beaucoup plus claire."
+  },
+  {
+    "id": "life-fr-bus-ab5643fe",
+    "language": "french",
+    "difficulty": "business",
+    "term": "bilan",
+    "pronunciation": "/bi.lɑ̃/",
+    "translation": "总结报告；资产负债表（阳性）",
+    "memoryCue": "faire le bilan（做复盘总结），bilan annuel 年度总结。",
+    "example": "Nous dresserons le bilan du trimestre vendredi après-midi."
+  },
+  {
+    "id": "life-fr-bus-f2c8603f",
+    "language": "french",
+    "difficulty": "business",
+    "term": "cahier des charges",
+    "pronunciation": "/ka.je de ʃaʁʒ/",
+    "translation": "需求规格说明书；项目规范书",
+    "memoryCue": "法国公司外包或研发立项前必签的详细需求书。",
+    "example": "Relisons le cahier des charges avant de lancer le prototype."
+  },
+  {
+    "id": "life-fr-bus-04ebd80c",
+    "language": "french",
+    "difficulty": "business",
+    "term": "chiffre d'affaires",
+    "pronunciation": "/ʃifʁ da.fɛʁ/",
+    "translation": "营业额；营收（简称 CA）",
+    "memoryCue": "直译“生意数字”，财报里永远排第一的收入指标。",
+    "example": "Le chiffre d'affaires a progressé de douze pour cent cette année."
+  },
+  {
+    "id": "life-fr-bus-4560fe9b",
+    "language": "french",
+    "difficulty": "business",
+    "term": "compétitivité",
+    "pronunciation": "/kɔ̃.pe.ti.ti.vi.te/",
+    "translation": "竞争力（阴性）",
+    "memoryCue": "compétitif（有竞争力的）的名词。",
+    "example": "L'innovation locale soutient la compétitivité des petites entreprises."
+  },
+  {
+    "id": "life-fr-bus-52dab255",
+    "language": "french",
+    "difficulty": "business",
+    "term": "congé",
+    "pronunciation": "/kɔ̃.ʒe/",
+    "translation": "假期；休假（阳性）",
+    "memoryCue": "prendre un jour de congé（请一天假），congés payés 带薪年假。",
+    "example": "Elle pose deux jours de congé à la fin du mois."
+  },
+  {
+    "id": "life-fr-bus-ae87a263",
+    "language": "french",
+    "difficulty": "business",
+    "term": "croissance",
+    "pronunciation": "/kʁwa.sɑ̃s/",
+    "translation": "增长；成长（阴性）",
+    "memoryCue": "croître（生长）的名词，croissance durable 可持续增长。",
+    "example": "La croissance du marché mobile reste soutenue en Europe."
+  },
+  {
+    "id": "life-fr-bus-00219ea8",
+    "language": "french",
+    "difficulty": "business",
+    "term": "embauche",
+    "pronunciation": "/ɑ̃.boʃ/",
+    "translation": "招聘；雇佣（阴性）",
+    "memoryCue": "动词 embaucher 表“录用”，反义词 licencier。",
+    "example": "Le département prépare un plan d'embauche pour le printemps."
+  },
+  {
+    "id": "life-fr-bus-6c79251d",
+    "language": "french",
+    "difficulty": "business",
+    "term": "investissement",
+    "pronunciation": "/ɛ̃.vɛs.tis.mɑ̃/",
+    "translation": "投资；投入（阳性）",
+    "memoryCue": "retour sur investissement 即 ROI（投资回报率）。",
+    "example": "Apprendre chaque jour est le meilleur investissement personnel."
+  },
+  {
+    "id": "life-fr-bus-c50a517f",
+    "language": "french",
+    "difficulty": "business",
+    "term": "partenariat",
+    "pronunciation": "/paʁ.tə.na.ʁja/",
+    "translation": "合作伙伴关系（阳性）",
+    "memoryCue": "partenaire（伙伴）+ -iat → 战略联盟或合作项目。",
+    "example": "Les deux universités ont signé un partenariat d'échange."
+  },
+  {
+    "id": "life-fr-bus-3af74939",
+    "language": "french",
+    "difficulty": "business",
+    "term": "télétravail",
+    "pronunciation": "/te.le.tʁa.vaj/",
+    "translation": "远程办公；居家办公（阳性）",
+    "memoryCue": "télé-（远程）+ travail（工作），法国职场日常高频词。",
+    "example": "Je suis en télétravail tous les mardis et jeudis."
+  }
+]

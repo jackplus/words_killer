@@ -10,9 +10,9 @@ import Testing
 @Suite("词库稳定性与多格式开源词典解析测试")
 @MainActor
 struct WordBankParserTests {
-    @Test("内置词书完整性：6 套内置词包全部加载成功且无重复 ID")
+    @Test("内置词书完整性：18 套内置词包全部加载成功且无重复 ID")
     func builtInPacksLoadCleanlyWithUniqueIDs() {
-        #expect(WordLibrary.builtInPacks.count == 6)
+        #expect(WordLibrary.builtInPacks.count == 18)
 
         for pack in WordLibrary.builtInPacks {
             let items = WordLibrary.words(forPackID: pack.id)
@@ -20,14 +20,31 @@ struct WordBankParserTests {
         }
 
         let allWords = WordLibrary.allBuiltInWords
-        #expect(allWords.count == 650)
+        #expect(allWords.count == 1800)
 
         let uniqueIDs = Set(allWords.map(\.id))
         #expect(uniqueIDs.count == allWords.count)
 
+        let uniqueLangTerms = Set(allWords.map { "\($0.language.rawValue)|\($0.term.trimmingCharacters(in: .whitespacesAndNewlines).lowercased())" })
+        #expect(uniqueLangTerms.count == allWords.count)
+
+        for word in allWords {
+            #expect(!word.pronunciation.isEmpty, "词条 \(word.id) 缺少音标/注音")
+            #expect(!word.translation.isEmpty, "词条 \(word.id) 缺少中文释义")
+            #expect(!word.memoryCue.isEmpty, "词条 \(word.id) 缺少记忆点")
+            #expect(!word.example.isEmpty, "词条 \(word.id) 缺少例句")
+        }
+
+        let expectedByLanguage: [TargetLanguage: Int] = [
+            .english: 980,
+            .japanese: 205,
+            .korean: 205,
+            .french: 205,
+            .spanish: 205
+        ]
         for language in TargetLanguage.allCases {
             let langCount = allWords.filter { $0.language == language }.count
-            #expect(langCount == 130)
+            #expect(langCount == expectedByLanguage[language])
         }
     }
 
@@ -64,10 +81,10 @@ struct WordBankParserTests {
         let first = WordLibrary.activeBuiltInWords(disabledPackIDs: disabled)
         let second = WordLibrary.activeBuiltInWords(disabledPackIDs: disabled)
         #expect(first == second)
-        #expect(first.count == 620)
+        #expect(first.count == 1770)
 
         let all = WordLibrary.activeBuiltInWords(disabledPackIDs: [])
-        #expect(all.count == 650)
+        #expect(all.count == 1800)
         // Unknown IDs and the core pack can't be disabled, so they map to the same cached result.
         #expect(WordLibrary.activeBuiltInWords(disabledPackIDs: ["core-500", "not-a-pack"]) == all)
     }
@@ -77,10 +94,18 @@ struct WordBankParserTests {
         let disabled: Set<String> = ["exam-en", "exam-ja"]
         let filtered = WordLibrary.activeBuiltInWords(disabledPackIDs: disabled)
 
-        #expect(filtered.count == 590)
+        #expect(filtered.count == 1740)
         #expect(!filtered.contains(where: { $0.packID == "exam-en" }))
         #expect(!filtered.contains(where: { $0.packID == "exam-ja" }))
         #expect(filtered.contains(where: { $0.packID == "core-500" }))
+
+        let withoutCetCore = WordLibrary.activeBuiltInWords(disabledPackIDs: ["en-cet-core"])
+        #expect(withoutCetCore.count == 1650)
+        #expect(!withoutCetCore.contains(where: { $0.packID == "en-cet-core" }))
+
+        let withoutGreGmat = WordLibrary.activeBuiltInWords(disabledPackIDs: ["en-gre-gmat"])
+        #expect(withoutGreGmat.count == 1650)
+        #expect(!withoutGreGmat.contains(where: { $0.packID == "en-gre-gmat" }))
     }
 
     @Test("单条容错解码：坏数据不拖垮整份词库并准确统计跳过数与去重数")
@@ -234,5 +259,17 @@ struct WordBankParserTests {
         #expect(report.items[0].translation == "adj. 实证的, 经验主义的")
         #expect(report.items[0].difficulty == .advanced)
         #expect(report.items[1].difficulty == .elementary)
+    }
+
+    @Test("难度推断：GRE/GMAT/TEM8/C2 识别为硬核专家，IELTS/TOEFL 为高级，CET6 为进阶")
+    func difficultyInferenceDistinguishesMasterFromAdvanced() {
+        #expect(DifficultyLevel.infer(from: "GRE") == .master)
+        #expect(DifficultyLevel.infer(from: "GMAT / C2") == .master)
+        #expect(DifficultyLevel.infer(from: "tem8") == .master)
+        #expect(DifficultyLevel.infer(from: "硬核专家") == .master)
+        #expect(DifficultyLevel.infer(from: "IELTS / TOEFL") == .advanced)
+        #expect(DifficultyLevel.infer(from: "kaoyan") == .advanced)
+        #expect(DifficultyLevel.infer(from: "cet6") == .intermediate)
+        #expect(DifficultyLevel.infer(from: "N1") == .advanced)
     }
 }

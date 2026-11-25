@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "mst-ja-bc9ff96d",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "齟齬",
+    "pronunciation": "そご (sogo)",
+    "translation": "龃龉；分歧；格格不入；脱节",
+    "memoryCue": "N1 难读汉字词，原指上下牙齿咬合不齐，引申意见或计划产生偏差。",
+    "example": "チーム間で認識の齟齬が生じないよう仕様を明文化した。"
+  },
+  {
+    "id": "mst-ja-44cfac9b",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "忖度",
+    "pronunciation": "そんたく (sontaku)",
+    "translation": "揣摩；察言观色；臆测上意",
+    "memoryCue": "日本社会热词，指不待对方明说便暗自揣测对方心思迎合。",
+    "example": "相手の意向を過剰に忖度せず、事実に基づいて議論しよう。"
+  },
+  {
+    "id": "mst-ja-76a656a5",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "淘汰",
+    "pronunciation": "とうた (touta)",
+    "translation": "淘汰；优胜劣汰",
+    "memoryCue": "自然淘汰（しぜんとうた），市场竞争或进化论常用书面语。",
+    "example": "時代に合わない古い仕組みは自然と淘汰されていく。"
+  },
+  {
+    "id": "mst-ja-c339f9bf",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "俯瞰",
+    "pronunciation": "ふかん (fukan)",
+    "translation": "俯瞰；宏观鸟瞰；全局审视",
+    "memoryCue": "俯瞰図（ふかんず），从高处或宏观高度把握全局。",
+    "example": "細かい表現だけでなく、文章全体を俯瞰して読む力が必要だ。"
+  },
+  {
+    "id": "mst-ja-517149c6",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "葛藤",
+    "pronunciation": "かっとう (kattou)",
+    "translation": "葛藤；内心纠葛挣扎；冲突",
+    "memoryCue": "原意藤蔓互相缠绕，现常指内心矛盾与思想挣扎。",
+    "example": "理想と現実の狭間で、彼は長い間葛藤を抱えていた。"
+  },
+  {
+    "id": "mst-ja-7315472b",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "杞憂",
+    "pronunciation": "きゆう (kiyu)",
+    "translation": "杞人忧天；多余的担忧",
+    "memoryCue": "源自中国成语“杞人忧天”，注意读音 きゆう 无长音！",
+    "example": "操作が難しすぎるのではという心配は全くの杞憂に終わった。"
+  },
+  {
+    "id": "mst-ja-27971bbe",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "凌駕",
+    "pronunciation": "りょうが (ryouga)",
+    "translation": "凌驾；超越；压倒胜过",
+    "memoryCue": "実力で他を凌駕する（凭实力碾压超越对手）。",
+    "example": "オフライン設計の快適さは多くのクラウド製品を凌駕している。"
+  },
+  {
+    "id": "mst-ja-fdfd603a",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "踏襲",
+    "pronunciation": "とうしゅう (toushuu)",
+    "translation": "沿袭；因循守旧沿用前例",
+    "memoryCue": "前例を踏襲する（照搬前人老办法），N1 评论高频动词。",
+    "example": "従来のやり方を漫然と踏襲するのではなく見直しを図った。"
+  },
+  {
+    "id": "mst-ja-6eca56b9",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "払拭",
+    "pronunciation": "ふっしょく (fusshoku)",
+    "translation": "拂拭；彻底消除（疑虑/偏见）",
+    "memoryCue": "不安を払拭する（一扫不安情绪），注意促音 ふっしょく。",
+    "example": "明確なプライバシー方針が利用者の不安をきれいに払拭した。"
+  },
+  {
+    "id": "mst-ja-3ae3cff6",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "一朝一夕",
+    "pronunciation": "いっちょういっせき (icchou isseki)",
+    "translation": "一朝一夕（多用于否定）",
+    "memoryCue": "四字熟语：一朝一夕には身につかない（非一日之功）。",
+    "example": "語学の習得は一朝一夕には成らず、日々の反復がものを言う。"
+  },
+  {
+    "id": "mst-ja-903b9365",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "試行錯誤",
+    "pronunciation": "しこうさくご (shikou sakugo)",
+    "translation": "试错；反复摸索改进",
+    "memoryCue": "对应英语 trial and error，研发与学习高频四字熟语。",
+    "example": "幾度もの試行錯誤を経て、最も覚えやすい画面構成に辿り着いた。"
+  },
+  {
+    "id": "mst-ja-a3a69b67",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "抜本的",
+    "pronunciation": "ばっぽんてき (bapponteki)",
+    "translation": "根本性的；彻底治本的",
+    "memoryCue": "抜本的な改革（大刀阔斧的根本改革），拔起树根般彻底。",
+    "example": "対症療法ではなく、抜本的な学習習慣の改善が求められる。"
+  },
+  {
+    "id": "mst-ja-3b9b9857",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "顕在化",
+    "pronunciation": "けんざいか (kenzaika)",
+    "translation": "显现出来；浮出水面",
+    "memoryCue": "反义词 潜在化（せんざいか）。潜在的问题表面化。",
+    "example": "利用者が増えるにつれ、画面の使いにくさが顕在化してきた。"
+  },
+  {
+    "id": "mst-ja-5f5bee89",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "網羅的",
+    "pronunciation": "もうらてき (mourateki)",
+    "translation": "全面包罗的；系统完备的",
+    "memoryCue": "網羅的（涵盖无遗）+ 的（形容动词后缀）。",
+    "example": "専門分野を網羅的に押さえるには体系的な単語帳が役立つ。"
+  },
+  {
+    "id": "mst-ja-7a706a21",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "帰結",
+    "pronunciation": "きけつ (kiketsu)",
+    "translation": "归结；必然结果；推论结论",
+    "memoryCue": "論理的帰結（逻辑必然归宿），哲学与论文常客。",
+    "example": "毎日の小さな習慣の積み重ねが、大きな成長という帰結を生む。"
+  },
+  {
+    "id": "mst-ja-910fbd3a",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "醸成",
+    "pronunciation": "じょうせい (jousei)",
+    "translation": "酝酿培养（气氛/文化）",
+    "memoryCue": "原指酿酒发酵，引申慢慢培养出良好学习风气与共识。",
+    "example": "ミスを恐れない雰囲気が、活発な質問文化を醸成している。"
+  },
+  {
+    "id": "mst-ja-64b4b888",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "乖離",
+    "pronunciation": "かいり (kairi)",
+    "translation": "乖离；背离脱节",
+    "memoryCue": "理想と現実の乖離（理想与现实严重脱节）。",
+    "example": "統計数値と現場の実感との間に大きな乖離が見られる。"
+  },
+  {
+    "id": "mst-ja-b9b480b4",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "頓挫",
+    "pronunciation": "とんざ (tonza)",
+    "translation": "受挫；搁浅；中途停顿",
+    "memoryCue": "計画が頓挫する（计划半途搁浅），N1 新闻常用词。",
+    "example": "資金不足のため、その大規模開発は途中で頓挫してしまった。"
+  },
+  {
+    "id": "mst-ja-fcee33f2",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "涵養",
+    "pronunciation": "かんよう (kan'you)",
+    "translation": "涵养；润物无声地培养",
+    "memoryCue": "教養を涵養する（涵养教养），比育成更书面典雅。",
+    "example": "古典文学を読むことで、豊かな語彙力と感性を涵養できる。"
+  },
+  {
+    "id": "mst-ja-e49fdde1",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "相俟って",
+    "pronunciation": "あいまって (aimatte)",
+    "translation": "相辅相成；双管齐下共同促成",
+    "memoryCue": "A と B が相まって（A 与 B 交互作用促成更大效果）。",
+    "example": "音声と視覚的な記憶法が相まって、定着率が飛躍的に高まった。"
+  },
+  {
+    "id": "mst-ja-753aab9d",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "揺るぎない",
+    "pronunciation": "ゆるぎない (yuruginai)",
+    "translation": "坚定不移的；不可动摇的",
+    "memoryCue": "揺るぐ（动摇）的否定形容词 → 稳如磐石。",
+    "example": "地道な反復こそが揺るぎない語学力の土台を築く。"
+  },
+  {
+    "id": "mst-ja-49c08b57",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "端緒",
+    "pronunciation": "たんしょ / たんちょ (tansho)",
+    "translation": "端绪；开端；线索",
+    "memoryCue": "解决問題の端緒を掴む（抓住解决问题的切入线索）。",
+    "example": "一つの語源を知ることが、関連語を一気に覚える端緒となる。"
+  },
+  {
+    "id": "mst-ja-4528ab16",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "斟酌",
+    "pronunciation": "しんしゃく (shinshaku)",
+    "translation": "斟酌；体谅酌情考虑",
+    "memoryCue": "事情を斟酌する（酌情体谅具体处境）。",
+    "example": "多忙な社会人の事情を斟酌し、一回の学習量を短く設計した。"
+  },
+  {
+    "id": "mst-ja-bea4e05c",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "一縷",
+    "pronunciation": "いちる (ichiru)",
+    "translation": "一缕；一线（希望/光明）",
+    "memoryCue": "一縷の望み（一线希望），文学与新闻高级书面表达。",
+    "example": "諦めかけた試験だったが、直前の復習で一縷の望みが見えた。"
+  },
+  {
+    "id": "mst-ja-2d527564",
+    "language": "japanese",
+    "difficulty": "master",
+    "term": "泰然自若",
+    "pronunciation": "たいぜんじじゃく (taizen jijaku)",
+    "translation": "泰然自若；处变不惊",
+    "memoryCue": "中国同源四字熟语，遇大事沉稳淡定毫不慌张。",
+    "example": "どんな難問が出ても、泰然自若として自分のペースを保ちたい。"
+  },
+  {
+    "id": "mst-ko-8c3fa019",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "괴리",
+    "pronunciation": "goe-ri",
+    "translation": "乖离；脱节；隔阂",
+    "memoryCue": "汉字词“乖离”（괴=乖，리=离），현실과의 괴리 与现实脱节。",
+    "example": "이론과 실제 현장 사이에는 적지 않은 괴리가 존재한다."
+  },
+  {
+    "id": "mst-ko-9c199711",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "도태되다",
+    "pronunciation": "do-tae-doe-da",
+    "translation": "被淘汰；落伍",
+    "memoryCue": "汉字词“淘汰”+ 되다（被动），경쟁에서 도태되다。",
+    "example": "변화하는 학습 환경에 적응하지 못하면 결국 도태되기 마련이다."
+  },
+  {
+    "id": "mst-ko-874c12ba",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "조망하다",
+    "pronunciation": "jo-mang-ha-da",
+    "translation": "眺望；宏观审视；展望",
+    "memoryCue": "汉字词“眺望”，역사적 맥락에서 조망하다（从历史脉络俯瞰）。",
+    "example": "단기 수치뿐만 아니라 장기적인 성장 흐름을 함께 조망해야 한다."
+  },
+  {
+    "id": "mst-ko-a93be9a7",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "갈등",
+    "pronunciation": "gal-deung",
+    "translation": "矛盾；纠葛；冲突",
+    "memoryCue": "汉字词“葛藤”，내적 갈등（内心纠结），세대 갈등（代沟）。",
+    "example": "서로의 입장 차이를 인정할 때 비로소 갈등 해결의 실마리가 보인다."
+  },
+  {
+    "id": "mst-ko-4b57e93d",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "기우",
+    "pronunciation": "gi-u",
+    "translation": "杞忧；杞人忧天",
+    "memoryCue": "汉字词“杞忧”（기=杞，우=忧），기우에 불과하다 纯属多余担心。",
+    "example": "처음에 가졌던 기술적 우려는 다행히 기우에 그치고 말았다."
+  },
+  {
+    "id": "mst-ko-2e63e1ae",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "능가하다",
+    "pronunciation": "neung-ga-ha-da",
+    "translation": "凌驾；超越；胜过",
+    "memoryCue": "汉字词“凌驾”（在韩语词首 ㄹ 变为 ㄴ，叫头音法则！）。",
+    "example": "이번 업데이트의 완성도는 기존 예상치를 훨씬 능가한다."
+  },
+  {
+    "id": "mst-ko-240aa6a2",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "답습하다",
+    "pronunciation": "dap-seup-ha-da",
+    "translation": "因循沿袭；照搬旧套",
+    "memoryCue": "汉字词“踏袭”，구태를 답습하다（墨守陈规）。",
+    "example": "과거의 방식을 무비판적으로 답습하기보다 새로운 시도를 택했다."
+  },
+  {
+    "id": "mst-ko-becad8f9",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "불식하다",
+    "pronunciation": "bul-sik-ha-da",
+    "translation": "拂拭；彻底消除（疑虑）",
+    "memoryCue": "汉字词“拂拭”，의혹을 불식하다（消除疑虑）。",
+    "example": "오프라인 전용 설계가 개인정보 유출에 대한 불안을 불식시켰다."
+  },
+  {
+    "id": "mst-ko-8441459d",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "시행착오",
+    "pronunciation": "si-haeng-chak-o",
+    "translation": "试错；摸索弯路",
+    "memoryCue": "汉字词“施行错误”，수많은 시행착오 끝에（历经无数试错之后）。",
+    "example": "수차례의 시행착오를 거친 덕분에 더욱 견고한 구조가 완성되었다."
+  },
+  {
+    "id": "mst-ko-f790ab32",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "근본적",
+    "pronunciation": "geun-bon-jeok",
+    "translation": "根本性的；彻底的",
+    "memoryCue": "汉字词“根本的”，근본적인 대책（治本之策）。",
+    "example": "단순 암기가 아닌 근본적인 어휘 감각을 기르는 데 집중해야 한다."
+  },
+  {
+    "id": "mst-ko-b65d1a84",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "가시화되다",
+    "pronunciation": "ga-si-hwa-doe-da",
+    "translation": "显现；可见化；明朗化",
+    "memoryCue": "汉字词“可视化”+ 되다，성과가 가시화되다（成果开始显现）。",
+    "example": "꾸준한 복습 효과가 석 달 만에 가시화되기 시작했다."
+  },
+  {
+    "id": "mst-ko-df454bdd",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "망라하다",
+    "pronunciation": "mang-na-ha-da",
+    "translation": "网罗；全面涵盖",
+    "memoryCue": "汉字词“网罗”，각 분야의 핵심 용어를 망라하다。",
+    "example": "이 단어장은 일상 회화부터 고급 시사 용어까지 폭넓게 망라한다."
+  },
+  {
+    "id": "mst-ko-e11b93d8",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "귀결되다",
+    "pronunciation": "gwi-gyeol-doe-da",
+    "translation": "归结于；最终导致",
+    "memoryCue": "汉字词“归结”，결국 하나의 결론으로 귀결되다。",
+    "example": "모든 성공적인 학습법은 결국 꾸준한 반복이라는 결론으로 귀결된다."
+  },
+  {
+    "id": "mst-ko-35852f57",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "함양하다",
+    "pronunciation": "ham-yang-ha-da",
+    "translation": "涵养；培养陶冶（能力/素养）",
+    "memoryCue": "汉字词“涵养”，비판적 사고력을 함양하다。",
+    "example": "다양한 원서를 읽으며 깊이 있는 문해력을 함양할 수 있다."
+  },
+  {
+    "id": "mst-ko-9e9b1ddb",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "좌초되다",
+    "pronunciation": "jwa-cho-doe-da",
+    "translation": "搁浅；触礁受挫（计划）",
+    "memoryCue": "汉字词“坐礁”，원래 船触礁，引申项目半途停摆。",
+    "example": "무리한 일정 강행으로 인해 초기 기획안은 결국 좌초되고 말았다."
+  },
+  {
+    "id": "mst-ko-0c12809e",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "상충하다",
+    "pronunciation": "sang-chung-ha-da",
+    "translation": "相互冲突；抵触矛盾",
+    "memoryCue": "汉字词“相冲”，이해관계가 상충하다。",
+    "example": "속도와 정확성은 종종 상충하는 가치처럼 보이지만 균형이 핵심이다."
+  },
+  {
+    "id": "mst-ko-cb90dd29",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "당위성",
+    "pronunciation": "dang-wi-seong",
+    "translation": "正当性；理所应当的必要性",
+    "memoryCue": "汉字词“当为性”，TOPIK 6 级高级议论文点睛词。",
+    "example": "자료 백업의 당위성은 아무리 강조해도 지나치지 않다."
+  },
+  {
+    "id": "mst-ko-a44cfce3",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "패러다임",
+    "pronunciation": "pae-reo-da-im",
+    "translation": "范式；思考模式（Paradigm）",
+    "memoryCue": "英语 paradigm 外来词，패러다임의 전환（范式转变）。",
+    "example": "모바일 환경의 발전이 어학 학습의 패러다임을 바꾸어 놓았다."
+  },
+  {
+    "id": "mst-ko-f8351085",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "면밀하다",
+    "pronunciation": "myeon-mil-ha-da",
+    "translation": "周密；细致入微",
+    "memoryCue": "汉字词“绵密”，면밀한 검토（周密审查）。",
+    "example": "출시 전 모든 오류 가능성을 면밀하게 점검할 필요가 있다."
+  },
+  {
+    "id": "mst-ko-108900b2",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "고취하다",
+    "pronunciation": "go-chwi-ha-da",
+    "translation": "鼓吹；激发激励（精神/热情）",
+    "memoryCue": "汉字词“鼓吹”，韩语里多为中性褒义“鼓舞激发”。",
+    "example": "연속 출석 배지는 학습자의 도전 의식을 효과적으로 고취한다."
+  },
+  {
+    "id": "mst-ko-1e4381bf",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "일맥상통하다",
+    "pronunciation": "il-maek-sang-tong-ha-da",
+    "translation": "一脉相通；殊途同归",
+    "memoryCue": "中国同源四字成语，앞뒤 맥락이 서로 통함。",
+    "example": "기억 곡선 원리는 동서양의 고전 암기법과 일맥상통한다."
+  },
+  {
+    "id": "mst-ko-8a63efef",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "무색하다",
+    "pronunciation": "mu-saek-ha-da",
+    "translation": "黯然失色；自愧不如；毫无意义",
+    "memoryCue": "汉字词“无色”，과거의 걱정이 무색할 만큼（好到让昔日担忧都多余）。",
+    "example": "초기 우려가 무색할 만큼 이용자들의 반응이 뜨거웠다."
+  },
+  {
+    "id": "mst-ko-5934fa54",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "단초",
+    "pronunciation": "dan-cho",
+    "translation": "端绪；契机；开端线索",
+    "memoryCue": "汉字词“端初”，사건 해결의 단초를 제공하다。",
+    "example": "하나의 어근을 이해하는 것이 백 단어를 외우는 단초가 된다."
+  },
+  {
+    "id": "mst-ko-fee5428e",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "간과하다",
+    "pronunciation": "gan-gwa-ha-da",
+    "translation": "忽视；轻率略过",
+    "memoryCue": "汉字词“看破/看过”→ 粗心忽略掉关键隐患。",
+    "example": "작은 발음 차이를 간과하면 실제 대화에서 오해가 생기기 쉽다."
+  },
+  {
+    "id": "mst-ko-687d5fd3",
+    "language": "korean",
+    "difficulty": "master",
+    "term": "심오하다",
+    "pronunciation": "sim-o-ha-da",
+    "translation": "深奥；高深莫测",
+    "memoryCue": "汉字词“深奥”（심=深，오=奥）。",
+    "example": "간결한 문장 속에 담긴 철학은 생각보다 훨씬 심오하다."
+  },
+  {
+    "id": "mst-fr-b6044ee8",
+    "language": "french",
+    "difficulty": "master",
+    "term": "abnégation",
+    "pronunciation": "/ab.ne.ɡa.sjɔ̃/",
+    "translation": "忘我精神；无私奉献（阴性）",
+    "memoryCue": "ab-（远离）+ négation（否定）→ 否定私利全心付出。",
+    "example": "Les chercheurs ont travaillé avec une admirable abnégation."
+  },
+  {
+    "id": "mst-fr-e7c7e558",
+    "language": "french",
+    "difficulty": "master",
+    "term": "acuité",
+    "pronunciation": "/a.kɥi.te/",
+    "translation": "敏锐度；锐利（阴性）",
+    "memoryCue": "acu-（针尖，同 acumen）→ 视觉或思维的极高清晰敏锐度。",
+    "example": "Elle analyse les nuances grammaticales avec une grande acuité."
+  },
+  {
+    "id": "mst-fr-b9e4bce1",
+    "language": "french",
+    "difficulty": "master",
+    "term": "alacrité",
+    "pronunciation": "/a.la.kʁi.te/",
+    "translation": "轻快雀跃；欣然敏捷（阴性）",
+    "memoryCue": "文学高级词汇，形容充满干劲、兴高采烈地立刻行动。",
+    "example": "Il a relevé ce nouveau défi technique avec alacrité."
+  },
+  {
+    "id": "mst-fr-14909f6a",
+    "language": "french",
+    "difficulty": "master",
+    "term": "anachronisme",
+    "pronunciation": "/a.na.kʁɔ.nism/",
+    "translation": "时代错乱；过时事物（阳性）",
+    "memoryCue": "ana-（错开）+ chron（时间）→ 时代违和感。",
+    "example": "Imposer des formulaires papier en ligne relève de l'anachronisme."
+  },
+  {
+    "id": "mst-fr-00b52f15",
+    "language": "french",
+    "difficulty": "master",
+    "term": "aphorisme",
+    "pronunciation": "/a.fɔ.ʁism/",
+    "translation": "格言；警句（阳性）",
+    "memoryCue": "短小精悍、耐人寻味的一句哲理名言。",
+    "example": "Un bref aphorisme suffit parfois à résumer tout un chapitre."
+  },
+  {
+    "id": "mst-fr-58957dd9",
+    "language": "french",
+    "difficulty": "master",
+    "term": "aphoristique",
+    "pronunciation": "/a.fɔ.ʁis.tik/",
+    "translation": "格言体的；精炼警策的",
+    "memoryCue": "形容文风高度浓缩凝练。",
+    "example": "Son style aphoristique frappe l'esprit dès la première ligne."
+  },
+  {
+    "id": "mst-fr-298ede3b",
+    "language": "french",
+    "difficulty": "master",
+    "term": "caduc",
+    "pronunciation": "/ka.dyk/",
+    "translation": "失效的；过时作废的（阴性 caduque）",
+    "memoryCue": "法律条文、护照或合同到期作废（devenir caduc）。",
+    "example": "L'ancien règlement est devenu caduc depuis l'entrée en vigueur du texte."
+  },
+  {
+    "id": "mst-fr-e492d7e1",
+    "language": "french",
+    "difficulty": "master",
+    "term": "circonspection",
+    "pronunciation": "/siʁ.kɔ̃s.pɛk.sjɔ̃/",
+    "translation": "慎重；谨慎小心（阴性）",
+    "memoryCue": "circon-（环顾四周）+ spect（看）→ 步步留神小心求证。",
+    "example": "Abordez les promesses miracles avec la plus grande circonspection."
+  },
+  {
+    "id": "mst-fr-2cef536a",
+    "language": "french",
+    "difficulty": "master",
+    "term": "corollaire",
+    "pronunciation": "/kɔ.ʁɔ.lɛʁ/",
+    "translation": "推论；必然伴随的结果（阳性）",
+    "memoryCue": "数学“推论”，引申为不可分割的连锁伴生现象。",
+    "example": "La clarté visuelle est le corollaire naturel d'un code bien structuré."
+  },
+  {
+    "id": "mst-fr-524dfd21",
+    "language": "french",
+    "difficulty": "master",
+    "term": "dichotomie",
+    "pronunciation": "/di.kɔ.tɔ.mi/",
+    "translation": "二分法；对立两极（阴性）",
+    "memoryCue": "哲学与社会学辩论高频词：échapper à une fausse dichotomie。",
+    "example": "La réalité dépasse souvent la dichotomie simpliste entre théorie et jeu."
+  },
+  {
+    "id": "mst-fr-b6d58439",
+    "language": "french",
+    "difficulty": "master",
+    "term": "dissidence",
+    "pronunciation": "/di.si.dɑ̃s/",
+    "translation": "异议；持不同政见（阴性）",
+    "memoryCue": "dis-（分开）+ sid（坐）→ 坐到另一边表达不同意见。",
+    "example": "L'essai examine la dissidence intellectuelle au XVIIIe siècle."
+  },
+  {
+    "id": "mst-fr-cc2878c3",
+    "language": "french",
+    "difficulty": "master",
+    "term": "éclectisme",
+    "pronunciation": "/e.klɛk.tism/",
+    "translation": "兼收并蓄；折衷主义（阳性）",
+    "memoryCue": "从各大流派汲取精华融合自成一体。",
+    "example": "Son éclectisme musical mêle jazz modal et chanson française."
+  },
+  {
+    "id": "mst-fr-dd356e41",
+    "language": "french",
+    "difficulty": "master",
+    "term": "efflorescence",
+    "pronunciation": "/e.flɔ.ʁɛ.sɑ̃s/",
+    "translation": "繁盛期；百花齐放；风化结晶（阴性）",
+    "memoryCue": "ef- + fleur（花）→ 文化或艺术突然蓬勃绽放。",
+    "example": "La ville connut une remarquable efflorescence littéraire après 1920."
+  },
+  {
+    "id": "mst-fr-58417757",
+    "language": "french",
+    "difficulty": "master",
+    "term": "épistémologie",
+    "pronunciation": "/e.pis.te.mɔ.lɔ.ʒi/",
+    "translation": "认识论；知识论（阴性）",
+    "memoryCue": "DALF C2 哲学阅读核心词汇：探讨人类如何获得可靠知识。",
+    "example": "L'épistémologie interroge les fondements mêmes de la preuve scientifique."
+  },
+  {
+    "id": "mst-fr-6274a7c8",
+    "language": "french",
+    "difficulty": "master",
+    "term": "euphémisme",
+    "pronunciation": "/ø.fe.mism/",
+    "translation": "委婉语；婉转说法（阳性）",
+    "memoryCue": "eu-（好）+ phém（说）→ 把不好听的事挑好听的讲。",
+    "example": "Dire que le projet a pris un léger retard est un doux euphémisme."
+  },
+  {
+    "id": "mst-fr-f4fa339d",
+    "language": "french",
+    "difficulty": "master",
+    "term": "exégèse",
+    "pronunciation": "/ɛɡ.ze.ʒɛz/",
+    "translation": "详尽诠释；文本精解（阴性）",
+    "memoryCue": "对经典原典或法规条文逐字逐句的深度考据解读。",
+    "example": "Une patiente exégèse révèle l'ironie cachée sous ce passage."
+  },
+  {
+    "id": "mst-fr-1fa2bf60",
+    "language": "french",
+    "difficulty": "master",
+    "term": "fastidieux",
+    "pronunciation": "/fas.ti.djø/",
+    "translation": "繁琐乏味的；令人生厌的",
+    "memoryCue": "注意假朋友！英语 fastidious 表“挑剔”，法语 fastidieux 表“枯燥繁琐”！",
+    "example": "L'importation automatique évite la saisie manuelle fastidieuse."
+  },
+  {
+    "id": "mst-fr-89dfaf32",
+    "language": "french",
+    "difficulty": "master",
+    "term": "fructueux",
+    "pronunciation": "/fʁyk.tɥø/",
+    "translation": "硕果累累的；富有成效的",
+    "memoryCue": "fruit（果实）同源 → 讨论或合作收获满满。",
+    "example": "Les échanges entre linguistes et développeurs ont été très fructueux."
+  },
+  {
+    "id": "mst-fr-e7beb1a6",
+    "language": "french",
+    "difficulty": "master",
+    "term": "hétérogène",
+    "pronunciation": "/e.te.ʁɔ.ʒɛn/",
+    "translation": "异质的；成分混杂多样的",
+    "memoryCue": "与英语 heterogeneous 同源，注意词首哑音 h。",
+    "example": "La classe réunit des profils hétérogènes aux objectifs variés."
+  },
+  {
+    "id": "mst-fr-1502f87f",
+    "language": "french",
+    "difficulty": "master",
+    "term": "impératif",
+    "pronunciation": "/ɛ̃.pe.ʁa.tif/",
+    "translation": "当务之急；祈使语气；强制的",
+    "memoryCue": "一词两义：语法里的祈使式，以及不可推卸的迫切要求。",
+    "example": "La protection des données locales demeure un impératif absolu."
+  },
+  {
+    "id": "mst-fr-b83bf12c",
+    "language": "french",
+    "difficulty": "master",
+    "term": "inéluctable",
+    "pronunciation": "/i.ne.lyk.tabl/",
+    "translation": "不可避免的；无可挽回的",
+    "memoryCue": "in-（不）+ é- + luct（搏斗）→ 再怎么挣扎也无法逃避的定数。",
+    "example": "Sans révision régulière, l'oubli reste malheureusement inéluctable."
+  },
+  {
+    "id": "mst-fr-7e45f70c",
+    "language": "french",
+    "difficulty": "master",
+    "term": "insidieux",
+    "pronunciation": "/ɛ̃.si.djø/",
+    "translation": "暗中潜伏危害的；不易察觉的",
+    "memoryCue": "in- + sid（埋伏）→ 悄悄潜入逐步侵蚀的（比如广告追踪或疲劳）。",
+    "example": "Les distractions numériques agissent de manière insidieuse sur l'attention."
+  },
+  {
+    "id": "mst-fr-4c772650",
+    "language": "french",
+    "difficulty": "master",
+    "term": "laconique",
+    "pronunciation": "/la.kɔ.nik/",
+    "translation": "言简意赅的；寡言简短的",
+    "memoryCue": "斯巴达式的精炼表述，极简却信息量充足。",
+    "example": "Un message d'erreur laconique laisse souvent l'utilisateur perplexe."
+  },
+  {
+    "id": "mst-fr-f92c40a0",
+    "language": "french",
+    "difficulty": "master",
+    "term": "palliatif",
+    "pronunciation": "/pa.lja.tif/",
+    "translation": "姑息缓和的；权宜之计（阳性）",
+    "memoryCue": "与动词 pallier（缓解，不加 à！）同源，只治标不治本的缓解手段。",
+    "example": "Cacher un bug visuel n'est qu'un simple palliatif temporaire."
+  },
+  {
+    "id": "mst-fr-04e276ed",
+    "language": "french",
+    "difficulty": "master",
+    "term": "quintessence",
+    "pronunciation": "/kɛ̃.tɛ.sɑ̃s/",
+    "translation": "精髓；精华所在（阴性）",
+    "memoryCue": "原指中世纪炼金术里提取的“第五元素”→ 精华浓缩。",
+    "example": "Ces cinq cents cartes condensent la quintessence du vocabulaire courant."
+  },
+  {
+    "id": "mst-es-a966d05b",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "abnegación",
+    "pronunciation": "/aβ.ne.ɣaˈθjon/",
+    "translation": "忘我；自我牺牲精神（阴性）",
+    "memoryCue": "ab-（去）+ negación（否定自我）→ 毫无怨言全身心奉献。",
+    "example": "Educó a tres generaciones de estudiantes con admirable abnegación."
+  },
+  {
+    "id": "mst-es-58469f48",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "acuciante",
+    "pronunciation": "/a.kuˈθjan.te/",
+    "translation": "迫切紧急的；尖锐紧迫的",
+    "memoryCue": "源自动词 acuciar（催促刺痛）→ 刻不容缓的现实难题。",
+    "example": "La falta de tiempo libre es un problema acuciante hoy en día."
+  },
+  {
+    "id": "mst-es-80065617",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "albedrío",
+    "pronunciation": "/al.βeˈðɾi.o/",
+    "translation": "自由意志；自行决断（阳性）",
+    "memoryCue": "libre albedrío（哲学经典术语：自由意志）。",
+    "example": "El ensayo reflexiona sobre la libertad y el libre albedrío."
+  },
+  {
+    "id": "mst-es-80341944",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "anacronismo",
+    "pronunciation": "/a.na.kɾoˈniz.mo/",
+    "translation": "时代错乱；过时现象（阳性）",
+    "memoryCue": "ana-（错开）+ cron（时间）→ 格格不入的陈旧做法。",
+    "example": "Exigir formularios impresos en plena era móvil parece un anacronismo."
+  },
+  {
+    "id": "mst-es-c28affb4",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "aforismo",
+    "pronunciation": "/a.foˈɾiz.mo/",
+    "translation": "格言；警句（阳性）",
+    "memoryCue": "言简意赅浓缩智慧的短句。",
+    "example": "Cada capítulo comienza con un breve aforismo sobre la memoria."
+  },
+  {
+    "id": "mst-es-894bb5a7",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "cautela",
+    "pronunciation": "/kauˈte.la/",
+    "translation": "谨慎；戒备慎重（阴性）",
+    "memoryCue": "con cautela（小心翼翼地，同英语 cautious）。",
+    "example": "Conviene interpretar los datos preliminares con suma cautela."
+  },
+  {
+    "id": "mst-es-d5e92f3e",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "corolario",
+    "pronunciation": "/ko.ɾoˈla.ɾjo/",
+    "translation": "推论；自然延伸的结果（阳性）",
+    "memoryCue": "逻辑演绎的自然推论结果。",
+    "example": "La confianza del usuario es el corolario directo de la transparencia."
+  },
+  {
+    "id": "mst-es-45c3a492",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "dicotomía",
+    "pronunciation": "/di.ko.toˈmi.a/",
+    "translation": "二分法；非此即彼的对立（阴性）",
+    "memoryCue": "superar la dicotomía（打破非黑即白的简单对立）。",
+    "example": "Conviene superar la falsa dicotomía entre memorizar y comprender."
+  },
+  {
+    "id": "mst-es-2e87f459",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "disidencia",
+    "pronunciation": "/di.siˈðen.θja/",
+    "translation": "异议；不同声音（阴性）",
+    "memoryCue": "dis-（分）+ sid（坐）→ 不随大流的独立见解。",
+    "example": "El debate académico se enriquece gracias a la disidencia constructiva."
+  },
+  {
+    "id": "mst-es-50a63326",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "eclecticismo",
+    "pronunciation": "/e.klek.tiˈθiz.mo/",
+    "translation": "兼收并蓄；折衷风格（阳性）",
+    "memoryCue": "博采众长融合多元元素。",
+    "example": "Su diseño destaca por un elegante eclecticismo cultural."
+  },
+  {
+    "id": "mst-es-b33fca82",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "efervescencia",
+    "pronunciation": "/e.feɾ.βesˈθen.θja/",
+    "translation": "沸腾；活跃蓬勃；思潮涌动（阴性）",
+    "memoryCue": "原指气泡翻腾，常形容艺术、科技界百花齐放的黄金时期。",
+    "example": "El festival reflejó la efervescencia creativa del cine independiente."
+  },
+  {
+    "id": "mst-es-7bdfda59",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "epistemología",
+    "pronunciation": "/e.pis.te.mo.loˈxi.a/",
+    "translation": "认识论（阴性）",
+    "memoryCue": "DELE C2 社科阅读常见哲学核心词。",
+    "example": "La epistemología estudia cómo validamos el conocimiento científico."
+  },
+  {
+    "id": "mst-es-89c3ed2f",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "eufemismo",
+    "pronunciation": "/eu.feˈmiz.mo/",
+    "translation": "委婉语（阳性）",
+    "memoryCue": "用温和措辞替换生硬或负面事实。",
+    "example": "Llamar ajuste temporal a una crisis grave es un claro eufemismo."
+  },
+  {
+    "id": "mst-es-5ef67496",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "exégesis",
+    "pronunciation": "/ekˈse.xe.sis/",
+    "translation": "考据诠释；精细解读（阴性）",
+    "memoryCue": "注意西语单复数同形：la exégesis / las exégesis。",
+    "example": "El profesor propuso una brillante exégesis del poema clásico."
+  },
+  {
+    "id": "mst-es-e0c2cdfb",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "falaz",
+    "pronunciation": "/faˈlaθ/",
+    "translation": "谬误的；欺骗性的；似是而非的",
+    "memoryCue": "同英语 fallacious，复数变 z 为 c：falaces。",
+    "example": "Desmontó con cifras claras un argumento aparentemente falaz."
+  },
+  {
+    "id": "mst-es-1335799d",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "fructífero",
+    "pronunciation": "/fɾukˈti.fe.ɾo/",
+    "translation": "硕果累累的；卓有成效的",
+    "memoryCue": "fruto（果实）+ -fero（带来）→ 带来丰硕成果的交流。",
+    "example": "Mantuvieron un diálogo muy fructífero sobre estándares abiertos."
+  },
+  {
+    "id": "mst-es-c0300ca8",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "heterogéneo",
+    "pronunciation": "/e.te.ɾoˈxe.ne.o/",
+    "translation": "异质的；多元混杂的",
+    "memoryCue": "un grupo heterogéneo（水平背景各异的群体）。",
+    "example": "El sistema atiende por igual a un alumnado muy heterogéneo."
+  },
+  {
+    "id": "mst-es-f617dfd9",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "imperativo",
+    "pronunciation": "/im.pe.ɾaˈti.βo/",
+    "translation": "当务之急；祈使式；迫切必须的",
+    "memoryCue": "imperativo categórico（绝对律令），兼语法“祈使语气”。",
+    "example": "Minimizar la fricción en el primer uso es un imperativo de diseño."
+  },
+  {
+    "id": "mst-es-c978968a",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "ineludible",
+    "pronunciation": "/i.ne.luˈði.βle/",
+    "translation": "无法回避的；不可逃避的",
+    "memoryCue": "in-（不）+ eludir（躲避）→ 必须正面对待的硬性挑战。",
+    "example": "El repaso activo es un paso ineludible hacia la fluidez real."
+  },
+  {
+    "id": "mst-es-8acf92c7",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "insidioso",
+    "pronunciation": "/in.siˈðjo.so/",
+    "translation": "阴险潜伏的；不知不觉侵蚀的",
+    "memoryCue": "习惯性小毛病或隐蔽故障像暗箭一样慢慢拖垮效果。",
+    "example": "Un fallo silencioso e insidioso corrompía las fechas antiguas."
+  },
+  {
+    "id": "mst-es-f3da7913",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "lacónico",
+    "pronunciation": "/laˈko.ni.ko/",
+    "translation": "简短冷峻的；惜字如金的",
+    "memoryCue": "斯巴达式的极简回应（respuesta lacónica）。",
+    "example": "Respondió con un mensaje tan lacónico como contundente."
+  },
+  {
+    "id": "mst-es-bbd9599b",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "paliativo",
+    "pronunciation": "/pa.ljaˈti.βo/",
+    "translation": "治标缓和的；权宜之计（阳性）",
+    "memoryCue": "与动词 paliar（缓解）同源，暂缓症状而非根治。",
+    "example": "Silenciar alertas sin corregir la causa es un mero paliativo."
+  },
+  {
+    "id": "mst-es-9f7c8f64",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "quintaesencia",
+    "pronunciation": "/kin.ta.eˈsen.θja/",
+    "translation": "精髓；纯粹精华（阴性）",
+    "memoryCue": "quinta（第五）+ esencia（本质）→ 最精纯的本质浓缩。",
+    "example": "Esta colección reúne la quintaesencia del léxico periodístico."
+  },
+  {
+    "id": "mst-es-920a8d7b",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "reticencia",
+    "pronunciation": "/re.tiˈθen.θja/",
+    "translation": "犹豫保留；不情愿；含糊保留",
+    "memoryCue": "con reticencia（心存疑虑犹豫不决地）。",
+    "example": "Pese a su reticencia inicial, adoptó las tarjetas auditivas cada día."
+  },
+  {
+    "id": "mst-es-69c67da1",
+    "language": "spanish",
+    "difficulty": "master",
+    "term": "soslayar",
+    "pronunciation": "/soz.laˈʝaɾ/",
+    "translation": "回避；绕开；斜眼避过",
+    "memoryCue": "DELE C1–C2 新闻高频动词（no podemos soslayar 不能回避）。",
+    "example": "No debemos soslayar la importancia de escuchar voces nativas."
+  }
+]

@@ -165,7 +165,8 @@ enum BackupService {
         existingProgress: [WordProgress],
         existingCustomWords: [CustomWordRecord],
         existingEvents: [ReviewEvent],
-        in modelContext: ModelContext
+        in modelContext: ModelContext,
+        prepareForSave: (() throws -> Void)? = nil
     ) throws -> (progressCount: Int, customWordCount: Int, eventCount: Int) {
         let accessed = url.startAccessingSecurityScopedResource()
         defer {
@@ -176,6 +177,7 @@ enum BackupService {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         let payload = try decoder.decode(StudyBackupPayload.self, from: data)
+        try prepareForSave?()
 
         let progressByID = Dictionary(uniqueKeysWithValues: existingProgress.map { ($0.wordID, $0) })
         let customByID = Dictionary(uniqueKeysWithValues: existingCustomWords.map { ($0.id, $0) })
@@ -260,7 +262,12 @@ enum BackupService {
             insertedEvents += 1
         }
 
-        try modelContext.save()
+        do {
+            try modelContext.save()
+        } catch {
+            modelContext.rollback()
+            throw error
+        }
         return (payload.progressRecords.count, payload.customWords.count, insertedEvents)
     }
 }

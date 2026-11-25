@@ -1,0 +1,1502 @@
+[
+  {
+    "id": "acad-en-int-accumulate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "accumulate",
+    "pronunciation": "/əˈkjuːmjəleɪt/",
+    "translation": "积累；积聚；累计",
+    "memoryCue": "ac- + cumul（堆积）+ -ate → 越堆越多。",
+    "example": "Small daily sessions accumulate into thousands of mastered words."
+  },
+  {
+    "id": "acad-en-int-adjacent",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "adjacent",
+    "pronunciation": "/əˈdʒeɪsnt/",
+    "translation": "邻近的；毗连的",
+    "memoryCue": "ad-（向）+ jac（躺/放）→ 紧挨着躺在旁边的。",
+    "example": "The chemistry lab sits in the building adjacent to the library."
+  },
+  {
+    "id": "acad-en-int-adverse",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "adverse",
+    "pronunciation": "/ədˈvɜːrs/",
+    "translation": "不利的；逆向的；有害的",
+    "memoryCue": "ad-（向）+ vers（转）→ 朝相反方向转，即逆境、不利。",
+    "example": "Adverse weather delayed the offshore survey by three days."
+  },
+  {
+    "id": "acad-en-int-aggregate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "aggregate",
+    "pronunciation": "/ˈæɡrɪɡət/",
+    "translation": "总计；聚集；聚合体",
+    "memoryCue": "ag- + greg（群体）+ -ate → 聚成一大群总数。",
+    "example": "Aggregate enrollment in online courses rose twenty percent."
+  },
+  {
+    "id": "acad-en-int-alter",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "alter",
+    "pronunciation": "/ˈɔːltər/",
+    "translation": "改变；修改；改动",
+    "memoryCue": "词根 alter-（另外的）→ 变成另一种模样。",
+    "example": "Microclimates can subtly alter when local flowers bloom."
+  },
+  {
+    "id": "acad-en-int-amend",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "amend",
+    "pronunciation": "/əˈmend/",
+    "translation": "修订；修正；改良",
+    "memoryCue": "a- + mend（修补/瑕疵）→ 改掉毛病使其完善。",
+    "example": "Lawmakers voted to amend the privacy clause before passage."
+  },
+  {
+    "id": "acad-en-int-analogy",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "analogy",
+    "pronunciation": "/əˈnælədʒi/",
+    "translation": "类比；比喻；相似",
+    "memoryCue": "ana-（依照）+ logy（比例/推理）→ 按比例对照说明。",
+    "example": "The lecturer used a river delta analogy to explain data flow."
+  },
+  {
+    "id": "acad-en-int-annual",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "annual",
+    "pronunciation": "/ˈænjuəl/",
+    "translation": "每年的；年度的；年刊",
+    "memoryCue": "ann-（年）+ -ual → 一年一度的；区分 anniversary。",
+    "example": "The university publishes an annual report on solar research."
+  },
+  {
+    "id": "acad-en-int-assemble",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "assemble",
+    "pronunciation": "/əˈsembl/",
+    "translation": "组装；集合；聚集",
+    "memoryCue": "as- + semble（相同）→ 把散件凑到一处。",
+    "example": "Researchers assembled fossil fragments to reconstruct the skull."
+  },
+  {
+    "id": "acad-en-int-assert",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "assert",
+    "pronunciation": "/əˈsɜːrt/",
+    "translation": "断言；主张；维护（权利）",
+    "memoryCue": "as- + sert（连接/放入）→ 坚定地提出论断。",
+    "example": "The paper asserts that early bilingualism boosts attention."
+  },
+  {
+    "id": "acad-en-int-attain",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "attain",
+    "pronunciation": "/əˈteɪn/",
+    "translation": "达到；获得；实现（高目标）",
+    "memoryCue": "at-（向）+ tain（触及）→ 努力伸手够到。",
+    "example": "Few athletes attain consistent form across four Olympic cycles."
+  },
+  {
+    "id": "acad-en-int-authentic",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "authentic",
+    "pronunciation": "/ɔːˈθentɪk/",
+    "translation": "真实的；正宗的；可信的",
+    "memoryCue": "词根 auth-（亲自/权威）→ 原汁原味的正品。",
+    "example": "Listening to authentic podcasts trains ears for natural speed."
+  },
+  {
+    "id": "acad-en-int-broaden",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "broaden",
+    "pronunciation": "/ˈbrɔːdn/",
+    "translation": "拓宽；扩大；增长（见识）",
+    "memoryCue": "broad（宽阔）+ -en（使……）→ 使视野变宽。",
+    "example": "Reading across disciplines helps broaden critical thinking."
+  },
+  {
+    "id": "acad-en-int-capture",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "capture",
+    "pronunciation": "/ˈkæptʃər/",
+    "translation": "捕获；捕捉；占领；记录",
+    "memoryCue": "cap-（抓）+ -ture → 精准抓住画面或核心意思。",
+    "example": "High-speed cameras capture wing motion invisible to the eye."
+  },
+  {
+    "id": "acad-en-int-catalyst",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "catalyst",
+    "pronunciation": "/ˈkætəlɪst/",
+    "translation": "催化剂；促进因素",
+    "memoryCue": "cata-（向下）+ lyst（松解）→ 加速反应发生的关键因素。",
+    "example": "Open datasets acted as a catalyst for medical imaging breakthroughs."
+  },
+  {
+    "id": "acad-en-int-chronicle",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "chronicle",
+    "pronunciation": "/ˈkrɑːnɪkl/",
+    "translation": "编年史；记录；按时间记述",
+    "memoryCue": "chron-（时间）→ 按时间顺序列出的大事记。",
+    "example": "The museum's archive chronicles three centuries of maritime trade."
+  },
+  {
+    "id": "acad-en-int-cite",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "cite",
+    "pronunciation": "/saɪt/",
+    "translation": "引用；引证；表扬",
+    "memoryCue": "写作引用文献必用词：cite a recent study。",
+    "example": "Always cite primary sources when writing an academic essay."
+  },
+  {
+    "id": "acad-en-int-classify",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "classify",
+    "pronunciation": "/ˈklæsɪfaɪ/",
+    "translation": "分类；归类；分级",
+    "memoryCue": "class（类别）+ -ify（使……）→ 分门别类。",
+    "example": "Botanists classify ferns separately from flowering plants."
+  },
+  {
+    "id": "acad-en-int-coincide",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "coincide",
+    "pronunciation": "/ˌkoʊɪnˈsaɪd/",
+    "translation": "巧合；同时发生；一致",
+    "memoryCue": "co-（共同）+ in- + cide（落）→ 恰好落在同一时点。",
+    "example": "The book fair happened to coincide with the city marathon."
+  },
+  {
+    "id": "acad-en-int-collaborate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "collaborate",
+    "pronunciation": "/kəˈlæbəreɪt/",
+    "translation": "合作；协作",
+    "memoryCue": "col-（共同）+ labor（劳动）+ -ate → 一起干活。",
+    "example": "Marine biologists and engineers collaborated on the reef sensor."
+  },
+  {
+    "id": "acad-en-int-commence",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "commence",
+    "pronunciation": "/kəˈmens/",
+    "translation": "开始；着手（正式）",
+    "memoryCue": "com- + mence → 学术通知与典礼常用“开始”。",
+    "example": "Evening lectures will commence promptly at seven o'clock."
+  },
+  {
+    "id": "acad-en-int-compile",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "compile",
+    "pronunciation": "/kəmˈpaɪl/",
+    "translation": "汇编；整理；编译",
+    "memoryCue": "com- + pile（堆）→ 把分散资料搜集整合成册。",
+    "example": "Editors spent two years compiling the regional dialect dictionary."
+  },
+  {
+    "id": "acad-en-int-complement",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "complement",
+    "pronunciation": "/ˈkɑːmplɪment/",
+    "translation": "补充；使完善；互补物",
+    "memoryCue": "注意 e 与 compliment（赞美，i）拼写区别！",
+    "example": "Short grammar notes nicely complement daily flashcard drills."
+  },
+  {
+    "id": "acad-en-int-comprehensive",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "comprehensive",
+    "pronunciation": "/ˌkɑːmprɪˈhensɪv/",
+    "translation": "全面的；综合的；包罗万象的",
+    "memoryCue": "com-（全）+ prehend（抓）→ 全部抓进来无遗漏。",
+    "example": "The textbook provides a comprehensive overview of phonetics."
+  },
+  {
+    "id": "acad-en-int-comprise",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "comprise",
+    "pronunciation": "/kəmˈpraɪz/",
+    "translation": "包含；由……组成",
+    "memoryCue": "注意主动语态表整体包含部分，无需加 of。",
+    "example": "The archipelagic nation comprises more than seventy inhabited islands."
+  },
+  {
+    "id": "acad-en-int-conceive",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "conceive",
+    "pronunciation": "/kənˈsiːv/",
+    "translation": "构想；设想；怀孕",
+    "memoryCue": "con- + ceive（拿/怀）→ 在脑海中酝酿出创意。",
+    "example": "Architects originally conceived the station as an open glass hall."
+  },
+  {
+    "id": "acad-en-int-conclude",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "conclude",
+    "pronunciation": "/kənˈkluːd/",
+    "translation": "得出结论；结束；缔结",
+    "memoryCue": "con-（全部）+ clude（关闭）→ 收尾下定论。",
+    "example": "Authors conclude that urban trees lower street temperatures markedly."
+  },
+  {
+    "id": "acad-en-int-concrete",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "concrete",
+    "pronunciation": "/ˈkɑːnkriːt/",
+    "translation": "具体的；实实在在的；混凝土",
+    "memoryCue": "与 abstract（抽象）相对，写作常用 concrete examples。",
+    "example": "Support your thesis with concrete statistics rather than vague claims."
+  },
+  {
+    "id": "acad-en-int-confer",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "confer",
+    "pronunciation": "/kənˈfɜːr/",
+    "translation": "商议；授予（学位/荣誉）",
+    "memoryCue": "con-（共同）+ fer（带来）→ 聚在一起商讨或颁发。",
+    "example": "The committee convened to confer honors on young inventors."
+  },
+  {
+    "id": "acad-en-int-confine",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "confine",
+    "pronunciation": "/kənˈfaɪn/",
+    "translation": "限制；局限；禁闭",
+    "memoryCue": "con- + fine（边界）→ 圈定在边界之内。",
+    "example": "Keep your opening paragraph confined to one central question."
+  },
+  {
+    "id": "acad-en-int-conform",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "conform",
+    "pronunciation": "/kənˈfɔːrm/",
+    "translation": "符合；遵守；顺从",
+    "memoryCue": "con-（共同）+ form（形状）→ 按统一规格对齐。",
+    "example": "All lab samples must conform to international safety standards."
+  },
+  {
+    "id": "acad-en-int-consent",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "consent",
+    "pronunciation": "/kənˈsent/",
+    "translation": "同意；许可；赞同",
+    "memoryCue": "con-（共同）+ sent（感觉）→ 想法一致即同意。",
+    "example": "Participants gave written consent before joining the study."
+  },
+  {
+    "id": "acad-en-int-consist",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "consist",
+    "pronunciation": "/kənˈsɪst/",
+    "translation": "由……组成（of）；在于（in）",
+    "memoryCue": "只用主动不用被动：consist of。",
+    "example": "True mastery consists in steady review rather than cramming."
+  },
+  {
+    "id": "acad-en-int-constitute",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "constitute",
+    "pronunciation": "/ˈkɑːnstɪtuːt/",
+    "translation": "构成；组成；设立",
+    "memoryCue": "con- + stitute（立）→ 共同立起构成整体。",
+    "example": "Twelve short essays constitute the core reading list."
+  },
+  {
+    "id": "acad-en-int-consult",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "consult",
+    "pronunciation": "/kənˈsʌlt/",
+    "translation": "咨询；查阅；商量",
+    "memoryCue": "词根 sult-（召唤坐下商议）→ 查阅词典也用 consult。",
+    "example": "Consult an etymology guide when two words look deceptively similar."
+  },
+  {
+    "id": "acad-en-int-contemporary",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "contemporary",
+    "pronunciation": "/kənˈtempəreri/",
+    "translation": "当代的；同时代的；同代人",
+    "memoryCue": "con-（共同）+ tempor（时间）→ 同一时代的。",
+    "example": "Contemporary architecture increasingly relies on recycled timber."
+  },
+  {
+    "id": "acad-en-int-contradict",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "contradict",
+    "pronunciation": "/ˌkɑːntrəˈdɪkt/",
+    "translation": "反驳；与……矛盾",
+    "memoryCue": "contra-（反对）+ dict（说）→ 唱反调互相矛盾。",
+    "example": "New ice-core readings appear to contradict the earlier timeline."
+  },
+  {
+    "id": "acad-en-int-contrast",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "contrast",
+    "pronunciation": "/ˈkɑːntræst/",
+    "translation": "对比；对照；鲜明反差",
+    "memoryCue": "contra-（对着）+ st（站）→ 面对面站着比差别。",
+    "example": "By contrast, nocturnal birds rely heavily on sharp hearing."
+  },
+  {
+    "id": "acad-en-int-convert",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "convert",
+    "pronunciation": "/kənˈvɜːrt/",
+    "translation": "转换；转变；改造",
+    "memoryCue": "con- + vert（转）→ 把形式或能源转成另一种。",
+    "example": "Rooftop panels convert afternoon sunlight directly into electricity."
+  },
+  {
+    "id": "acad-en-int-convey",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "convey",
+    "pronunciation": "/kənˈveɪ/",
+    "translation": "传达；表达；运送",
+    "memoryCue": "con- + vey（路）→ 沿着路径把意思传递到对方心里。",
+    "example": "Tone of voice can convey urgency even in a short phrase."
+  },
+  {
+    "id": "acad-en-int-cooperate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "cooperate",
+    "pronunciation": "/koʊˈɑːpəreɪt/",
+    "translation": "合作；配合；协作",
+    "memoryCue": "co-（共同）+ oper（工作）→ 共同工作。",
+    "example": "Neighboring towns cooperated to restore the wetland trail."
+  },
+  {
+    "id": "acad-en-int-coordinate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "coordinate",
+    "pronunciation": "/koʊˈɔːrdɪneɪt/",
+    "translation": "协调；统筹；坐标",
+    "memoryCue": "co- + ordin（顺序）→ 理顺多方步调。",
+    "example": "Volunteers worked hard to coordinate emergency food deliveries."
+  },
+  {
+    "id": "acad-en-int-crucial",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "crucial",
+    "pronunciation": "/ˈkruːʃl/",
+    "translation": "至关重要的；决定性的",
+    "memoryCue": "词根 cruc-（十字路口）→ 站在生死抉择十字路口的。",
+    "example": "Spaced timing is crucial for moving vocabulary into long-term memory."
+  },
+  {
+    "id": "acad-en-int-cultivate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "cultivate",
+    "pronunciation": "/ˈkʌltɪveɪt/",
+    "translation": "培养；耕作；陶冶",
+    "memoryCue": "cult-（耕耘）+ -ivate → 像种庄稼一样耐心培育习惯。",
+    "example": "Daily journaling helps cultivate precision in second-language writing."
+  },
+  {
+    "id": "acad-en-int-cumulative",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "cumulative",
+    "pronunciation": "/ˈkjuːmjəleɪtɪv/",
+    "translation": "累积的；渐增的",
+    "memoryCue": "cumul（堆）+ -ative → 一步步叠加起来的效应。",
+    "example": "Vocabulary growth reflects the cumulative impact of short sessions."
+  },
+  {
+    "id": "acad-en-int-decline",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "decline",
+    "pronunciation": "/dɪˈklaɪn/",
+    "translation": "下降；衰退；婉拒",
+    "memoryCue": "de-（向下）+ cline（倾斜）→ 向下滑落或礼貌谢绝。",
+    "example": "Pollinator populations tend to decline when wildflowers vanish."
+  },
+  {
+    "id": "acad-en-int-deduce",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "deduce",
+    "pronunciation": "/dɪˈduːs/",
+    "translation": "推断；演绎；推论",
+    "memoryCue": "de-（向下）+ duce（引导）→ 顺着线索向下推出结论。",
+    "example": "Readers can deduce the word's sense from surrounding clues."
+  },
+  {
+    "id": "acad-en-int-demonstrate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "demonstrate",
+    "pronunciation": "/ˈdemənstreɪt/",
+    "translation": "证明；演示；示范；游行",
+    "memoryCue": "de- + monstr（展示）→ 摆出来让大家看明白。",
+    "example": "Controlled trials demonstrate measurable gains in recall speed."
+  },
+  {
+    "id": "acad-en-int-depict",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "depict",
+    "pronunciation": "/dɪˈpɪkt/",
+    "translation": "描绘；描写；刻画",
+    "memoryCue": "de- + pict（画）→ 用文字或画笔细致勾勒。",
+    "example": "Cave paintings depict herds migrating across ancient grasslands."
+  },
+  {
+    "id": "acad-en-int-derive",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "derive",
+    "pronunciation": "/dɪˈraɪv/",
+    "translation": "源自；衍生；获得（from）",
+    "memoryCue": "de- + rive（河流）→ 如河水从源头流淌而出。",
+    "example": "Many English legal terms derive directly from Norman French."
+  },
+  {
+    "id": "acad-en-int-detect",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "detect",
+    "pronunciation": "/dɪˈtekt/",
+    "translation": "探测；察觉；发现",
+    "memoryCue": "de-（去掉）+ tect（盖子）→ 掀开盖子查出真相。",
+    "example": "Acoustic buoys detect whale songs miles beneath the surface."
+  },
+  {
+    "id": "acad-en-int-deviate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "deviate",
+    "pronunciation": "/ˈdiːvieɪt/",
+    "translation": "偏离；背离（from）",
+    "memoryCue": "de-（离开）+ via（道路）→ 走偏出既定轨道。",
+    "example": "Try not to deviate from your core review plan during busy weeks."
+  },
+  {
+    "id": "acad-en-int-diminish",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "diminish",
+    "pronunciation": "/dɪˈmɪnɪʃ/",
+    "translation": "减少；削弱；贬低",
+    "memoryCue": "di- + min（小）+ -ish → 变得越来越小。",
+    "example": "Repetition causes initial nervousness to gradually diminish."
+  },
+  {
+    "id": "acad-en-int-discrete",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "discrete",
+    "pronunciation": "/dɪˈskriːt/",
+    "translation": "离散的；互不相连的；独立的",
+    "memoryCue": "注意区分 discreet（谨慎的）与 discrete（分立的）。",
+    "example": "Break long projects into discrete twenty-minute milestones."
+  },
+  {
+    "id": "acad-en-int-distinct",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "distinct",
+    "pronunciation": "/dɪˈstɪŋkt/",
+    "translation": "截然不同的；清晰的；显著的",
+    "memoryCue": "dis- + stinct（刺/标记）→ 标记清楚互不相混。",
+    "example": "Japanese has three distinct writing scripts working together."
+  },
+  {
+    "id": "acad-en-int-distort",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "distort",
+    "pronunciation": "/dɪˈstɔːrt/",
+    "translation": "扭曲；歪曲；失真",
+    "memoryCue": "dis-（分开）+ tort（拧）→ 用力拧歪事实或声音。",
+    "example": "Faulty microphones can easily distort subtle vowel contrasts."
+  },
+  {
+    "id": "acad-en-int-diverse",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "diverse",
+    "pronunciation": "/daɪˈvɜːrs/",
+    "translation": "多样的；形形色色的",
+    "memoryCue": "di-（分开）+ verse（转）→ 朝不同方向绽放的多元性。",
+    "example": "Exposure to diverse accents prepares ears for real-world travel."
+  },
+  {
+    "id": "acad-en-int-dominate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "dominate",
+    "pronunciation": "/ˈdɑːmɪneɪt/",
+    "translation": "支配；占主导地位；俯瞰",
+    "memoryCue": "dom-（屋主/统治）→ 居于统治核心。",
+    "example": "Two tech hubs still dominate regional semiconductor exports."
+  },
+  {
+    "id": "acad-en-int-elaborate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "elaborate",
+    "pronunciation": "/ɪˈlæbərət/",
+    "translation": "详尽阐述；精巧复杂的",
+    "memoryCue": "e-（出）+ labor（劳动）→ 花费心思精雕细琢；作动词读 /-eɪt/。",
+    "example": "Could you elaborate on how that memory trick works?"
+  },
+  {
+    "id": "acad-en-int-eliminate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "eliminate",
+    "pronunciation": "/ɪˈlɪmɪneɪt/",
+    "translation": "消除；淘汰；排除",
+    "memoryCue": "e-（出）+ limin（门槛）→ 踢出门槛彻底清除。",
+    "example": "Active quizzing helps eliminate passive illusion of knowing."
+  },
+  {
+    "id": "acad-en-adv-aberration",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "aberration",
+    "pronunciation": "/ˌæbəˈreɪʃn/",
+    "translation": "反常；偏差；畸变",
+    "memoryCue": "ab-（偏离）+ err（走错/漫游）→ 偏离正轨的反常现象。",
+    "example": "Analysts treated the sudden winter heatwave as a statistical aberration."
+  },
+  {
+    "id": "acad-en-adv-abstain",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "abstain",
+    "pronunciation": "/əbˈsteɪn/",
+    "translation": "弃权；戒除；克制（from）",
+    "memoryCue": "abs-（离开）+ tain（拿住）→ 管住自己不伸手。",
+    "example": "Three delegates chose to abstain during the final committee vote."
+  },
+  {
+    "id": "acad-en-adv-acclaim",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "acclaim",
+    "pronunciation": "/əˈkleɪm/",
+    "translation": "称赞；高度赞誉；欢呼",
+    "memoryCue": "ac- + claim（呼喊）→ 全场大声叫好。",
+    "example": "The documentary earned critical acclaim across major film festivals."
+  },
+  {
+    "id": "acad-en-adv-acerbity",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "acerbity",
+    "pronunciation": "/əˈsɜːrbəti/",
+    "translation": "尖刻；酸涩；严厉",
+    "memoryCue": "acer-（尖酸）+ -ity → 言辞或味道尖锐带刺。",
+    "example": "She replied with quiet poise rather than matching his acerbity."
+  },
+  {
+    "id": "acad-en-adv-acumen",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "acumen",
+    "pronunciation": "/əˈkjuːmən/",
+    "translation": "敏锐；精明；洞察力",
+    "memoryCue": "acu-（尖针）→ 思维像针尖一样锐利（business acumen）。",
+    "example": "Her editorial acumen turned a small zine into an influential journal."
+  },
+  {
+    "id": "acad-en-adv-adhere",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "adhere",
+    "pronunciation": "/ədˈhɪr/",
+    "translation": "粘附；遵守；坚持（to）",
+    "memoryCue": "ad- + here（粘）→ 牢牢粘在原则或表面上。",
+    "example": "Researchers must adhere strictly to peer-review guidelines."
+  },
+  {
+    "id": "acad-en-adv-admonish",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "admonish",
+    "pronunciation": "/ədˈmɑːnɪʃ/",
+    "translation": "告诫；劝诫；轻度训斥",
+    "memoryCue": "ad- + mon（警告）→ 善意提醒纠正过失。",
+    "example": "Inspectors admonished the lab for delaying safety disclosures."
+  },
+  {
+    "id": "acad-en-adv-aesthetic",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "aesthetic",
+    "pronunciation": "/esˈθetɪk/",
+    "translation": "审美的；美学的；美感",
+    "memoryCue": "aesthe-（感觉）→ 关于视觉与艺术美感的追求。",
+    "example": "Minimalist packaging gives the studio a timeless aesthetic."
+  },
+  {
+    "id": "acad-en-adv-affluent",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "affluent",
+    "pronunciation": "/ˈæfluənt/",
+    "translation": "富裕的；丰足的",
+    "memoryCue": "af- + flu（流）→ 财富源源不断流进来。",
+    "example": "Affluent neighborhoods often invest heavily in urban tree canopies."
+  },
+  {
+    "id": "acad-en-adv-aggravate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "aggravate",
+    "pronunciation": "/ˈæɡrəveɪt/",
+    "translation": "加重；恶化；激怒",
+    "memoryCue": "ag- + grav（重，同 gravity）→ 让坏情况雪上加霜。",
+    "example": "Drought conditions further aggravate coastal soil salinity."
+  },
+  {
+    "id": "acad-en-adv-alleviate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "alleviate",
+    "pronunciation": "/əˈliːvieɪt/",
+    "translation": "减轻；缓解（痛苦/负担）",
+    "memoryCue": "al- + levi（轻）→ 把沉重痛苦变轻。",
+    "example": "Flexible deadlines help alleviate burnout among new hires."
+  },
+  {
+    "id": "acad-en-adv-altruism",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "altruism",
+    "pronunciation": "/ˈæltruɪzəm/",
+    "translation": "利他主义；无私奉献",
+    "memoryCue": "altr-（他人，同 other）+ -ism → 处处先想到别人。",
+    "example": "Cross-species altruism continues to intrigue behavioral ecologists."
+  },
+  {
+    "id": "acad-en-adv-ameliorate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "ameliorate",
+    "pronunciation": "/əˈmiːljəreɪt/",
+    "translation": "改善；改良（糟糕处境）",
+    "memoryCue": "a- + melior（更好）→ 让原本困难的局面往好处转。",
+    "example": "Targeted tutoring programs can ameliorate early literacy gaps."
+  },
+  {
+    "id": "acad-en-adv-anachronism",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "anachronism",
+    "pronunciation": "/əˈnækrənɪzəm/",
+    "translation": "时代错乱；过时的人或物",
+    "memoryCue": "ana-（错开）+ chron（时间）→ 把不属于那个年代的东西放进去。",
+    "example": "A wristwatch in a medieval film is a classic anachronism."
+  },
+  {
+    "id": "acad-en-adv-animosity",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "animosity",
+    "pronunciation": "/ˌænɪˈmɑːsəti/",
+    "translation": "敌意；憎恶；仇恨",
+    "memoryCue": "anim-（精神/气）→ 心头涌起的强烈怒气与敌对情绪。",
+    "example": "Years of open dialogue gradually dissolved the old animosity."
+  },
+  {
+    "id": "acad-en-adv-anomaly",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "anomaly",
+    "pronunciation": "/əˈnɑːməli/",
+    "translation": "异常；反常事物",
+    "memoryCue": "a-（无）+ nom（规律）→ 不合常规的异常点。",
+    "example": "Astronomers investigated a faint thermal anomaly near the star's pole."
+  },
+  {
+    "id": "acad-en-adv-antithesis",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "antithesis",
+    "pronunciation": "/ænˈtɪθəsɪs/",
+    "translation": "对立面；正相反；对照法",
+    "memoryCue": "anti-（反）+ thesis（论点）→ 站在对立面的另一极。",
+    "example": "Calm deliberation is the antithesis of impulsive decision-making."
+  },
+  {
+    "id": "acad-en-adv-apathy",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "apathy",
+    "pronunciation": "/ˈæpəθi/",
+    "translation": "冷漠；漠不关心；无动于衷",
+    "memoryCue": "a-（无）+ pathy（感情）→ 心里毫无波动。",
+    "example": "Voter apathy often drops when local issues directly affect schools."
+  },
+  {
+    "id": "acad-en-adv-appease",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "appease",
+    "pronunciation": "/əˈpiːz/",
+    "translation": "安抚；平息；姑息",
+    "memoryCue": "ap- + peace（和平）→ 让人消气平静下来。",
+    "example": "Minor concessions failed to appease the frustrated commuters."
+  },
+  {
+    "id": "acad-en-adv-archaic",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "archaic",
+    "pronunciation": "/ɑːrˈkeɪɪk/",
+    "translation": "古老的；陈旧的；古语的",
+    "memoryCue": "archae-（古代）→ 像古董一样早已不常用的词或制度。",
+    "example": "Dictionaries mark outdated spellings with the label archaic."
+  },
+  {
+    "id": "acad-en-adv-arduous",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "arduous",
+    "pronunciation": "/ˈɑːrdʒuəs/",
+    "translation": "艰巨的；费力的；险峻的",
+    "memoryCue": "ard-（陡峭/高）→ 像攀登陡坡一样耗时耗力。",
+    "example": "Translating poetry demands arduous attention to rhythm and nuance."
+  },
+  {
+    "id": "acad-en-adv-articulate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "articulate",
+    "pronunciation": "/ɑːrˈtɪkjəleɪt/",
+    "translation": "清晰表达；口齿伶俐的",
+    "memoryCue": "articul-（关节）→ 话语像关节一样节节分明、条理清晰。",
+    "example": "Good teachers articulate complex theories in everyday language."
+  },
+  {
+    "id": "acad-en-adv-ascertain",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "ascertain",
+    "pronunciation": "/ˌæsərˈteɪn/",
+    "translation": "查明；探明；弄清",
+    "memoryCue": "as- + certain（确定）→ 调查后把事实弄得确凿无疑。",
+    "example": "Auditors checked receipts to ascertain the exact shipping date."
+  },
+  {
+    "id": "acad-en-adv-assiduous",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "assiduous",
+    "pronunciation": "/əˈsɪdʒuəs/",
+    "translation": "勤勉的；刻苦钻研的",
+    "memoryCue": "as- + sid（坐）→ 坐得住冷板凳的勤奋。",
+    "example": "Assiduous note-taking turned casual reading into lasting expertise."
+  },
+  {
+    "id": "acad-en-adv-astute",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "astute",
+    "pronunciation": "/əˈstuːt/",
+    "translation": "敏锐的；精明的；机警的",
+    "memoryCue": "一眼看透局势关键所在的精明。",
+    "example": "An astute observer notices what goes unsaid during talks."
+  },
+  {
+    "id": "acad-en-adv-audacious",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "audacious",
+    "pronunciation": "/ɔːˈdeɪʃəs/",
+    "translation": "大胆的；无畏的；鲁莽的",
+    "memoryCue": "aud-（敢）+ -acious → 敢为天下先。",
+    "example": "The architect proposed an audacious timber bridge across the gorge."
+  },
+  {
+    "id": "acad-en-adv-augment",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "augment",
+    "pronunciation": "/ɔːɡˈment/",
+    "translation": "增加；扩大；强化",
+    "memoryCue": "aug-（增长）+ -ment → 让规模或能力进一步放大。",
+    "example": "Visual flashcards augment traditional textbook study effectively."
+  },
+  {
+    "id": "acad-en-adv-austere",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "austere",
+    "pronunciation": "/ɔːˈstɪr/",
+    "translation": "简朴的；严峻的；禁欲的",
+    "memoryCue": "毫无多余装饰、克制极简。",
+    "example": "Monastic libraries share a calm, austere beauty."
+  },
+  {
+    "id": "acad-en-adv-autonomous",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "autonomous",
+    "pronunciation": "/ɔːˈtɑːnəməs/",
+    "translation": "自治的；自主的；自动驾驶的",
+    "memoryCue": "auto-（自己）+ nom（法则）→ 自己管自己的法则。",
+    "example": "Autonomous underwater gliders map ocean currents for months."
+  },
+  {
+    "id": "acad-en-adv-avarice",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "avarice",
+    "pronunciation": "/ˈævərɪs/",
+    "translation": "贪婪；贪财",
+    "memoryCue": "avar-（渴望）→ 永不知足的贪欲。",
+    "example": "Classic fables repeatedly warn against unchecked avarice."
+  },
+  {
+    "id": "acad-en-adv-banal",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "banal",
+    "pronunciation": "/bəˈnɑːl/",
+    "translation": "陈腐的；平庸的；老套的",
+    "memoryCue": "人人都在用、听腻了的陈词滥调。",
+    "example": "Avoid banal openings like 'since the dawn of time' in IELTS essays."
+  },
+  {
+    "id": "acad-en-adv-belie",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "belie",
+    "pronunciation": "/bɪˈlaɪ/",
+    "translation": "掩饰；与……不符；证明……为假",
+    "memoryCue": "be- + lie（说谎）→ 表面看似如此，实则相反。",
+    "example": "Her gentle smile belied her fierce determination on the court."
+  },
+  {
+    "id": "acad-en-adv-benevolent",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "benevolent",
+    "pronunciation": "/bəˈnevələnt/",
+    "translation": "仁慈的；善意的；乐善好施的",
+    "memoryCue": "bene-（好）+ vol（意愿）→ 怀着善意的。",
+    "example": "Benevolent mentors lift entire cohorts of younger researchers."
+  },
+  {
+    "id": "acad-en-adv-benign",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "benign",
+    "pronunciation": "/bɪˈnaɪn/",
+    "translation": "良性的；温和的；仁慈的",
+    "memoryCue": "bene-（好）→ 医学上指“良性的”（benign tumor），也指气候温和。",
+    "example": "Initial biopsy results thankfully confirmed the growth was benign."
+  },
+  {
+    "id": "acad-en-adv-bolster",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "bolster",
+    "pronunciation": "/ˈboʊlstər/",
+    "translation": "支撑；加强；鼓舞",
+    "memoryCue": "原指枕垫，引申为垫起、巩固论点或信心。",
+    "example": "Fresh archaeological evidence helped bolster the migration theory."
+  },
+  {
+    "id": "acad-en-adv-brevity",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "brevity",
+    "pronunciation": "/ˈbrevəti/",
+    "translation": "简短；简洁；短暂",
+    "memoryCue": "brev-（短，同 brief）→ 言简意赅。",
+    "example": "Brevity is a hallmark of memorable scientific abstracts."
+  },
+  {
+    "id": "acad-en-adv-buoyant",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "buoyant",
+    "pronunciation": "/ˈbɔɪənt/",
+    "translation": "有浮力的；轻快的；看涨的",
+    "memoryCue": "buoy（浮标）→ 像浮标一样漂浮不沉、充满朝气。",
+    "example": "Strong export orders kept consumer confidence buoyant."
+  },
+  {
+    "id": "acad-en-adv-cacophony",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cacophony",
+    "pronunciation": "/kəˈkɑːfəni/",
+    "translation": "刺耳的嘈杂声；不和谐音",
+    "memoryCue": "caco-（坏）+ phon（声音）→ 难听的杂音混响。",
+    "example": "Morning horns created a loud cacophony beneath our hotel window."
+  },
+  {
+    "id": "acad-en-adv-candid",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "candid",
+    "pronunciation": "/ˈkændɪd/",
+    "translation": "坦率的；直爽的；抓拍的",
+    "memoryCue": "cand-（白/纯洁，同 candle）→ 毫无掩饰亮出真心。",
+    "example": "We appreciated her candid critique of the early prototype."
+  },
+  {
+    "id": "acad-en-adv-capricious",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "capricious",
+    "pronunciation": "/kəˈprɪʃəs/",
+    "translation": "反复无常的；任性的；多变的",
+    "memoryCue": "capr-（山羊）→ 像山羊乱蹦一样说变就变。",
+    "example": "Mountain weather is notoriously capricious in late spring."
+  },
+  {
+    "id": "acad-en-adv-censure",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "censure",
+    "pronunciation": "/ˈsenʃər/",
+    "translation": "严厉指责；谴责",
+    "memoryCue": "cens-（评估/审查）→ 公开点名批评。",
+    "example": "The ethics board voted to censure falsified lab citations."
+  },
+  {
+    "id": "acad-en-adv-chicanery",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "chicanery",
+    "pronunciation": "/ʃɪˈkeɪnəri/",
+    "translation": "诡计；狡辩；欺诈手段",
+    "memoryCue": "耍小聪明钻空子的把戏。",
+    "example": "Transparent audit trails leave no room for financial chicanery."
+  },
+  {
+    "id": "acad-en-adv-chronological",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "chronological",
+    "pronunciation": "/ˌkrɑːnəˈlɑːdʒɪkl/",
+    "translation": "按时间顺序的",
+    "memoryCue": "chron-（时间）+ logic → 依先后年份顺排。",
+    "example": "Arrange the historical milestones in chronological order."
+  },
+  {
+    "id": "acad-en-adv-circumspect",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "circumspect",
+    "pronunciation": "/ˈsɜːrkəmspekt/",
+    "translation": "慎重的；小心翼翼的",
+    "memoryCue": "circum-（四周）+ spect（看）→ 环顾四周后再落脚。",
+    "example": "Investors grew circumspect ahead of the central bank briefing."
+  },
+  {
+    "id": "acad-en-adv-clandestine",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "clandestine",
+    "pronunciation": "/klænˈdestɪn/",
+    "translation": "秘密的；暗中进行的",
+    "memoryCue": "私下偷偷隐藏起来做的行动。",
+    "example": "Historians uncovered letters detailing clandestine wartime rescues."
+  },
+  {
+    "id": "acad-en-adv-coalesce",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "coalesce",
+    "pronunciation": "/ˌkoʊəˈles/",
+    "translation": "合并；联合；融合成一体",
+    "memoryCue": "co-（共同）+ al（生长）→ 长到一块合流。",
+    "example": "Scattered community gardens began to coalesce into a green belt."
+  },
+  {
+    "id": "acad-en-adv-cogent",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cogent",
+    "pronunciation": "/ˈkoʊdʒənt/",
+    "translation": "有说服力的；切中要害的",
+    "memoryCue": "co- + ag（推动）→ 逻辑严密到直接推动人信服。",
+    "example": "She presented a cogent argument backed by three longitudinal datasets."
+  },
+  {
+    "id": "acad-en-adv-commensurate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "commensurate",
+    "pronunciation": "/kəˈmenʃərət/",
+    "translation": "相称的；相当的；同比例的",
+    "memoryCue": "com-（同）+ mens（测量）→ 尺寸重量彼此匹配。",
+    "example": "Rewards should feel commensurate with the time invested."
+  },
+  {
+    "id": "acad-en-adv-compelling",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "compelling",
+    "pronunciation": "/kəmˈpelɪŋ/",
+    "translation": "引人注目的；令人信服的",
+    "memoryCue": "com- + pel（推）→ 魅力或证据强到让人无法拒绝。",
+    "example": "The film offers a compelling portrait of rural craftsmanship."
+  },
+  {
+    "id": "acad-en-adv-complacent",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "complacent",
+    "pronunciation": "/kəmˈpleɪsnt/",
+    "translation": "自满的；得意的；麻痹大意的",
+    "memoryCue": "com- + plac（取悦）→ 只顾自己满意而不再进取。",
+    "example": "Early fluency tests should never make learners complacent."
+  },
+  {
+    "id": "acad-en-adv-conciliatory",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "conciliatory",
+    "pronunciation": "/kənˈsɪliətɔːri/",
+    "translation": "安抚的；调解的；愿意和解的",
+    "memoryCue": "concil-（拉拢聚拢）→ 释放善意化解冲突。",
+    "example": "He struck a conciliatory tone to reopen stalled trade talks."
+  },
+  {
+    "id": "acad-en-adv-concise",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "concise",
+    "pronunciation": "/kənˈsaɪs/",
+    "translation": "简明的；简洁的",
+    "memoryCue": "con- + cise（切）→ 把冗余废话全切掉。",
+    "example": "Academic writing favors concise sentences over padded prose."
+  },
+  {
+    "id": "acad-en-adv-concur",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "concur",
+    "pronunciation": "/kənˈkɜːr/",
+    "translation": "同意；一致；同时发生",
+    "memoryCue": "con-（共同）+ cur（跑）→ 思路跑到同一个方向上。",
+    "example": "Independent reviewers concur with the main experimental finding."
+  },
+  {
+    "id": "acad-en-adv-conducive",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "conducive",
+    "pronunciation": "/kənˈduːsɪv/",
+    "translation": "有助于……的；有益的（to）",
+    "memoryCue": "con- + duc（引导）→ 顺势引向好结果。",
+    "example": "Quiet lighting and clear layouts are conducive to deep focus."
+  },
+  {
+    "id": "acad-en-adv-conjecture",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "conjecture",
+    "pronunciation": "/kənˈdʒektʃər/",
+    "translation": "猜测；臆测；推测",
+    "memoryCue": "con-（一起）+ ject（扔）→ 凑些零星线索瞎猜。",
+    "example": "Without fossil records, early origins remain pure conjecture."
+  },
+  {
+    "id": "acad-en-adv-conspicuous",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "conspicuous",
+    "pronunciation": "/kənˈspɪkjuəs/",
+    "translation": "显眼的；引人注目的",
+    "memoryCue": "con- + spic（看）→ 站出来人人都看得见。",
+    "example": "The crimson lighthouse stands conspicuous against gray cliffs."
+  },
+  {
+    "id": "acad-en-adv-contentious",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "contentious",
+    "pronunciation": "/kənˈtenʃəs/",
+    "translation": "有争议的；爱争论的",
+    "memoryCue": "con- + tent（拉扯）→ 双方互相拉扯不休的话题。",
+    "example": "Zoning rules remain the most contentious item on the ballot."
+  },
+  {
+    "id": "acad-en-adv-contiguous",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "contiguous",
+    "pronunciation": "/kənˈtɪɡjuəs/",
+    "translation": "邻近的；接壤的；连续不断的",
+    "memoryCue": "con- + tig（触碰）→ 边界挨在一起碰着的。",
+    "example": "Forty-eight contiguous states span the continental mainland."
+  },
+  {
+    "id": "acad-en-adv-contingent",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "contingent",
+    "pronunciation": "/kənˈtɪndʒənt/",
+    "translation": "视……而定的；偶然的；代表团",
+    "memoryCue": "固定搭配 contingent on（取决于……）。",
+    "example": "Grant renewal is contingent on passing the midterm review."
+  },
+  {
+    "id": "acad-en-adv-conundrum",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "conundrum",
+    "pronunciation": "/kəˈnʌndrəm/",
+    "translation": "难题；谜语；两难困境",
+    "memoryCue": "让人摸不着头脑的棘手难题。",
+    "example": "Balancing speed and retention is a classic study conundrum."
+  },
+  {
+    "id": "acad-en-adv-converge",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "converge",
+    "pronunciation": "/kənˈvɜːrdʒ/",
+    "translation": "汇合；趋同；收敛",
+    "memoryCue": "con-（共同）+ verge（转向）→ 多条路朝同一点汇聚。",
+    "example": "Several hiking paths converge at the wooden lookout tower."
+  },
+  {
+    "id": "acad-en-adv-convivial",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "convivial",
+    "pronunciation": "/kənˈvɪviəl/",
+    "translation": "欢乐的；热闹友好的",
+    "memoryCue": "con-（共同）+ viv（活）→ 一起畅快活络气氛。",
+    "example": "Long shared tables created a convivial atmosphere at the bistro."
+  },
+  {
+    "id": "acad-en-adv-copious",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "copious",
+    "pronunciation": "/ˈkoʊpiəs/",
+    "translation": "丰富的；大量的；详尽的",
+    "memoryCue": "copi-（丰裕，同 copy 源自大量复制）→ 源源不绝。",
+    "example": "She took copious margin notes throughout the seminar."
+  },
+  {
+    "id": "acad-en-adv-corrigible",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "corrigible",
+    "pronunciation": "/ˈkɔːrɪdʒəbl/",
+    "translation": "可改正的；可矫正的",
+    "memoryCue": "cor- + rig（直，同 correct）+ -ible → 可以掰正过来的。",
+    "example": "Early pronunciation habits are easily corrigible with audio mimicry."
+  },
+  {
+    "id": "acad-en-adv-credulous",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "credulous",
+    "pronunciation": "/ˈkredʒələs/",
+    "translation": "轻信的；易受骗的",
+    "memoryCue": "cred-（相信）→ 太容易轻信他人（区别 credible 可信的）。",
+    "example": "Media literacy prevents credulous readers from sharing hoaxes."
+  },
+  {
+    "id": "acad-en-adv-cryptic",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cryptic",
+    "pronunciation": "/ˈkrɪptɪk/",
+    "translation": "晦涩难懂的；神秘的；加密的",
+    "memoryCue": "crypt-（隐藏，同 crypto）→ 藏在谜团里的。",
+    "example": "He left a cryptic sticky note containing only three numbers."
+  },
+  {
+    "id": "acad-en-adv-culminate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "culminate",
+    "pronunciation": "/ˈkʌlmɪneɪt/",
+    "translation": "达到顶点；以……告终（in）",
+    "memoryCue": "culmin-（山顶）+ -ate → 攀爬到最高峰。",
+    "example": "Months of rehearsals will culminate in Friday's opening concert."
+  },
+  {
+    "id": "acad-en-adv-cursory",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cursory",
+    "pronunciation": "/ˈkɜːrsəri/",
+    "translation": "草率的；粗略的；匆匆一瞥的",
+    "memoryCue": "curs-（跑）→ 一跑而过扫一眼。",
+    "example": "Even a cursory glance revealed several formatting glitches."
+  },
+  {
+    "id": "acad-en-adv-curtail",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "curtail",
+    "pronunciation": "/kɜːrˈteɪl/",
+    "translation": "削减；缩减；剥夺",
+    "memoryCue": "curt（短）+ tail（尾巴）→ 把尾巴截短。",
+    "example": "Dry winters forced farmers to curtail daytime irrigation."
+  },
+  {
+    "id": "acad-en-adv-cynical",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cynical",
+    "pronunciation": "/ˈsɪnɪkl/",
+    "translation": "愤世嫉俗的；怀疑一切的",
+    "memoryCue": "源于古希腊犬儒学派 Cynic，现指冷嘲怀疑他人动机。",
+    "example": "Constant clickbait leaves audiences cynical about online headlines."
+  },
+  {
+    "id": "acad-en-adv-dearth",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "dearth",
+    "pronunciation": "/dɜːrθ/",
+    "translation": "缺乏；匮乏；稀少",
+    "memoryCue": "dear（稀缺昂贵）+ -th → 供不应求的严重短缺。",
+    "example": "There is no dearth of free classic texts online today."
+  },
+  {
+    "id": "acad-en-adv-debacle",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "debacle",
+    "pronunciation": "/dɪˈbɑːkl/",
+    "translation": "彻底溃败；崩溃；灾难性失败",
+    "memoryCue": "源自法语，原指冰河突然决堤崩塌。",
+    "example": "Poor logistics turned the festival launch into a public debacle."
+  },
+  {
+    "id": "acad-en-adv-decorum",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "decorum",
+    "pronunciation": "/dɪˈkɔːrəm/",
+    "translation": "礼节；端庄得体",
+    "memoryCue": "decor-（合适优雅）→ 正式场合得体的举止。",
+    "example": "Courtroom debates follow strict rules of verbal decorum."
+  },
+  {
+    "id": "acad-en-adv-defer",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "defer",
+    "pronunciation": "/dɪˈfɜːr/",
+    "translation": "推迟；延期；顺从（to）",
+    "memoryCue": "de-（向下/推后）+ fer（拿）→ 往后挪；defer to 表尊重听从。",
+    "example": "We decided to defer major redesigns until user feedback arrives."
+  },
+  {
+    "id": "acad-en-adv-deft",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "deft",
+    "pronunciation": "/deft/",
+    "translation": "灵巧的；娴熟的；敏捷的",
+    "memoryCue": "动作干净利落（deft brushwork）。",
+    "example": "With a few deft strokes, the illustrator captured the bird's flight."
+  },
+  {
+    "id": "acad-en-adv-delineate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "delineate",
+    "pronunciation": "/dɪˈlɪnieɪt/",
+    "translation": "勾勒；清晰划定；详述",
+    "memoryCue": "de- + line（线条）+ -ate → 用线条清楚描出边界。",
+    "example": "Chapter two delineates the boundaries between syntax and semantics."
+  },
+  {
+    "id": "acad-en-adv-demur",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "demur",
+    "pronunciation": "/dɪˈmɜːr/",
+    "translation": "提出异议；犹豫；反对",
+    "memoryCue": "de- + mur（停留）→ 停下来表示不同意。",
+    "example": "Several members demurred when asked to double weekly meetings."
+  },
+  {
+    "id": "acad-en-adv-denote",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "denote",
+    "pronunciation": "/dɪˈnoʊt/",
+    "translation": "表示；意指；预示",
+    "memoryCue": "de- + note（记号）→ 明确标出字面含义。",
+    "example": "Red dots on the map denote active geological stations."
+  },
+  {
+    "id": "acad-en-adv-deplete",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "deplete",
+    "pronunciation": "/dɪˈpliːt/",
+    "translation": "耗尽；使枯竭",
+    "memoryCue": "de-（去掉）+ plete（满）→ 把原本满的东西全抽空。",
+    "example": "Unchecked pumping can rapidly deplete underground aquifers."
+  },
+  {
+    "id": "acad-en-adv-deprecate",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "deprecate",
+    "pronunciation": "/ˈdeprəkeɪt/",
+    "translation": "强烈反对；不赞成；弃用（软件）",
+    "memoryCue": "de- + prec（祈祷/请求）→ 极力反对；编程里指功能已过时。",
+    "example": "Modern browsers deprecate legacy insecure encryption protocols."
+  },
+  {
+    "id": "acad-en-adv-deride",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "deride",
+    "pronunciation": "/dɪˈraɪd/",
+    "translation": "嘲笑；愚弄；嗤笑",
+    "memoryCue": "de-（向下）+ ride（笑）→ 居高临下地嘲弄。",
+    "example": "Critics initially derided the lightweight folding bicycle as a toy."
+  },
+  {
+    "id": "acad-en-adv-desultory",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "desultory",
+    "pronunciation": "/ˈdesəltɔːri/",
+    "translation": "散漫的；无条理的；东拉西扯的",
+    "memoryCue": "de- + sult（跳）→ 思维到处乱跳没有章法。",
+    "example": "Desultory cramming rarely builds durable vocabulary."
+  },
+  {
+    "id": "acad-en-adv-deter",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "deter",
+    "pronunciation": "/dɪˈtɜːr/",
+    "translation": "威慑；阻止；使打消念头",
+    "memoryCue": "de-（离开）+ ter（惊吓）→ 吓退阻止；deterrent 为威慑物。",
+    "example": "Steep fines alone rarely deter careless littering along highways."
+  },
+  {
+    "id": "acad-en-adv-detrimental",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "detrimental",
+    "pronunciation": "/ˌdetrɪˈmentl/",
+    "translation": "有害的；不利的（to）",
+    "memoryCue": "de- + tri（摩擦磨损）→ 造成实质损耗伤害。",
+    "example": "Chronic multitasking is detrimental to deep memory encoding."
+  },
+  {
+    "id": "acad-en-adv-devious",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "devious",
+    "pronunciation": "/ˈdiːviəs/",
+    "translation": "狡猾的；迂回曲折的；偏离正道的",
+    "memoryCue": "de-（偏离）+ via（路）→ 绕弯路不走正途。",
+    "example": "The mountain switchback takes a devious path up the ridge."
+  },
+  {
+    "id": "acad-en-adv-didactic",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "didactic",
+    "pronunciation": "/daɪˈdæktɪk/",
+    "translation": "说教的；教诲的；教学用的",
+    "memoryCue": "didact-（教导）→ 刻意教育人的口吻或材料。",
+    "example": "Children enjoy stories that inspire without sounding overly didactic."
+  },
+  {
+    "id": "acad-en-adv-diffident",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "diffident",
+    "pronunciation": "/ˈdɪfɪdənt/",
+    "translation": "腼腆的；缺乏自信的",
+    "memoryCue": "dif-（不）+ fid（相信）→ 不敢相信自己（反义 confident）。",
+    "example": "Even diffident speakers open up in small supportive pairs."
+  },
+  {
+    "id": "acad-en-adv-digress",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "digress",
+    "pronunciation": "/daɪˈɡres/",
+    "translation": "离题；跑题；枝节横生",
+    "memoryCue": "di-（分开）+ gress（走）→ 说着说着走岔到话题外。",
+    "example": "Let me briefly digress to share a quick pronunciation tip."
+  },
+  {
+    "id": "acad-en-adv-diligent",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "diligent",
+    "pronunciation": "/ˈdɪlɪdʒənt/",
+    "translation": "勤奋的；勤勉细致的",
+    "memoryCue": "di- + lig（选择/用心）→ 一丝不苟下功夫。",
+    "example": "Diligent daily review turns tricky verbs into second nature."
+  },
+  {
+    "id": "acad-en-adv-discerning",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "discerning",
+    "pronunciation": "/dɪˈsɜːrnɪŋ/",
+    "translation": "有洞察力的；目光敏锐的",
+    "memoryCue": "dis-（分开）+ cern（筛）→ 能分清好坏细微差别。",
+    "example": "Discerning readers quickly spot inflated marketing claims."
+  }
+]

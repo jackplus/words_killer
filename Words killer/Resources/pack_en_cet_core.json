@@ -1,0 +1,1502 @@
+[
+  {
+    "id": "cet-en-beg-accept",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "accept",
+    "pronunciation": "/əkˈsept/",
+    "translation": "接受；认可；同意",
+    "memoryCue": "ac-（朝向）+ cept（拿取）→ 伸手接过来。",
+    "example": "She decided to accept the offer after thinking carefully."
+  },
+  {
+    "id": "cet-en-beg-across",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "across",
+    "pronunciation": "/əˈkrɔːs/",
+    "translation": "穿过；横过；在对面",
+    "memoryCue": "a- + cross（十字/交叉）→ 从这一边跨到另一边。",
+    "example": "Walk across the bridge to reach the train station."
+  },
+  {
+    "id": "cet-en-beg-action",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "action",
+    "pronunciation": "/ˈækʃn/",
+    "translation": "行动；举措；情节",
+    "memoryCue": "act（做）+ -ion（名词后缀）→ 具体的行动。",
+    "example": "Prompt action prevented the small issue from spreading."
+  },
+  {
+    "id": "cet-en-beg-active",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "active",
+    "pronunciation": "/ˈæktɪv/",
+    "translation": "积极的；活跃的；主动的",
+    "memoryCue": "act（行动）+ -ive → 爱行动的，即积极活跃。",
+    "example": "Staying active keeps both your body and mind sharp."
+  },
+  {
+    "id": "cet-en-beg-actual",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "actual",
+    "pronunciation": "/ˈæktʃuəl/",
+    "translation": "实际的；真实的",
+    "memoryCue": "act（事实/行为）+ -ual → 真实发生的情况。",
+    "example": "The actual cost was much lower than our estimate."
+  },
+  {
+    "id": "cet-en-beg-allow",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "allow",
+    "pronunciation": "/əˈlaʊ/",
+    "translation": "允许；准许；留出",
+    "memoryCue": "al- + low（放置/批准）→ 批准放行。",
+    "example": "The museum does not allow flash photography inside."
+  },
+  {
+    "id": "cet-en-beg-almost",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "almost",
+    "pronunciation": "/ˈɔːlmoʊst/",
+    "translation": "几乎；差不多",
+    "memoryCue": "all（全部）+ most（最）→ 接近全部，即几乎。",
+    "example": "We have almost finished packing for the trip."
+  },
+  {
+    "id": "cet-en-beg-alone",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "alone",
+    "pronunciation": "/əˈloʊn/",
+    "translation": "独自；单独的",
+    "memoryCue": "al（all）+ one（一个）→ 全部就自己一个。",
+    "example": "He prefers studying alone in a quiet corner."
+  },
+  {
+    "id": "cet-en-beg-already",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "already",
+    "pronunciation": "/ɔːlˈredi/",
+    "translation": "已经；早就",
+    "memoryCue": "all + ready → 全部准备好了，事情已经完成。",
+    "example": "The package had already arrived when I got home."
+  },
+  {
+    "id": "cet-en-beg-answer",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "answer",
+    "pronunciation": "/ˈænsər/",
+    "translation": "回答；答复；答案",
+    "memoryCue": "an-（对着）+ swer（宣誓/回应）→ 对提问作出回应。",
+    "example": "Please answer the email before five o'clock."
+  },
+  {
+    "id": "cet-en-beg-appear",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "appear",
+    "pronunciation": "/əˈpɪr/",
+    "translation": "出现；显得；似乎",
+    "memoryCue": "ap-（朝向）+ pear（显现）→ 走到眼前显现出来。",
+    "example": "A bright rainbow appeared shortly after the rain."
+  },
+  {
+    "id": "cet-en-beg-around",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "around",
+    "pronunciation": "/əˈraʊnd/",
+    "translation": "在周围；大约；到处",
+    "memoryCue": "a- + round（圆）→ 绕成一圈，即周围或大约。",
+    "example": "Trees around the lake turn golden in autumn."
+  },
+  {
+    "id": "cet-en-beg-ask",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "ask",
+    "pronunciation": "/æsk/",
+    "translation": "询问；请求；邀请",
+    "memoryCue": "基础高频动词：ask for help（寻求帮助）。",
+    "example": "Feel free to ask questions whenever a rule feels unclear."
+  },
+  {
+    "id": "cet-en-beg-attend",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "attend",
+    "pronunciation": "/əˈtend/",
+    "translation": "出席；参加；照料",
+    "memoryCue": "at-（向）+ tend（伸展）→ 把心思与人带到现场。",
+    "example": "All team members will attend the Monday briefing."
+  },
+  {
+    "id": "cet-en-beg-become",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "become",
+    "pronunciation": "/bɪˈkʌm/",
+    "translation": "成为；变得",
+    "memoryCue": "be- + come（来）→ 逐渐来到某种新状态。",
+    "example": "Regular reading helps you become a better writer."
+  },
+  {
+    "id": "cet-en-beg-before",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "before",
+    "pronunciation": "/bɪˈfɔːr/",
+    "translation": "在……之前；以前",
+    "memoryCue": "be- + fore（前面）→ 时间或位置在前方。",
+    "example": "Wash your hands before sitting down to dinner."
+  },
+  {
+    "id": "cet-en-beg-begin",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "begin",
+    "pronunciation": "/bɪˈɡɪn/",
+    "translation": "开始；着手",
+    "memoryCue": "be- + gin（张开）→ 揭开序幕开始做。",
+    "example": "Let us begin the lesson with a quick review."
+  },
+  {
+    "id": "cet-en-beg-behind",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "behind",
+    "pronunciation": "/bɪˈhaɪnd/",
+    "translation": "在……后面；落后",
+    "memoryCue": "be- + hind（后方）→ 位于身后。",
+    "example": "There is a small garden behind the bookstore."
+  },
+  {
+    "id": "cet-en-beg-believe",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "believe",
+    "pronunciation": "/bɪˈliːv/",
+    "translation": "相信；认为",
+    "memoryCue": "be- + lieve（喜爱/信赖）→ 心里信赖认可。",
+    "example": "I believe consistent practice leads to real fluency."
+  },
+  {
+    "id": "cet-en-beg-belong",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "belong",
+    "pronunciation": "/bɪˈlɔːŋ/",
+    "translation": "属于；应归入",
+    "memoryCue": "be- + long（相配延伸）→ 与某群体天然相属。",
+    "example": "These notebooks belong on the top shelf."
+  },
+  {
+    "id": "cet-en-beg-borrow",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "borrow",
+    "pronunciation": "/ˈbɑːroʊ/",
+    "translation": "借入；借用",
+    "memoryCue": "方向是“借进来”（borrow from）；借出去用 lend。",
+    "example": "May I borrow your pen for a quick signature?"
+  },
+  {
+    "id": "cet-en-beg-bright",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "bright",
+    "pronunciation": "/braɪt/",
+    "translation": "明亮的；聪颖的",
+    "memoryCue": "联想灯光耀眼、前途光明（a bright future）。",
+    "example": "Sunlight filled the bright living room every morning."
+  },
+  {
+    "id": "cet-en-beg-build",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "build",
+    "pronunciation": "/bɪld/",
+    "translation": "建造；建立；增强",
+    "memoryCue": "词根对应建筑 building，动词表一步步搭建。",
+    "example": "It takes patience to build a daily reading habit."
+  },
+  {
+    "id": "cet-en-beg-busy",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "busy",
+    "pronunciation": "/ˈbɪzi/",
+    "translation": "忙碌的；占线的",
+    "memoryCue": "注意发音为 /ˈbɪzi/，不读成 u 音。",
+    "example": "The café is always busy during the lunch rush."
+  },
+  {
+    "id": "cet-en-beg-careful",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "careful",
+    "pronunciation": "/ˈkerfl/",
+    "translation": "仔细的；小心的",
+    "memoryCue": "care（关心）+ -ful（充满）→ 处处留心。",
+    "example": "Be careful when crossing the wet stone steps."
+  },
+  {
+    "id": "cet-en-beg-carry",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "carry",
+    "pronunciation": "/ˈkæri/",
+    "translation": "携带；搬运；承担",
+    "memoryCue": "词根 car-（车/运载）→ 用手或工具搬运。",
+    "example": "She carried two bags of fresh fruit upstairs."
+  },
+  {
+    "id": "cet-en-beg-center",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "center",
+    "pronunciation": "/ˈsentər/",
+    "translation": "中心；中央；核心",
+    "memoryCue": "cent-（中心）→ 圆心或城市核心区。",
+    "example": "The clock tower stands right in the city center."
+  },
+  {
+    "id": "cet-en-beg-chance",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "chance",
+    "pronunciation": "/tʃæns/",
+    "translation": "机会；可能性；碰巧",
+    "memoryCue": "by chance 表示“偶然”，take a chance 表“试一试”。",
+    "example": "Don't miss this chance to practice speaking aloud."
+  },
+  {
+    "id": "cet-en-beg-change",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "change",
+    "pronunciation": "/tʃeɪndʒ/",
+    "translation": "改变；变化；零钱",
+    "memoryCue": "既可指改变习惯，也指找回的零钱（keep the change）。",
+    "example": "Small daily changes add up to big progress."
+  },
+  {
+    "id": "cet-en-beg-clean",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "clean",
+    "pronunciation": "/kliːn/",
+    "translation": "干净的；打扫；清理",
+    "memoryCue": "清清爽爽一尘不染。",
+    "example": "Remember to keep your desk clean after work."
+  },
+  {
+    "id": "cet-en-beg-clear",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "clear",
+    "pronunciation": "/klɪr/",
+    "translation": "清晰的；晴朗的；清除",
+    "memoryCue": "视野或表达毫无遮挡，清清楚楚。",
+    "example": "Her instructions were clear and easy to follow."
+  },
+  {
+    "id": "cet-en-beg-close",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "close",
+    "pronunciation": "/kloʊz/",
+    "translation": "关闭；亲近的；接近",
+    "memoryCue": "作动词读 /kloʊz/，作形容词表“近的”读 /kloʊs/。",
+    "example": "Please close the window before turning on the heater."
+  },
+  {
+    "id": "cet-en-beg-collect",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "collect",
+    "pronunciation": "/kəˈlekt/",
+    "translation": "收集；领取；聚集",
+    "memoryCue": "col-（共同）+ lect（选/聚）→ 聚到一起。",
+    "example": "He likes to collect vintage postcards from each trip."
+  },
+  {
+    "id": "cet-en-beg-common",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "common",
+    "pronunciation": "/ˈkɑːmən/",
+    "translation": "常见的；共同的；普通的",
+    "memoryCue": "com-（共同）+ mon → 大家共有的，因此常见。",
+    "example": "A common mistake is skipping the listening review."
+  },
+  {
+    "id": "cet-en-beg-complete",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "complete",
+    "pronunciation": "/kəmˈpliːt/",
+    "translation": "完成；完整的；彻底的",
+    "memoryCue": "com-（全部）+ plete（满）→ 装满补齐即完成。",
+    "example": "Please complete the registration form by Friday."
+  },
+  {
+    "id": "cet-en-beg-continue",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "continue",
+    "pronunciation": "/kənˈtɪnjuː/",
+    "translation": "继续；持续",
+    "memoryCue": "con-（一直）+ tin（拿住）→ 一直拿住不中断。",
+    "example": "They decided to continue the hike after resting."
+  },
+  {
+    "id": "cet-en-beg-control",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "control",
+    "pronunciation": "/kənˈtroʊl/",
+    "translation": "控制；管理；掌握",
+    "memoryCue": "contra-（对照核查）→ 核查并掌控局面。",
+    "example": "Learning to control your pace prevents early burnout."
+  },
+  {
+    "id": "cet-en-beg-correct",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "correct",
+    "pronunciation": "/kəˈrekt/",
+    "translation": "正确的；纠正；批改",
+    "memoryCue": "cor-（全部）+ rect（直）→ 全部掰直即正确。",
+    "example": "Check your spelling to make sure every word is correct."
+  },
+  {
+    "id": "cet-en-beg-create",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "create",
+    "pronunciation": "/kriˈeɪt/",
+    "translation": "创造；创作；引起",
+    "memoryCue": "词根 cre-（生长/产生）→ 无中生有地创造。",
+    "example": "You can create your own word list in seconds."
+  },
+  {
+    "id": "cet-en-beg-culture",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "culture",
+    "pronunciation": "/ˈkʌltʃər/",
+    "translation": "文化；修养；培养",
+    "memoryCue": "cult-（耕耘培育）→ 精神层面的长期培育。",
+    "example": "Learning a language opens a window into another culture."
+  },
+  {
+    "id": "cet-en-ele-ability",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "ability",
+    "pronunciation": "/əˈbɪləti/",
+    "translation": "能力；才能；本领",
+    "memoryCue": "able（能够）的名词形式，搭配 have the ability to。",
+    "example": "Reading aloud improves your ability to recall words."
+  },
+  {
+    "id": "cet-en-ele-achieve",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "achieve",
+    "pronunciation": "/əˈtʃiːv/",
+    "translation": "实现；达到；取得成功",
+    "memoryCue": "a- + chieve（头/顶点）→ 到达顶点达成目标。",
+    "example": "Steady effort helped him achieve his target score."
+  },
+  {
+    "id": "cet-en-ele-advance",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "advance",
+    "pronunciation": "/ədˈvæns/",
+    "translation": "前进；推进；提前",
+    "memoryCue": "ad-（向前）+ vance（前）→ 向前迈进，in advance 表提前。",
+    "example": "Book your seats in advance for the weekend concert."
+  },
+  {
+    "id": "cet-en-ele-affect",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "affect",
+    "pronunciation": "/əˈfekt/",
+    "translation": "影响；打动；侵袭",
+    "memoryCue": "作动词“影响”用 affect；作名词“效果/影响”多用 effect。",
+    "example": "Lack of sleep can seriously affect your concentration."
+  },
+  {
+    "id": "cet-en-ele-afford",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "afford",
+    "pronunciation": "/əˈfɔːrd/",
+    "translation": "负担得起；抽得出（时间）",
+    "memoryCue": "常与 can / could 连用：can't afford to waste time。",
+    "example": "We cannot afford to ignore basic grammar rules."
+  },
+  {
+    "id": "cet-en-ele-agree",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "agree",
+    "pronunciation": "/əˈɡriː/",
+    "translation": "同意；赞成；一致",
+    "memoryCue": "a- + gree（愉悦/同意）→ 欣然赞同。",
+    "example": "Both sides agreed to meet again next Tuesday."
+  },
+  {
+    "id": "cet-en-ele-amazing",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "amazing",
+    "pronunciation": "/əˈmeɪzɪŋ/",
+    "translation": "令人惊叹的；了不起的",
+    "memoryCue": "a- + maze（迷宫）→ 让人惊艳得像走进奇境。",
+    "example": "The view from the mountain peak was truly amazing."
+  },
+  {
+    "id": "cet-en-ele-amount",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "amount",
+    "pronunciation": "/əˈmaʊnt/",
+    "translation": "数量；总额；总计",
+    "memoryCue": "a- + mount（山/堆）→ 堆起来的总数。",
+    "example": "A small amount of daily review beats cramming."
+  },
+  {
+    "id": "cet-en-ele-ancient",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "ancient",
+    "pronunciation": "/ˈeɪnʃənt/",
+    "translation": "古代的；古老的",
+    "memoryCue": "词根 ant-（前）→ 很久以前的时代。",
+    "example": "We visited an ancient temple built over a thousand years ago."
+  },
+  {
+    "id": "cet-en-ele-announce",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "announce",
+    "pronunciation": "/əˈnaʊns/",
+    "translation": "宣布；通告；播报",
+    "memoryCue": "an-（向）+ nounce（报告）→ 公开向大家报告。",
+    "example": "The airline announced a twenty-minute delay due to fog."
+  },
+  {
+    "id": "cet-en-ele-anxious",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "anxious",
+    "pronunciation": "/ˈæŋkʃəs/",
+    "translation": "焦虑的；渴望的",
+    "memoryCue": "词根 anx-（勒紧）→ 心里揪紧，既表紧张也表热切盼望。",
+    "example": "Many candidates feel anxious right before an oral exam."
+  },
+  {
+    "id": "cet-en-ele-apply",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "apply",
+    "pronunciation": "/əˈplaɪ/",
+    "translation": "申请；应用；涂抹",
+    "memoryCue": "ap- + ply（折叠/贴合）→ 贴上去用即应用/申请。",
+    "example": "You can apply these idioms directly in conversation."
+  },
+  {
+    "id": "cet-en-ele-arrange",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "arrange",
+    "pronunciation": "/əˈreɪndʒ/",
+    "translation": "安排；整理；筹备",
+    "memoryCue": "ar- + range（排列）→ 排好顺序即安排妥当。",
+    "example": "Let me arrange a quiet meeting room for our review."
+  },
+  {
+    "id": "cet-en-ele-article",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "article",
+    "pronunciation": "/ˈɑːrtɪkl/",
+    "translation": "文章；物品；条款；冠词",
+    "memoryCue": "指报刊文章、法律条款或语法里的冠词。",
+    "example": "She shared an insightful article on memory science."
+  },
+  {
+    "id": "cet-en-ele-attempt",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "attempt",
+    "pronunciation": "/əˈtempt/",
+    "translation": "尝试；企图；努力",
+    "memoryCue": "at- + tempt（试探）→ 动手试一试。",
+    "example": "He passed the driving test on his second attempt."
+  },
+  {
+    "id": "cet-en-ele-attention",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "attention",
+    "pronunciation": "/əˈtenʃn/",
+    "translation": "注意力；关注；照料",
+    "memoryCue": "pay attention to 为高频固定搭配。",
+    "example": "Please pay attention to the stress on the second syllable."
+  },
+  {
+    "id": "cet-en-ele-attitude",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "attitude",
+    "pronunciation": "/ˈætɪtuːd/",
+    "translation": "态度；看法；姿势",
+    "memoryCue": "apt-（适应）→ 对人或事展现出的姿态。",
+    "example": "A positive attitude makes difficult tasks feel lighter."
+  },
+  {
+    "id": "cet-en-ele-attract",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "attract",
+    "pronunciation": "/əˈtrækt/",
+    "translation": "吸引；引起……的注意",
+    "memoryCue": "at-（向）+ tract（拉）→ 把目光拉过来。",
+    "example": "The coastal town attracts thousands of visitors each spring."
+  },
+  {
+    "id": "cet-en-ele-average",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "average",
+    "pronunciation": "/ˈævərɪdʒ/",
+    "translation": "平均的；普通的；平均数",
+    "memoryCue": "on average 表示“平均而言”。",
+    "example": "On average, users review twenty cards before breakfast."
+  },
+  {
+    "id": "cet-en-ele-avoid",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "avoid",
+    "pronunciation": "/əˈvɔɪd/",
+    "translation": "避免；避开；躲避",
+    "memoryCue": "a- + void（空出）→ 绕开留出空位；后接动名词。",
+    "example": "Try to avoid checking your phone while studying."
+  },
+  {
+    "id": "cet-en-ele-basic",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "basic",
+    "pronunciation": "/ˈbeɪsɪk/",
+    "translation": "基础的；基本的；根本的",
+    "memoryCue": "base（底座）+ -ic → 打底最根本的。",
+    "example": "Mastering basic verbs helps you build natural sentences."
+  },
+  {
+    "id": "cet-en-ele-behavior",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "behavior",
+    "pronunciation": "/bɪˈheɪvjər/",
+    "translation": "行为；举止；表现",
+    "memoryCue": "behave（表现）的名词形式，英式拼作 behaviour。",
+    "example": "Consistent study behavior matters more than sudden willpower."
+  },
+  {
+    "id": "cet-en-ele-benefit",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "benefit",
+    "pronunciation": "/ˈbenɪfɪt/",
+    "translation": "益处；福利；使受益",
+    "memoryCue": "bene-（好）+ fit（做）→ 带来好处的东西。",
+    "example": "Daily walks offer huge benefits for mental clarity."
+  },
+  {
+    "id": "cet-en-ele-beyond",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "beyond",
+    "pronunciation": "/bɪˈjɑːnd/",
+    "translation": "超过；在……那边；超出范围",
+    "memoryCue": "be- + yond（远方）→ 越过那条线。",
+    "example": "The outcome was far beyond what anyone expected."
+  },
+  {
+    "id": "cet-en-ele-brief",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "brief",
+    "pronunciation": "/briːf/",
+    "translation": "简短的；简洁的；摘要",
+    "memoryCue": "in brief 表示“简而言之”；作动词表“简报情况”。",
+    "example": "She gave a brief summary before answering questions."
+  },
+  {
+    "id": "cet-en-ele-calm",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "calm",
+    "pronunciation": "/kɑːm/",
+    "translation": "冷静的；平静的；使镇定",
+    "memoryCue": "注意字母 l 不发音，读 /kɑːm/。",
+    "example": "Take a deep breath and stay calm during the interview."
+  },
+  {
+    "id": "cet-en-ele-cancel",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "cancel",
+    "pronunciation": "/ˈkænsl/",
+    "translation": "取消；撤销；删去",
+    "memoryCue": "原意为在纸上画交叉线划掉，引申为取消。",
+    "example": "We had to cancel the picnic because of heavy rain."
+  },
+  {
+    "id": "cet-en-ele-capable",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "capable",
+    "pronunciation": "/ˈkeɪpəbl/",
+    "translation": "有能力的；能干的",
+    "memoryCue": "cap-（拿住）+ -able → 拿得下事的；搭配 be capable of。",
+    "example": "Everyone is capable of learning a second language."
+  },
+  {
+    "id": "cet-en-ele-cause",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "cause",
+    "pronunciation": "/kɔːz/",
+    "translation": "引起；导致；原因；事业",
+    "memoryCue": "既可作名词“原因”，也可作动词“引发”。",
+    "example": "Careless typos often cause unnecessary misunderstandings."
+  },
+  {
+    "id": "cet-en-ele-certain",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "certain",
+    "pronunciation": "/ˈsɜːrtn/",
+    "translation": "确定的；某些；必然的",
+    "memoryCue": "make certain 确保；for certain 确切地。",
+    "example": "Check the departure gate to be certain of the time."
+  },
+  {
+    "id": "cet-en-ele-character",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "character",
+    "pronunciation": "/ˈkærəktər/",
+    "translation": "性格；角色；汉字；品质",
+    "memoryCue": "既指人物性格与小说角色，也指中文字体里的“汉字”。",
+    "example": "Learning Chinese characters becomes fun with memory stories."
+  },
+  {
+    "id": "cet-en-ele-cheerful",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "cheerful",
+    "pronunciation": "/ˈtʃɪrfl/",
+    "translation": "开朗的；愉快的；高兴的",
+    "memoryCue": "cheer（欢呼）+ -ful → 充满欢笑。",
+    "example": "Her cheerful greeting brightened the whole office."
+  },
+  {
+    "id": "cet-en-ele-claim",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "claim",
+    "pronunciation": "/kleɪm/",
+    "translation": "声称；索赔；认领；主张",
+    "memoryCue": "词根 clam-/claim- 表“喊叫/宣告”。",
+    "example": "Several studies claim spaced review doubles retention."
+  },
+  {
+    "id": "cet-en-ele-comfort",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "comfort",
+    "pronunciation": "/ˈkʌmfərt/",
+    "translation": "安慰；舒适；使缓和",
+    "memoryCue": "com-（加强）+ fort（力量）→ 给人力量即安慰。",
+    "example": "Warm tea brings instant comfort on a rainy evening."
+  },
+  {
+    "id": "cet-en-ele-comment",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "comment",
+    "pronunciation": "/ˈkɑːment/",
+    "translation": "评论；意见；发表看法",
+    "memoryCue": "com- + ment（思考/心智）→ 思考后说出的评价。",
+    "example": "Feel free to leave a comment on the draft proposal."
+  },
+  {
+    "id": "cet-en-ele-communicate",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "communicate",
+    "pronunciation": "/kəˈmjuːnɪkeɪt/",
+    "translation": "交流；沟通；传达",
+    "memoryCue": "com-（共同）+ mun（分享）→ 彼此分享信息。",
+    "example": "Listening carefully helps you communicate more clearly."
+  },
+  {
+    "id": "cet-en-ele-community",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "community",
+    "pronunciation": "/kəˈmjuːnəti/",
+    "translation": "社区；群体；共同体",
+    "memoryCue": "与 communicate 同源，强调共享联系的群体。",
+    "example": "Local learners formed a weekend speaking community."
+  },
+  {
+    "id": "cet-en-ele-concern",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "concern",
+    "pronunciation": "/kənˈsɜːrn/",
+    "translation": "关心；担忧；涉及；关注点",
+    "memoryCue": "con-（一起）+ cern（筛/察觉）→ 放在心上牵挂。",
+    "example": "Data privacy remains a primary concern for users."
+  },
+  {
+    "id": "cet-en-ele-condition",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "condition",
+    "pronunciation": "/kənˈdɪʃn/",
+    "translation": "条件；状况；健康状况",
+    "memoryCue": "on condition that 表示“只要/在……条件下”。",
+    "example": "The used book arrived in nearly brand-new condition."
+  },
+  {
+    "id": "cet-en-ele-confident",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "confident",
+    "pronunciation": "/ˈkɑːnfɪdənt/",
+    "translation": "自信的；确信的",
+    "memoryCue": "con-（完全）+ fid（信任）→ 完全相信自己。",
+    "example": "Practicing out loud makes you more confident in meetings."
+  },
+  {
+    "id": "cet-en-ele-connect",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "connect",
+    "pronunciation": "/kəˈnekt/",
+    "translation": "连接；联系；接通",
+    "memoryCue": "con-（共同）+ nect（绑）→ 把两头绑到一起。",
+    "example": "Connect new words to personal memories to recall faster."
+  },
+  {
+    "id": "cet-en-ele-consider",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "consider",
+    "pronunciation": "/kənˈsɪdər/",
+    "translation": "考虑；认为；体谅",
+    "memoryCue": "con- + sider（星辰）→ 像观星象一样慎重思量；后接 -ing。",
+    "example": "Have you considered reviewing flashcards while commuting?"
+  },
+  {
+    "id": "cet-en-ele-contain",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "contain",
+    "pronunciation": "/kənˈteɪn/",
+    "translation": "包含；容纳；控制（情绪）",
+    "memoryCue": "con-（一起）+ tain（拿住）→ 把东西全装在里面。",
+    "example": "This pack contains over a hundred high-frequency verbs."
+  },
+  {
+    "id": "cet-en-ele-convenient",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "convenient",
+    "pronunciation": "/kənˈviːniənt/",
+    "translation": "方便的；便利的",
+    "memoryCue": "con- + ven（走）→ 走起来顺手方便；主语常为物而非人。",
+    "example": "Offline audio makes practicing very convenient on flights."
+  },
+  {
+    "id": "cet-en-ele-convince",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "convince",
+    "pronunciation": "/kənˈvɪns/",
+    "translation": "说服；使信服",
+    "memoryCue": "con-（完全）+ vince（征服）→ 用道理完全折服对方。",
+    "example": "Real examples are the best way to convince skeptical readers."
+  },
+  {
+    "id": "cet-en-ele-courage",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "courage",
+    "pronunciation": "/ˈkɜːrɪdʒ/",
+    "translation": "勇气；胆量",
+    "memoryCue": "cour-（心）+ -age → 内心的力量即勇气。",
+    "example": "It takes courage to speak a foreign language from day one."
+  },
+  {
+    "id": "cet-en-ele-curious",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "curious",
+    "pronunciation": "/ˈkjʊriəs/",
+    "translation": "好奇的；求知欲强的",
+    "memoryCue": "cur-（关心/探究）→ 事事想弄明白；搭配 be curious about。",
+    "example": "Children stay curious about every new sound they hear."
+  },
+  {
+    "id": "cet-en-ele-damage",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "damage",
+    "pronunciation": "/ˈdæmɪdʒ/",
+    "translation": "损害；破坏；损失",
+    "memoryCue": "注意作不可数名词表“损坏”，加 s 作 damages 指“赔偿金”。",
+    "example": "Direct sunlight can damage sensitive camera lenses."
+  },
+  {
+    "id": "cet-en-ele-debate",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "debate",
+    "pronunciation": "/dɪˈbeɪt/",
+    "translation": "辩论；争论；仔细考虑",
+    "memoryCue": "de- + bate（打）→ 唇枪舌剑地来回交锋。",
+    "example": "Students held a lively debate on remote education."
+  },
+  {
+    "id": "cet-en-ele-declare",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "declare",
+    "pronunciation": "/dɪˈkler/",
+    "translation": "宣布；声明；申报（海关）",
+    "memoryCue": "de-（加强）+ clare（清楚）→ 公开讲得清清楚楚。",
+    "example": "Travelers must declare any fresh plants at customs."
+  },
+  {
+    "id": "cet-en-ele-decrease",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "decrease",
+    "pronunciation": "/dɪˈkriːs/",
+    "translation": "减少；降低；下降",
+    "memoryCue": "de-（向下）+ crease（增长）→ 向下走即减少；反义 increase。",
+    "example": "Review intervals gradually decrease errors over time."
+  },
+  {
+    "id": "cet-en-ele-defend",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "defend",
+    "pronunciation": "/dɪˈfend/",
+    "translation": "保卫；辩护；防守",
+    "memoryCue": "de-（挡开）+ fend（打击）→ 把攻击挡在外面。",
+    "example": "She calmly defended her research design during Q&A."
+  },
+  {
+    "id": "cet-en-ele-deliver",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "deliver",
+    "pronunciation": "/dɪˈlɪvər/",
+    "translation": "递送；发表（演讲）；兑现",
+    "memoryCue": "de- + liver（自由/释放）→ 把包裹或演讲交到对方手上。",
+    "example": "The courier promised to deliver the parcel before noon."
+  },
+  {
+    "id": "cet-en-ele-demand",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "demand",
+    "pronunciation": "/dɪˈmænd/",
+    "translation": "要求；需求；需要",
+    "memoryCue": "de- + mand（命令）→ 强烈要求或市场需求。",
+    "example": "Demand for bilingual engineers continues to grow."
+  },
+  {
+    "id": "cet-en-ele-depend",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "depend",
+    "pronunciation": "/dɪˈpend/",
+    "translation": "取决于；依赖；依靠",
+    "memoryCue": "de-（向下）+ pend（悬挂）→ 挂在某件事上面，即取决于它。",
+    "example": "Your daily goal can depend on how busy your week is."
+  },
+  {
+    "id": "cet-en-ele-describe",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "describe",
+    "pronunciation": "/dɪˈskraɪb/",
+    "translation": "描述；形容；描绘",
+    "memoryCue": "de-（向下）+ scribe（写）→ 落笔写下细节。",
+    "example": "Can you describe the neighborhood in three sentences?"
+  },
+  {
+    "id": "cet-en-ele-deserve",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "deserve",
+    "pronunciation": "/dɪˈzɜːrv/",
+    "translation": "值得；应得",
+    "memoryCue": "de-（完全）+ serve（服务）→ 付出服务后理应得到的回报。",
+    "example": "After weeks of preparation, the team deserves a celebration."
+  },
+  {
+    "id": "cet-en-ele-design",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "design",
+    "pronunciation": "/dɪˈzaɪn/",
+    "translation": "设计；构思；图案",
+    "memoryCue": "de- + sign（标记）→ 画草图定标记。",
+    "example": "Clean card design helps learners stay focused longer."
+  },
+  {
+    "id": "cet-en-ele-determine",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "determine",
+    "pronunciation": "/dɪˈtɜːrmɪn/",
+    "translation": "决定；确定；测定",
+    "memoryCue": "de- + term（边界）→ 划清边界下决心。",
+    "example": "Early habits often determine long-term learning speed."
+  },
+  {
+    "id": "cet-en-ele-develop",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "develop",
+    "pronunciation": "/dɪˈveləp/",
+    "translation": "发展；培养；开发；冲洗（照片）",
+    "memoryCue": "de-（打开）+ velop（包裹）→ 剥开包裹让事物展开成长。",
+    "example": "Read short stories daily to develop natural word sense."
+  },
+  {
+    "id": "cet-en-int-abandon",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "abandon",
+    "pronunciation": "/əˈbændən/",
+    "translation": "放弃；抛弃；放纵",
+    "memoryCue": "a-（无）+ bandon（控制）→ 撒手不管。",
+    "example": "Never abandon a good book after reading just one difficult page."
+  },
+  {
+    "id": "cet-en-int-abstract",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "abstract",
+    "pronunciation": "/ˈæbstrækt/",
+    "translation": "抽象的；摘要；提取",
+    "memoryCue": "abs-（离开）+ tract（拉）→ 把概念抽离出来成为摘要。",
+    "example": "Beginners grasp concrete nouns faster than abstract concepts."
+  },
+  {
+    "id": "cet-en-int-abundant",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "abundant",
+    "pronunciation": "/əˈbʌndənt/",
+    "translation": "丰富的；充裕的",
+    "memoryCue": "ab- + und（波浪）→ 像浪涛一样源源不绝。",
+    "example": "The coastal region has abundant sunshine year-round."
+  },
+  {
+    "id": "cet-en-int-accelerate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "accelerate",
+    "pronunciation": "/əkˈseləreɪt/",
+    "translation": "加速；促进；加快",
+    "memoryCue": "ac- + celer（速度）+ -ate → 加快速度。",
+    "example": "Active recall can accelerate vocabulary mastery significantly."
+  },
+  {
+    "id": "cet-en-int-accommodate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "accommodate",
+    "pronunciation": "/əˈkɑːmədeɪt/",
+    "translation": "容纳；提供住宿；适应",
+    "memoryCue": "双 c 双 m，拼写高频考点；意为“腾出空间接纳”。",
+    "example": "The lecture hall can easily accommodate three hundred guests."
+  },
+  {
+    "id": "cet-en-int-accompany",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "accompany",
+    "pronunciation": "/əˈkʌmpəni/",
+    "translation": "陪伴；陪同；伴随；伴奏",
+    "memoryCue": "ac- + company（同伴）→ 成为同行伙伴。",
+    "example": "Thunder often accompanies sudden summer storms."
+  },
+  {
+    "id": "cet-en-int-accomplish",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "accomplish",
+    "pronunciation": "/əˈkɑːmplɪʃ/",
+    "translation": "完成；实现；达成",
+    "memoryCue": "ac- + compl（填满）+ -ish → 圆满完成目标。",
+    "example": "You can accomplish a lot in fifteen focused minutes."
+  },
+  {
+    "id": "cet-en-int-accurate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "accurate",
+    "pronunciation": "/ˈækjərət/",
+    "translation": "准确的；精确的",
+    "memoryCue": "ac- + cur（关心）+ -ate → 细心核对到分毫不差。",
+    "example": "Keep an accurate log of the words you confuse most."
+  },
+  {
+    "id": "cet-en-int-acquire",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "acquire",
+    "pronunciation": "/əˈkwaɪər/",
+    "translation": "获得；学到；收购",
+    "memoryCue": "ac- + quire（寻求）→ 经过努力寻求而得到。",
+    "example": "Children acquire spoken rhythm naturally through listening."
+  },
+  {
+    "id": "cet-en-int-adequate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "adequate",
+    "pronunciation": "/ˈædɪkwət/",
+    "translation": "充足的；适当的；胜任的",
+    "memoryCue": "ad- + equ（相等）+ -ate → 刚好够用匹配需求。",
+    "example": "Make sure you get adequate rest before a long exam."
+  },
+  {
+    "id": "cet-en-int-adjust",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "adjust",
+    "pronunciation": "/əˈdʒʌst/",
+    "translation": "调整；适应；校准",
+    "memoryCue": "ad- + just（正/准）→ 调到恰到好处的位置。",
+    "example": "You can adjust the playback speed to match your ear."
+  },
+  {
+    "id": "cet-en-int-admit",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "admit",
+    "pronunciation": "/ədˈmɪt/",
+    "translation": "承认；准许进入；接纳",
+    "memoryCue": "ad- + mit（送/放）→ 放进来或点头承认；后接动名词。",
+    "example": "She was brave enough to admit her mistake right away."
+  },
+  {
+    "id": "cet-en-int-adopt",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "adopt",
+    "pronunciation": "/əˈdɑːpt/",
+    "translation": "采用；采纳；收养",
+    "memoryCue": "ad- + opt（选择）→ 选过来为己所用（区分 adapt 适应）。",
+    "example": "Our team decided to adopt a simpler weekly workflow."
+  },
+  {
+    "id": "cet-en-int-advocate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "advocate",
+    "pronunciation": "/ˈædvəkeɪt/",
+    "translation": "提倡；拥护；拥护者",
+    "memoryCue": "ad- + voc（声音）+ -ate → 站出来大声呼吁支持。",
+    "example": "Many linguists advocate reading aloud during early study."
+  },
+  {
+    "id": "cet-en-int-allocate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "allocate",
+    "pronunciation": "/ˈæləkeɪt/",
+    "translation": "分配；拨出；分派",
+    "memoryCue": "al- + loc（地方）+ -ate → 给每份资源指定位置。",
+    "example": "Allocate ten minutes each night for reviewing missed words."
+  },
+  {
+    "id": "cet-en-int-ambition",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "ambition",
+    "pronunciation": "/æmˈbɪʃn/",
+    "translation": "抱负；雄心；野心",
+    "memoryCue": "amb-（四周走）→ 四处奔走争取理想。",
+    "example": "Her ambition is to read classic novels in three languages."
+  },
+  {
+    "id": "cet-en-int-analyze",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "analyze",
+    "pronunciation": "/ˈænəlaɪz/",
+    "translation": "分析；解析；分解",
+    "memoryCue": "ana-（分开）+ lyze（松开）→ 把复杂整体拆开看清。",
+    "example": "Analyze root words whenever you meet unfamiliar terms."
+  },
+  {
+    "id": "cet-en-int-anticipate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "anticipate",
+    "pronunciation": "/ænˈtɪsɪpeɪt/",
+    "translation": "预期；预料；期盼",
+    "memoryCue": "anti-（提前）+ cip（抓）→ 提前抓准即将发生的事。",
+    "example": "We anticipate higher traffic before the holiday weekend."
+  },
+  {
+    "id": "cet-en-int-apparent",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "apparent",
+    "pronunciation": "/əˈpærənt/",
+    "translation": "显而易见的；表面上的",
+    "memoryCue": "ap- + par（显现）→ 清清楚楚摆在表面上。",
+    "example": "The benefit of daily spacing becomes apparent within a week."
+  },
+  {
+    "id": "cet-en-int-appreciate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "appreciate",
+    "pronunciation": "/əˈpriːʃieɪt/",
+    "translation": "感激；欣赏；理解；增值",
+    "memoryCue": "ap- + preci（价值）+ -ate → 看出其中价值所在。",
+    "example": "I truly appreciate your patient feedback on my essay."
+  },
+  {
+    "id": "cet-en-int-appropriate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "appropriate",
+    "pronunciation": "/əˈproʊpriət/",
+    "translation": "适当的；恰当的",
+    "memoryCue": "ap- + propri（自身特性）→ 正好合身贴切。",
+    "example": "Choose an appropriate tone when writing formal emails."
+  },
+  {
+    "id": "cet-en-int-approximate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "approximate",
+    "pronunciation": "/əˈprɑːksɪmət/",
+    "translation": "大约的；近似的；接近",
+    "memoryCue": "ap- + proxim（靠近）→ 很接近真实数值。",
+    "example": "The approximate flight time from Tokyo to Seoul is two hours."
+  },
+  {
+    "id": "cet-en-int-arbitrary",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "arbitrary",
+    "pronunciation": "/ˈɑːrbətreri/",
+    "translation": "任意的；武断的；专横的",
+    "memoryCue": "arbitr-（裁判）→ 全凭个人拍板决定。",
+    "example": "Review dates are scheduled by memory rules, not arbitrary guesses."
+  },
+  {
+    "id": "cet-en-int-aspect",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "aspect",
+    "pronunciation": "/ˈæspekt/",
+    "translation": "方面；面貌；视角",
+    "memoryCue": "a- + spect（看）→ 从某一个方向看到的侧面。",
+    "example": "Pronunciation is just one aspect of speaking fluency."
+  },
+  {
+    "id": "cet-en-int-assess",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "assess",
+    "pronunciation": "/əˈses/",
+    "translation": "评估；评定；估价",
+    "memoryCue": "as- + sess（坐）→ 坐下来仔细核定价值或水平。",
+    "example": "Short quizzes help you assess what you actually remember."
+  },
+  {
+    "id": "cet-en-int-assign",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "assign",
+    "pronunciation": "/əˈsaɪn/",
+    "translation": "指派；分配；指定",
+    "memoryCue": "as- + sign（标记）→ 画上记号指派任务。",
+    "example": "The coach assigned each runner a tailored training plan."
+  },
+  {
+    "id": "cet-en-int-assist",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "assist",
+    "pronunciation": "/əˈsɪst/",
+    "translation": "协助；帮助；助攻",
+    "memoryCue": "as- + sist（站）→ 站在旁边搭把手。",
+    "example": "Contextual hints assist learners in recalling meanings faster."
+  },
+  {
+    "id": "cet-en-int-associate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "associate",
+    "pronunciation": "/əˈsoʊʃieɪt/",
+    "translation": "联想；联系；同事",
+    "memoryCue": "as- + soci（同伴）+ -ate → 把两个东西拉到一起建立关联。",
+    "example": "Try to associate abstract words with vivid mental images."
+  },
+  {
+    "id": "cet-en-int-assume",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "assume",
+    "pronunciation": "/əˈsuːm/",
+    "translation": "假定；假设；承担（责任）",
+    "memoryCue": "as- + sume（拿取）→ 先把这个前提拿过来用着。",
+    "example": "Never assume a familiar-looking word means the same thing."
+  },
+  {
+    "id": "cet-en-int-assure",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "assure",
+    "pronunciation": "/əˈʃʊr/",
+    "translation": "向……保证；使确信",
+    "memoryCue": "as- + sure（确定）→ 拍胸脯让对方放心。",
+    "example": "Let me assure you that steady review pays off."
+  },
+  {
+    "id": "cet-en-int-attach",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "attach",
+    "pronunciation": "/əˈtætʃ/",
+    "translation": "附上；贴上；依恋",
+    "memoryCue": "at- + tach（钉子）→ 用钉子钉上附上附件。",
+    "example": "Please attach the updated slide deck to your reply."
+  },
+  {
+    "id": "cet-en-int-attribute",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "attribute",
+    "pronunciation": "/əˈtrɪbjuːt/",
+    "translation": "把……归因于；属性",
+    "memoryCue": "读重音在后表动词“归因于”；重音在前作名词表“属性”。",
+    "example": "She attributes her fluency to listening every morning."
+  },
+  {
+    "id": "cet-en-int-authority",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "authority",
+    "pronunciation": "/əˈθɔːrəti/",
+    "translation": "权威；当局；权力",
+    "memoryCue": "author（创始人/作者）→ 拥有发言权与决定权的机构。",
+    "example": "Always verify grammar exceptions using a trusted authority."
+  },
+  {
+    "id": "cet-en-int-automate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "automate",
+    "pronunciation": "/ˈɔːtəmeɪt/",
+    "translation": "使自动化",
+    "memoryCue": "auto-（自己）+ mate → 机器自己跑起来。",
+    "example": "Spaced repetition tools automate your daily review queue."
+  },
+  {
+    "id": "cet-en-int-aware",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "aware",
+    "pronunciation": "/əˈwer/",
+    "translation": "意识到的；知道的",
+    "memoryCue": "a- + ware（留心）→ 心里有数；搭配 be aware of。",
+    "example": "Learners become more aware of subtle tone differences."
+  },
+  {
+    "id": "cet-en-int-barrier",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "barrier",
+    "pronunciation": "/ˈbæriər/",
+    "translation": "障碍；壁垒；屏障",
+    "memoryCue": "bar（横木栅栏）+ -ier → 挡住去路的栅栏。",
+    "example": "Building vocabulary removes the biggest barrier to reading news."
+  },
+  {
+    "id": "cet-en-int-behalf",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "behalf",
+    "pronunciation": "/bɪˈhæf/",
+    "translation": "代表；利益",
+    "memoryCue": "固定搭配 on behalf of（代表……）。",
+    "example": "She thanked the mentors on behalf of the entire class."
+  },
+  {
+    "id": "cet-en-int-bias",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "bias",
+    "pronunciation": "/ˈbaɪəs/",
+    "translation": "偏见；偏差；使有倾向",
+    "memoryCue": "斜线倾斜 → 观点偏向一边。",
+    "example": "A balanced word list avoids bias toward only formal terms."
+  },
+  {
+    "id": "cet-en-int-boost",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "boost",
+    "pronunciation": "/buːst/",
+    "translation": "提升；促进；增强",
+    "memoryCue": "用力向上托举推动。",
+    "example": "Short daily streaks boost confidence dramatically."
+  },
+  {
+    "id": "cet-en-int-boundary",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "boundary",
+    "pronunciation": "/ˈbaʊndri/",
+    "translation": "边界；分界线；界限",
+    "memoryCue": "bound（界限）+ -ary → 划分范围的边线。",
+    "example": "Setting clear time boundaries prevents late-night fatigue."
+  },
+  {
+    "id": "cet-en-int-burden",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "burden",
+    "pronunciation": "/ˈbɜːrdn/",
+    "translation": "负担；重担；使负重",
+    "memoryCue": "沉重压在肩上的东西。",
+    "example": "Short sessions keep memory practice from feeling like a burden."
+  },
+  {
+    "id": "cet-en-int-capacity",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "capacity",
+    "pronunciation": "/kəˈpæsəti/",
+    "translation": "容量；能力；身份",
+    "memoryCue": "cap-（容纳/拿）+ -ity → 能装下多少东西的上限。",
+    "example": "The new battery nearly doubled the device's storage capacity."
+  },
+  {
+    "id": "cet-en-int-category",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "category",
+    "pronunciation": "/ˈkætəɡɔːri/",
+    "translation": "类别；范畴；种类",
+    "memoryCue": "把相似词按主题归到同一类目。",
+    "example": "Grouping words by category makes recall much easier."
+  },
+  {
+    "id": "cet-en-int-cease",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "cease",
+    "pronunciation": "/siːs/",
+    "translation": "停止；终止；结束",
+    "memoryCue": "比 stop 更正式的“停止”。",
+    "example": "The noisy construction finally ceased after sunset."
+  },
+  {
+    "id": "cet-en-int-circumstance",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "circumstance",
+    "pronunciation": "/ˈsɜːrkəmstæns/",
+    "translation": "情况；环境；境遇",
+    "memoryCue": "circum-（围绕）+ stance（站）→ 围绕在身边的处境。",
+    "example": "Under no circumstances should you skip warm-up stretches."
+  },
+  {
+    "id": "cet-en-int-collapse",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "collapse",
+    "pronunciation": "/kəˈlæps/",
+    "translation": "倒塌；崩溃；折叠",
+    "memoryCue": "col-（一起）+ lapse（滑落）→ 整个垮塌下来。",
+    "example": "The old wooden bridge threatened to collapse during the flood."
+  },
+  {
+    "id": "cet-en-int-combine",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "combine",
+    "pronunciation": "/kəmˈbaɪn/",
+    "translation": "结合；联合；兼有",
+    "memoryCue": "com-（共同）+ bi（二）+ -ne → 二合为一。",
+    "example": "Combine visual flashcards with audio playback for stronger recall."
+  },
+  {
+    "id": "cet-en-int-commit",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "commit",
+    "pronunciation": "/kəˈmɪt/",
+    "translation": "承诺；投入；犯（错）",
+    "memoryCue": "com-（共同）+ mit（送）→ 把自己投入某件事。",
+    "example": "Commit to just ten minutes a day for thirty days."
+  },
+  {
+    "id": "cet-en-int-compensate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "compensate",
+    "pronunciation": "/ˈkɑːmpenseɪt/",
+    "translation": "补偿；弥补；赔偿",
+    "memoryCue": "com- + pens（称重）+ -ate → 往天平另一端补足重量。",
+    "example": "Clear examples help compensate for tricky definitions."
+  },
+  {
+    "id": "cet-en-int-compete",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "compete",
+    "pronunciation": "/kəmˈpiːt/",
+    "translation": "竞争；比赛；比得上",
+    "memoryCue": "com-（共同）+ pete（追求）→ 一起追求同一个名额。",
+    "example": "Small cafes compete on warmth and personal service."
+  }
+]

@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "life-en-beg-airport",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "airport",
+    "pronunciation": "/ˈerpɔːrt/",
+    "translation": "机场；航空港",
+    "memoryCue": "air（空中）+ port（港口）→ 天空中的港口。",
+    "example": "We arrived at the airport two hours before boarding."
+  },
+  {
+    "id": "life-en-beg-baggage",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "baggage",
+    "pronunciation": "/ˈbæɡɪdʒ/",
+    "translation": "行李（总称，不可数）",
+    "memoryCue": "bag（包）+ -age → 随身或托运的大包小包。",
+    "example": "You can pick up your checked baggage at carousel three."
+  },
+  {
+    "id": "life-en-beg-bakery",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "bakery",
+    "pronunciation": "/ˈbeɪkəri/",
+    "translation": "面包店；烘焙坊",
+    "memoryCue": "bake（烤）+ -ery（场所）→ 烘烤面包的地方。",
+    "example": "The smell of fresh bread drew us into the corner bakery."
+  },
+  {
+    "id": "life-en-beg-beach",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "beach",
+    "pronunciation": "/biːtʃ/",
+    "translation": "海滩；沙滩",
+    "memoryCue": "注意长元音 /iː/，区分于 bitch。",
+    "example": "Children built sandcastles along the sunny beach."
+  },
+  {
+    "id": "life-en-beg-breakfast",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "breakfast",
+    "pronunciation": "/ˈbrekfəst/",
+    "translation": "早餐；早饭",
+    "memoryCue": "break（打破）+ fast（斋戒/空腹）→ 打破一夜空腹的第一餐。",
+    "example": "Hotel breakfast is served from seven to ten daily."
+  },
+  {
+    "id": "life-en-beg-bridge",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "bridge",
+    "pronunciation": "/brɪdʒ/",
+    "translation": "桥；桥梁；架起",
+    "memoryCue": "跨过河谷或沟通两端的纽带。",
+    "example": "Walk across the stone bridge to reach the old quarter."
+  },
+  {
+    "id": "life-en-beg-camera",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "camera",
+    "pronunciation": "/ˈkæmrə/",
+    "translation": "照相机；摄像头",
+    "memoryCue": "原意指“暗室”，现代指相机或手机镜头。",
+    "example": "Don't forget to charge your camera before the boat tour."
+  },
+  {
+    "id": "life-en-beg-campus",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "campus",
+    "pronunciation": "/ˈkæmpəs/",
+    "translation": "校园；大学校区",
+    "memoryCue": "词根 camp-（开阔场地）→ 大学绿地园区。",
+    "example": "Cherry blossoms cover the main campus every April."
+  },
+  {
+    "id": "life-en-beg-cash",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "cash",
+    "pronunciation": "/kæʃ/",
+    "translation": "现金；兑现",
+    "memoryCue": "pay in cash（付现金），pay by card（刷卡）。",
+    "example": "Keep a little local cash for small street stalls."
+  },
+  {
+    "id": "life-en-beg-check",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "check",
+    "pronunciation": "/tʃek/",
+    "translation": "检查；核对；结账；账单",
+    "memoryCue": "check in（办理入住/登机），check out（退房）。",
+    "example": "Could we have the check, please?"
+  },
+  {
+    "id": "life-en-beg-clinic",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "clinic",
+    "pronunciation": "/ˈklɪnɪk/",
+    "translation": "诊所；门诊部",
+    "memoryCue": "小型医疗诊所，大型综合医院用 hospital。",
+    "example": "There is a walk-in dental clinic two blocks away."
+  },
+  {
+    "id": "life-en-beg-cloud",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "cloud",
+    "pronunciation": "/klaʊd/",
+    "translation": "云；云朵；云端",
+    "memoryCue": "既指天空云朵，也指云存储 cloud storage。",
+    "example": "Soft white clouds drifted slowly across the bay."
+  },
+  {
+    "id": "life-en-beg-coat",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "coat",
+    "pronunciation": "/koʊt/",
+    "translation": "外套；大衣；涂层",
+    "memoryCue": "出门御寒的外衣。",
+    "example": "Bring a warm coat because evenings get chilly here."
+  },
+  {
+    "id": "life-en-beg-corner",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "corner",
+    "pronunciation": "/ˈkɔːrnər/",
+    "translation": "角落；街角；转角",
+    "memoryCue": "around the corner 表示“就在拐角处 / 即将到来”。",
+    "example": "Wait for me at the corner across from the post office."
+  },
+  {
+    "id": "life-en-beg-crowd",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "crowd",
+    "pronunciation": "/kraʊd/",
+    "translation": "人群；挤满",
+    "memoryCue": "crowded（拥挤的）的词根词。",
+    "example": "A cheerful crowd gathered to watch the street parade."
+  },
+  {
+    "id": "life-en-beg-dinner",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "dinner",
+    "pronunciation": "/ˈdɪnər/",
+    "translation": "晚餐；正餐",
+    "memoryCue": "一天中最丰盛的晚间正餐。",
+    "example": "We booked a quiet table for dinner near the river."
+  },
+  {
+    "id": "life-en-beg-doctor",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "doctor",
+    "pronunciation": "/ˈdɑːktər/",
+    "translation": "医生；博士",
+    "memoryCue": "词根 doc-（教导/博学）→ 博士或医师。",
+    "example": "See a doctor if the fever lasts more than two days."
+  },
+  {
+    "id": "life-en-beg-dream",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "dream",
+    "pronunciation": "/driːm/",
+    "translation": "梦想；做梦",
+    "memoryCue": "dream of / about 表示“梦想/梦到”。",
+    "example": "She finally fulfilled her dream of visiting Kyoto."
+  },
+  {
+    "id": "life-en-beg-drink",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "drink",
+    "pronunciation": "/drɪŋk/",
+    "translation": "喝；饮；饮料",
+    "memoryCue": "搭配 soft drink（软饮/不含酒精饮料）。",
+    "example": "Remember to drink plenty of water during long flights."
+  },
+  {
+    "id": "life-en-beg-drive",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "drive",
+    "pronunciation": "/draɪv/",
+    "translation": "驾驶；驱车；驱动力",
+    "memoryCue": "注意过去式 drove，过去分词 driven。",
+    "example": "It takes forty minutes to drive along the scenic coast."
+  },
+  {
+    "id": "life-en-beg-early",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "early",
+    "pronunciation": "/ˈɜːrli/",
+    "translation": "早的；提前的",
+    "memoryCue": "early bird（早起的人），an early flight（早班机）。",
+    "example": "Catching an early train avoids the morning rush."
+  },
+  {
+    "id": "life-en-beg-enjoy",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "enjoy",
+    "pronunciation": "/ɪnˈdʒɔɪ/",
+    "translation": "享受；喜爱；欣赏",
+    "memoryCue": "en-（使）+ joy（快乐）→ 从中获得乐趣；后接 -ing。",
+    "example": "We really enjoyed walking through the night market."
+  },
+  {
+    "id": "life-en-beg-entrance",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "entrance",
+    "pronunciation": "/ˈentrəns/",
+    "translation": "入口；门口；入场",
+    "memoryCue": "enter（进入）的名词；反义词 exit（出口）。",
+    "example": "Meet me near the main museum entrance at two."
+  },
+  {
+    "id": "life-en-beg-express",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "express",
+    "pronunciation": "/ɪkˈspres/",
+    "translation": "表达；特快列车；快递",
+    "memoryCue": "ex-（向外）+ press（压）→ 把内心想法挤出来表达。",
+    "example": "Take the airport express train directly downtown."
+  },
+  {
+    "id": "life-en-beg-famous",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "famous",
+    "pronunciation": "/ˈfeɪməs/",
+    "translation": "著名的；出名的",
+    "memoryCue": "fame（名声）+ -ous → 名声在外的；搭配 famous for。",
+    "example": "This street is famous for its traditional noodle shops."
+  },
+  {
+    "id": "life-en-beg-flight",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "flight",
+    "pronunciation": "/flaɪt/",
+    "translation": "航班；飞行；一段楼梯",
+    "memoryCue": "fly（飞）的名词形式，book a direct flight（订直飞航班）。",
+    "example": "Our evening flight landed twenty minutes ahead of schedule."
+  },
+  {
+    "id": "life-en-beg-fresh",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "fresh",
+    "pronunciation": "/freʃ/",
+    "translation": "新鲜的；清新的；淡水的",
+    "memoryCue": "fresh air（新鲜空气），fresh fruit（鲜果）。",
+    "example": "Buy fresh berries from the weekend farmers market."
+  },
+  {
+    "id": "life-en-beg-garden",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "garden",
+    "pronunciation": "/ˈɡɑːrdn/",
+    "translation": "花园；菜园；庭院",
+    "memoryCue": "词根 guard-（围栏保护的园地）。",
+    "example": "Her grandmother grows herbs in a sunny backyard garden."
+  },
+  {
+    "id": "life-en-beg-gift",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "gift",
+    "pronunciation": "/ɡɪft/",
+    "translation": "礼物；天赋",
+    "memoryCue": "give（给）的名词 → 送出去的礼物，或上天赐予的天赋。",
+    "example": "We picked up handmade tea as a gift for our host."
+  },
+  {
+    "id": "life-en-beg-guest",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "guest",
+    "pronunciation": "/ɡest/",
+    "translation": "客人；来宾；旅客",
+    "memoryCue": "酒店住客或受邀做客的人。",
+    "example": "Hotel guests receive free access to the rooftop pool."
+  },
+  {
+    "id": "life-en-beg-guide",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "guide",
+    "pronunciation": "/ɡaɪd/",
+    "translation": "导游；指南；引导",
+    "memoryCue": "tour guide（导游），user guide（使用指南）。",
+    "example": "Our local guide explained the history behind every mural."
+  },
+  {
+    "id": "life-en-beg-hotel",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "hotel",
+    "pronunciation": "/hoʊˈtel/",
+    "translation": "旅馆；酒店",
+    "memoryCue": "重音在第二个音节 /hoʊˈtel/。",
+    "example": "The boutique hotel sits right beside the central park."
+  },
+  {
+    "id": "life-en-beg-hungry",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "hungry",
+    "pronunciation": "/ˈhʌŋɡri/",
+    "translation": "饥饿的；渴望的",
+    "memoryCue": "名词为 hunger；feel hungry（觉得饿）。",
+    "example": "Hiking up the steep trail made everyone hungry."
+  },
+  {
+    "id": "life-en-beg-island",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "island",
+    "pronunciation": "/ˈaɪlənd/",
+    "translation": "岛；岛屿",
+    "memoryCue": "注意字母 s 不发音，读 /ˈaɪlənd/。",
+    "example": "A small ferry connects the mainland to the island."
+  },
+  {
+    "id": "life-en-beg-jacket",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "jacket",
+    "pronunciation": "/ˈdʒækɪt/",
+    "translation": "夹克；短上衣；书皮",
+    "memoryCue": "light jacket（轻便夹克）。",
+    "example": "Pack a light waterproof jacket for mountain breezes."
+  },
+  {
+    "id": "life-en-beg-kitchen",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "kitchen",
+    "pronunciation": "/ˈkɪtʃɪn/",
+    "translation": "厨房",
+    "memoryCue": "区分 kitchen（厨房）和 chicken（鸡肉）。",
+    "example": "Fresh coffee is brewing in the shared kitchen."
+  },
+  {
+    "id": "life-en-beg-laugh",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "laugh",
+    "pronunciation": "/læf/",
+    "translation": "笑；发笑；笑声",
+    "memoryCue": "laugh at 嘲笑；burst out laughing 放声大笑。",
+    "example": "Good friends always make each other laugh."
+  },
+  {
+    "id": "life-en-beg-lesson",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "lesson",
+    "pronunciation": "/ˈlesn/",
+    "translation": "课程；一节课；教训",
+    "memoryCue": "learn a lesson（吸取教训 / 学到一课）。",
+    "example": "Each morning starts with a ten-minute listening lesson."
+  },
+  {
+    "id": "life-en-beg-letter",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "letter",
+    "pronunciation": "/ˈletər/",
+    "translation": "信；字母；文字",
+    "memoryCue": "既指书信，也指 26 个英文字母。",
+    "example": "Every letter in this sign is hand-painted."
+  },
+  {
+    "id": "life-en-beg-local",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "local",
+    "pronunciation": "/ˈloʊkl/",
+    "translation": "当地的；本地的；本地人",
+    "memoryCue": "loc-（地方）+ -al → 本土本地的。",
+    "example": "Ask a local resident for the best dumpling place."
+  },
+  {
+    "id": "life-en-beg-lunch",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "lunch",
+    "pronunciation": "/lʌntʃ/",
+    "translation": "午餐；午饭",
+    "memoryCue": "have lunch（吃午饭）。",
+    "example": "Let's grab a quick lunch near the office."
+  },
+  {
+    "id": "life-en-beg-market",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "market",
+    "pronunciation": "/ˈmɑːrkɪt/",
+    "translation": "市场；集市；行情",
+    "memoryCue": "night market（夜市），supermarket（超市）。",
+    "example": "The morning market opens at six with fresh seafood."
+  },
+  {
+    "id": "life-en-beg-meal",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "meal",
+    "pronunciation": "/miːl/",
+    "translation": "一餐；一顿饭",
+    "memoryCue": "three meals a day（一日三餐）。",
+    "example": "Cooking a warm meal at home helps me relax."
+  },
+  {
+    "id": "life-en-beg-menu",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "menu",
+    "pronunciation": "/ˈmenjuː/",
+    "translation": "菜单；功能菜单",
+    "memoryCue": "来自法语，Ask for an English menu（要一份英文菜单）。",
+    "example": "The seasonal menu changes every month."
+  },
+  {
+    "id": "life-en-beg-mirror",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "mirror",
+    "pronunciation": "/ˈmɪrər/",
+    "translation": "镜子；映照",
+    "memoryCue": "词根 mir-（惊奇/看）→ 照见自己的镜子。",
+    "example": "Check the rearview mirror before changing lanes."
+  },
+  {
+    "id": "life-en-beg-movie",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "movie",
+    "pronunciation": "/ˈmuːvi/",
+    "translation": "电影；影片",
+    "memoryCue": "move（移动的画面）+ -ie → 电影；go to the movies。",
+    "example": "Watching a movie with subtitles trains listening naturally."
+  },
+  {
+    "id": "life-en-beg-museum",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "museum",
+    "pronunciation": "/mjuˈziːəm/",
+    "translation": "博物馆；美术馆",
+    "memoryCue": "词根 muse（缪斯女神）→ 收藏艺术与历史珍品之地。",
+    "example": "Admission to the city museum is free on Wednesdays."
+  },
+  {
+    "id": "life-en-beg-nature",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "nature",
+    "pronunciation": "/ˈneɪtʃər/",
+    "translation": "自然；本性；性格",
+    "memoryCue": "by nature 表示“天生地/本性如此”。",
+    "example": "Spending Sunday in nature clears away weekly stress."
+  },
+  {
+    "id": "life-en-beg-noise",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "noise",
+    "pronunciation": "/nɔɪz/",
+    "translation": "噪音；声响；喧闹声",
+    "memoryCue": "形容词 noisy（吵闹的）。",
+    "example": "Noise-canceling headphones help on crowded subways."
+  },
+  {
+    "id": "life-en-beg-ocean",
+    "language": "english",
+    "difficulty": "beginner",
+    "term": "ocean",
+    "pronunciation": "/ˈoʊʃn/",
+    "translation": "海洋；大海",
+    "memoryCue": "Atlantic / Pacific Ocean（大西洋/太平洋）。",
+    "example": "Our balcony looks straight out over the blue ocean."
+  },
+  {
+    "id": "life-en-ele-accommodation",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "accommodation",
+    "pronunciation": "/əˌkɑːməˈdeɪʃn/",
+    "translation": "住宿；住处；膳宿",
+    "memoryCue": "旅行预订最常用词：book accommodation。",
+    "example": "We booked cozy accommodation within walking distance of the station."
+  },
+  {
+    "id": "life-en-ele-allergy",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "allergy",
+    "pronunciation": "/ˈælərdʒi/",
+    "translation": "过敏；过敏反应",
+    "memoryCue": "food allergy（食物过敏）；形容词为 allergic。",
+    "example": "Always mention a peanut allergy before ordering street food."
+  },
+  {
+    "id": "life-en-ele-appointment",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "appointment",
+    "pronunciation": "/əˈpɔɪntmənt/",
+    "translation": "预约；约会；任命",
+    "memoryCue": "make an appointment（预约看病/理发/办事）。",
+    "example": "She made a dental appointment for Thursday morning."
+  },
+  {
+    "id": "life-en-ele-atmosphere",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "atmosphere",
+    "pronunciation": "/ˈætməsfɪr/",
+    "translation": "氛围；气氛；大气层",
+    "memoryCue": "atmo-（蒸汽）+ sphere（球体）→ 环绕的氛围。",
+    "example": "Soft jazz music gave the bookstore a relaxing atmosphere."
+  },
+  {
+    "id": "life-en-ele-attraction",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "attraction",
+    "pronunciation": "/əˈtrækʃn/",
+    "translation": "景点；吸引力",
+    "memoryCue": "tourist attraction（旅游景点）。",
+    "example": "The lantern festival is the town's biggest winter attraction."
+  },
+  {
+    "id": "life-en-ele-avenue",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "avenue",
+    "pronunciation": "/ˈævənuː/",
+    "translation": "林荫大道；途径",
+    "memoryCue": "城市宽阔街道常见缩写 Ave.。",
+    "example": "Tree-lined avenues make downtown great for evening strolls."
+  },
+  {
+    "id": "life-en-ele-backpack",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "backpack",
+    "pronunciation": "/ˈbækpæk/",
+    "translation": "双肩背包；背包旅行",
+    "memoryCue": "back（背）+ pack（包）→ 背在肩上的包。",
+    "example": "Everything needed for a three-day trip fits in one backpack."
+  },
+  {
+    "id": "life-en-ele-bargain",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "bargain",
+    "pronunciation": "/ˈbɑːrɡən/",
+    "translation": "便宜货；讨价还价；协议",
+    "memoryCue": "a real bargain（真划算）。",
+    "example": "That handmade leather notebook was a real bargain."
+  },
+  {
+    "id": "life-en-ele-beverage",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "beverage",
+    "pronunciation": "/ˈbevərɪdʒ/",
+    "translation": "饮料；饮品（正式用语）",
+    "memoryCue": "餐厅菜单与航班上常把饮品统称为 beverages。",
+    "example": "Complimentary hot beverages are served throughout the flight."
+  },
+  {
+    "id": "life-en-ele-boarding",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "boarding",
+    "pronunciation": "/ˈbɔːrdɪŋ/",
+    "translation": "登机；上船；寄宿",
+    "memoryCue": "boarding pass（登机牌），boarding gate（登机口）。",
+    "example": "Keep your passport and boarding pass ready at the gate."
+  },
+  {
+    "id": "life-en-ele-brochure",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "brochure",
+    "pronunciation": "/broʊˈʃʊr/",
+    "translation": "小册子；旅游宣传手册",
+    "memoryCue": "酒店大堂或景点常放着折页简介。",
+    "example": "Pick up a free trail brochure at the visitor center."
+  },
+  {
+    "id": "life-en-ele-cafe",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "cafe",
+    "pronunciation": "/kæˈfeɪ/",
+    "translation": "咖啡馆；小餐馆",
+    "memoryCue": "源自法语 café，末尾 e 发 /eɪ/ 音。",
+    "example": "We stopped at a sunlit cafe for pastries and espresso."
+  },
+  {
+    "id": "life-en-ele-cancellation",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "cancellation",
+    "pronunciation": "/ˌkænsəˈleɪʃn/",
+    "translation": "取消；作废；退订",
+    "memoryCue": "free cancellation（免费取消预订）。",
+    "example": "Choose rooms with free cancellation in case plans shift."
+  },
+  {
+    "id": "life-en-ele-cashier",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "cashier",
+    "pronunciation": "/kæˈʃɪr/",
+    "translation": "收银员；出纳",
+    "memoryCue": "cash（现金）+ -ier（职业）→ 管钱收银的人。",
+    "example": "Hand the coupon to the cashier before scanning items."
+  },
+  {
+    "id": "life-en-ele-celebrate",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "celebrate",
+    "pronunciation": "/ˈselɪbreɪt/",
+    "translation": "庆祝；庆贺；赞美",
+    "memoryCue": "celebr（荣耀）+ -ate → 隆重庆祝节日或成果。",
+    "example": "Families gather to celebrate Lunar New Year together."
+  },
+  {
+    "id": "life-en-ele-checkout",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "checkout",
+    "pronunciation": "/ˈtʃekaʊt/",
+    "translation": "退房；结账台；付款",
+    "memoryCue": "酒店退房或超市收银台皆可用 checkout。",
+    "example": "Late checkout until two o'clock saved us from rushing."
+  },
+  {
+    "id": "life-en-ele-climate",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "climate",
+    "pronunciation": "/ˈklaɪmət/",
+    "translation": "气候；风气",
+    "memoryCue": "指长期气候（如热带气候），weather 指当天天气。",
+    "example": "The island enjoys a mild coastal climate all winter."
+  },
+  {
+    "id": "life-en-ele-commute",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "commute",
+    "pronunciation": "/kəˈmjuːt/",
+    "translation": "通勤；上下班往返",
+    "memoryCue": "com-（共同）+ mute（交换位置）→ 每天在家和公司间往返。",
+    "example": "Listening to word audio turns a long commute into study time."
+  },
+  {
+    "id": "life-en-ele-complaint",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "complaint",
+    "pronunciation": "/kəmˈpleɪnt/",
+    "translation": "抱怨；投诉",
+    "memoryCue": "动词是 complain（无 t），名词加 t 变 complaint。",
+    "example": "Staff handled the noise complaint politely and moved our room."
+  },
+  {
+    "id": "life-en-ele-concierge",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "concierge",
+    "pronunciation": "/ˌkɑːnsiˈerʒ/",
+    "translation": "酒店礼宾员；门房服务",
+    "memoryCue": "源自法语，专门帮住客订票、叫车和推荐餐厅。",
+    "example": "Ask the hotel concierge to reserve a taxi for sunrise."
+  },
+  {
+    "id": "life-en-ele-connection",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "connection",
+    "pronunciation": "/kəˈnekʃn/",
+    "translation": "转机；连接；人脉联系",
+    "memoryCue": "航空里指转机衔接航班（make a connection）。",
+    "example": "We had ninety minutes to catch our flight connection in Munich."
+  },
+  {
+    "id": "life-en-ele-courtesy",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "courtesy",
+    "pronunciation": "/ˈkɜːrtəsi/",
+    "translation": "礼貌；谦恭；免费接送服务",
+    "memoryCue": "courtesy shuttle（酒店免费接驳车）。",
+    "example": "A courtesy shuttle runs between the terminal and the hotel."
+  },
+  {
+    "id": "life-en-ele-cuisine",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "cuisine",
+    "pronunciation": "/kwɪˈziːn/",
+    "translation": "烹饪；风味菜系",
+    "memoryCue": "源自法语，local cuisine（当地特色美食）。",
+    "example": "Exploring regional cuisine is the best part of traveling."
+  },
+  {
+    "id": "life-en-ele-currency",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "currency",
+    "pronunciation": "/ˈkɜːrənsi/",
+    "translation": "货币；通货；流行",
+    "memoryCue": "current（流通）+ -cy → 市场上流通的钱币。",
+    "example": "Exchange a small amount of currency before leaving the terminal."
+  },
+  {
+    "id": "life-en-ele-customs",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "customs",
+    "pronunciation": "/ˈkʌstəmz/",
+    "translation": "海关；关税",
+    "memoryCue": "记住总是复数形式，go through customs（过海关）。",
+    "example": "Passing through customs took less than ten minutes."
+  },
+  {
+    "id": "life-en-ele-delicious",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "delicious",
+    "pronunciation": "/dɪˈlɪʃəs/",
+    "translation": "美味的；可口的",
+    "memoryCue": "de- + lic（诱惑）→ 味道诱人可口。",
+    "example": "The freshly grilled fish tasted absolutely delicious."
+  },
+  {
+    "id": "life-en-ele-departure",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "departure",
+    "pronunciation": "/dɪˈpɑːrtʃər/",
+    "translation": "出发；离开；起飞",
+    "memoryCue": "动词 depart + -ure；机场大厅标牌 Departures。",
+    "example": "Check the departure board for any last-minute gate changes."
+  },
+  {
+    "id": "life-en-ele-destination",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "destination",
+    "pronunciation": "/ˌdestɪˈneɪʃn/",
+    "translation": "目的地；终点",
+    "memoryCue": "de- + stin（站定）→ 旅途最终站定的地方。",
+    "example": "Lisbon has become a favorite destination for solo travelers."
+  },
+  {
+    "id": "life-en-ele-discount",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "discount",
+    "pronunciation": "/ˈdɪskaʊnt/",
+    "translation": "折扣；打折；低估",
+    "memoryCue": "dis-（去掉）+ count（计算）→ 算账时减去一部分钱。",
+    "example": "Students get a twenty-percent discount with a valid ID."
+  },
+  {
+    "id": "life-en-ele-downtown",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "downtown",
+    "pronunciation": "/ˌdaʊnˈtaʊn/",
+    "translation": "市中心；商业区",
+    "memoryCue": "美式常用表达，指城市繁华中心区。",
+    "example": "Most theaters and cafes are clustered downtown."
+  },
+  {
+    "id": "life-en-ele-emergency",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "emergency",
+    "pronunciation": "/ɪˈmɜːrdʒənsi/",
+    "translation": "紧急情况；突发事件",
+    "memoryCue": "emerge（突然冒出）+ -ency → 突发急事；emergency exit。",
+    "example": "Save the local emergency number before hiking alone."
+  },
+  {
+    "id": "life-en-ele-exchange",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "exchange",
+    "pronunciation": "/ɪksˈtʃeɪndʒ/",
+    "translation": "兑换；交换；交流",
+    "memoryCue": "exchange rate（汇率），language exchange（语伴交流）。",
+    "example": "Check the exchange rate before converting cash at the booth."
+  },
+  {
+    "id": "life-en-ele-exhibition",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "exhibition",
+    "pronunciation": "/ˌeksɪˈbɪʃn/",
+    "translation": "展览；陈列；展销会",
+    "memoryCue": "ex-（出）+ hibit（拿）→ 拿出来给大家看。",
+    "example": "The photography exhibition runs through the end of October."
+  },
+  {
+    "id": "life-en-ele-fare",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "fare",
+    "pronunciation": "/fer/",
+    "translation": "车费；船费；票价",
+    "memoryCue": "区分：fare 指交通票价，fee 指服务费/学费。",
+    "example": "Subway fare depends on the distance between stations."
+  },
+  {
+    "id": "life-en-ele-festival",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "festival",
+    "pronunciation": "/ˈfestɪvl/",
+    "translation": "节日；庆典；音乐节",
+    "memoryCue": "feast（盛宴）同源 → 欢聚庆祝的盛会。",
+    "example": "Lanterns lit up the entire riverfront during the summer festival."
+  },
+  {
+    "id": "life-en-ele-flavor",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "flavor",
+    "pronunciation": "/ˈfleɪvər/",
+    "translation": "味道；风味；特色",
+    "memoryCue": "冰淇淋口味、菜肴风味都用 flavor。",
+    "example": "Green tea and sesame are the shop's top ice-cream flavors."
+  },
+  {
+    "id": "life-en-ele-fountain",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "fountain",
+    "pronunciation": "/ˈfaʊntən/",
+    "translation": "喷泉；源泉",
+    "memoryCue": "词根 fount-（泉源）→ 喷水池。",
+    "example": "Tourists tossed coins into the marble fountain at dusk."
+  },
+  {
+    "id": "life-en-ele-gallery",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "gallery",
+    "pronunciation": "/ˈɡæləri/",
+    "translation": "画廊；美术馆；走廊",
+    "memoryCue": "art gallery（艺术画廊）。",
+    "example": "We spent a rainy afternoon inside a quiet contemporary gallery."
+  },
+  {
+    "id": "life-en-ele-grocery",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "grocery",
+    "pronunciation": "/ˈɡroʊsəri/",
+    "translation": "杂货店；食品杂货",
+    "memoryCue": "grocery store（生鲜食品超市）。",
+    "example": "Pick up milk and fresh pasta from the neighborhood grocery."
+  },
+  {
+    "id": "life-en-ele-harbor",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "harbor",
+    "pronunciation": "/ˈhɑːrbər/",
+    "translation": "海港；港口；怀抱（情感）",
+    "memoryCue": "船只停靠避风的港湾，英式拼作 harbour。",
+    "example": "Sailboats rocked gently inside the sheltered harbor."
+  },
+  {
+    "id": "life-en-ele-hospitality",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "hospitality",
+    "pronunciation": "/ˌhɑːspɪˈtæləti/",
+    "translation": "好客；热情款待；酒店服务业",
+    "memoryCue": "hospit-（客人，同 hospital / hotel）→ 热情待客之道。",
+    "example": "We will always remember our host's warm hospitality."
+  },
+  {
+    "id": "life-en-ele-itinerary",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "itinerary",
+    "pronunciation": "/aɪˈtɪnəreri/",
+    "translation": "行程单；旅行路线",
+    "memoryCue": "iter-（走/路线）→ 每天去哪里的行程表。",
+    "example": "Leave one open afternoon in your travel itinerary for wandering."
+  },
+  {
+    "id": "life-en-ele-landmark",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "landmark",
+    "pronunciation": "/ˈlændmɑːrk/",
+    "translation": "地标；里程碑",
+    "memoryCue": "land（陆地）+ mark（记号）→ 城市最醒目的地标建筑。",
+    "example": "The clock tower is the city's most recognizable landmark."
+  },
+  {
+    "id": "life-en-ele-laundry",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "laundry",
+    "pronunciation": "/ˈlɔːndri/",
+    "translation": "洗衣店；待洗衣物",
+    "memoryCue": "do the laundry（洗衣服），self-service laundry。",
+    "example": "There is a coin laundry right behind the guesthouse."
+  },
+  {
+    "id": "life-en-ele-luggage",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "luggage",
+    "pronunciation": "/ˈlʌɡɪdʒ/",
+    "translation": "行李（英式常用，不可数）",
+    "memoryCue": "lug（用力拖曳）+ -age → 拖着走的箱包。",
+    "example": "Travel light with only carry-on luggage when hopping trains."
+  },
+  {
+    "id": "life-en-ele-neighborhood",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "neighborhood",
+    "pronunciation": "/ˈneɪbərhʊd/",
+    "translation": "街区；邻近地区；四邻",
+    "memoryCue": "neighbor（邻居）+ -hood（范围）→ 邻居们生活的街区。",
+    "example": "This quiet neighborhood is packed with independent bookshops."
+  },
+  {
+    "id": "life-en-ele-passport",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "passport",
+    "pronunciation": "/ˈpæspɔːrt/",
+    "translation": "护照；通行证",
+    "memoryCue": "pass（通过）+ port（港口）→ 出入关口的证件。",
+    "example": "Make sure your passport has six months of validity left."
+  },
+  {
+    "id": "life-en-ele-pharmacy",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "pharmacy",
+    "pronunciation": "/ˈfɑːrməsi/",
+    "translation": "药房；药店",
+    "memoryCue": "希腊词根 pharmak-（药）→ 买非处方药与日用品的药店。",
+    "example": "The pharmacy on Main Street stays open until midnight."
+  },
+  {
+    "id": "life-en-ele-receipt",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "receipt",
+    "pronunciation": "/rɪˈsiːt/",
+    "translation": "收据；发票；收到",
+    "memoryCue": "注意字母 p 不发音，读 /rɪˈsiːt/。",
+    "example": "Keep the paper receipt in case you need a refund."
+  },
+  {
+    "id": "life-en-ele-reservation",
+    "language": "english",
+    "difficulty": "elementary",
+    "term": "reservation",
+    "pronunciation": "/ˌrezərˈveɪʃn/",
+    "translation": "预订；预约；保留意见",
+    "memoryCue": "make a reservation（订座/订房）。",
+    "example": "We have a dinner reservation under the name Lin at seven."
+  }
+]

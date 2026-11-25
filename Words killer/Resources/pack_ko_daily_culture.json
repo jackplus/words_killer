@@ -1,0 +1,502 @@
+[
+  {
+    "id": "life-ko-beg-2a7ace43",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "지하철",
+    "pronunciation": "ji-ha-cheol",
+    "translation": "地铁",
+    "memoryCue": "汉字词“地下铁”（지=地，하=下，철=铁），和日语同源。",
+    "example": "출퇴근 시간에는 지하철을 타는 것이 가장 빨라요."
+  },
+  {
+    "id": "life-ko-beg-fa0677f8",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "공항",
+    "pronunciation": "gong-hang",
+    "translation": "机场；航空港",
+    "memoryCue": "汉字词“空港”（공=空，항=港），인천공항 仁川机场。",
+    "example": "비행기 출발 두 시간 전에 공항에 도착했습니다."
+  },
+  {
+    "id": "life-ko-beg-00536290",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "병원",
+    "pronunciation": "byeong-won",
+    "translation": "医院",
+    "memoryCue": "汉字词“病院”（병=病，원=院）。",
+    "example": "목이 너무 아파서 아침에 병원에 다녀왔어요."
+  },
+  {
+    "id": "life-ko-beg-5d8963f4",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "약국",
+    "pronunciation": "yak-guk",
+    "translation": "药店；药房",
+    "memoryCue": "汉字词“药局”（약=药，국=局）。",
+    "example": "식사 후에 약국에서 산 감기약을 먹었어요."
+  },
+  {
+    "id": "life-ko-beg-48a75a3a",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "사진",
+    "pronunciation": "sa-jin",
+    "translation": "照片；相片",
+    "memoryCue": "汉字词“写真”（사=写，진=真），사진을 찍다 拍照。",
+    "example": "바다가 예뻐서 친구들과 사진을 많이 찍었어요."
+  },
+  {
+    "id": "life-ko-beg-e0e3b473",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "지도",
+    "pronunciation": "ji-do",
+    "translation": "地图",
+    "memoryCue": "汉字词“地图”（지=地，도=图）。",
+    "example": "처음 가는 동네라서 지도 앱을 보며 찾았습니다."
+  },
+  {
+    "id": "life-ko-beg-fc79037e",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "가게",
+    "pronunciation": "ga-ge",
+    "translation": "商店；小店",
+    "memoryCue": "固有词，比 상점 更生活化，빵가게 面包店。",
+    "example": "우리 집 근처에 맛있는 떡볶이 가게가 있어요."
+  },
+  {
+    "id": "life-ko-beg-2d95a445",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "날짜",
+    "pronunciation": "nal-jja",
+    "translation": "日期",
+    "memoryCue": "날（日子）+ 짜 → 具体的某月某日。",
+    "example": "예약 날짜를 다음 주 금요일로 변경할 수 있나요?"
+  },
+  {
+    "id": "life-ko-beg-ab8981f5",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "모임",
+    "pronunciation": "mo-im",
+    "translation": "聚会；社团活动",
+    "memoryCue": "모이다（聚集）的名词形式 → 同学会、读书会皆可用。",
+    "example": "이번 토요일 저녁에 동아리 친구들 모임이 있어요."
+  },
+  {
+    "id": "life-ko-beg-ac8b3eba",
+    "language": "korean",
+    "difficulty": "beginner",
+    "term": "선배",
+    "pronunciation": "seon-bae",
+    "translation": "前辈；学长学姐",
+    "memoryCue": "汉字词“先辈”，反义词 후배（后辈/学弟学妹）。",
+    "example": "학교 선배가 한국어 공부 방법을 친절하게 알려 주었어요."
+  },
+  {
+    "id": "life-ko-ele-0b3bf0da",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "예약",
+    "pronunciation": "ye-yak",
+    "translation": "预约；预订",
+    "memoryCue": "汉字词“预约”（예=预，약=约），餐厅订座、买票常用。",
+    "example": "인기가 많은 식당이라서 미리 예약을 해야 해요."
+  },
+  {
+    "id": "life-ko-ele-863b62db",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "주문",
+    "pronunciation": "ju-mun",
+    "translation": "点菜；下单；订单",
+    "memoryCue": "汉字词“注文”，여기 주문할게요（服务员，点单）。",
+    "example": "메뉴판을 보고 따뜻한 비빔밥 두 그릇을 주문했어요."
+  },
+  {
+    "id": "life-ko-ele-76c2df56",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "할인",
+    "pronunciation": "hal-in",
+    "translation": "打折；折扣",
+    "memoryCue": "汉字词“割引”，학생 할인 学生折扣。",
+    "example": "멤버십 카드를 보여 주시면 십 퍼센트 할인을 받아요."
+  },
+  {
+    "id": "life-ko-ele-88f05723",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "영수증",
+    "pronunciation": "yeong-su-jeung",
+    "translation": "收据；发票；小票",
+    "memoryCue": "汉字词“领收证”（领=영，收=수，证=증）。",
+    "example": "교환이나 환불을 하려면 영수증을 꼭 보관하세요."
+  },
+  {
+    "id": "life-ko-ele-5b7fe798",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "분위기",
+    "pronunciation": "bun-wi-gi",
+    "translation": "气氛；氛围",
+    "memoryCue": "汉字词“氛围气”，cafe 探店评价最高频词之一。",
+    "example": "조용하고 따뜻한 조명 덕분에 카페 분위기가 정말 좋아요."
+  },
+  {
+    "id": "life-ko-ele-44d30cb6",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "추억",
+    "pronunciation": "chu-eok",
+    "translation": "回忆；往事",
+    "memoryCue": "汉字词“追忆”→ 怀念美好的过往时光。",
+    "example": "제주도에서 보낸 여름 휴가는 잊지 못할 추억이에요."
+  },
+  {
+    "id": "life-ko-ele-ccc302d7",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "환승",
+    "pronunciation": "hwan-seung",
+    "translation": "换乘；转乘",
+    "memoryCue": "汉字词“换乘”，地铁广播常听 환승역（换乘站）。",
+    "example": "사당역에서 이호선으로 환승하면 회사에 바로 가요."
+  },
+  {
+    "id": "life-ko-ele-bb832b78",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "단골",
+    "pronunciation": "dan-gol",
+    "translation": "常客；熟客",
+    "memoryCue": "단골손님（老顾客），단골집（常去的心头好小店）。",
+    "example": "사장님이 친절해서 자주 가는 단골 빵집이 생겼어요."
+  },
+  {
+    "id": "life-ko-ele-ecf87b13",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "솔직하다",
+    "pronunciation": "sol-jik-ha-da",
+    "translation": "坦率；直爽；诚实",
+    "memoryCue": "汉字词“率直”，솔직히 말하면（老实说）。",
+    "example": "친구의 솔직한 조언이 큰 도움이 되었습니다."
+  },
+  {
+    "id": "life-ko-ele-2c2c3d7c",
+    "language": "korean",
+    "difficulty": "elementary",
+    "term": "배려",
+    "pronunciation": "bae-ryeo",
+    "translation": "体贴；关怀；照顾他人",
+    "memoryCue": "汉字词“配虑”→ 站在对方角度考虑。",
+    "example": "서로 조금씩 배려하면 함께 일하기가 훨씬 편해져요."
+  },
+  {
+    "id": "life-ko-int-4c8c7d5e",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "성취감",
+    "pronunciation": "seong-chwi-gam",
+    "translation": "成就感",
+    "memoryCue": "汉字词“成就感”，完成今日背词目标时的满足感。",
+    "example": "매일 목표를 달성할 때마다 뿌듯한 성취감을 느껴요."
+  },
+  {
+    "id": "life-ko-int-94b5855b",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "경험담",
+    "pronunciation": "gyeong-heom-dam",
+    "translation": "亲身经历；经验谈",
+    "memoryCue": "경험（经验）+ 담（谈话）→ 过来人的实战故事。",
+    "example": "유학 선배의 경험담을 듣고 걱정이 많이 줄었어요."
+  },
+  {
+    "id": "life-ko-int-b8d8e575",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "공감",
+    "pronunciation": "gong-gam",
+    "translation": "共鸣；同感",
+    "memoryCue": "汉字词“共感”（공=共，감=感），공감하다 感同身受。",
+    "example": "작가의 섬세한 글에 많은 독자가 깊이 공감했습니다."
+  },
+  {
+    "id": "life-ko-int-a0ea39f7",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "소통",
+    "pronunciation": "so-tong",
+    "translation": "沟通；交流",
+    "memoryCue": "汉字词“疏通”→ 畅通地交换想法。",
+    "example": "팀원 간의 원활한 소통이 프로젝트 성공의 열쇠예요."
+  },
+  {
+    "id": "life-ko-int-0d907dd2",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "유행",
+    "pronunciation": "yu-haeng",
+    "translation": "流行；风尚",
+    "memoryCue": "汉字词“流行”，요즘 유행하는 노래 最近爆火的歌。",
+    "example": "요즘 젊은 세대 사이에서는 미니멀 라이프가 유행이에요."
+  },
+  {
+    "id": "life-ko-int-ae0ef505",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "호기심",
+    "pronunciation": "ho-gi-sim",
+    "translation": "好奇心",
+    "memoryCue": "汉字词“好奇心”（호=好，기=奇，심=心）。",
+    "example": "새로운 언어에 대한 호기심이 꾸준한 학습의 원동력이에요."
+  },
+  {
+    "id": "life-ko-int-2ea2d58f",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "여유롭다",
+    "pronunciation": "yeo-yu-rop-da",
+    "translation": "从容的；悠闲的；宽裕的",
+    "memoryCue": "여유（余地）+ -롭다 → 时间和心态都不慌不忙。",
+    "example": "주말 아침에는 여유롭게 산책하며 커피를 마셔요."
+  },
+  {
+    "id": "life-ko-int-47a30147",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "꼼꼼하다",
+    "pronunciation": "kkom-kkom-ha-da",
+    "translation": "细致；一丝不苟",
+    "memoryCue": "韩语常用拟态形容词，形容做事检查非常仔细。",
+    "example": "성격이 꼼꼼해서 작은 철자 실수도 금방 찾아내요."
+  },
+  {
+    "id": "life-ko-int-8ec3eef2",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "익숙해지다",
+    "pronunciation": "ik-suk-hae-ji-da",
+    "translation": "变得熟悉；习惯",
+    "memoryCue": "익숙하다（熟练习惯）+ -아/어지다（变得……）。",
+    "example": "매일 발음을 따라 읽다 보니 억양이 금세 익숙해졌어요."
+  },
+  {
+    "id": "life-ko-int-f126588f",
+    "language": "korean",
+    "difficulty": "intermediate",
+    "term": "다채롭다",
+    "pronunciation": "da-chae-rop-da",
+    "translation": "丰富多彩的",
+    "memoryCue": "다채（多彩）+ -롭다 → 活动、菜品或文化极其丰富。",
+    "example": "이번 지역 축제에서는 다채로운 전통 공연이 열립니다."
+  },
+  {
+    "id": "life-ko-adv-4df79316",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "가치관",
+    "pronunciation": "ga-chi-gwan",
+    "translation": "价值观",
+    "memoryCue": "汉字词“价值观”，TOPIK II 写作议论高频词。",
+    "example": "세대에 따라 일을 바라보는 가치관이 조금씩 다릅니다."
+  },
+  {
+    "id": "life-ko-adv-648773da",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "객관적",
+    "pronunciation": "gaek-gwan-jeok",
+    "translation": "客观的",
+    "memoryCue": "汉字词“客观的”，反义词 주관적（主观的）。",
+    "example": "감정에 치우치지 말고 객관적인 자료를 바탕으로 판단하세요."
+  },
+  {
+    "id": "life-ko-adv-980e6abf",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "보편성",
+    "pronunciation": "bo-pyeon-seong",
+    "translation": "普遍性；普适性",
+    "memoryCue": "汉字词“普遍性”，形容放之四海而皆准的规律。",
+    "example": "사랑과 우정이라는 주제는 시대를 초월한 보편성을 지닙니다."
+  },
+  {
+    "id": "life-ko-adv-1797f5a8",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "심층적",
+    "pronunciation": "sim-cheung-jeok",
+    "translation": "深层次的；深入的",
+    "memoryCue": "汉字词“深层的”，심층 인터뷰（深度专访）。",
+    "example": "단편적인 정보보다 심층적인 분석 기사를 즐겨 읽어요."
+  },
+  {
+    "id": "life-ko-adv-44c5a152",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "유연성",
+    "pronunciation": "yu-yeon-seong",
+    "translation": "灵活性；弹性",
+    "memoryCue": "汉字词“柔软性”，업무 유연성（工作灵活性）。",
+    "example": "예상치 못한 변화에 대응하려면 사고의 유연성이 필요해요."
+  },
+  {
+    "id": "life-ko-adv-83bfa54d",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "지속가능성",
+    "pronunciation": "ji-sok-ga-neung-seong",
+    "translation": "可持续性",
+    "memoryCue": "지속（持续）+ 가능성（可能性）→ ESG 与环保核心词。",
+    "example": "환경 보호를 위해 제품의 지속가능성을 최우선으로 둡니다."
+  },
+  {
+    "id": "life-ko-adv-f4a66af7",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "함축적",
+    "pronunciation": "ham-chuk-jeok",
+    "translation": "含蓄的；言简意赅的",
+    "memoryCue": "汉字词“含蓄的”→ 寥寥数语蕴含深意。",
+    "example": "시의 짧은 문장 속에는 함축적인 의미가 담겨 있습니다."
+  },
+  {
+    "id": "life-ko-adv-11262ae7",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "시너지",
+    "pronunciation": "si-neo-ji",
+    "translation": "协同效应（Synergy）",
+    "memoryCue": "英语 synergy 音译外来词，韩企报告常用。",
+    "example": "오프라인 워크숍과 복습 앱이 좋은 시너지를 냈어요."
+  },
+  {
+    "id": "life-ko-adv-66cca747",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "정착",
+    "pronunciation": "jeong-chak",
+    "translation": "扎根；固定下来；稳固成型",
+    "memoryCue": "汉字词“定着”，새로운 제도가 정착되다（新制度落地扎根）。",
+    "example": "재택근무 문화가 이제는 많은 기업에 안정적으로 정착했어요."
+  },
+  {
+    "id": "life-ko-adv-12303f7c",
+    "language": "korean",
+    "difficulty": "advanced",
+    "term": "진정성",
+    "pronunciation": "jin-jeong-seong",
+    "translation": "真诚；真挚；原汁原味",
+    "memoryCue": "汉字词“真正性”→ 打动用户的真心与诚意。",
+    "example": "꾸밈없는 진정성이 담긴 후기가 큰 신뢰를 얻습니다."
+  },
+  {
+    "id": "life-ko-bus-c42b39f5",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "명함",
+    "pronunciation": "myeong-ham",
+    "translation": "名片",
+    "memoryCue": "汉字词“名衔”，명함을 주고받다（互换名片）。",
+    "example": "미팅을 시작하기 전에 두 손으로 정중히 명함을 건넸어요."
+  },
+  {
+    "id": "life-ko-bus-2fdefe0c",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "연차",
+    "pronunciation": "yeon-cha",
+    "translation": "年假（带薪年休假）",
+    "memoryCue": "연차 휴가（年次休假）简称，연차를 쓰다 休年假。",
+    "example": "다음 주에는 남은 연차를 사용해서 가족 여행을 떠날 거예요."
+  },
+  {
+    "id": "life-ko-bus-0672f7ac",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "야근",
+    "pronunciation": "ya-geun",
+    "translation": "加班（夜班/晚间加班）",
+    "memoryCue": "汉字词“夜勤”，야근을 줄이다 减少加班。",
+    "example": "업무 자동화 덕분에 불필요한 야근이 눈에 띄게 줄었어요."
+  },
+  {
+    "id": "life-ko-bus-c812616a",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "거래처",
+    "pronunciation": "geo-rae-cheo",
+    "translation": "客户公司；往来合作方",
+    "memoryCue": "거래（交易）+ 처（处）→ 商务合作上下游单位。",
+    "example": "오후에 주요 거래처 담당자와 계약 조건을 논의할 예정입니다."
+  },
+  {
+    "id": "life-ko-bus-8eac91f0",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "조율",
+    "pronunciation": "jo-yul",
+    "translation": "协调；微调统筹",
+    "memoryCue": "汉字词“调律”（给乐器调音）→ 协调各方日程与意见。",
+    "example": "참석자 모두가 가능한 시간으로 회의 일정을 조율하고 있어요."
+  },
+  {
+    "id": "life-ko-bus-0b1a0f2e",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "공지",
+    "pronunciation": "gong-ji",
+    "translation": "公告；通知",
+    "memoryCue": "汉字词“公知”，사내 공지（公司内部公告）。",
+    "example": "변경된 보안 규정은 오늘 오전 사내 게시판에 공지되었습니다."
+  },
+  {
+    "id": "life-ko-bus-df233763",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "마감",
+    "pronunciation": "ma-gam",
+    "translation": "截止；截稿；收尾",
+    "memoryCue": "마감 기한（截止日期），마감 시간 截单时间。",
+    "example": "이번 분기 프로젝트 보고서 마감은 내일 오후 다섯 시입니다."
+  },
+  {
+    "id": "life-ko-bus-8cfe1e59",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "협업",
+    "pronunciation": "hyeop-eop",
+    "translation": "协同合作；跨界联名",
+    "memoryCue": "汉字词“协业”，既指团队协作也指品牌联名。",
+    "example": "디자인팀과 개발팀의 긴밀한 협업으로 새 기능을 출시했어요."
+  },
+  {
+    "id": "life-ko-bus-dbc67bce",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "승진",
+    "pronunciation": "seung-jin",
+    "translation": "升职；晋升",
+    "memoryCue": "汉字词“升进”，반의어/관련어 승진 축하해요（恭喜升职）。",
+    "example": "꾸준한 성과와 리더십을 인정받아 과장으로 승진했습니다."
+  },
+  {
+    "id": "life-ko-bus-a4fe38da",
+    "language": "korean",
+    "difficulty": "business",
+    "term": "보안",
+    "pronunciation": "bo-an",
+    "translation": "安全；保密；信息安全",
+    "memoryCue": "汉字词“保安”，개인정보 보안（个人信息安全）。",
+    "example": "모든 학습 데이터는 기기 내부에만 저장되어 보안이 뛰어납니다."
+  }
+]

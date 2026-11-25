@@ -1,0 +1,528 @@
+#!/usr/bin/env bash
+# code-worker — 把独立模块交给 Grok Build（`grok`），在新的 git worktree 里写代码
+#              Delegate an isolated module to Grok Build in a fresh worktree.
+#
+# Codex is the main agent; this script is a helper it dispatches.
+# Usage:
+#   code-worker --task-file spec.md [--branch name] [--model M]
+#
+# Must be run from a Git repo under ~/Code (or $AGENT_CODE_ROOT).
+# Never merges, pushes, or deletes the worktree.
+
+set -euo pipefail
+
+SCRIPT_NAME=$(basename -- "$0")
+
+# Do not pin a model slug by default (unknown ids may fail). Override with
+# WORKER_MODEL / --model after checking `grok models`. Official settings
+# docs recommend "grok-build" for coding sessions.
+DEFAULT_TIMEOUT=1200
+DEFAULT_CODE_ROOT="$HOME/Code"
+MAX_PROMPT_ARGV=80000
+
+usage() {
+  cat <<'USAGE'
+code-worker — 在隔离 worktree 中调用 Grok Build / isolated Grok Build worker
+
+用法 / Usage:
+  code-worker --task-file spec.md [--branch name] [--model M] [--timeout SECS]
+
+选项 / Options:
+  --task-file FILE   Required. Task / spec markdown (or text) for Grok Build.
+  -b, --branch NAME  New branch and worktree name (default: worker-YYYYMMDD-HHMMSS)
+  -m, --model M      Model slug (default: $WORKER_MODEL, else grok's own default)
+  -t, --timeout SECS Kill the CLI after SECS seconds (default: $WORKER_TIMEOUT or 1200)
+  -h, --help         Show this help
+
+环境变量 / Environment:
+  WORKER_MODEL       Optional model slug (passed as --model). See: grok models
+  WORKER_TIMEOUT     Default timeout in seconds (default: 1200)
+  AGENT_CODE_ROOT    Required parent of the repo (default: ~/Code)
+  AGENT_LOG_DIR      Log directory (default: ~/.agent-logs)
+  GROK, GROK_BIN     Optional path to the grok binary
+
+行为 / Behaviour:
+  Codex is the main agent. This helper only implements an isolated module.
+
+  1. Refuse unless cwd is a Git repo under AGENT_CODE_ROOT, and the tree is clean.
+  2. Create a new branch + worktree at ../<repo>-wt/<branch> (next to the repo).
+     (We do not use `grok --worktree`, which would place trees under ~/.grok/worktrees
+     and whose `grok worktree rm` can delete them.)
+  3. Run official Grok Build CLI (https://docs.x.ai/build/cli/reference):
+       grok --sandbox workspace --permission-mode dontAsk
+            --allow Read --allow Grep --allow Edit
+            --deny Bash --deny WebFetch --deny WebSearch --deny MCPTool
+            --disable-web-search --no-subagents
+            --no-auto-update --no-alt-screen --output-format plain
+            --cwd <worktree> -p <task>
+     Never --always-approve / --yolo / --dangerously-skip-permissions.
+  4. Print the worktree path, git diff --stat against the start SHA, and a
+     reminder to review (preferably via grok-review) and run tests.
+     Never merge, push, or delete.
+  5. Warn if the diff touches .env, *.p8, *.p12, or *.mobileprovision.
+     Refuse up front if the spec itself mentions those files.
+
+  The current worktree is left untouched. Inspect, test, and merge yourself.
+
+  Trap: user config may set [ui] permission_mode = "auto" or "always-approve".
+  Headless Ask mode may hang without a TTY. This script always pins
+  --permission-mode dontAsk (silently deny anything not explicitly allowed)
+  plus a narrow allow list, so writes are limited to Edit in the worktree
+  and shell/web/MCP are denied. --sandbox workspace further limits writes
+  to CWD (the worktree), ~/.grok/, and temp
+  (https://docs.x.ai/build/features/sandbox).
+USAGE
+}
+
+die() {
+  printf '%s\n' "$SCRIPT_NAME: $*" >&2
+  exit 1
+}
+
+# Portable timeout. Exit 124 on timeout (GNU timeout convention).
+# macOS bash 3.2 has no builtin timeout(1); prefer timeout/gtimeout, else
+# python3, else a perl watchdog. Do not use GNU-only flags.
+run_with_timeout() {
+  local secs
+  secs=$1
+  shift
+  if command -v timeout >/dev/null 2>&1; then
+    timeout "$secs" "$@"
+    return $?
+  fi
+  if command -v gtimeout >/dev/null 2>&1; then
+    gtimeout "$secs" "$@"
+    return $?
+  fi
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -c '
+import subprocess, sys
+t = int(sys.argv[1])
+cmd = sys.argv[2:]
+try:
+    r = subprocess.run(cmd, timeout=t)
+    sys.exit(r.returncode if r.returncode is not None else 1)
+except subprocess.TimeoutExpired:
+    sys.exit(124)
+except OSError as e:
+    sys.stderr.write("failed to start command: %s\\n" % e)
+    sys.exit(127)
+' "$secs" "$@"
+    return $?
+  fi
+  if command -v perl >/dev/null 2>&1; then
+    perl -e '
+      my $secs = shift;
+      my $pid = fork();
+      die "fork: $!\\n" unless defined $pid;
+      if ($pid == 0) { exec @ARGV or die "exec: $!\\n"; }
+      $SIG{ALRM} = sub {
+        kill "TERM", $pid;
+        select(undef, undef, undef, 2);
+        kill "KILL", $pid;
+        exit 124;
+      };
+      alarm $secs;
+      waitpid($pid, 0);
+      my $st = $?;
+      alarm 0;
+      if ($st & 127) { exit 128 + ($st & 127); }
+      exit $st >> 8;
+    ' "$secs" "$@"
+    return $?
+  fi
+  die "no timeout helper found (need timeout, gtimeout, python3, or perl)"
+}
+
+find_grok() {
+  local p
+  if [ -n "${GROK_BIN:-}" ]; then
+    if [ -x "$GROK_BIN" ]; then
+      printf '%s\n' "$GROK_BIN"
+      return 0
+    fi
+    die "GROK_BIN is set but not executable: $GROK_BIN"
+  fi
+  if [ -n "${GROK:-}" ]; then
+    if [ -x "$GROK" ]; then
+      printf '%s\n' "$GROK"
+      return 0
+    fi
+    if command -v "$GROK" >/dev/null 2>&1; then
+      command -v "$GROK"
+      return 0
+    fi
+    die "GROK is set but not found: $GROK"
+  fi
+  if command -v grok >/dev/null 2>&1; then
+    command -v grok
+    return 0
+  fi
+  for p in "$HOME/.local/bin/grok" /usr/local/bin/grok; do
+    if [ -x "$p" ]; then
+      printf '%s\n' "$p"
+      return 0
+    fi
+  done
+  return 1
+}
+
+
+phys_dir() {
+  # Resolve an existing directory to a physical path. Avoid GNU realpath -f.
+  (cd -- "$1" && pwd -P)
+}
+
+is_under() {
+  # $1 child (physical), $2 parent (physical)
+  case "$1" in
+    "$2"|"$2"/*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+is_sensitive_name() {
+  local base
+  base=$(basename -- "$1")
+  case "$base" in
+    .env|.env.*)
+      case "$base" in
+        .env.example|.env.sample|.env.template|.env.example.*)
+          return 1
+          ;;
+        *)
+          return 0
+          ;;
+      esac
+      ;;
+    *.p8|*.p12|*.mobileprovision)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
+# Return 0 if the spec text mentions sensitive files (fail closed).
+# .env.example / .env.sample / .env.template alone are allowed.
+spec_mentions_sensitive() {
+  local spec tmp
+  spec=$1
+  if grep -F -q -- '.p8' "$spec" \
+    || grep -F -q -- '.p12' "$spec" \
+    || grep -F -q -- '.mobileprovision' "$spec"; then
+    return 0
+  fi
+  if grep -F -- '.env' "$spec" >/dev/null 2>&1; then
+    tmp=$(mktemp "${TMPDIR:-/tmp}/code-worker-spec.XXXXXX") || return 0
+    grep -F -- '.env' "$spec" \
+      | grep -F -v -e '.env.example' -e '.env.sample' -e '.env.template' \
+      > "$tmp" || true
+    if grep -F -q -- '.env' "$tmp"; then
+      rm -f -- "$tmp"
+      return 0
+    fi
+    rm -f -- "$tmp"
+  fi
+  return 1
+}
+
+valid_branch_name() {
+  # Letters, digits, . _ - only, so ../<repo>-wt/<branch> stays a single path
+  # segment.
+  case "$1" in
+    ''|-*) return 1 ;;
+    *[!A-Za-z0-9._-]*) return 1 ;;
+  esac
+  return 0
+}
+
+ORIG_PWD=$(pwd)
+model="${WORKER_MODEL:-}"
+timeout_secs="${WORKER_TIMEOUT:-$DEFAULT_TIMEOUT}"
+log_dir="${AGENT_LOG_DIR:-$HOME/.agent-logs}"
+code_root="${AGENT_CODE_ROOT:-$DEFAULT_CODE_ROOT}"
+task_file=""
+branch=""
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    --task-file)
+      [ $# -ge 2 ] || die "$1 requires an argument"
+      task_file=$2
+      shift 2
+      ;;
+    -b|--branch)
+      [ $# -ge 2 ] || die "$1 requires an argument"
+      branch=$2
+      shift 2
+      ;;
+    -m|--model)
+      [ $# -ge 2 ] || die "$1 requires an argument"
+      model=$2
+      shift 2
+      ;;
+    -t|--timeout)
+      [ $# -ge 2 ] || die "$1 requires an argument"
+      timeout_secs=$2
+      shift 2
+      ;;
+    --)
+      shift
+      break
+      ;;
+    -*)
+      die "unknown option: $1 (try --help)"
+      ;;
+    *)
+      die "unexpected argument: $1 (try --help)"
+      ;;
+  esac
+done
+
+[ $# -eq 0 ] || die "unexpected argument: $1 (try --help)"
+[ -n "$task_file" ] || die "--task-file is required (try --help)"
+case "$timeout_secs" in
+  ''|*[!0-9]*) die "timeout must be a positive integer, got: $timeout_secs" ;;
+  0) die "timeout must be a positive integer, got: $timeout_secs" ;;
+esac
+
+case "$task_file" in
+  /*) task_abs=$task_file ;;
+  *) task_abs="$ORIG_PWD/$task_file" ;;
+esac
+[ -f "$task_abs" ] || die "task file not found: $task_file"
+[ -r "$task_abs" ] || die "task file not readable: $task_file"
+
+command -v git >/dev/null 2>&1 || die "git not found on PATH"
+grok_bin=$(find_grok) || die "grok (Grok Build CLI) not found on PATH or in ~/.local/bin. Install from https://docs.x.ai/build/overview and log in once (run \`grok\` or \`grok login\`). Do not put an API key into this script."
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  die "not inside a Git repository"
+fi
+
+repo_root=$(git rev-parse --show-toplevel) || die "cannot resolve repo root"
+repo_root=$(phys_dir "$repo_root")
+
+if [ ! -d "$code_root" ]; then
+  die "code root does not exist: $code_root (create ~/Code and put repos there, or set AGENT_CODE_ROOT)"
+fi
+code_root=$(phys_dir "$code_root")
+
+if ! is_under "$repo_root" "$code_root"; then
+  die "repo is not under $code_root: $repo_root"
+fi
+
+if [ -n "$(git -C "$repo_root" status --porcelain)" ]; then
+  printf '%s\n' "$SCRIPT_NAME: working tree is not clean. Commit, stash, or revert first:" >&2
+  git -C "$repo_root" status --short >&2
+  exit 1
+fi
+
+if spec_mentions_sensitive "$task_abs"; then
+  die "task file mentions sensitive paths (.env / *.p8 / *.p12 / *.mobileprovision). Handle secrets yourself; do not ask the worker to touch them."
+fi
+
+if [ -z "$branch" ]; then
+  branch="worker-$(date +%Y%m%d-%H%M%S)"
+fi
+valid_branch_name "$branch" || die "invalid branch name: $branch (use letters, digits, . _ - only)"
+
+if git -C "$repo_root" show-ref --verify --quiet "refs/heads/$branch"; then
+  die "branch already exists: $branch (pick a new --branch name)"
+fi
+if git -C "$repo_root" show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+  die "remote branch already exists: origin/$branch (pick a new --branch name)"
+fi
+
+repo_name=$(basename -- "$repo_root")
+repo_parent=$(dirname -- "$repo_root")
+wt_root="$repo_parent/${repo_name}-wt"
+wt_path="$wt_root/$branch"
+
+if [ -e "$wt_path" ]; then
+  die "worktree path already exists: $wt_path"
+fi
+
+mkdir -p -- "$wt_root" || die "cannot create $wt_root"
+
+start_sha=$(git -C "$repo_root" rev-parse HEAD) || die "cannot resolve HEAD"
+
+if ! git -C "$repo_root" worktree add -b "$branch" -- "$wt_path" >&2; then
+  die "git worktree add failed for $wt_path (branch $branch). The worktree was not created; nothing was merged or pushed."
+fi
+
+# From here on, NEVER delete the worktree or the branch, even on failure.
+mkdir -p -- "$log_dir" || die "cannot create log dir: $log_dir"
+ts=$(date +%Y%m%d-%H%M%S)
+log_file="$log_dir/code-worker-${ts}-$$.log"
+
+prompt_file=$(mktemp "${TMPDIR:-/tmp}/code-worker-prompt.XXXXXX") || die "mktemp failed"
+trap 'if [ -n "${prompt_file:-}" ] && [ -f "$prompt_file" ]; then rm -f -- "$prompt_file"; fi' EXIT
+
+{
+  printf '%s\n' "You are a coding worker operating only inside the current workspace."
+  printf '%s\n' "Implement the task below. Stay scoped to this isolated module."
+  printf '%s\n' "Do not merge, push, delete branches, or change git remotes."
+  printf '%s\n' "Do not touch secrets or credentials: no .env (except perhaps .env.example),"
+  printf '%s\n' "no *.p8, *.p12, or *.mobileprovision files, no certificates or private keys."
+  printf '%s\n' "Prefer leaving changes uncommitted in the working tree so they can be reviewed."
+  printf '%s\n' "Do not run shell commands; edit files in this workspace only."
+  printf '%s\n' "If you cannot finish, leave partial work and explain what remains."
+  printf '\n%s\n\n' "===== TASK ====="
+  cat -- "$task_abs"
+} > "$prompt_file"
+
+prompt_size=$(wc -c < "$prompt_file" | tr -d '[:space:]')
+if [ "$prompt_size" -le "$MAX_PROMPT_ARGV" ]; then
+  prompt=$(cat -- "$prompt_file")
+else
+  prompt="You are a read-then-edit coding worker. Read the task file at ${prompt_file} and implement it in the current workspace only. Do not run shell commands. Do not merge, push, or delete. Do not touch secrets (.env, *.p8, *.p12, *.mobileprovision). Leave changes uncommitted. If you cannot finish, leave partial work and explain."
+fi
+
+{
+  printf '%s\n' "code-worker $ts"
+  printf '%s\n' "grok=$grok_bin model=${model:-(grok default)} timeout=${timeout_secs}s"
+  printf '%s\n' "repo=$repo_root start_sha=$start_sha"
+  printf '%s\n' "branch=$branch worktree=$wt_path"
+  printf '%s\n' "task_file=$task_abs"
+  printf '%s\n' "log=$log_file"
+  printf '%s\n' "----- prompt -----"
+  cat -- "$prompt_file"
+  printf '\n%s\n' "----- grok output -----"
+} > "$log_file"
+
+# Official flags:
+#   -p / --single          https://docs.x.ai/build/cli/headless-scripting
+#   --cwd --model --sandbox --allow --deny --always-approve
+#                          https://docs.x.ai/build/cli/reference
+#   --sandbox workspace    https://docs.x.ai/build/features/sandbox
+#   --permission-mode dontAsk
+#                          https://docs.x.ai/build/enterprise (headless/CI)
+#   --allow / --deny       https://docs.x.ai/build/features/permissions
+# stdin is /dev/null so unused stdin cannot block.
+
+printf '%s\n' "$SCRIPT_NAME: worktree: $wt_path" >&2
+printf '%s\n' "$SCRIPT_NAME: branch:   $branch (from $start_sha)" >&2
+printf '%s\n' "$SCRIPT_NAME: running Grok Build (timeout ${timeout_secs}s, log $log_file) ..." >&2
+
+set -- \
+  "$grok_bin" \
+  --no-auto-update \
+  --no-alt-screen \
+  --output-format plain \
+  --sandbox workspace \
+  --permission-mode dontAsk \
+  --allow Read \
+  --allow Grep \
+  --allow Edit \
+  --deny Bash \
+  --deny WebFetch \
+  --deny WebSearch \
+  --deny MCPTool \
+  --disable-web-search \
+  --no-subagents \
+  --cwd "$wt_path"
+
+if [ -n "$model" ]; then
+  set -- "$@" --model "$model"
+fi
+set -- "$@" -p "$prompt"
+
+set +e
+(
+  cd -- "$wt_path" || exit 1
+  run_with_timeout "$timeout_secs" "$@" </dev/null
+) 2>&1 | tee -a "$log_file"
+rc=$?
+set -e
+
+printf '\n%s\n' "----- exit $rc -----" >> "$log_file"
+
+printf '\n'
+printf '%s\n' "======== code-worker result ========"
+printf '%s\n' "Worktree: $wt_path"
+printf '%s\n' "Branch:   $branch"
+printf '%s\n' "Base:     $start_sha"
+printf '%s\n' "Log:      $log_file"
+if [ "$rc" -eq 124 ]; then
+  printf '%s\n' "Grok Build: TIMED OUT after ${timeout_secs}s"
+elif [ "$rc" -ne 0 ]; then
+  printf '%s\n' "Grok Build: exited $rc"
+else
+  printf '%s\n' "Grok Build: exited 0"
+fi
+printf '%s\n' "------------------------------------"
+printf '%s\n' "git status:"
+git -C "$wt_path" status --short || true
+printf '%s\n' "------------------------------------"
+printf '%s\n' "git log ${start_sha}..HEAD:"
+if [ -n "$(git -C "$wt_path" log --oneline "$start_sha"..HEAD 2>/dev/null)" ]; then
+  git -C "$wt_path" log --oneline "$start_sha"..HEAD || true
+else
+  printf '%s\n' "(no new commits)"
+fi
+printf '%s\n' "------------------------------------"
+printf '%s\n' "git diff --stat ${start_sha}:"
+git -C "$wt_path" diff --stat "$start_sha" || true
+untracked=$(git -C "$wt_path" ls-files --others --exclude-standard || true)
+if [ -n "$untracked" ]; then
+  printf '%s\n' "------------------------------------"
+  printf '%s\n' "Untracked files:"
+  printf '%s\n' "$untracked"
+fi
+
+sensitive_hit=0
+sensitive_list=""
+while IFS= read -r path || [ -n "$path" ]; do
+  [ -n "$path" ] || continue
+  if is_sensitive_name "$path"; then
+    sensitive_hit=1
+    if [ -n "$sensitive_list" ]; then
+      sensitive_list=$(printf '%s\n%s' "$sensitive_list" "$path")
+    else
+      sensitive_list=$path
+    fi
+  fi
+done <<EOF
+$(git -C "$wt_path" diff --name-only "$start_sha" 2>/dev/null || true)
+$(git -C "$wt_path" ls-files --others --exclude-standard 2>/dev/null || true)
+EOF
+
+if [ "$sensitive_hit" -ne 0 ]; then
+  printf '%s\n' "------------------------------------" >&2
+  printf '%s\n' "$SCRIPT_NAME: WARNING: sensitive files changed in the worktree:" >&2
+  printf '%s\n' "$sensitive_list" >&2
+  printf '%s\n' "$SCRIPT_NAME: Review and revert these before merging. Do not commit secrets." >&2
+fi
+
+printf '%s\n' "===================================="
+printf '%s\n' "NEXT: the main agent (Codex) must review the diff and run tests"
+printf '%s\n' "before merging. Prefer: scripts/grok-review --cwd \"$wt_path\" --base $start_sha"
+printf '%s\n' "This script never merges, pushes, or deletes."
+printf '%s\n' "  git -C \"$wt_path\" diff $start_sha"
+printf '%s\n' "  # run tests inside the worktree"
+printf '%s\n' "  # only then merge $branch into your main branch by hand"
+printf '%s\n' "===================================="
+
+{
+  printf '\n%s\n' "----- summary -----"
+  printf '%s\n' "worktree=$wt_path branch=$branch base=$start_sha rc=$rc"
+  git -C "$wt_path" status --short || true
+  git -C "$wt_path" diff --stat "$start_sha" || true
+} >> "$log_file"
+
+if [ "$sensitive_hit" -ne 0 ]; then
+  exit 2
+fi
+if [ "$rc" -eq 124 ]; then
+  die "grok timed out after ${timeout_secs}s (worktree left at $wt_path, log: $log_file)"
+fi
+if [ "$rc" -ne 0 ]; then
+  die "grok exited $rc (worktree left at $wt_path, log: $log_file). If the message is about authentication, run \`grok login\` (or \`grok login --device-auth\`) once; a subscription login is enough — do not paste an API key into this script."
+fi
+
+exit 0

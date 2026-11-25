@@ -11,10 +11,12 @@ struct WordCardView: View {
     let isTranslationVisible: Bool
     let isRequeuedInSession: Bool
     let speechService: SpeechService
+    var challengeMode: CardChallengeMode = .standard
     var onTapToggleTranslation: (() -> Void)? = nil
     var onSwipeDragChanged: ((CGFloat) -> Void)? = nil
     var onSwipeRate: ((RecallRating) -> Void)? = nil
     var onToggleFavorite: (() -> Void)? = nil
+    var onMarkTooEasy: (() -> Void)? = nil
     var onEditNote: (() -> Void)? = nil
     var isPreviewOnly: Bool = false
 
@@ -47,6 +49,24 @@ struct WordCardView: View {
             return ("不认识", "xmark.circle.fill", .red, false)
         }
         return nil
+    }
+
+    private var shouldShowTermInHero: Bool {
+        switch challengeMode {
+        case .standard, .noPhonetics:
+            true
+        case .blindAudio, .meaningToTerm:
+            isTranslationVisible
+        }
+    }
+
+    private var shouldShowPhoneticsInHero: Bool {
+        switch challengeMode {
+        case .standard:
+            true
+        case .noPhonetics, .blindAudio, .meaningToTerm:
+            isTranslationVisible
+        }
     }
 
     var body: some View {
@@ -163,7 +183,7 @@ struct WordCardView: View {
     private func cardContent(themeColor: Color) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             // Top badge & controls row
-            HStack(alignment: .center, spacing: 8) {
+            HStack(alignment: .center, spacing: 6) {
                 Text(progress?.statusLabel ?? "新词")
                     .font(.caption2.weight(.bold))
                     .padding(.horizontal, 9)
@@ -174,7 +194,7 @@ struct WordCardView: View {
                 if isRequeuedInSession {
                     Text("本轮重测")
                         .font(.caption2.weight(.bold))
-                        .padding(.horizontal, 9)
+                        .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(Color.red.opacity(0.14), in: Capsule())
                         .foregroundStyle(.red)
@@ -189,6 +209,18 @@ struct WordCardView: View {
                     .background(Color(.tertiarySystemFill), in: Capsule())
                     .foregroundStyle(.secondary)
 
+                if let onMarkTooEasy, !isPreviewOnly {
+                    Button(action: onMarkTooEasy) {
+                        Image(systemName: "bolt.slash.fill")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(Color.teal)
+                            .frame(width: 32, height: 32)
+                            .background(Color.teal.opacity(0.13), in: Circle())
+                    }
+                    .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                    .accessibilityLabel("太简单，标为已掌握并 60 天不再出现")
+                }
+
                 if onToggleFavorite != nil {
                     let isFav = progress?.isFavorite == true
                     Button {
@@ -197,7 +229,7 @@ struct WordCardView: View {
                         Image(systemName: isFav ? "star.fill" : "star")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(isFav ? Color.orange : Color.secondary)
-                            .frame(width: 34, height: 34)
+                            .frame(width: 32, height: 32)
                             .background(
                                 isFav ? Color.orange.opacity(0.15) : Color(.tertiarySystemFill),
                                 in: Circle()
@@ -214,7 +246,7 @@ struct WordCardView: View {
                     Image(systemName: isSpeakingTerm ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(themeColor)
-                        .frame(width: 36, height: 36)
+                        .frame(width: 34, height: 34)
                         .background(themeColor.opacity(isSpeakingTerm ? 0.22 : 0.13), in: Circle())
                         .overlay(
                             Circle()
@@ -226,27 +258,8 @@ struct WordCardView: View {
                 .accessibilityLabel("朗读单词")
             }
 
-            // Main word & pronunciation hero
-            VStack(alignment: .leading, spacing: 6) {
-                Text(word.term)
-                    .font(.system(size: 38, weight: .bold, design: .rounded))
-                    .minimumScaleFactor(0.65)
-                    .lineLimit(2)
-                    .foregroundStyle(.primary)
-
-                HStack(spacing: 8) {
-                    if !word.pronunciation.isEmpty {
-                        Text(word.pronunciation)
-                            .font(.headline.weight(.medium))
-                            .foregroundStyle(themeColor)
-                    }
-
-                    if isSpeakingTerm {
-                        SpeakingWaveView(isAnimating: true, color: themeColor, barCount: 4, height: 12)
-                    }
-                }
-            }
-            .padding(.top, 2)
+            // Main Hero section adapted to active CardChallengeMode
+            heroSection(themeColor: themeColor)
 
             Divider()
                 .opacity(0.6)
@@ -269,39 +282,133 @@ struct WordCardView: View {
         .padding(18)
     }
 
+    @ViewBuilder
+    private func heroSection(themeColor: Color) -> some View {
+        if shouldShowTermInHero {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(word.term)
+                    .font(.system(size: 38, weight: .bold, design: .rounded))
+                    .minimumScaleFactor(0.65)
+                    .lineLimit(2)
+                    .foregroundStyle(.primary)
+
+                HStack(spacing: 8) {
+                    if shouldShowPhoneticsInHero {
+                        if !word.pronunciation.isEmpty {
+                            Text(word.pronunciation)
+                                .font(.headline.weight(.medium))
+                                .foregroundStyle(themeColor)
+                        }
+                    } else {
+                        Label("无音标模式 · 独立辨音", systemImage: "eye.slash")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                    }
+
+                    if isSpeakingTerm {
+                        SpeakingWaveView(isAnimating: true, color: themeColor, barCount: 4, height: 12)
+                    }
+                }
+            }
+            .padding(.top, 2)
+        } else if challengeMode == .blindAudio {
+            // Blind listening challenge front: hide spelling & phonetics, invite listening
+            Button {
+                speechService.speak(word.term, language: word.language)
+            } label: {
+                HStack(spacing: 14) {
+                    ZStack {
+                        Circle()
+                            .fill(themeColor.opacity(isSpeakingTerm ? 0.24 : 0.14))
+                            .frame(width: 56, height: 56)
+                        Image(systemName: isSpeakingTerm ? "speaker.wave.3.fill" : "ear.and.waveform")
+                            .font(.title2.weight(.semibold))
+                            .foregroundStyle(themeColor)
+                            .symbolEffect(.variableColor.iterative, isActive: isSpeakingTerm && !reduceMotion)
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack(spacing: 8) {
+                            Text("盲听辨词模式")
+                                .font(.headline.weight(.bold))
+                                .foregroundStyle(.primary)
+                            if isSpeakingTerm {
+                                SpeakingWaveView(isAnimating: true, color: themeColor, barCount: 4, height: 12)
+                            }
+                        }
+                        Text("点击重播读音 · 凭听觉回想拼写与释义")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    Spacer(minLength: 0)
+                }
+                .padding(14)
+                .background(accentTheme.softTint(for: colorScheme), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            }
+            .buttonStyle(PressScaleButtonStyle())
+            .padding(.top, 2)
+        } else {
+            // Meaning-to-Term challenge front: show Chinese translation, hide foreign term
+            VStack(alignment: .leading, spacing: 6) {
+                Label("看义回忆模式 · 试着说出或拼出外语词", systemImage: "character.book.closed")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(themeColor)
+
+                Text(word.translation)
+                    .font(.title2.weight(.bold))
+                    .foregroundStyle(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.vertical, 2)
+            }
+            .padding(.top, 2)
+        }
+    }
+
     private func hiddenPromptSection(themeColor: Color) -> some View {
-        VStack(spacing: 12) {
+        let promptText: String = switch challengeMode {
+        case .standard: "先回忆词义，轻触卡片即可揭晓"
+        case .noPhonetics: "独立读出该词并回忆含义，轻触揭晓"
+        case .blindAudio: "听音回想单词与释义，轻触卡片揭晓"
+        case .meaningToTerm: "回想外语拼写与发音，轻触卡片核对"
+        }
+
+        return VStack(spacing: 12) {
             Spacer(minLength: 10)
 
             HStack(spacing: 8) {
                 Image(systemName: "hand.tap")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(themeColor)
-                Text("先回忆词义，轻触卡片即可揭晓")
+                Text(promptText)
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 9)
             .background(themeColor.opacity(0.08), in: Capsule())
 
             if !word.memoryCue.isEmpty {
-                Text("含记忆联想与例句 · 支持左右滑卡判词")
+                Text("支持右滑认识 · 左滑不认识 · 顶部闪电一键斩熟词")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
 
             Spacer(minLength: 10)
         }
-        .frame(maxWidth: .infinity, minHeight: 112)
+        .frame(maxWidth: .infinity, minHeight: 108)
     }
 
     private func revealedSection(themeColor: Color) -> some View {
         VStack(alignment: .leading, spacing: 11) {
-            Text(word.translation)
-                .font(.title3.weight(.bold))
-                .foregroundStyle(.primary)
-                .fixedSize(horizontal: false, vertical: true)
+            if challengeMode != .meaningToTerm {
+                Text(word.translation)
+                    .font(.title3.weight(.bold))
+                    .foregroundStyle(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
 
             if !word.memoryCue.isEmpty {
                 HStack(alignment: .top, spacing: 8) {

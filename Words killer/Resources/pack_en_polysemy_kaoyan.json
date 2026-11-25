@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "poly-en-adv-address",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "address",
+    "pronunciation": "/əˈdres/",
+    "translation": "处理解决；向……发表演说；写地址",
+    "memoryCue": "熟词僻义：不只是“地址”，外刊最常用作动词“着手解决（问题）”。",
+    "example": "The council met to address rising housing costs immediately."
+  },
+  {
+    "id": "poly-en-adv-anchor",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "anchor",
+    "pronunciation": "/ˈæŋkər/",
+    "translation": "锚；主播；使扎根稳固",
+    "memoryCue": "熟词僻义：不仅是“船锚”，作动词表“扎根支撑”，名词指新闻“主播”。",
+    "example": "Clear milestones anchor the learner's daily rhythm."
+  },
+  {
+    "id": "poly-en-adv-arrest",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "arrest",
+    "pronunciation": "/əˈrest/",
+    "translation": "阻止；抑制；吸引（注意）；逮捕",
+    "memoryCue": "熟词僻义：外刊中表“遏制/阻断（进程）”，并非全指抓捕！",
+    "example": "Early interventions helped arrest the steady loss of topsoil."
+  },
+  {
+    "id": "poly-en-adv-back",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "back",
+    "pronunciation": "/bæk/",
+    "translation": "支持；资助；倒车；背部",
+    "memoryCue": "熟词僻义：在商业新闻中 back = support（注资支持某计划）。",
+    "example": "Several local charities agreed to back the mobile library project."
+  },
+  {
+    "id": "poly-en-adv-bank",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "bank",
+    "pronunciation": "/bæŋk/",
+    "translation": "河岸；指望信赖（on）；银行",
+    "memoryCue": "熟词僻义：river bank（河岸），bank on（指望依靠）。",
+    "example": "Never bank on last-minute cramming to pass an oral exam."
+  },
+  {
+    "id": "poly-en-adv-bar",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "bar",
+    "pronunciation": "/bɑːr/",
+    "translation": "禁止；阻拦；条块；律师界",
+    "memoryCue": "熟词僻义：除“酒吧/横杆”外，作动词表“明确禁止某人参与”。",
+    "example": "Age limits bar minors from entering the archival vault."
+  },
+  {
+    "id": "poly-en-adv-bear",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "bear",
+    "pronunciation": "/ber/",
+    "translation": "承担；忍受；怀有（想法）；结（果）",
+    "memoryCue": "熟词僻义：bear fruit（开花结果），bear responsibility（承担责任）。",
+    "example": "Patient daily practice always bears fruit within a month."
+  },
+  {
+    "id": "poly-en-adv-bill",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "bill",
+    "pronunciation": "/bɪl/",
+    "translation": "法案；纸币；鸟喙；账单",
+    "memoryCue": "熟词僻义：pass a bill（通过法案），duck's bill（鸭嘴）。",
+    "example": "Lawmakers debated the digital privacy bill late into Tuesday night."
+  },
+  {
+    "id": "poly-en-adv-bleak",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "bleak",
+    "pronunciation": "/bliːk/",
+    "translation": "暗淡的；渺茫的；寒冷荒凉的",
+    "memoryCue": "外刊高频形容前景严峻暗淡（bleak outlook）。",
+    "example": "Early forecasts painted a bleak picture for rural bus routes."
+  },
+  {
+    "id": "poly-en-adv-blind",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "blind",
+    "pronunciation": "/blaɪnd/",
+    "translation": "盲目的；盲测的；百叶窗",
+    "memoryCue": "熟词僻义：window blinds（百叶窗），blind trial（盲测实验）。",
+    "example": "Pull down the window blinds to block afternoon glare."
+  },
+  {
+    "id": "poly-en-adv-cap",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cap",
+    "pronunciation": "/kæp/",
+    "translation": "设定上限；封顶；覆盖；帽子",
+    "memoryCue": "熟词僻义：作动词表示“对价格/人数/难度设上限”。",
+    "example": "Regulators moved to cap roaming charges across border regions."
+  },
+  {
+    "id": "poly-en-adv-channel",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "channel",
+    "pronunciation": "/ˈtʃænl/",
+    "translation": "引导（精力/资金）；渠道；海峡",
+    "memoryCue": "熟词僻义：作动词“把热情引导到正事上”。",
+    "example": "Channel pre-exam anxiety into targeted five-minute drills."
+  },
+  {
+    "id": "poly-en-adv-charge",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "charge",
+    "pronunciation": "/tʃɑːrdʒ/",
+    "translation": "冲锋；指控；充电；主管（in charge）",
+    "memoryCue": "一词多义极强：注意区分指控（charge with）和收费/充电。",
+    "example": "She was placed in charge of regional dictionary curation."
+  },
+  {
+    "id": "poly-en-adv-club",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "club",
+    "pronunciation": "/klʌb/",
+    "translation": "俱乐部；球棒；联合凑份子",
+    "memoryCue": "熟词僻义：club together（大家凑钱/协力做一件事）。",
+    "example": "Neighbors clubbed together to buy a shared snowblower."
+  },
+  {
+    "id": "poly-en-adv-coach",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "coach",
+    "pronunciation": "/koʊtʃ/",
+    "translation": "指导辅导；长途大巴；经济舱",
+    "memoryCue": "熟词僻义：除“教练”外，在英国/欧洲常指长途客车或经济舱。",
+    "example": "Traveling overnight by coach saved half the train fare."
+  },
+  {
+    "id": "poly-en-adv-coin",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "coin",
+    "pronunciation": "/kɔɪn/",
+    "translation": "创造（新词/短语）；硬币",
+    "memoryCue": "熟词僻义：coin a phrase（造出一个广为流传的新词）。",
+    "example": "Journalists quickly coined the term 'doomscrolling' during lockdowns."
+  },
+  {
+    "id": "poly-en-adv-color",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "color",
+    "pronunciation": "/ˈkʌlər/",
+    "translation": "影响（判断）；染上主观色彩；颜色",
+    "memoryCue": "熟词僻义：考研阅读高频动词，指情绪或偏见“左右渲染了判断”。",
+    "example": "Past disappointment shouldn't color your view of new tools."
+  },
+  {
+    "id": "poly-en-adv-company",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "company",
+    "pronunciation": "/ˈkʌmpəni/",
+    "translation": "陪伴；同伴；公司",
+    "memoryCue": "熟词僻义：keep somebody company（陪某人作伴）。",
+    "example": "Soft ambient music kept me company through late-night edits."
+  },
+  {
+    "id": "poly-en-adv-compound",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "compound",
+    "pronunciation": "/ˈkɑːmpaʊnd/",
+    "translation": "使恶化加重；复合词；大院",
+    "memoryCue": "熟词僻义：作动词读 /kəmˈpaʊnd/ 表“使问题雪上加霜/复利叠加”。",
+    "example": "Poor sleep can compound minor memory slips during finals."
+  },
+  {
+    "id": "poly-en-adv-conduct",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "conduct",
+    "pronunciation": "/kənˈdʌkt/",
+    "translation": "进行（调查）；指挥；传导；行为举止",
+    "memoryCue": "动词重音在后，名词“品行”重音在前 /ˈkɑːndʌkt/。",
+    "example": "Researchers plan to conduct follow-up interviews next spring."
+  },
+  {
+    "id": "poly-en-adv-consume",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "consume",
+    "pronunciation": "/kənˈsuːm/",
+    "translation": "消耗；吞噬；使充满（情感）；吃喝",
+    "memoryCue": "熟词僻义：consumed with curiosity（满心好奇，被好奇心吞噬）。",
+    "example": "Large audio models consume considerable battery when uncached."
+  },
+  {
+    "id": "poly-en-adv-contest",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "contest",
+    "pronunciation": "/kənˈtest/",
+    "translation": "质疑；争夺；比赛",
+    "memoryCue": "熟词僻义：动词重音在后，表“对某结论提出异议/竞争名额”。",
+    "example": "Rival historians immediately contested the dating of the coin."
+  },
+  {
+    "id": "poly-en-adv-count",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "count",
+    "pronunciation": "/kaʊnt/",
+    "translation": "有价值；重要；算数；计算",
+    "memoryCue": "熟词僻义：Every minute counts（分秒必争，count = matter）。",
+    "example": "Consistency counts far more than occasional all-nighters."
+  },
+  {
+    "id": "poly-en-adv-course",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "course",
+    "pronunciation": "/kɔːrs/",
+    "translation": "过程走向；航线；一道菜；课程",
+    "memoryCue": "熟词僻义：in due course（到时候/顺其自然），main course（主菜）。",
+    "example": "Long-term memory builds naturally in due course."
+  },
+  {
+    "id": "poly-en-adv-court",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "court",
+    "pronunciation": "/kɔːrt/",
+    "translation": "招致（风险/失败）；追求讨好；法庭；球场",
+    "memoryCue": "熟词僻义：court disaster（自寻灾祸/招致失败）。",
+    "example": "Launching without unit tests is simply courting disaster."
+  },
+  {
+    "id": "poly-en-adv-cover",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cover",
+    "pronunciation": "/ˈkʌvər/",
+    "translation": "报道（新闻）；足以支付；行进（里程）；覆盖",
+    "memoryCue": "熟词僻义：记者报道（cover an event）、收入抵消开支（cover costs）。",
+    "example": "Three hours of brisk walking covered twelve scenic miles."
+  },
+  {
+    "id": "poly-en-adv-craft",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "craft",
+    "pronunciation": "/kræft/",
+    "translation": "精心制作；手艺；飞行器/船只",
+    "memoryCue": "熟词僻义：craft a concise argument（匠心打磨论点）。",
+    "example": "Take time to craft vivid memory hooks for tricky verbs."
+  },
+  {
+    "id": "poly-en-adv-credit",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "credit",
+    "pronunciation": "/ˈkredɪt/",
+    "translation": "归功于；赞誉；学分；信用",
+    "memoryCue": "熟词僻义：credit A to B（把功劳归于 B），give credit where due。",
+    "example": "I credit my listening fluency to daily morning commutes."
+  },
+  {
+    "id": "poly-en-adv-critical",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "critical",
+    "pronunciation": "/ˈkrɪtɪkl/",
+    "translation": "至关重要的；批判性的；危急的",
+    "memoryCue": "熟词僻义：不一定都是“批评挑刺”，外刊更常表“决定生死关键的”。",
+    "example": "Accurate stress placement is critical when speaking French."
+  },
+  {
+    "id": "poly-en-adv-cross",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cross",
+    "pronunciation": "/krɔːs/",
+    "translation": "恼怒的；交叉；跨过；混杂",
+    "memoryCue": "熟词僻义：be cross with someone（生某人的气，英式常用）。",
+    "example": "Don't be cross with yourself when a mature word slips once."
+  },
+  {
+    "id": "poly-en-adv-crown",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "crown",
+    "pronunciation": "/kraʊn/",
+    "translation": "使圆满完成；加冕；顶峰；王冠",
+    "memoryCue": "熟词僻义：crown weeks of study with a perfect score（画上圆满句号）。",
+    "example": "A lively discussion crowned the end of the summer workshop."
+  },
+  {
+    "id": "poly-en-adv-cure",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cure",
+    "pronunciation": "/kjʊr/",
+    "translation": "解决（弊病）；腌制（肉/鱼）；治愈",
+    "memoryCue": "熟词僻义：除治病外，还可指“纠正坏习惯”或“风干腌制火腿”。",
+    "example": "Testing yourself quickly cures the illusion of passive fluency."
+  },
+  {
+    "id": "poly-en-adv-current",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "current",
+    "pronunciation": "/ˈkɜːrənt/",
+    "translation": "水流；气流；思潮；当前的",
+    "memoryCue": "熟词僻义：名词指洋流、电流与社会思潮（undercurrent 暗流）。",
+    "example": "Strong ocean currents require cautious navigation near headlands."
+  },
+  {
+    "id": "poly-en-adv-cushion",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "cushion",
+    "pronunciation": "/ˈkʊʃn/",
+    "translation": "缓冲；减轻（冲击）；靠垫",
+    "memoryCue": "熟词僻义：作动词表“缓和经济下行或压力冲击”。",
+    "example": "Generous emergency savings cushion sudden income swings."
+  },
+  {
+    "id": "poly-en-adv-dawn",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "dawn",
+    "pronunciation": "/dɔːn/",
+    "translation": "开始明白（on）；破晓；开端",
+    "memoryCue": "熟词僻义：dawn on somebody（某人突然恍然大悟）。",
+    "example": "It suddenly dawned on me that both words share a Latin root."
+  },
+  {
+    "id": "poly-en-adv-deal",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "deal",
+    "pronunciation": "/diːl/",
+    "translation": "发牌；分配；处理；交易",
+    "memoryCue": "熟词僻义：deal a blow to（给……以沉重打击）。",
+    "example": "Sudden frost dealt a severe blow to early peach blossoms."
+  },
+  {
+    "id": "poly-en-adv-desert",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "desert",
+    "pronunciation": "/dɪˈzɜːrt/",
+    "translation": "抛弃；离弃；沙漠",
+    "memoryCue": "注意读音：名词“沙漠” /ˈdezərt/，动词“抛弃” /dɪˈzɜːrt/！",
+    "example": "True friends never desert each other during rough stretches."
+  },
+  {
+    "id": "poly-en-adv-digest",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "digest",
+    "pronunciation": "/daɪˈdʒest/",
+    "translation": "领会理解（信息）；消化；文摘",
+    "memoryCue": "Reader's Digest（读者文摘），作动词表“消化吸收新知识”。",
+    "example": "Pause briefly after each session so your brain can digest words."
+  },
+  {
+    "id": "poly-en-adv-discipline",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "discipline",
+    "pronunciation": "/ˈdɪsəplɪn/",
+    "translation": "学科领域；自律纪律；管教",
+    "memoryCue": "熟词僻义：学术论文里常指“某个专业学科”（academic discipline）。",
+    "example": "Cognitive science is a rich discipline bridging psychology and linguistics."
+  },
+  {
+    "id": "poly-en-adv-draft",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "draft",
+    "pronunciation": "/dræft/",
+    "translation": "草稿；穿堂风；征召；起草",
+    "memoryCue": "熟词僻义：cold draft（一阵冷风），draft beer（生啤/扎啤）。",
+    "example": "Close the hallway door to block the chilly winter draft."
+  },
+  {
+    "id": "poly-en-adv-drain",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "drain",
+    "pronunciation": "/dreɪn/",
+    "translation": "消耗殆尽；排水管；排空",
+    "memoryCue": "熟词僻义：brain drain（人才流失），drain one's energy（耗尽精力）。",
+    "example": "Constant context switching drains mental energy faster than study."
+  },
+  {
+    "id": "poly-en-adv-duck",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "duck",
+    "pronunciation": "/dʌk/",
+    "translation": "闪避；迅速低下头；把语音调低；鸭子",
+    "memoryCue": "熟词僻义：音频开发里的 duckOthers（压低背景音乐音量）就是它！",
+    "example": "He had to duck quickly to clear the low stone archway."
+  },
+  {
+    "id": "poly-en-adv-dull",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "dull",
+    "pronunciation": "/dʌl/",
+    "translation": "使迟钝；减轻（疼痛）；枯燥的；阴沉的",
+    "memoryCue": "熟词僻义：作动词表“使反应变钝 / 使锐气消磨”。",
+    "example": "Overly long drills can dull initial curiosity if breaks are skipped."
+  },
+  {
+    "id": "poly-en-adv-employ",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "employ",
+    "pronunciation": "/ɪmˈplɔɪ/",
+    "translation": "采用运用（方法/工具）；雇佣",
+    "memoryCue": "熟词僻义：考研高频词，主语为文章/技术时译“采用、使用”。",
+    "example": "The author employs sharp contrast to clarify the debate."
+  },
+  {
+    "id": "poly-en-adv-engage",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "engage",
+    "pronunciation": "/ɪnˈɡeɪdʒ/",
+    "translation": "吸引参与；啮合（齿轮）；订婚；雇佣",
+    "memoryCue": "熟词僻义：engage with（深入互动参与）。",
+    "example": "Audio prompts engage auditory memory alongside visual reading."
+  },
+  {
+    "id": "poly-en-adv-enter",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "enter",
+    "pronunciation": "/ˈentər/",
+    "translation": "开始从事（职业）；录入（数据）；进入",
+    "memoryCue": "熟词僻义：enter into negotiations（开启谈判），enter data（录入）。",
+    "example": "Double-check accents before you enter new French terms."
+  },
+  {
+    "id": "poly-en-adv-entertain",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "entertain",
+    "pronunciation": "/ˌentərˈteɪn/",
+    "translation": "心怀/考虑（想法/怀疑）；款待；娱乐",
+    "memoryCue": "熟词僻义：entertain a doubt / idea（心存疑虑 / 认真考虑某设想）。",
+    "example": "Scientists must entertain alternative hypotheses before concluding."
+  },
+  {
+    "id": "poly-en-adv-escape",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "escape",
+    "pronunciation": "/ɪˈskeɪp/",
+    "translation": "被……遗忘（记不起）；逃离；泄漏",
+    "memoryCue": "熟词僻义：His name escapes me right now（我一时想不起他的名字了！）。",
+    "example": "That tricky German noun temporarily escaped my memory."
+  },
+  {
+    "id": "poly-en-adv-even",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "even",
+    "pronunciation": "/ˈiːvn/",
+    "translation": "平坦的；偶数的；持平的；甚至",
+    "memoryCue": "熟词僻义：even number（偶数），get even（扯平），on an even keel（平稳）。",
+    "example": "Keep daily pacing even rather than swinging between extremes."
+  },
+  {
+    "id": "poly-en-adv-fashion",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "fashion",
+    "pronunciation": "/ˈfæʃn/",
+    "translation": "塑造；制作；方式；时尚",
+    "memoryCue": "熟词僻义：作动词表“用双手/心智精心打造塑形”（after a fashion 勉强地）。",
+    "example": "Artisans fashion smooth cedar planks into curved boat ribs."
+  },
+  {
+    "id": "poly-en-mas-champion",
+    "language": "english",
+    "difficulty": "master",
+    "term": "champion",
+    "pronunciation": "/ˈtʃæmpiən/",
+    "translation": "公开拥护；捍卫（理念）；冠军",
+    "memoryCue": "熟词僻义：作动词表“力挺捍卫某项改革或权益”。",
+    "example": "Independent educators continue to champion ad-free learning tools."
+  },
+  {
+    "id": "poly-en-mas-table",
+    "language": "english",
+    "difficulty": "master",
+    "term": "table",
+    "pronunciation": "/ˈteɪbl/",
+    "translation": "搁置（美式）或提交审议（英式）；桌子",
+    "memoryCue": "熟词僻义：英美截然相反！美式 table a motion=搁置；英式=正式提上议程。",
+    "example": "Lawmakers agreed to table the contentious amendment until autumn."
+  },
+  {
+    "id": "poly-en-mas-flag",
+    "language": "english",
+    "difficulty": "master",
+    "term": "flag",
+    "pronunciation": "/flæɡ/",
+    "translation": "衰退减弱；标记提示；旗帜",
+    "memoryCue": "熟词僻义：作动词可表“体力/热情衰减”（flagging energy）或“标出重点”。",
+    "example": "Short pauses keep attention from flagging halfway through review."
+  },
+  {
+    "id": "poly-en-mas-hail",
+    "language": "english",
+    "difficulty": "master",
+    "term": "hail",
+    "pronunciation": "/heɪl/",
+    "translation": "盛赞；称颂；下冰雹；向……打招呼",
+    "memoryCue": "熟词僻义：外刊最常用 hail A as B（盛赞 A 为 B）。",
+    "example": "Critics hailed the quiet minimalist design as a breath of fresh air."
+  },
+  {
+    "id": "poly-en-mas-sanction",
+    "language": "english",
+    "difficulty": "master",
+    "term": "sanction",
+    "pronunciation": "/ˈsæŋkʃn/",
+    "translation": "制裁；正式批准认可",
+    "memoryCue": "神奇的“正反同词”：既指严厉惩罚制裁，也指官方授权批准！",
+    "example": "The ethics panel refused to sanction unverified tracking scripts."
+  },
+  {
+    "id": "poly-en-mas-stem",
+    "language": "english",
+    "difficulty": "master",
+    "term": "stem",
+    "pronunciation": "/stem/",
+    "translation": "遏制；阻挡（from）；源自；茎干",
+    "memoryCue": "熟词僻义：stem the tide（遏制浪潮），stem from（源自……）。",
+    "example": "Better tooling helped stem unnecessary delays before release."
+  },
+  {
+    "id": "poly-en-mas-yield",
+    "language": "english",
+    "difficulty": "master",
+    "term": "yield",
+    "pronunciation": "/jiːld/",
+    "translation": "屈服；让步；产生（收益/结果）；产量",
+    "memoryCue": "熟词僻义：investment yield（收益率），yield surprising clues（得出线索）。",
+    "example": "Careful error logs often yield valuable insights into weak spots."
+  },
+  {
+    "id": "poly-en-mas-sound",
+    "language": "english",
+    "difficulty": "master",
+    "term": "sound",
+    "pronunciation": "/saʊnd/",
+    "translation": "合理的；稳健可靠的；探测；声音",
+    "memoryCue": "熟词僻义：sound advice（中肯可靠的建议），safe and sound（安然无恙）。",
+    "example": "That sounds like a financially sound plan for sustainable growth."
+  },
+  {
+    "id": "poly-en-mas-stomach",
+    "language": "english",
+    "difficulty": "master",
+    "term": "stomach",
+    "pronunciation": "/ˈstʌmək/",
+    "translation": "忍受；承受（批评/困难）；胃",
+    "memoryCue": "熟词僻义：cannot stomach（实在受不了、咽不下这口气）。",
+    "example": "Users can rarely stomach sudden paywalls blocking their own notes."
+  },
+  {
+    "id": "poly-en-mas-milk",
+    "language": "english",
+    "difficulty": "master",
+    "term": "milk",
+    "pronunciation": "/mɪlk/",
+    "translation": "榨取；充分利用（话题/机会）；挤奶",
+    "memoryCue": "熟词僻义：milk a story（把一个热点榨干用尽）。",
+    "example": "Tabloids tried to milk the minor rumor for three straight weeks."
+  },
+  {
+    "id": "poly-en-mas-mine",
+    "language": "english",
+    "difficulty": "master",
+    "term": "mine",
+    "pronunciation": "/maɪn/",
+    "translation": "深入挖掘（数据/资料）；开采；地雷",
+    "memoryCue": "熟词僻义：data mining（数据挖掘），mine archives（挖掘史料）。",
+    "example": "Researchers mined decades of diaries for regional slang shifts."
+  },
+  {
+    "id": "poly-en-mas-shoulder",
+    "language": "english",
+    "difficulty": "master",
+    "term": "shoulder",
+    "pronunciation": "/ˈʃoʊldər/",
+    "translation": "肩负；承担（责任/费用）；肩膀",
+    "memoryCue": "熟词僻义：shoulder the blame / burden（勇挑重担/承担责任）。",
+    "example": "Team leads chose to shoulder the extra release verification work."
+  },
+  {
+    "id": "poly-en-mas-skirt",
+    "language": "english",
+    "difficulty": "master",
+    "term": "skirt",
+    "pronunciation": "/skɜːrt/",
+    "translation": "绕开；回避（难题）；沿边缘走；裙子",
+    "memoryCue": "熟词僻义：skirt around the real issue（绕着核心问题打太极）。",
+    "example": "Candid briefings never skirt uncomfortable technical constraints."
+  },
+  {
+    "id": "poly-en-mas-spell",
+    "language": "english",
+    "difficulty": "master",
+    "term": "spell",
+    "pronunciation": "/spel/",
+    "translation": "意味着；招致（灾难）；轮班；拼写",
+    "memoryCue": "熟词僻义：spell trouble / disaster（意味着麻烦要来了）。",
+    "example": "Unchecked schema drift can spell trouble for older backups."
+  },
+  {
+    "id": "poly-en-mas-square",
+    "language": "english",
+    "difficulty": "master",
+    "term": "square",
+    "pronunciation": "/skwer/",
+    "translation": "使一致；调和（with）；结清账目；正方形",
+    "memoryCue": "熟词僻义：square theory with facts（使理论与事实吻合）。",
+    "example": "Analysts tried to square optimistic surveys with sluggish sales."
+  },
+  {
+    "id": "poly-en-mas-tax",
+    "language": "english",
+    "difficulty": "master",
+    "term": "tax",
+    "pronunciation": "/tæks/",
+    "translation": "使承受重负；榨干（精力）；征税",
+    "memoryCue": "熟词僻义：tax one's patience / memory（极其考验/耗费精力）。",
+    "example": "Overloaded screens tax working memory unnecessarily."
+  },
+  {
+    "id": "poly-en-mas-thumb",
+    "language": "english",
+    "difficulty": "master",
+    "term": "thumb",
+    "pronunciation": "/θʌm/",
+    "translation": "迅速翻阅（书页）；搭顺风车；拇指",
+    "memoryCue": "熟词僻义：thumb through a dictionary（随手翻看词典）。",
+    "example": "He liked to thumb through pocket poetry books on trains."
+  },
+  {
+    "id": "poly-en-mas-vet",
+    "language": "english",
+    "difficulty": "master",
+    "term": "vet",
+    "pronunciation": "/vet/",
+    "translation": "严格审查；甄别（人选/内容）；兽医",
+    "memoryCue": "熟词僻义：vet every open-source license（仔细审核每个开源协议）。",
+    "example": "Legal counsel must vet third-party terms before distribution."
+  },
+  {
+    "id": "poly-en-mas-wage",
+    "language": "english",
+    "difficulty": "master",
+    "term": "wage",
+    "pronunciation": "/weɪdʒ/",
+    "translation": "发动；持续开展（运动/斗争）；工资",
+    "memoryCue": "熟词僻义：wage a campaign（发起一场持久行动）。",
+    "example": "Community librarians waged a tireless drive for open archives."
+  },
+  {
+    "id": "poly-en-mas-warrant",
+    "language": "english",
+    "difficulty": "master",
+    "term": "warrant",
+    "pronunciation": "/ˈwɔːrənt/",
+    "translation": "使有充分理由；值得；保证；逮捕令",
+    "memoryCue": "熟词僻义：考研超高频动词“值得/有理由证明……必要”（warrant attention）。",
+    "example": "Persistent review delays warrant checking your daily load limit."
+  },
+  {
+    "id": "poly-en-mas-arresting",
+    "language": "english",
+    "difficulty": "master",
+    "term": "arresting",
+    "pronunciation": "/əˈrestɪŋ/",
+    "translation": "引人注目的；动人的；震撼人心的",
+    "memoryCue": "由 arrest（吸住目光）派生 → 美到让人停下脚步盯着看。",
+    "example": "An arresting jade gradient anchors the updated app emblem."
+  },
+  {
+    "id": "poly-en-mas-bent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "bent",
+    "pronunciation": "/bent/",
+    "translation": "天赋；爱好倾向（for）；一心想（on）",
+    "memoryCue": "熟词僻义：名词指“天赋/兴趣偏好”（artistic bent）。",
+    "example": "Students with a mathematical bent often love structured grammar."
+  },
+  {
+    "id": "poly-en-mas-checked",
+    "language": "english",
+    "difficulty": "master",
+    "term": "checked",
+    "pronunciation": "/tʃekt/",
+    "translation": "曲折坎坷的；格子花纹的；受阻的",
+    "memoryCue": "熟词僻义：a checkered career（大起大落坎坷的职业生涯）。",
+    "example": "The harbor town has a rich and checkered maritime history."
+  },
+  {
+    "id": "poly-en-mas-clinical",
+    "language": "english",
+    "difficulty": "master",
+    "term": "clinical",
+    "pronunciation": "/ˈklɪnɪkl/",
+    "translation": "冷静客观得近乎冷酷的；临床的",
+    "memoryCue": "熟词僻义：形容分析或表现“不带一丝情绪、精准冷峻”。",
+    "example": "She dismantled every opposing claim with clinical precision."
+  },
+  {
+    "id": "poly-en-mas-telling",
+    "language": "english",
+    "difficulty": "master",
+    "term": "telling",
+    "pronunciation": "/ˈtelɪŋ/",
+    "translation": "有力的；说明问题的；耐人寻味的",
+    "memoryCue": "熟词僻义：a telling detail（极能说明本质的小细节）。",
+    "example": "It is telling that completion rates doubled once scrolling vanished."
+  },
+  {
+    "id": "poly-en-mas-trying",
+    "language": "english",
+    "difficulty": "master",
+    "term": "trying",
+    "pronunciation": "/ˈtraɪɪŋ/",
+    "translation": "令人难熬的；考验耐心的；棘手的",
+    "memoryCue": "熟词僻义：a trying week（极其煎熬的一周）。",
+    "example": "Quiet offline focus brought calm during a trying semester."
+  },
+  {
+    "id": "poly-en-mas-wanting",
+    "language": "english",
+    "difficulty": "master",
+    "term": "wanting",
+    "pronunciation": "/ˈwɑːntɪŋ/",
+    "translation": "欠缺不足的；不够格的；缺少（in）",
+    "memoryCue": "熟词僻义：found wanting（经检验发现力不从心/存在欠缺）。",
+    "example": "Earlier drafts were found wanting in real multi-language support."
+  },
+  {
+    "id": "poly-en-mas-exacting",
+    "language": "english",
+    "difficulty": "master",
+    "term": "exacting",
+    "pronunciation": "/ɪɡˈzæktɪŋ/",
+    "translation": "要求极严的；苛刻费力的",
+    "memoryCue": "源自 exact（精确到极致）→ 容不得半点马虎的高标准。",
+    "example": "App Store checklists enforce exacting privacy transparency."
+  },
+  {
+    "id": "poly-en-mas-measured",
+    "language": "english",
+    "difficulty": "master",
+    "term": "measured",
+    "pronunciation": "/ˈmeʒərd/",
+    "translation": "慎重克制的；从容有节制的；有韵律的",
+    "memoryCue": "熟词僻义：measured response（经过深思熟虑、分寸极佳的回应）。",
+    "example": "Reviewers praised his measured response to tough questions."
+  },
+  {
+    "id": "poly-en-mas-pointed",
+    "language": "english",
+    "difficulty": "master",
+    "term": "pointed",
+    "pronunciation": "/ˈpɔɪntɪd/",
+    "translation": "尖锐直指某事的；切中要害的；尖头的",
+    "memoryCue": "熟词僻义：a pointed reminder（话里有话、直接点出的提醒）。",
+    "example": "The memo offered a pointed critique of bloated launch screens."
+  },
+  {
+    "id": "poly-en-mas-reserved",
+    "language": "english",
+    "difficulty": "master",
+    "term": "reserved",
+    "pronunciation": "/rɪˈzɜːrvd/",
+    "translation": "内敛矜持的；寡言的；预留的",
+    "memoryCue": "熟词僻义：形容性格内向克制不轻易表露情绪。",
+    "example": "Beneath a reserved manner, he held fierce pride in his craft."
+  },
+  {
+    "id": "poly-en-mas-studied",
+    "language": "english",
+    "difficulty": "master",
+    "term": "studied",
+    "pronunciation": "/ˈstʌdid/",
+    "translation": "刻意营造的；深思熟虑的；做作的",
+    "memoryCue": "熟词僻义：studied indifference（刻意装出来的若无其事）。",
+    "example": "The portrait captures a mood of studied casual elegance."
+  },
+  {
+    "id": "poly-en-mas-affected",
+    "language": "english",
+    "difficulty": "master",
+    "term": "affected",
+    "pronunciation": "/əˈfektɪd/",
+    "translation": "矫揉造作的；装腔作势的；受影响的",
+    "memoryCue": "熟词僻义：an affected accent（故意拿腔拿调的口音）。",
+    "example": "Natural speech always beats an affected textbook cadence."
+  },
+  {
+    "id": "poly-en-mas-engaging",
+    "language": "english",
+    "difficulty": "master",
+    "term": "engaging",
+    "pronunciation": "/ɪnˈɡeɪdʒɪŋ/",
+    "translation": "迷人的；有亲和力引人入胜的",
+    "memoryCue": "熟词僻义：an engaging storyteller（讲起故事让人入迷的人）。",
+    "example": "Clear tactile animations make daily review quietly engaging."
+  },
+  {
+    "id": "poly-en-mas-grounded",
+    "language": "english",
+    "difficulty": "master",
+    "term": "grounded",
+    "pronunciation": "/ˈɡraʊndɪd/",
+    "translation": "脚踏实地的；有充分依据的；停飞的",
+    "memoryCue": "熟词僻义：well-grounded fear / calm grounded personality。",
+    "example": "Stay grounded in daily habit metrics rather than sudden sprints."
+  },
+  {
+    "id": "poly-en-mas-involved",
+    "language": "english",
+    "difficulty": "master",
+    "term": "involved",
+    "pronunciation": "/ɪnˈvɑːlvd/",
+    "translation": "错综复杂的；冗长费解的；牵涉其中的",
+    "memoryCue": "熟词僻义：an involved explanation（绕来绕去很复杂的解释）。",
+    "example": "Break involved legal clauses down into plain bullet points."
+  },
+  {
+    "id": "poly-en-mas-marked",
+    "language": "english",
+    "difficulty": "master",
+    "term": "marked",
+    "pronunciation": "/mɑːrkt/",
+    "translation": "显著的；明显的；被盯上的",
+    "memoryCue": "熟词僻义：a marked improvement（非常显著的提升）。",
+    "example": "Testers saw a marked drop in mis-swipes after threshold tuning."
+  },
+  {
+    "id": "poly-en-mas-pronounced",
+    "language": "english",
+    "difficulty": "master",
+    "term": "pronounced",
+    "pronunciation": "/prəˈnaʊnst/",
+    "translation": "极其明显的；显著突出的",
+    "memoryCue": "熟词僻义：不是“被发音”，在外刊里常作形容词表“非常明显”。",
+    "example": "There was a pronounced shift toward offline privacy apps."
+  },
+  {
+    "id": "poly-en-mas-refreshing",
+    "language": "english",
+    "difficulty": "master",
+    "term": "refreshing",
+    "pronunciation": "/rɪˈfreʃɪŋ/",
+    "translation": "耳目一新的；令人振奋的；清凉提神的",
+    "memoryCue": "熟词僻义：refreshing honesty（让人眼前一亮的坦诚）。",
+    "example": "Zero pop-up ads feel refreshing in modern mobile software."
+  },
+  {
+    "id": "poly-en-mas-relieved",
+    "language": "english",
+    "difficulty": "master",
+    "term": "relieved",
+    "pronunciation": "/rɪˈliːvd/",
+    "translation": "松了一口气的；感到欣慰的",
+    "memoryCue": "be relieved to hear（听到消息总算放心）。",
+    "example": "Learners felt relieved to see custom notes preserved on reset."
+  },
+  {
+    "id": "poly-en-mas-rewarding",
+    "language": "english",
+    "difficulty": "master",
+    "term": "rewarding",
+    "pronunciation": "/rɪˈwɔːrdɪŋ/",
+    "translation": "有回报的；值得的；带来成就感的",
+    "memoryCue": "a rewarding journey（收获满满的旅程）。",
+    "example": "Reading your first unadapted article in Spanish feels deeply rewarding."
+  },
+  {
+    "id": "poly-en-mas-seasoned",
+    "language": "english",
+    "difficulty": "master",
+    "term": "seasoned",
+    "pronunciation": "/ˈsiːznd/",
+    "translation": "经验丰富的；老练的；加过调料的",
+    "memoryCue": "熟词僻义：seasoned traveler / engineer（身经百战的老手）。",
+    "example": "Even seasoned translators keep pocket phrasebooks on hand."
+  },
+  {
+    "id": "poly-en-mas-spirited",
+    "language": "english",
+    "difficulty": "master",
+    "term": "spirited",
+    "pronunciation": "/ˈspɪrɪtɪd/",
+    "translation": "生机勃勃的；热烈的；有骨气的",
+    "memoryCue": "a spirited debate（唇枪舌剑、气氛高昂的精彩辩论）。",
+    "example": "Students held a spirited discussion on regional dialects."
+  },
+  {
+    "id": "poly-en-mas-unassuming",
+    "language": "english",
+    "difficulty": "master",
+    "term": "unassuming",
+    "pronunciation": "/ˌʌnəˈsuːmɪŋ/",
+    "translation": "谦逊低调的；不张扬的",
+    "memoryCue": "un-（不）+ assume（摆架子端着）→ 平易近人、深藏不露。",
+    "example": "An unassuming neighborhood bakery won top culinary honors."
+  },
+  {
+    "id": "poly-en-mas-unwitting",
+    "language": "english",
+    "difficulty": "master",
+    "term": "unwitting",
+    "pronunciation": "/ʌnˈwɪtɪŋ/",
+    "translation": "不知情的；无意中做出的",
+    "memoryCue": "un- + wit（知晓）→ 蒙在鼓里、稀里糊涂充当了工具。",
+    "example": "Free games often turn children into unwitting ad viewers."
+  },
+  {
+    "id": "poly-en-mas-wrought",
+    "language": "english",
+    "difficulty": "master",
+    "term": "wrought",
+    "pronunciation": "/rɔːt/",
+    "translation": "精心打造的；引起的；锻造的",
+    "memoryCue": "work 的古老分词形式（wrought iron 熟铁 / havoc wrought 造成的破坏）。",
+    "example": "Patient craft wrought tiny visual details into seamless flow."
+  },
+  {
+    "id": "poly-en-mas-accommodating",
+    "language": "english",
+    "difficulty": "master",
+    "term": "accommodating",
+    "pronunciation": "/əˈkɑːmədeɪtɪŋ/",
+    "translation": "随和通融的；乐于助人的；肯迁就的",
+    "memoryCue": "不仅指“容纳”，形容人时表示“特别好说话、肯行方便”。",
+    "example": "Our host was remarkably accommodating about late train arrivals."
+  },
+  {
+    "id": "poly-en-mas-compromising",
+    "language": "english",
+    "difficulty": "master",
+    "term": "compromising",
+    "pronunciation": "/ˈkɑːmprəmaɪzɪŋ/",
+    "translation": "使人难堪的；危及声誉/安全的",
+    "memoryCue": "in a compromising position（陷入百口莫辩的窘境）。",
+    "example": "Strong encryption prevents keys from landing in compromising logs."
+  },
+  {
+    "id": "poly-en-mas-demanding",
+    "language": "english",
+    "difficulty": "master",
+    "term": "demanding",
+    "pronunciation": "/dɪˈmændɪŋ/",
+    "translation": "要求苛刻的；费时耗神的",
+    "memoryCue": "a demanding curriculum（强度极高、要求很严的课程）。",
+    "example": "Blind audio drills offer a demanding workout for advanced ears."
+  },
+  {
+    "id": "poly-en-mas-forbidding",
+    "language": "english",
+    "difficulty": "master",
+    "term": "forbidding",
+    "pronunciation": "/fərˈbɪdɪŋ/",
+    "translation": "令人生畏的；险恶阴森的",
+    "memoryCue": "a forbidding mountain pass（险峻得吓人的山口）。",
+    "example": "Dense legal jargon can make privacy notices look forbidding."
+  }
+]

@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "pro-en-bus-accrual",
+    "language": "english",
+    "difficulty": "business",
+    "term": "accrual",
+    "pronunciation": "/əˈkruːəl/",
+    "translation": "权责发生制；应计项目",
+    "memoryCue": "ac- + crue（增长）→ 按实际发生期间而非现金进出记账的会计原则。",
+    "example": "Accrual accounting matches quarterly revenue with related expenses."
+  },
+  {
+    "id": "pro-en-bus-annuity",
+    "language": "english",
+    "difficulty": "business",
+    "term": "annuity",
+    "pronunciation": "/əˈnjuːəti/",
+    "translation": "年金；定期固定养老金",
+    "memoryCue": "ann-（年）+ -uity → 每年/每月固定领取一笔款项。",
+    "example": "Retirees often balance flexible savings with a steady annuity."
+  },
+  {
+    "id": "pro-en-bus-antitrust",
+    "language": "english",
+    "difficulty": "business",
+    "term": "antitrust",
+    "pronunciation": "/ˌæntiˈtrʌst/",
+    "translation": "反垄断的；反托拉斯法",
+    "memoryCue": "anti-（反）+ trust（托拉斯垄断联盟）→ 维护公平市场竞争。",
+    "example": "Antitrust regulators reviewed the proposed cross-border merger closely."
+  },
+  {
+    "id": "pro-en-bus-arbitrage",
+    "language": "english",
+    "difficulty": "business",
+    "term": "arbitrage",
+    "pronunciation": "/ˈɑːrbɪtrɑːʒ/",
+    "translation": "套利（低买高卖无风险价差）",
+    "memoryCue": "金融高频词，利用两个市场定价差异瞬间锁定收益。",
+    "example": "Automated desks close cross-exchange currency arbitrage within milliseconds."
+  },
+  {
+    "id": "pro-en-bus-arrears",
+    "language": "english",
+    "difficulty": "business",
+    "term": "arrears",
+    "pronunciation": "/əˈrɪrz/",
+    "translation": "逾期欠款；拖欠",
+    "memoryCue": "in arrears 表示“逾期未付 / 延后支付”。",
+    "example": "Late notifications prevented accounts from falling into arrears."
+  },
+  {
+    "id": "pro-en-bus-audit",
+    "language": "english",
+    "difficulty": "business",
+    "term": "audit",
+    "pronunciation": "/ˈɔːdɪt/",
+    "translation": "审计；核查；旁听（课程）",
+    "memoryCue": "aud-（听）→ 古代查账靠听取账目汇报，现指财务/安全审查。",
+    "example": "Annual security audits confirm zero unencrypted exports leave the device."
+  },
+  {
+    "id": "pro-en-bus-bailout",
+    "language": "english",
+    "difficulty": "business",
+    "term": "bailout",
+    "pronunciation": "/ˈbeɪlaʊt/",
+    "translation": "紧急财务纾困；救助",
+    "memoryCue": "bail（舀出船舱积水）+ out → 帮濒危机构抽水渡过危机。",
+    "example": "Strict capital buffers reduce the odds of taxpayer bailouts."
+  },
+  {
+    "id": "pro-en-bus-bankruptcy",
+    "language": "english",
+    "difficulty": "business",
+    "term": "bankruptcy",
+    "pronunciation": "/ˈbæŋkrʌptsi/",
+    "translation": "破产；倒闭；彻底枯竭",
+    "memoryCue": "bank（银行柜台）+ rupt（断裂）→ 柜台被砸烂、资金链断裂。",
+    "example": "Poor cash-flow forecasting pushes profitable firms toward bankruptcy."
+  },
+  {
+    "id": "pro-en-bus-benchmarking",
+    "language": "english",
+    "difficulty": "business",
+    "term": "benchmarking",
+    "pronunciation": "/ˈbentʃmɑːrkɪŋ/",
+    "translation": "对标分析；基准性能测试",
+    "memoryCue": "benchmark 的动名词形式，研发测试与商业分析均高频使用。",
+    "example": "Frame-time benchmarking proved background parsing eliminated UI hitches."
+  },
+  {
+    "id": "pro-en-bus-beneficiary",
+    "language": "english",
+    "difficulty": "business",
+    "term": "beneficiary",
+    "pronunciation": "/ˌbenɪˈfɪʃeri/",
+    "translation": "受益人；受款人；受惠者",
+    "memoryCue": "bene-（好）+ fic（做）→ 合同或信托中最终拿到利益的一方。",
+    "example": "Double-check beneficiary names on wire transfer instructions."
+  },
+  {
+    "id": "pro-en-bus-breach",
+    "language": "english",
+    "difficulty": "business",
+    "term": "breach",
+    "pronunciation": "/briːtʃ/",
+    "translation": "违约；违反（规定）；数据泄露",
+    "memoryCue": "data breach（数据泄露），breach of contract（违约）。",
+    "example": "Pure on-device storage reduces exposure during cloud data breaches."
+  },
+  {
+    "id": "pro-en-bus-capitalization",
+    "language": "english",
+    "difficulty": "business",
+    "term": "capitalization",
+    "pronunciation": "/ˌkæpɪtəlaɪˈzeɪʃn/",
+    "translation": "市值；资本化；首字母大写",
+    "memoryCue": "market capitalization（简称 market cap 市值）；拼写时也指大写规范。",
+    "example": "Software capitalization rules govern how multi-year R&D is booked."
+  },
+  {
+    "id": "pro-en-bus-cartel",
+    "language": "english",
+    "difficulty": "business",
+    "term": "cartel",
+    "pronunciation": "/kɑːrˈtel/",
+    "translation": "卡特尔（企业价格垄断同盟）",
+    "memoryCue": "多巨头私下串联操纵价格或产量。",
+    "example": "International rules strictly prohibit price-fixing cartels."
+  },
+  {
+    "id": "pro-en-bus-clause",
+    "language": "english",
+    "difficulty": "business",
+    "term": "clause",
+    "pronunciation": "/klɔːz/",
+    "translation": "条款；法律条文；从句",
+    "memoryCue": "非竞业条款（non-compete clause）、免责条款，或语法里的从句。",
+    "example": "Read the termination clause carefully before signing annual retainers."
+  },
+  {
+    "id": "pro-en-bus-collateralize",
+    "language": "english",
+    "difficulty": "business",
+    "term": "collateralize",
+    "pronunciation": "/kəˈlætərəlaɪz/",
+    "translation": "提供抵押担保",
+    "memoryCue": "用房产、存单或证券为贷款提供抵押品（collateral）。",
+    "example": "Short-term treasuries collateralize overnight interbank lending."
+  },
+  {
+    "id": "pro-en-bus-commodity",
+    "language": "english",
+    "difficulty": "business",
+    "term": "commodity",
+    "pronunciation": "/kəˈmɑːdəti/",
+    "translation": "大宗商品；日用品",
+    "memoryCue": "commodities market（大宗商品市场：原油、粮食、金属）。",
+    "example": "Coffee beans remain one of the most actively traded agricultural commodities."
+  },
+  {
+    "id": "pro-en-bus-conglomerate",
+    "language": "english",
+    "difficulty": "business",
+    "term": "conglomerate",
+    "pronunciation": "/kənˈɡlɑːmərət/",
+    "translation": "大型企业集团；砾岩",
+    "memoryCue": "con- + glomer（团）→ 跨多个不相干行业的巨无霸集团。",
+    "example": "The industrial conglomerate spun off its consumer electronics unit."
+  },
+  {
+    "id": "pro-en-bus-copyright",
+    "language": "english",
+    "difficulty": "business",
+    "term": "copyright",
+    "pronunciation": "/ˈkɑːpiraɪt/",
+    "translation": "版权；著作权",
+    "memoryCue": "copy + right → 控制复制分发的专有权利。",
+    "example": "Verify dataset copyright licenses before bundling third-party decks."
+  },
+  {
+    "id": "pro-en-bus-coupon",
+    "language": "english",
+    "difficulty": "business",
+    "term": "coupon",
+    "pronunciation": "/ˈkuːpɑːn/",
+    "translation": "优惠券；债券票息",
+    "memoryCue": "金融里常指债券定期派发的票面利息率（coupon rate）。",
+    "example": "Fixed-rate bonds pay a predictable semiannual coupon."
+  },
+  {
+    "id": "pro-en-bus-creditor",
+    "language": "english",
+    "difficulty": "business",
+    "term": "creditor",
+    "pronunciation": "/ˈkredɪtər/",
+    "translation": "债权人；贷方",
+    "memoryCue": "cred-（信任借出）+ -or → 借钱给别人的债主（反义 debtor）。",
+    "example": "Secured creditors hold priority claims during restructuring."
+  },
+  {
+    "id": "pro-en-bus-customary",
+    "language": "english",
+    "difficulty": "business",
+    "term": "customary",
+    "pronunciation": "/ˈkʌstəmeri/",
+    "translation": "惯例的；习惯上的；常规的",
+    "memoryCue": "custom（风俗习惯）+ -ary → 行业默认通行的合规标准。",
+    "example": "It is customary to attach release notes alongside major updates."
+  },
+  {
+    "id": "pro-en-bus-debenture",
+    "language": "english",
+    "difficulty": "business",
+    "term": "debenture",
+    "pronunciation": "/dɪˈbentʃər/",
+    "translation": "无抵押公司债券；信用债券",
+    "memoryCue": "全凭企业信用发行的长期债券。",
+    "example": "Blue-chip utilities issued ten-year debentures at modest yields."
+  },
+  {
+    "id": "pro-en-bus-default",
+    "language": "english",
+    "difficulty": "business",
+    "term": "default",
+    "pronunciation": "/dɪˈfɔːlt/",
+    "translation": "违约；拖欠；默认设置",
+    "memoryCue": "软件中是“默认值”，金融里则是“到期还不上的违约”！",
+    "example": "Never rely on opaque default settings when handling private backups."
+  },
+  {
+    "id": "pro-en-bus-deficit",
+    "language": "english",
+    "difficulty": "business",
+    "term": "deficit",
+    "pronunciation": "/ˈdefɪsɪt/",
+    "translation": "赤字；亏空；逆差；缺陷",
+    "memoryCue": "de-（少）+ fic（做）→ 入不敷出、少了一块（trade deficit）。",
+    "example": "Attention deficit makes silent reading harder after noisy commutes."
+  },
+  {
+    "id": "pro-en-bus-depreciation",
+    "language": "english",
+    "difficulty": "business",
+    "term": "depreciation",
+    "pronunciation": "/dɪˌpriːʃiˈeɪʃn/",
+    "translation": "折旧；贬值；轻视",
+    "memoryCue": "de-（降）+ preci（价值）→ 设备逐年损耗贬值或汇率下跌。",
+    "example": "Fleet depreciation accounts for a major share of logistics overhead."
+  },
+  {
+    "id": "pro-en-bus-derivative",
+    "language": "english",
+    "difficulty": "business",
+    "term": "derivative",
+    "pronunciation": "/dɪˈrɪvətɪv/",
+    "translation": "金融衍生品；派生词；导数",
+    "memoryCue": "derive（衍生）的名词与形容词：词根派生词（word derivatives）也用它！",
+    "example": "Learning common Latin derivatives unlocks five words from one root."
+  },
+  {
+    "id": "pro-en-bus-dividend",
+    "language": "english",
+    "difficulty": "business",
+    "term": "dividend",
+    "pronunciation": "/ˈdɪvɪdend/",
+    "translation": "股息；红利；分红；回报",
+    "memoryCue": "divid（分配）→ 公司利润分给股东的分红（pay dividends 带来回报）。",
+    "example": "Daily study pays compound dividends when reading foreign news."
+  },
+  {
+    "id": "pro-en-bus-embargo",
+    "language": "english",
+    "difficulty": "business",
+    "term": "embargo",
+    "pronunciation": "/ɪmˈbɑːrɡoʊ/",
+    "translation": "禁运；贸易封锁；新闻禁发期",
+    "memoryCue": "press embargo（媒体统一解禁发布时间）。",
+    "example": "Reviewers respected the product embargo until Tuesday morning."
+  },
+  {
+    "id": "pro-en-bus-enactment",
+    "language": "english",
+    "difficulty": "business",
+    "term": "enactment",
+    "pronunciation": "/ɪˈnæktmənt/",
+    "translation": "颁布实施；法律制定",
+    "memoryCue": "en- + act（行动/法案）→ 议案正式成为生效法律。",
+    "example": "Enactment of stricter privacy rules reshaped mobile analytics."
+  },
+  {
+    "id": "pro-en-bus-escrow",
+    "language": "english",
+    "difficulty": "business",
+    "term": "escrow",
+    "pronunciation": "/ˈeskroʊ/",
+    "translation": "第三方托管账户（资金暂存）",
+    "memoryCue": "买卖双方达成条件前把款项暂存在中立第三方账户。",
+    "example": "Funds stayed safely in escrow until final inspection cleared."
+  },
+  {
+    "id": "pro-en-bus-exemption",
+    "language": "english",
+    "difficulty": "business",
+    "term": "exemption",
+    "pronunciation": "/ɪɡˈzempʃn/",
+    "translation": "豁免；免税；免除",
+    "memoryCue": "ex-（出）+ empt（拿）→ 从义务名单里抽出来免除（export compliance exemption）。",
+    "example": "Apps using standard OS encryption qualify for simplified export exemption."
+  },
+  {
+    "id": "pro-en-bus-franchise",
+    "language": "english",
+    "difficulty": "business",
+    "term": "franchise",
+    "pronunciation": "/ˈfræntʃaɪz/",
+    "translation": "特许经营权；加盟店；选举权",
+    "memoryCue": "franch-（自由许可）→ 品牌授权加盟门店。",
+    "example": "Independent coffee roasters rarely operate as national franchises."
+  },
+  {
+    "id": "pro-en-bus-hedging",
+    "language": "english",
+    "difficulty": "business",
+    "term": "hedging",
+    "pronunciation": "/ˈhedʒɪŋ/",
+    "translation": "对冲（风险管理）；含糊闪避",
+    "memoryCue": "hedge（树篱围栏）→ 用相反头寸围出防护栏抵御汇率波动。",
+    "example": "Airline fuel hedging smooths out sudden crude-oil spikes."
+  },
+  {
+    "id": "pro-en-bus-inflation",
+    "language": "english",
+    "difficulty": "business",
+    "term": "inflation",
+    "pronunciation": "/ɪnˈfleɪʃn/",
+    "translation": "通货膨胀；物价飞涨；充气膨胀",
+    "memoryCue": "in- + flate（吹气）→ 货币超发像气球一样鼓起来。",
+    "example": "Core inflation cooled slowly as shipping bottlenecks cleared."
+  },
+  {
+    "id": "pro-en-bus-infringement",
+    "language": "english",
+    "difficulty": "business",
+    "term": "infringement",
+    "pronunciation": "/ɪnˈfrɪndʒmənt/",
+    "translation": "侵权；违约；侵害",
+    "memoryCue": "in- + fring（打破，同 fracture）→ 踩破别人专利或版权界线。",
+    "example": "Strict open-source audits prevent accidental copyright infringement."
+  },
+  {
+    "id": "pro-en-bus-injunction",
+    "language": "english",
+    "difficulty": "business",
+    "term": "injunction",
+    "pronunciation": "/ɪnˈdʒʌŋkʃn/",
+    "translation": "法院禁令；强制令",
+    "memoryCue": "in- + junct（连接命令）→ 法院下令立即停止某项行为。",
+    "example": "The court denied a temporary injunction blocking the software release."
+  },
+  {
+    "id": "pro-en-bus-insolvency",
+    "language": "english",
+    "difficulty": "business",
+    "term": "insolvency",
+    "pronunciation": "/ɪnˈsɑːlvənsi/",
+    "translation": "无力偿债；资不抵债",
+    "memoryCue": "in-（不）+ solve（解开/偿清）→ 到期还不起债的财务状态。",
+    "example": "High cash reserves insulated the firm from seasonal insolvency."
+  },
+  {
+    "id": "pro-en-bus-intellectual",
+    "language": "english",
+    "difficulty": "business",
+    "term": "intellectual",
+    "pronunciation": "/ˌɪntəˈlektʃuəl/",
+    "translation": "智力的；知识分子；知识产权（IP）",
+    "memoryCue": "intellectual property（知识产权，简称 IP）。",
+    "example": "Small design teams protect intellectual property through clean brand craft."
+  },
+  {
+    "id": "pro-en-bus-jurisdiction",
+    "language": "english",
+    "difficulty": "business",
+    "term": "jurisdiction",
+    "pronunciation": "/ˌdʒʊrɪsˈdɪkʃn/",
+    "translation": "司法管辖权；管辖区域",
+    "memoryCue": "juris（法律）+ dict（说）→ 法律说话算数的地盘范围。",
+    "example": "Confirm local tax jurisdiction rules before publishing globally."
+  },
+  {
+    "id": "pro-en-bus-ledger",
+    "language": "english",
+    "difficulty": "business",
+    "term": "ledger",
+    "pronunciation": "/ˈledʒər/",
+    "translation": "分类账；账簿；分布式账本",
+    "memoryCue": "会计记账总本（general ledger）。",
+    "example": "Review events act like an append-only ledger of daily study."
+  },
+  {
+    "id": "pro-en-bus-lien",
+    "language": "english",
+    "difficulty": "business",
+    "term": "lien",
+    "pronunciation": "/ˈliːən/",
+    "translation": "留置权；资产抵押留置",
+    "memoryCue": "债权人对欠款方财产享有的优先扣留担保权。",
+    "example": "Title searches verify the property is free of unpaid tax liens."
+  },
+  {
+    "id": "pro-en-bus-liquidation",
+    "language": "english",
+    "difficulty": "business",
+    "term": "liquidation",
+    "pronunciation": "/ˌlɪkwɪˈdeɪʃn/",
+    "translation": "清算；破产变现；清仓甩卖",
+    "memoryCue": "liquid（流动变现）→ 把全部资产变现还债清盘。",
+    "example": "Inventory liquidation cleared seasonal stock before winter."
+  },
+  {
+    "id": "pro-en-bus-litigation",
+    "language": "english",
+    "difficulty": "business",
+    "term": "litigation",
+    "pronunciation": "/ˌlɪtɪˈɡeɪʃn/",
+    "translation": "诉讼；打官司",
+    "memoryCue": "litig-（争讼）→ 走法庭途径解决商业争端。",
+    "example": "Clear license agreements keep small studios out of costly litigation."
+  },
+  {
+    "id": "pro-en-bus-monopoly",
+    "language": "english",
+    "difficulty": "business",
+    "term": "monopoly",
+    "pronunciation": "/məˈnɑːpəli/",
+    "translation": "垄断；专卖权；大富翁游戏",
+    "memoryCue": "mono-（单一）+ poly（卖）→ 仅此一家别无分号。",
+    "example": "Healthy competition prevents any single vendor monopoly."
+  },
+  {
+    "id": "pro-en-bus-mortgage",
+    "language": "english",
+    "difficulty": "business",
+    "term": "mortgage",
+    "pronunciation": "/ˈmɔːrɡɪdʒ/",
+    "translation": "抵押贷款；房贷",
+    "memoryCue": "注意字母 t 不发音，读 /ˈmɔːrɡɪdʒ/。",
+    "example": "Fixed mortgage rates give household budgets predictable monthly bills."
+  },
+  {
+    "id": "pro-en-bus-prospectus",
+    "language": "english",
+    "difficulty": "business",
+    "term": "prospectus",
+    "pronunciation": "/prəˈspektəs/",
+    "translation": "招股说明书；项目/课程简介手册",
+    "memoryCue": "pro-（向前）+ spect（看）→ 展示未来前景的正式说明书。",
+    "example": "Read the fund prospectus before committing long-term savings."
+  },
+  {
+    "id": "pro-en-bus-quorum",
+    "language": "english",
+    "difficulty": "business",
+    "term": "quorum",
+    "pronunciation": "/ˈkwɔːrəm/",
+    "translation": "法定最低出席人数",
+    "memoryCue": "会议必须达到这个人数，表决才合法有效。",
+    "example": "The board waited ten minutes to reach a quorum before voting."
+  },
+  {
+    "id": "pro-en-bus-rebate",
+    "language": "english",
+    "difficulty": "business",
+    "term": "rebate",
+    "pronunciation": "/ˈriːbeɪt/",
+    "translation": "回扣；退款；消费返现",
+    "memoryCue": "re-（回）+ bate（减）→ 付款后再退回一部分现金优惠。",
+    "example": "Energy-efficient appliances qualify for a local utility rebate."
+  },
+  {
+    "id": "pro-en-bus-solvency",
+    "language": "english",
+    "difficulty": "business",
+    "term": "solvency",
+    "pronunciation": "/ˈsɑːlvənsi/",
+    "translation": "偿付能力；清偿力",
+    "memoryCue": "insolvency 的反义词，衡量企业稳健还债能力。",
+    "example": "Quarterly stress tests verify long-term solvency."
+  },
+  {
+    "id": "pro-en-bus-tariff",
+    "language": "english",
+    "difficulty": "business",
+    "term": "tariff",
+    "pronunciation": "/ˈtærɪf/",
+    "translation": "关税；资费表",
+    "memoryCue": "进出口海关税率表或酒店价目表。",
+    "example": "Shifts in import tariffs reshaped regional manufacturing routes."
+  },
+  {
+    "id": "pro-en-mas-abiotic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "abiotic",
+    "pronunciation": "/ˌeɪbaɪˈɑːtɪk/",
+    "translation": "非生物的；无生命的（环境因素）",
+    "memoryCue": "a-（无）+ bio（生命）→ 光照、温度、岩石等非生命环境因子。",
+    "example": "Abiotic stressors like salinity shape coastal mangrove roots."
+  },
+  {
+    "id": "pro-en-mas-acoustic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "acoustic",
+    "pronunciation": "/əˈkuːstɪk/",
+    "translation": "声学的；听觉的；原声木吉他的",
+    "memoryCue": "acou-（听）→ 声音物理传播特性，不插电乐器也叫 acoustic。",
+    "example": "Timber baffles improved the concert hall's acoustic warmth."
+  },
+  {
+    "id": "pro-en-mas-allele",
+    "language": "english",
+    "difficulty": "master",
+    "term": "allele",
+    "pronunciation": "/əˈliːl/",
+    "translation": "等位基因",
+    "memoryCue": "遗传学高频核心词，同一基因位点上的不同变异版本。",
+    "example": "Recessive alleles only surface when inherited from both parents."
+  },
+  {
+    "id": "pro-en-mas-ambient",
+    "language": "english",
+    "difficulty": "master",
+    "term": "ambient",
+    "pronunciation": "/ˈæmbiənt/",
+    "translation": "周围环境的；氛围轻音乐",
+    "memoryCue": "ambi-（四周）→ 环绕在周围的环境光/环境音（ambient gradient）。",
+    "example": "A gentle ambient glow helps cards stand out without harsh glare."
+  },
+  {
+    "id": "pro-en-mas-amplitude",
+    "language": "english",
+    "difficulty": "master",
+    "term": "amplitude",
+    "pronunciation": "/ˈæmplɪtuːd/",
+    "translation": "振幅；幅度；充沛广阔",
+    "memoryCue": "ampl-（大/宽广）→ 声波或摇摆震动的峰谷高度。",
+    "example": "Waveform bars animate smoothly according to speech amplitude."
+  },
+  {
+    "id": "pro-en-mas-anaerobic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "anaerobic",
+    "pronunciation": "/ˌænəˈroʊbɪk/",
+    "translation": "厌氧的；无氧运动的",
+    "memoryCue": "an-（无）+ aero（空气/氧）+ bio（生命）→ 无氧呼吸或力量训练。",
+    "example": "Sprint intervals rely heavily on brief anaerobic energy bursts."
+  },
+  {
+    "id": "pro-en-mas-anisotropic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "anisotropic",
+    "pronunciation": "/ˌænaɪsəˈtrɑːpɪk/",
+    "translation": "各向异性的（不同方向物理性质不同）",
+    "memoryCue": "an-（不）+ iso-（相同）+ trop（方向）→ 木纹顺纹和横纹强度不同。",
+    "example": "Wood grain displays pronounced anisotropic strength along fibers."
+  },
+  {
+    "id": "pro-en-mas-anthropogenic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "anthropogenic",
+    "pronunciation": "/ˌænθrəpəˈdʒenɪk/",
+    "translation": "人为引起的；人类活动造成的",
+    "memoryCue": "anthropo-（人类）+ gen（产生）→ 托福/雅思环保高频学术词！",
+    "example": "Oceanographers track anthropogenic warming across deep currents."
+  },
+  {
+    "id": "pro-en-mas-apoptosis",
+    "language": "english",
+    "difficulty": "master",
+    "term": "apoptosis",
+    "pronunciation": "/ˌæpəpˈtoʊsɪs/",
+    "translation": "细胞凋亡（程序性细胞死亡）",
+    "memoryCue": "希腊语原意“秋天树叶自然飘落”→ 生物体内有序的自我清理。",
+    "example": "Healthy tissue renewal depends on tightly regulated apoptosis."
+  },
+  {
+    "id": "pro-en-mas-aquifer",
+    "language": "english",
+    "difficulty": "master",
+    "term": "aquifer",
+    "pronunciation": "/ˈækwɪfər/",
+    "translation": "地下含水层；蓄水岩层",
+    "memoryCue": "aqua（水）+ fer（携带/含）→ 地下贮存淡水的透水岩层。",
+    "example": "Winter snowpack slowly recharges deep mountain aquifers."
+  },
+  {
+    "id": "pro-en-mas-asymptote",
+    "language": "english",
+    "difficulty": "master",
+    "term": "asymptote",
+    "pronunciation": "/ˈæsɪmptoʊt/",
+    "translation": "渐近线",
+    "memoryCue": "a-（不）+ sym-（合）+ ptote（落）→ 无限靠近却永不相交的数学曲线。",
+    "example": "Recall probability approaches perfection like a smooth asymptote."
+  },
+  {
+    "id": "pro-en-mas-attenuate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "attenuate",
+    "pronunciation": "/əˈtenjueɪt/",
+    "translation": "衰减；减弱；稀释",
+    "memoryCue": "at- + tenu（细薄）→ 使信号强度、音量或病毒毒力逐步变弱。",
+    "example": "Thick stone walls rapidly attenuate high-frequency radio signals."
+  },
+  {
+    "id": "pro-en-mas-bioluminescent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "bioluminescent",
+    "pronunciation": "/ˌbaɪoʊˌluːmɪˈnesnt/",
+    "translation": "生物发光的",
+    "memoryCue": "bio（生命）+ lumin（光）→ 深海鱼和萤火虫自带化学冷光。",
+    "example": "Bioluminescent plankton lit up every ripple behind our kayak."
+  },
+  {
+    "id": "pro-en-mas-calibrate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "calibrate",
+    "pronunciation": "/ˈkælɪbreɪt/",
+    "translation": "校准；标定；精细微调",
+    "memoryCue": "calibr-（卡尺口径）→ 用标准刻度精确校正仪器或难度算法。",
+    "example": "Calibrate speech playback speed until phrasing feels natural."
+  },
+  {
+    "id": "pro-en-mas-carcinogen",
+    "language": "english",
+    "difficulty": "master",
+    "term": "carcinogen",
+    "pronunciation": "/kɑːrˈsɪnədʒən/",
+    "translation": "致癌物质",
+    "memoryCue": "carcino-（癌症）+ gen（产生）→ 能诱发癌症的物质。",
+    "example": "Clean air filtration removes common airborne carcinogens indoors."
+  },
+  {
+    "id": "pro-en-mas-centrifugal",
+    "language": "english",
+    "difficulty": "master",
+    "term": "centrifugal",
+    "pronunciation": "/senˈtrɪfjəɡl/",
+    "translation": "离心的；离心力的",
+    "memoryCue": "centr（中心）+ fug（逃离，同 fugitive）→ 甩离中心向外飞。",
+    "example": "Spin cycles use centrifugal force to extract moisture rapidly."
+  },
+  {
+    "id": "pro-en-mas-chromatin",
+    "language": "english",
+    "difficulty": "master",
+    "term": "chromatin",
+    "pronunciation": "/ˈkroʊmətɪn/",
+    "translation": "染色质",
+    "memoryCue": "chrom（颜色）→ 细胞核内易被碱性染料染色的 DNA-蛋白复合物。",
+    "example": "Chromatin packing controls which genes remain accessible in cells."
+  },
+  {
+    "id": "pro-en-mas-cognition",
+    "language": "english",
+    "difficulty": "master",
+    "term": "cognition",
+    "pronunciation": "/kɑːɡˈnɪʃn/",
+    "translation": "认知；认识过程",
+    "memoryCue": "cogn-（知道）→ 感知、记忆、推理等大脑高级加工过程。",
+    "example": "Active retrieval strengthens human cognition far more than re-reading."
+  },
+  {
+    "id": "pro-en-mas-congenital",
+    "language": "english",
+    "difficulty": "master",
+    "term": "congenital",
+    "pronunciation": "/kənˈdʒenɪtl/",
+    "translation": "先天的；与生俱来的",
+    "memoryCue": "con-（共同）+ gen（出生）→ 生下来就自带的特征。",
+    "example": "Early screening detects many congenital heart conditions smoothly."
+  },
+  {
+    "id": "pro-en-mas-cryogenic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "cryogenic",
+    "pronunciation": "/ˌkraɪəˈdʒenɪk/",
+    "translation": "深冷的；低温学的",
+    "memoryCue": "cryo-（冰冻极寒）+ gen（产生）→ 零下百余度超低温保存技术。",
+    "example": "Cryogenic tanks store liquid oxygen for orbital launch vehicles."
+  },
+  {
+    "id": "pro-en-mas-cytokine",
+    "language": "english",
+    "difficulty": "master",
+    "term": "cytokine",
+    "pronunciation": "/ˈsaɪtəkaɪn/",
+    "translation": "细胞因子（免疫信号蛋白）",
+    "memoryCue": "cyto-（细胞）+ kine（运动/激活）→ 免疫细胞互相通风报信的分子。",
+    "example": "Balanced cytokine signaling coordinates rapid tissue repair."
+  },
+  {
+    "id": "pro-en-mas-dendrite",
+    "language": "english",
+    "difficulty": "master",
+    "term": "dendrite",
+    "pronunciation": "/ˈdendraɪt/",
+    "translation": "（神经元）树突；树枝状结晶",
+    "memoryCue": "dendr-（树）→ 像大树分枝一样接收其他神经元电信号的触角。",
+    "example": "Repeated recall encourages new synaptic spines along dendrites."
+  },
+  {
+    "id": "pro-en-mas-dichotomy",
+    "language": "english",
+    "difficulty": "master",
+    "term": "dichotomy",
+    "pronunciation": "/daɪˈkɑːtəmi/",
+    "translation": "二分法；截然对立的两面",
+    "memoryCue": "dicho-（一分为二）+ tomy（切）→ 非黑即白的二元对立。",
+    "example": "Skip the false dichotomy between speed and thorough understanding."
+  },
+  {
+    "id": "pro-en-mas-diurnal",
+    "language": "english",
+    "difficulty": "master",
+    "term": "diurnal",
+    "pronunciation": "/daɪˈɜːrnl/",
+    "translation": "昼行的；每日周期性的（反义 nocturnal）",
+    "memoryCue": "di-（天/白昼，同 diary）→ 白天活动、夜晚休息的生物节律。",
+    "example": "Diurnal temperature swings can top twenty degrees in high deserts."
+  },
+  {
+    "id": "pro-en-mas-entropy",
+    "language": "english",
+    "difficulty": "master",
+    "term": "entropy",
+    "pronunciation": "/ˈentrəpi/",
+    "translation": "熵；混乱度；信息不确定性",
+    "memoryCue": "热力学与信息论基石概念：封闭系统总是自发趋向无序。",
+    "example": "Regular card pruning counters entropy inside personal wordbooks."
+  },
+  {
+    "id": "pro-en-mas-epigenetics",
+    "language": "english",
+    "difficulty": "master",
+    "term": "epigenetics",
+    "pronunciation": "/ˌepɪdʒəˈnetɪks/",
+    "translation": "表观遗传学",
+    "memoryCue": "epi-（在……之上）+ genetics → 不改 DNA 序列却影响基因开关的调控。",
+    "example": "Epigenetics helps explain how environment shapes long-term cell memory."
+  },
+  {
+    "id": "pro-en-mas-equilibrium",
+    "language": "english",
+    "difficulty": "master",
+    "term": "equilibrium",
+    "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+    "translation": "平衡；均衡状态",
+    "memoryCue": "equi-（相等）+ libr（天平）→ 物理力学、化学反应或供需达到静平衡。",
+    "example": "Forest ecosystems recover dynamic equilibrium after mild seasonal fires."
+  },
+  {
+    "id": "pro-en-mas-estuary",
+    "language": "english",
+    "difficulty": "master",
+    "term": "estuary",
+    "pronunciation": "/ˈestʃueri/",
+    "translation": "河口；三角洲入海口",
+    "memoryCue": "淡水河与咸水海洋交汇的生态富饶地带（托福阅读常考地貌）。",
+    "example": "Migratory shorebirds feed along muddy tidal estuaries each autumn."
+  },
+  {
+    "id": "pro-en-mas-exothermic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "exothermic",
+    "pronunciation": "/ˌeksoʊˈθɜːrmɪk/",
+    "translation": "放热的（化学反应）",
+    "memoryCue": "exo-（向外）+ therm（热）→ 向外界释放热量的反应（反义 endothermic）。",
+    "example": "Rapid battery discharge is an exothermic process requiring cooling."
+  },
+  {
+    "id": "pro-en-mas-geodesic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "geodesic",
+    "pronunciation": "/ˌdʒiːəˈdesɪk/",
+    "translation": "测地线的；球面最短路径的",
+    "memoryCue": "geo-（地球）+ des（分割测量）→ 曲面上两点间的最短航线。",
+    "example": "Transoceanic flights follow curved geodesic arcs to save fuel."
+  },
+  {
+    "id": "pro-en-mas-homeostasis",
+    "language": "english",
+    "difficulty": "master",
+    "term": "homeostasis",
+    "pronunciation": "/ˌhoʊmioʊˈsteɪsɪs/",
+    "translation": "体内稳态；动态平衡",
+    "memoryCue": "homeo-（相似稳定）+ stasis（停住）→ 人体维持恒温恒压的自我调节。",
+    "example": "Sweating and shivering maintain thermal homeostasis automatically."
+  },
+  {
+    "id": "pro-en-mas-heuristic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "heuristic",
+    "pronunciation": "/hjʊˈrɪstɪk/",
+    "translation": "启发式的；经验法则；探索法",
+    "memoryCue": "源自阿基米德名言 Eureka（我发现了！），指高效近似求解规则。",
+    "example": "Spaced scheduling heuristics prioritize overdue terms before new ones."
+  },
+  {
+    "id": "pro-en-mas-hydrology",
+    "language": "english",
+    "difficulty": "master",
+    "term": "hydrology",
+    "pronunciation": "/haɪˈdrɑːlədʒi/",
+    "translation": "水文学",
+    "memoryCue": "hydro-（水）+ -logy（学科）→ 研究降水、径流与地下水循环。",
+    "example": "Watershed hydrology guides reservoir planning across dry summers."
+  },
+  {
+    "id": "pro-en-mas-hypoxia",
+    "language": "english",
+    "difficulty": "master",
+    "term": "hypoxia",
+    "pronunciation": "/haɪˈpɑːksiə/",
+    "translation": "缺氧；低氧症",
+    "memoryCue": "hypo-（低于正常）+ ox（氧）→ 组织或海拔高处供氧不足。",
+    "example": "High-altitude mountaineers watch closely for early signs of hypoxia."
+  },
+  {
+    "id": "pro-en-mas-isotope",
+    "language": "english",
+    "difficulty": "master",
+    "term": "isotope",
+    "pronunciation": "/ˈaɪsətoʊp/",
+    "translation": "同位素",
+    "memoryCue": "iso-（相同）+ tope（周期表同一位置）→ 质子数同、中子数不同。",
+    "example": "Carbon isotope ratios help date ancient wooden shipwrecks accurately."
+  },
+  {
+    "id": "pro-en-mas-kinetic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "kinetic",
+    "pronunciation": "/kɪˈnetɪk/",
+    "translation": "运动的；动力的（kinetic energy 动能）",
+    "memoryCue": "kine-（运动，同 cinema）→ 物体运动所携带的能量。",
+    "example": "Regenerative braking converts kinetic energy back into battery charge."
+  },
+  {
+    "id": "pro-en-mas-lithosphere",
+    "language": "english",
+    "difficulty": "master",
+    "term": "lithosphere",
+    "pronunciation": "/ˈlɪθəsfɪr/",
+    "translation": "岩石圈",
+    "memoryCue": "litho-（石头）+ sphere（球层）→ 地壳与上地幔顶部坚硬板块。",
+    "example": "Slow convection beneath the lithosphere drives tectonic plate drift."
+  },
+  {
+    "id": "pro-en-mas-metamorphic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "metamorphic",
+    "pronunciation": "/ˌmetəˈmɔːrfɪk/",
+    "translation": "变质的（岩石）；变形蜕变的",
+    "memoryCue": "meta-（改变）+ morph（形态）→ 大理石是石灰岩高温高压变成的变质岩。",
+    "example": "Marble is a classic metamorphic rock prized by classic sculptors."
+  },
+  {
+    "id": "pro-en-mas-mitochondria",
+    "language": "english",
+    "difficulty": "master",
+    "term": "mitochondria",
+    "pronunciation": "/ˌmaɪtəˈkɑːndriə/",
+    "translation": "线粒体（细胞能量工厂）",
+    "memoryCue": "细胞里负责把糖与氧气变成 ATP 能量的核心细胞器。",
+    "example": "Muscle cells pack dense mitochondria to sustain endurance exercise."
+  },
+  {
+    "id": "pro-en-mas-neuroplasticity",
+    "language": "english",
+    "difficulty": "master",
+    "term": "neuroplasticity",
+    "pronunciation": "/ˌnʊroʊplæˈstɪsəti/",
+    "translation": "神经可塑性",
+    "memoryCue": "大脑终生随着学习练习不断重塑神经连接的能力。",
+    "example": "Adult language mastery proves lifelong neuroplasticity in action."
+  },
+  {
+    "id": "pro-en-mas-osmosis",
+    "language": "english",
+    "difficulty": "master",
+    "term": "osmosis",
+    "pronunciation": "/ɑːzˈmoʊsɪs/",
+    "translation": "渗透作用；耳濡目染潜移默化",
+    "memoryCue": "既指生物半透膜水分子移动，也指“不知不觉受熏陶学会”。",
+    "example": "Immersion lets idioms sink in almost by cultural osmosis."
+  },
+  {
+    "id": "pro-en-mas-pathogen",
+    "language": "english",
+    "difficulty": "master",
+    "term": "pathogen",
+    "pronunciation": "/ˈpæθədʒən/",
+    "translation": "病原体；致病微生物",
+    "memoryCue": "patho-（病痛）+ gen（产生）→ 细菌、病毒等致病元凶。",
+    "example": "Rapid handwashing breaks surface transmission of seasonal pathogens."
+  },
+  {
+    "id": "pro-en-mas-photosynthesis",
+    "language": "english",
+    "difficulty": "master",
+    "term": "photosynthesis",
+    "pronunciation": "/ˌfoʊtoʊˈsɪnθəsɪs/",
+    "translation": "光合作用",
+    "memoryCue": "photo-（光）+ syn-（合）+ thesis（放）→ 植物借阳光把二氧化碳合成养分。",
+    "example": "Lush summer leaves maximize sunlight capture for photosynthesis."
+  },
+  {
+    "id": "pro-en-mas-quantum",
+    "language": "english",
+    "difficulty": "master",
+    "term": "quantum",
+    "pronunciation": "/ˈkwɑːntəm/",
+    "translation": "量子；微小的份额；飞跃（quantum leap）",
+    "memoryCue": "quant-（数量份额）→ 物理能量不可再分的最小离散包。",
+    "example": "Quantum cryptography relies on fundamental laws of particle measurement."
+  },
+  {
+    "id": "pro-en-mas-refraction",
+    "language": "english",
+    "difficulty": "master",
+    "term": "refraction",
+    "pronunciation": "/rɪˈfrækʃn/",
+    "translation": "折射（光线/声波）",
+    "memoryCue": "re- + fract（折断）→ 筷子插进水杯看起来“折断”的物理现象。",
+    "example": "Atmospheric refraction paints glowing sunsets after the sun dips below sea."
+  },
+  {
+    "id": "pro-en-mas-sedimentary",
+    "language": "english",
+    "difficulty": "master",
+    "term": "sedimentary",
+    "pronunciation": "/ˌsedɪˈmenteri/",
+    "translation": "沉积的；沉积岩的",
+    "memoryCue": "sed-（坐下沉淀）→ 泥沙千百万年层层沉降压实形成的岩层。",
+    "example": "Fossils appear almost exclusively inside layered sedimentary rock."
+  },
+  {
+    "id": "pro-en-mas-stochastic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "stochastic",
+    "pronunciation": "/stəˈkæstɪk/",
+    "translation": "随机性的；随机过程的",
+    "memoryCue": "数学/AI 核心词：含随机变量演化过程（stochastic gradient）。",
+    "example": "Shuffle tie-breakers add mild stochastic variety across review rounds."
+  },
+  {
+    "id": "pro-en-mas-symbiosis",
+    "language": "english",
+    "difficulty": "master",
+    "term": "symbiosis",
+    "pronunciation": "/ˌsɪmbaɪˈoʊsɪs/",
+    "translation": "共生关系；互利共存",
+    "memoryCue": "sym-（共同）+ bio（生活）→ 小丑鱼与海葵互相依存。",
+    "example": "Fungi and pine roots form vital underground symbiosis."
+  },
+  {
+    "id": "pro-en-mas-thermodynamics",
+    "language": "english",
+    "difficulty": "master",
+    "term": "thermodynamics",
+    "pronunciation": "/ˌθɜːrmoʊdaɪˈnæmɪks/",
+    "translation": "热力学",
+    "memoryCue": "thermo-（热）+ dynamics（动力学）→ 能量转化与熵增定律科学。",
+    "example": "Laws of thermodynamics set strict limits on heat engine efficiency."
+  },
+  {
+    "id": "pro-en-mas-vector",
+    "language": "english",
+    "difficulty": "master",
+    "term": "vector",
+    "pronunciation": "/ˈvektər/",
+    "translation": "向量；矢量；传播媒介（生物）",
+    "memoryCue": "数学物理指带方向的矢量；医学指传播疟疾的蚊子等病媒。",
+    "example": "Crisp SVG icons scale as clean mathematical vectors at any screen size."
+  }
+]

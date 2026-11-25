@@ -26,10 +26,19 @@ private struct ExitingCardState: Identifiable {
     let progress: WordProgress?
     let wasTranslationVisible: Bool
     let wasRequeued: Bool
+    let challengeMode: CardChallengeMode
     let rating: RecallRating
     var offsetX: CGFloat
     var opacity: Double = 1.0
     var scale: CGFloat = 1.0
+}
+
+private enum VocabularyQuizEntry: String, Identifiable {
+    case today
+    case currentRound
+    case mistakes
+
+    var id: String { rawValue }
 }
 
 struct ContentView: View {
@@ -37,6 +46,8 @@ struct ContentView: View {
     @Environment(\.accentTheme) private var accentTheme
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(AppRouter.self) private var router: AppRouter?
 
     @Query private var allProgress: [WordProgress]
     @Query(sort: \CustomWordRecord.createdAt, order: .reverse) private var customWords: [CustomWordRecord]
@@ -45,6 +56,9 @@ struct ContentView: View {
 
     @AppStorage("selectedLanguage") private var selectedLanguageRawValue = TargetLanguage.english.rawValue
     @AppStorage("selectedDifficulty") private var selectedDifficultyRawValue = DifficultyLevel.beginner.rawValue
+    @AppStorage("difficultyScope") private var difficultyScopeRawValue = DifficultyScope.exact.rawValue
+    @AppStorage("cardChallengeMode") private var cardChallengeModeRawValue = CardChallengeMode.standard.rawValue
+    @AppStorage("selectedStudyPackID") private var selectedStudyPackID = ""
     @AppStorage("studyFilterMode") private var studyFilterModeRawValue = StudyMode.smart.rawValue
     @AppStorage("autoSpeakOnCard") private var autoSpeakOnCard = true
     @AppStorage("speechSpeed") private var speechSpeedRawValue = SpeechSpeed.normal.rawValue
@@ -52,10 +66,19 @@ struct ContentView: View {
     @AppStorage("challengeSize") private var challengeSize = 10
     @AppStorage("isPreferenceExpanded") private var isPreferenceExpanded = false
     @AppStorage(WordLibrary.disabledPacksStorageKey) private var disabledPacksRaw = ""
+    @AppStorage("accentTheme") private var accentThemeRawValue = AccentTheme.forest.rawValue
+    @AppStorage(WidgetSnapshotStore.hideTranslationStorageKey) private var hideWidgetTranslation = false
 
     @State private var speechService = SpeechService()
     @State private var audioController = AudioLearningController()
-    @State private var isShowingQuizSheet = false
+    @State private var quizEntry: VocabularyQuizEntry?
+    @State private var quizAfterDismissal: VocabularyQuizEntry?
+    @State private var todayCheckpoint: TodayPracticeState?
+    @State private var todayDueCount = 0
+    @State private var todayCanLearn = false
+    @State private var todayMistakeCount = 0
+    @State private var todayError: String?
+    @State private var showsClassicTraining = false
     @State private var isShowingAudioSheet = false
     @State private var isShowingStrategyTip = false
     @State private var noteEditingWord: WordItem?
@@ -103,6 +126,14 @@ struct ContentView: View {
         DifficultyLevel(rawValue: selectedDifficultyRawValue) ?? .beginner
     }
 
+    private var selectedDifficultyScope: DifficultyScope {
+        DifficultyScope(rawValue: difficultyScopeRawValue) ?? .exact
+    }
+
+    private var selectedChallengeMode: CardChallengeMode {
+        CardChallengeMode(rawValue: cardChallengeModeRawValue) ?? .standard
+    }
+
     private var selectedStudyMode: StudyMode {
         StudyMode(rawValue: studyFilterModeRawValue) ?? .smart
     }
@@ -118,21 +149,46 @@ struct ContentView: View {
             speechSpeedRawValue = newValue.rawValue
             speechService.speed = newValue
             audioController.speechService.speed = newValue
-            if let word = currentWord {
-                speechService.speak(word.term, language: word.language)
-            }
+            speakCurrentWordIfNeeded()
         }
+    }
+
+    private var disabledPackIDSet: Set<String> {
+        WordLibrary.parseDisabledPackIDs(disabledPacksRaw)
     }
 
     private var allWords: [WordItem] {
         WordLibrary.mergedWords(
             with: customWords,
-            disabledPackIDs: WordLibrary.parseDisabledPackIDs(disabledPacksRaw)
+            disabledPackIDs: disabledPackIDSet
         )
     }
 
-    private var availableWords: [WordItem] {
+    private var languageWords: [WordItem] {
         allWords.filter { $0.language == selectedLanguage }
+    }
+
+    /// Active bundled packs available for the currently selected language.
+    private var activeLanguagePacks: [WordPackDescriptor] {
+        let disabled = disabledPackIDSet
+        return WordLibrary.builtInPacks.filter { pack in
+            (pack.isCore || !disabled.contains(pack.id)) && pack.languages.contains(selectedLanguage)
+        }
+    }
+
+    /// Words scoped to both `selectedLanguage` and optional `selectedStudyPackID`.
+    private var availableWords: [WordItem] {
+        let pack = todayScope.packID
+        return pack.isEmpty ? languageWords : languageWords.filter { $0.packID == pack }
+    }
+
+    private var customWordsSignature: [String] {
+        customWords.map { "\($0.id)|\($0.languageRawValue)|\($0.term)|\($0.translation)" }
+    }
+
+    private var todayScope: TodayPracticeScope {
+        let pack = activeLanguagePacks.contains { $0.id == selectedStudyPackID } ? selectedStudyPackID : ""
+        return TodayPracticeScope(language: selectedLanguage, packID: pack)
     }
 
     private var progressMap: [String: WordProgress] {
@@ -196,6 +252,7 @@ struct ContentView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 12) {
                         compactTopBar(studiedToday: studiedToday, streak: streak)
+                        todayPanel
 
                         if isPreferenceExpanded {
                             expandedPreferencesDrawer
@@ -206,30 +263,26 @@ struct ContentView: View {
                                 )
                         }
 
-                        sessionProgressBar
-
-                        if let warning = speechService.voiceWarningMessage {
-                            VoicePackNoticeBanner(message: warning) {
-                                speechService.dismissVoiceWarning()
+                        if showsClassicTraining {
+                            sessionProgressBar
+                            if let warning = speechService.voiceWarningMessage {
+                                VoicePackNoticeBanner(message: warning) {
+                                    speechService.dismissVoiceWarning()
+                                }
                             }
+                            if isChallengeFinished {
+                                sessionCompleteCard
+                                    .transition(.opacity.combined(with: .scale(scale: 0.96)))
+                            } else if let word = currentWord {
+                                cardDeckStage(
+                                    word: word, currentProgress: currentProgress, progressMap: currentProgressMap
+                                )
+                                actionPanel(currentProgress: currentProgress)
+                            } else {
+                                emptyModeCard
+                            }
+                            strategyFooterTip
                         }
-
-                        if isChallengeFinished {
-                            sessionCompleteCard
-                                .transition(.opacity.combined(with: .scale(scale: 0.96)))
-                        } else if let word = currentWord {
-                            cardDeckStage(
-                                word: word,
-                                currentProgress: currentProgress,
-                                progressMap: currentProgressMap
-                            )
-
-                            actionPanel(currentProgress: currentProgress)
-                        } else {
-                            emptyModeCard
-                        }
-
-                        strategyFooterTip
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 8)
@@ -257,34 +310,11 @@ struct ContentView: View {
             .toolbarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    HStack(spacing: 12) {
-                        Button {
-                            isShowingQuizSheet = true
-                        } label: {
-                            Image(systemName: "pencil.and.outline")
-                        }
-                        .disabled(sessionQueue.isEmpty)
-                        .accessibilityLabel("测验自测")
-
-                        Button {
-                            audioController.startPlayback(words: sessionQueue, startIndex: currentIndex)
-                            isShowingAudioSheet = true
-                        } label: {
-                            Image(systemName: "headphones")
-                        }
-                        .disabled(sessionQueue.isEmpty)
-                        .accessibilityLabel("随身听学")
-                    }
+                    practiceMenu
                 }
             }
-            .sheet(isPresented: $isShowingQuizSheet) {
-                QuizView(
-                    sourceWords: sessionQueue,
-                    allAvailableWords: availableWords,
-                    onComplete: {
-                        startNewChallenge()
-                    }
-                )
+            .sheet(item: $quizEntry, onDismiss: didDismissQuiz) { entry in
+                practiceSheet(for: entry)
             }
             .sheet(isPresented: $isShowingAudioSheet) {
                 AudioPlayerView(
@@ -304,6 +334,13 @@ struct ContentView: View {
             .sensoryFeedback(.warning, trigger: warningTrigger)
             .sensoryFeedback(.impact(weight: .light), trigger: fuzzyTrigger)
             .sensoryFeedback(.selection, trigger: selectionTrigger)
+            .alert("背词", isPresented: Binding(
+                get: { todayError != nil }, set: { if !$0 { todayError = nil } }
+            )) {
+                Button("知道了", role: .cancel) {}
+            } message: {
+                Text(todayError ?? "")
+            }
             .task(id: StudyAnalytics.streakMayExceedWindow(streak)) {
                 guard StudyAnalytics.streakMayExceedWindow(streak) else { return }
                 olderActiveDays = StudyAnalytics.olderActiveDays(before: windowStart, in: modelContext)
@@ -311,9 +348,32 @@ struct ContentView: View {
             .onAppear {
                 speechService.speed = selectedSpeechSpeed
                 audioController.speechService.speed = selectedSpeechSpeed
-                if sessionQueue.isEmpty {
+                refreshToday()
+                consumePendingStudyRoute()
+                if showsClassicTraining && sessionQueue.isEmpty {
                     startNewChallenge()
                 }
+            }
+            .onChange(of: router?.pendingStudyAction) {
+                consumePendingStudyRoute()
+            }
+            .onChange(of: dailyGoal) { refreshToday() }
+            .onChange(of: accentThemeRawValue) { refreshToday() }
+            .onChange(of: hideWidgetTranslation) { refreshToday() }
+            .onChange(of: scenePhase) {
+                if scenePhase == .active && quizEntry == nil { refreshToday() }
+            }
+            .onChange(of: todayScope) {
+                refreshToday()
+            }
+            .onChange(of: selectedDifficultyRawValue) { refreshToday() }
+            .onChange(of: difficultyScopeRawValue) { refreshToday() }
+            .onChange(of: customWordsSignature) { refreshToday() }
+            .onChange(of: allProgress.count) {
+                if quizEntry == nil { refreshToday() }
+            }
+            .onChange(of: recentEvents.count) {
+                if quizEntry == nil { refreshToday() }
             }
             .onChange(of: challengeSize) {
                 if completedIDs.isEmpty {
@@ -321,9 +381,13 @@ struct ContentView: View {
                 }
             }
             .onChange(of: disabledPacksRaw) {
+                if !selectedStudyPackID.isEmpty && disabledPackIDSet.contains(selectedStudyPackID) {
+                    selectedStudyPackID = ""
+                }
                 if completedIDs.isEmpty {
                     startNewChallenge()
                 }
+                refreshToday()
             }
             .onChange(of: speechSpeedRawValue) {
                 speechService.speed = selectedSpeechSpeed
@@ -336,12 +400,249 @@ struct ContentView: View {
         }
     }
 
+    private var practiceMenu: some View {
+        Menu {
+            Button {
+                showsClassicTraining.toggle()
+                if showsClassicTraining {
+                    if sessionQueue.isEmpty { startNewChallenge() }
+                    else { speakCurrentWordIfNeeded() }
+                } else {
+                    speechService.stop()
+                }
+            } label: {
+                Label(showsClassicTraining ? "收起闪卡训练" : "闪卡训练", systemImage: "rectangle.stack")
+            }
+
+            Button {
+                if sessionQueue.isEmpty { startNewChallenge() }
+                guard !sessionQueue.isEmpty else {
+                    todayError = "当前筛选范围没有可用的练习词条。"
+                    return
+                }
+                quizEntry = .currentRound
+            } label: {
+                Label("词汇练习", systemImage: "pencil.and.outline")
+            }
+
+            Button {
+                quizEntry = .mistakes
+            } label: {
+                Label("错词专练", systemImage: QuizMode.mistakePractice.systemImage)
+            }
+
+            Button {
+                if sessionQueue.isEmpty { startNewChallenge() }
+                guard !sessionQueue.isEmpty else {
+                    todayError = "当前筛选范围没有可听学的词条。"
+                    return
+                }
+                audioController.startPlayback(words: sessionQueue, startIndex: currentIndex)
+                isShowingAudioSheet = true
+            } label: {
+                Label("随身听学", systemImage: "headphones")
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+        }
+        .accessibilityLabel("更多练习")
+    }
+
+    private func practiceSheet(for entry: VocabularyQuizEntry) -> some View {
+        let summary: (() -> (remaining: Int, canLearn: Bool))?
+        let next: (() -> Void)?
+        if entry == .today {
+            summary = { todayTotals() }
+            next = { quizAfterDismissal = .today }
+        } else {
+            summary = nil
+            next = nil
+        }
+        let mistakes: (() -> Void)? = entry == .mistakes ? nil : { quizAfterDismissal = .mistakes }
+        let quiz = QuizView(
+            sourceWords: entry == .mistakes ? availableWords : sessionQueue,
+            allAvailableWords: languageWords,
+            initialMode: entry == .mistakes ? .mistakePractice : .vocabularyPractice,
+            today: entry == .today ? todayCheckpoint : nil,
+            todaySummary: summary,
+            onNextToday: next,
+            onPracticeMistakes: mistakes,
+            onRecordReview: { wordID in
+                if undoStack.contains(where: { $0.reviewSnapshot.wordID == wordID }) {
+                    undoStack.removeAll()
+                }
+            },
+            onComplete: {
+                if entry == .currentRound { startNewChallenge() }
+            }
+        )
+        return quiz.onAppear {
+            speechService.stop()
+            audioController.stopPlayback()
+        }
+    }
+
+    private var todayPanel: some View {
+        let packTitle = activeLanguagePacks.first { $0.id == todayScope.packID }?.title ?? "全部词书"
+        let title = todayCheckpoint != nil ? "继续复习" : todayDueCount > 0 ? "开始复习" : "学新词"
+        return VStack(alignment: .leading, spacing: 12) {
+            Text("今日复习")
+                .font(.title2.weight(.bold))
+            Text("\(selectedLanguage.title) · \(packTitle)")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            Text(todayDueCount > 0 ? "\(todayDueCount) 个到期词" : "当前范围暂无到期词")
+                .font(.subheadline)
+            if let todayCheckpoint {
+                Text("已完成 \(todayCheckpoint.questions.count - todayCheckpoint.pending.count) / \(todayCheckpoint.questions.count) 个首答")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            if todayCheckpoint != nil || todayDueCount > 0 || todayCanLearn {
+                Button(action: openToday) {
+                    Label(title, systemImage: "arrow.right.circle.fill")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+            } else {
+                Text("当前难度暂无新词，可调整背词设置。")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            if todayMistakeCount > 0 {
+                Button {
+                    quizEntry = .mistakes
+                } label: {
+                    Label("错词专练（\(todayMistakeCount) 词）", systemImage: QuizMode.mistakePractice.systemImage)
+                        .font(.subheadline.weight(.semibold))
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .tint(themeColor)
+            }
+        }
+        .padding(18)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .surfacePanel(radius: AppMetrics.panelRadius)
+    }
+
+    private func todayProgress(in context: ModelContext) throws -> [String: WordProgress] {
+        Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<WordProgress>()).map { ($0.wordID, $0) })
+    }
+
+    private func todayTotals() -> (remaining: Int, canLearn: Bool) {
+        let context = ModelContext(modelContext.container)
+        let progress = (try? todayProgress(in: context)) ?? progressMap
+        let words = availableWords
+        return (
+            TodayPracticeState.dueWords(from: words, progress: progress).count,
+            !TodayPracticeState.newWords(from: words, progress: progress, difficulty: selectedDifficulty, scope: selectedDifficultyScope).isEmpty
+        )
+    }
+
+    private func refreshToday() {
+        let context = ModelContext(modelContext.container)
+        do {
+            let progress = try todayProgress(in: context)
+            let words = availableWords
+            todayDueCount = TodayPracticeState.dueWords(from: words, progress: progress).count
+            todayCanLearn = !TodayPracticeState.newWords(
+                from: words, progress: progress, difficulty: selectedDifficulty, scope: selectedDifficultyScope
+            ).isEmpty
+            todayMistakeCount = MistakePractice.selectWords(from: words, progressByID: progress).count
+
+            let stored: TodayPracticeState?
+            do { stored = try TodayPracticeStore.load(in: context) }
+            catch is DecodingError {
+                try TodayPracticeStore.stageRemoval(in: context)
+                try context.save()
+                todayCheckpoint = nil
+                showToast(message: "无法恢复上次练习，可以开始新一轮", icon: "arrow.clockwise", tint: themeColor)
+                return
+            }
+            if let stored, !stored.isValid(for: todayScope, words: words, progress: progress) {
+                try TodayPracticeStore.commit(nil, replacing: stored, in: modelContext.container)
+                todayCheckpoint = nil
+                showToast(message: "学习范围或进度已更新，请开始新一轮", icon: "arrow.clockwise", tint: themeColor)
+            } else {
+                todayCheckpoint = stored
+            }
+
+            let packTitle = activeLanguagePacks.first { $0.id == todayScope.packID }?.title ?? "全部词书"
+            let snapshot = WidgetSnapshotBuilder.build(
+                language: selectedLanguage,
+                scopeTitle: packTitle,
+                scopedWords: words,
+                allProgress: Array(progress.values),
+                recentEvents: recentEvents,
+                olderActiveDays: olderActiveDays,
+                dailyGoal: dailyGoal,
+                accentThemeRawValue: accentThemeRawValue,
+                hideDailyWordTranslation: hideWidgetTranslation
+            )
+            WidgetSnapshotStore.save(snapshot)
+        } catch {
+            todayError = "未能读取今日复习：\(error.localizedDescription)"
+        }
+    }
+
+    private func consumePendingStudyRoute() {
+        guard let action = router?.pendingStudyAction else { return }
+        router?.pendingStudyAction = nil
+        switch action {
+        case .openToday:
+            openToday()
+        case .openMistakes:
+            quizEntry = .mistakes
+        }
+    }
+
+    private func openToday() {
+        refreshToday()
+        guard todayError == nil else { return }
+        if todayCheckpoint != nil {
+            quizEntry = .today
+            return
+        }
+        do {
+            let context = ModelContext(modelContext.container)
+            let progress = try todayProgress(in: context)
+            let words = availableWords
+            let due = TodayPracticeState.dueWords(from: words, progress: progress)
+            let isNew = due.isEmpty
+            let targets = isNew ? TodayPracticeState.newWords(
+                from: words, progress: progress, difficulty: selectedDifficulty, scope: selectedDifficultyScope
+            ) : due
+            guard !targets.isEmpty else { return }
+            let draft = TodayPracticeState(
+                scope: todayScope, learnsNewWords: isNew, words: targets, distractors: languageWords, progress: progress
+            )
+            todayCheckpoint = try TodayPracticeStore.commit(draft, replacing: nil, in: modelContext.container)
+            quizEntry = .today
+        } catch {
+            todayError = "未能开始今日复习：\(error.localizedDescription)"
+        }
+    }
+
+    private func didDismissQuiz() {
+        let destination = quizAfterDismissal
+        quizAfterDismissal = nil
+        if destination == .today {
+            openToday()
+        } else {
+            refreshToday()
+            if destination == .mistakes { quizEntry = .mistakes }
+        }
+    }
+
     // MARK: - Compact Header & Expandable Preferences
 
     private func compactTopBar(studiedToday: Int, streak: Int) -> some View {
         let goalRatio = dailyGoal > 0 ? min(1.0, Double(studiedToday) / Double(dailyGoal)) : 0
         let goalReached = dailyGoal > 0 && studiedToday >= dailyGoal
         let ringColor = goalReached ? Color.green : themeColor
+        let activePack = activeLanguagePacks.first(where: { $0.id == selectedStudyPackID })
 
         return HStack(spacing: 10) {
             Button {
@@ -363,6 +664,18 @@ struct ContentView: View {
                         .foregroundStyle(.primary)
                         .lineLimit(1)
 
+                    if activePack != nil {
+                        Image(systemName: "book.closed.fill")
+                            .font(.caption2)
+                            .foregroundStyle(themeColor)
+                    }
+
+                    if selectedChallengeMode != .standard {
+                        Image(systemName: selectedChallengeMode.systemImage)
+                            .font(.caption2.weight(.bold))
+                            .foregroundStyle(.indigo)
+                    }
+
                     if selectedStudyMode != .smart {
                         Text(selectedStudyMode.shortBadge)
                             .font(.caption2.weight(.bold))
@@ -381,7 +694,7 @@ struct ContentView: View {
                 .surfacePanel(radius: 20, borderColor: themeColor.opacity(isPreferenceExpanded ? 0.35 : 0.10))
             }
             .buttonStyle(PressScaleButtonStyle(scale: 0.97))
-            .accessibilityLabel("展开或折叠语种、难度与训练模式设置")
+            .accessibilityLabel("展开或折叠语种、词书、难度与挑战模式设置")
 
             Spacer(minLength: 4)
 
@@ -426,12 +739,18 @@ struct ContentView: View {
     }
 
     private var expandedPreferencesDrawer: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            // 5 Language horizontal chips
+        VStack(alignment: .leading, spacing: 14) {
+            // 1. 5 Languages
             VStack(alignment: .leading, spacing: 6) {
-                Text("目标语种")
-                    .font(.caption2.weight(.semibold))
-                    .foregroundStyle(.secondary)
+                HStack {
+                    Text("目标语种")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    Text("已掌握 \(languageProgressStats.mastered) · 到期 \(languageProgressStats.due)")
+                        .font(.caption2.monospacedDigit())
+                        .foregroundStyle(.secondary)
+                }
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
@@ -441,6 +760,11 @@ struct ContentView: View {
                                 guard language != selectedLanguage else { return }
                                 selectionTrigger += 1
                                 selectedLanguageRawValue = language.rawValue
+                                if !selectedStudyPackID.isEmpty,
+                                   let pack = WordLibrary.builtInPacks.first(where: { $0.id == selectedStudyPackID }),
+                                   !pack.languages.contains(language) {
+                                    selectedStudyPackID = ""
+                                }
                                 startNewChallenge()
                             } label: {
                                 HStack(spacing: 5) {
@@ -464,19 +788,86 @@ struct ContentView: View {
                 }
             }
 
-            // Difficulty level
+            // 2. Single-book focus selector
             VStack(alignment: .leading, spacing: 6) {
+                Text("专攻词书")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.secondary)
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        let allSelected = selectedStudyPackID.isEmpty || !activeLanguagePacks.contains(where: { $0.id == selectedStudyPackID })
+                        Button {
+                            guard !allSelected else { return }
+                            selectionTrigger += 1
+                            selectedStudyPackID = ""
+                            startNewChallenge()
+                        } label: {
+                            Text("全部词书 (\(languageWords.count))")
+                                .font(.caption.weight(allSelected ? .bold : .medium))
+                                .padding(.horizontal, 11)
+                                .padding(.vertical, 6)
+                                .background(allSelected ? themeColor : Color(.tertiarySystemFill), in: Capsule())
+                                .foregroundStyle(allSelected ? .white : .primary)
+                        }
+                        .buttonStyle(PressScaleButtonStyle())
+
+                        ForEach(activeLanguagePacks) { pack in
+                            let isSelected = selectedStudyPackID == pack.id
+                            let packLangCount = WordLibrary.words(forPackID: pack.id).filter { $0.language == selectedLanguage }.count
+                            Button {
+                                guard !isSelected else { return }
+                                selectionTrigger += 1
+                                selectedStudyPackID = pack.id
+                                startNewChallenge()
+                            } label: {
+                                Text("\(pack.title) (\(packLangCount))")
+                                    .font(.caption.weight(isSelected ? .bold : .medium))
+                                    .padding(.horizontal, 11)
+                                    .padding(.vertical, 6)
+                                    .background(isSelected ? themeColor : Color(.tertiarySystemFill), in: Capsule())
+                                    .foregroundStyle(isSelected ? .white : .primary)
+                            }
+                            .buttonStyle(PressScaleButtonStyle())
+                        }
+                    }
+                }
+            }
+
+            // 3. 6-tier difficulty + Exact/UpTo scope switch
+            VStack(alignment: .leading, spacing: 8) {
                 HStack {
-                    Text("词库难度上限")
+                    Text("词库难度")
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(.secondary)
+
                     Spacer()
-                    Text("已掌握 \(languageProgressStats.mastered) · 到期 \(languageProgressStats.due)")
-                        .font(.caption2.monospacedDigit())
-                        .foregroundStyle(.secondary)
+
+                    HStack(spacing: 4) {
+                        ForEach(DifficultyScope.allCases) { scope in
+                            let isSelected = scope == selectedDifficultyScope
+                            Button {
+                                guard scope != selectedDifficultyScope else { return }
+                                selectionTrigger += 1
+                                difficultyScopeRawValue = scope.rawValue
+                                startNewChallenge()
+                            } label: {
+                                Text(scope.title)
+                                    .font(.caption2.weight(isSelected ? .bold : .medium))
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(isSelected ? themeColor.opacity(0.16) : Color(.tertiarySystemFill), in: Capsule())
+                                    .overlay(
+                                        Capsule().stroke(isSelected ? themeColor : Color.clear, lineWidth: 1)
+                                    )
+                                    .foregroundStyle(isSelected ? themeColor : .secondary)
+                            }
+                            .buttonStyle(PressScaleButtonStyle())
+                        }
+                    }
                 }
 
-                HStack(spacing: 6) {
+                HStack(spacing: 5) {
                     ForEach(DifficultyLevel.allCases) { level in
                         let isSelected = level == selectedDifficulty
                         Button {
@@ -487,10 +878,12 @@ struct ContentView: View {
                         } label: {
                             Text(level.shortTitle)
                                 .font(.caption.weight(isSelected ? .bold : .medium))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.75)
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 6)
+                                .padding(.vertical, 7)
                                 .background(
-                                    isSelected ? themeColor.opacity(0.15) : Color(.tertiarySystemFill),
+                                    isSelected ? themeColor.opacity(0.16) : Color(.tertiarySystemFill),
                                     in: RoundedRectangle(cornerRadius: 8, style: .continuous)
                                 )
                                 .overlay(
@@ -506,9 +899,48 @@ struct ContentView: View {
                 DifficultyScaleView(selectedDifficulty: selectedDifficulty)
             }
 
-            // Multi-mode study filter (Roadmap feature)
+            // 4. Card Challenge Mode (4 intensity modes)
             VStack(alignment: .leading, spacing: 6) {
-                Text("训练模式")
+                Text("卡片挑战强度")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.secondary)
+
+                HStack(spacing: 6) {
+                    ForEach(CardChallengeMode.allCases) { mode in
+                        let isSelected = mode == selectedChallengeMode
+                        Button {
+                            guard mode != selectedChallengeMode else { return }
+                            selectionTrigger += 1
+                            cardChallengeModeRawValue = mode.rawValue
+                            isTranslationVisible = false
+                            if mode == .blindAudio, let word = currentWord {
+                                speechService.speak(word.term, language: word.language)
+                            }
+                        } label: {
+                            Label(mode.shortTitle, systemImage: mode.systemImage)
+                                .font(.caption.weight(isSelected ? .bold : .medium))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.75)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 7)
+                                .background(
+                                    isSelected ? Color.indigo : Color(.tertiarySystemFill),
+                                    in: RoundedRectangle(cornerRadius: 9, style: .continuous)
+                                )
+                                .foregroundStyle(isSelected ? .white : .primary)
+                        }
+                        .buttonStyle(PressScaleButtonStyle())
+                    }
+                }
+
+                Text(selectedChallengeMode.subtitle)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+
+            // 5. Study Queue Filter (Smart / Due / Favorites)
+            VStack(alignment: .leading, spacing: 6) {
+                Text("复习范围")
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
 
@@ -536,19 +968,13 @@ struct ContentView: View {
                         .buttonStyle(PressScaleButtonStyle())
                     }
                 }
-
-                Text(selectedStudyMode.subtitle)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
             }
 
             Divider()
 
-            HStack {
-                Toggle("切卡自动朗读", isOn: $autoSpeakOnCard)
-                    .font(.subheadline)
-                    .tint(themeColor)
-            }
+            Toggle("切卡自动朗读", isOn: $autoSpeakOnCard)
+                .font(.subheadline)
+                .tint(themeColor)
 
             Picker("朗读语速", selection: speechSpeedSelection) {
                 ForEach(SpeechSpeed.allCases) { speed in
@@ -666,6 +1092,7 @@ struct ContentView: View {
                     isTranslationVisible: false,
                     isRequeuedInSession: requeuedIDs.contains(nextWord.id),
                     speechService: speechService,
+                    challengeMode: selectedChallengeMode,
                     isPreviewOnly: true
                 )
                 .scaleEffect(backScale)
@@ -681,8 +1108,9 @@ struct ContentView: View {
                 isTranslationVisible: isTranslationVisible,
                 isRequeuedInSession: requeuedIDs.contains(word.id),
                 speechService: speechService,
+                challengeMode: selectedChallengeMode,
                 onTapToggleTranslation: {
-                    isTranslationVisible.toggle()
+                    toggleCardReveal(for: word)
                 },
                 onSwipeDragChanged: { width in
                     activeSwipeWidth = width
@@ -692,6 +1120,9 @@ struct ContentView: View {
                 },
                 onToggleFavorite: {
                     toggleFavorite(word)
+                },
+                onMarkTooEasy: {
+                    markTooEasyCurrentWord()
                 },
                 onEditNote: {
                     noteEditingWord = word
@@ -714,6 +1145,7 @@ struct ContentView: View {
                     isTranslationVisible: exiting.wasTranslationVisible,
                     isRequeuedInSession: exiting.wasRequeued,
                     speechService: speechService,
+                    challengeMode: exiting.challengeMode,
                     isPreviewOnly: true
                 )
                 .offset(x: exiting.offsetX)
@@ -735,8 +1167,10 @@ struct ContentView: View {
 
         return VStack(spacing: 10) {
             Button {
-                withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
-                    isTranslationVisible.toggle()
+                if let word = currentWord {
+                    withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                        toggleCardReveal(for: word)
+                    }
                 }
             } label: {
                 Label(
@@ -856,9 +1290,9 @@ struct ContentView: View {
 
                 HStack(spacing: 10) {
                     Button {
-                        isShowingQuizSheet = true
+                        quizEntry = .currentRound
                     } label: {
-                        Label("测验本轮", systemImage: "pencil.and.outline")
+                        Label("词汇练习", systemImage: "pencil.and.outline")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(themeColor)
                             .frame(maxWidth: .infinity)
@@ -909,6 +1343,27 @@ struct ContentView: View {
                 startNewChallenge()
             }
         case .smart:
+            if selectedDifficultyScope == .exact && !selectedStudyPackID.isEmpty {
+                return EmptyStateView(
+                    title: "所选词书无「\(selectedDifficulty.shortTitle)」词条",
+                    subtitle: "当前词书聚焦其他难度分级。可恢复「全部词书」或改为「含更低级别」。",
+                    icon: "books.vertical.fill",
+                    actionTitle: "恢复全部词书"
+                ) {
+                    selectedStudyPackID = ""
+                    startNewChallenge()
+                }
+            } else if selectedDifficultyScope == .exact {
+                return EmptyStateView(
+                    title: "\(selectedLanguage.title)暂无「\(selectedDifficulty.shortTitle)」词条",
+                    subtitle: "可切换为「含更低级别」覆盖周边难度，或前往「词库 → 词书管理」开启更多词包。",
+                    icon: "slider.horizontal.3",
+                    actionTitle: "改为含更低级别"
+                ) {
+                    difficultyScopeRawValue = DifficultyScope.upTo.rawValue
+                    startNewChallenge()
+                }
+            }
             return EmptyStateView()
         }
     }
@@ -940,6 +1395,13 @@ struct ContentView: View {
 
     // MARK: - Actions & Transitions
 
+    private func toggleCardReveal(for word: WordItem) {
+        isTranslationVisible.toggle()
+        if isTranslationVisible && selectedChallengeMode == .meaningToTerm && autoSpeakOnCard {
+            speechService.speak(word.term, language: word.language)
+        }
+    }
+
     private func toggleFavorite(_ word: WordItem) {
         selectionTrigger += 1
         let record: WordProgress
@@ -964,6 +1426,75 @@ struct ContentView: View {
         try? modelContext.save()
     }
 
+    private func markTooEasyCurrentWord() {
+        guard let word = currentWord, !isChallengeFinished else { return }
+
+        speechService.stop()
+        activeSwipeWidth = 0
+
+        let hadReachedDailyGoal = dailyGoal > 0 && todayStudiedWords >= dailyGoal
+        let currentProgressSnapshot = progressMap[word.id]
+
+        triggerCardExitAnimation(
+            word: word,
+            progress: currentProgressSnapshot,
+            wasTranslationVisible: isTranslationVisible,
+            wasRequeued: requeuedIDs.contains(word.id),
+            rating: .known,
+            startOffsetX: 0
+        )
+
+        let previousIndex = currentIndex
+        let previousKnown = knownCount
+        let previousFuzzy = fuzzyCount
+        let previousUnknown = unknownCount
+        let previousCompleted = completedIDs
+        let previousRequeued = requeuedIDs
+
+        let snapshot = SpacedRepetitionEngine.masterImmediately(
+            for: word,
+            existingProgress: currentProgressSnapshot,
+            in: modelContext
+        )
+
+        knownCount += 1
+        successTrigger += 1
+        completedIDs.insert(word.id)
+
+        undoStack.append(
+            SessionUndoEntry(
+                reviewSnapshot: snapshot,
+                wordTerm: word.term,
+                previousIndex: previousIndex,
+                previousKnownCount: previousKnown,
+                previousFuzzyCount: previousFuzzy,
+                previousUnknownCount: previousUnknown,
+                previousCompletedIDs: previousCompleted,
+                previousRequeuedIDs: previousRequeued,
+                appendedRequeueAtEnd: false
+            )
+        )
+
+        isTranslationVisible = false
+        if currentIndex < sessionQueue.count - 1 {
+            withAnimation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion)) {
+                currentIndex += 1
+            }
+            speakCurrentWordIfNeeded()
+        }
+
+        let nowReachedGoal = dailyGoal > 0 && todayStudiedWords >= dailyGoal
+        if !hadReachedDailyGoal && nowReachedGoal {
+            celebrateTrigger += 1
+            showToast(message: "太棒了！今日 \(dailyGoal) 词目标达成", icon: "flame.fill", tint: .orange)
+        } else {
+            if isChallengeFinished {
+                celebrateTrigger += 1
+            }
+            showToast(message: "已斩熟词「\(word.term)」· 60 天后复查", icon: "bolt.slash.fill", tint: .teal)
+        }
+    }
+
     private func rateCurrentWord(_ rating: RecallRating, startOffsetX: CGFloat = 0) {
         guard let word = currentWord, !isChallengeFinished else { return }
 
@@ -973,7 +1504,6 @@ struct ContentView: View {
         let hadReachedDailyGoal = dailyGoal > 0 && todayStudiedWords >= dailyGoal
         let currentProgressSnapshot = progressMap[word.id]
 
-        // Launch flying exit overlay card before advancing index
         triggerCardExitAnimation(
             word: word,
             progress: currentProgressSnapshot,
@@ -1060,6 +1590,7 @@ struct ContentView: View {
             progress: progress,
             wasTranslationVisible: wasTranslationVisible,
             wasRequeued: wasRequeued,
+            challengeMode: selectedChallengeMode,
             rating: rating,
             offsetX: startOffsetX
         )
@@ -1156,7 +1687,8 @@ struct ContentView: View {
             progressMap: progressMap,
             excluding: previousChallengeIDs,
             limit: challengeSize,
-            mode: selectedStudyMode
+            mode: selectedStudyMode,
+            difficultyScope: selectedDifficultyScope
         )
 
         withAnimation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion)) {
@@ -1176,12 +1708,17 @@ struct ContentView: View {
     }
 
     private func speakCurrentWordIfNeeded() {
-        guard autoSpeakOnCard, let word = currentWord else { return }
+        guard showsClassicTraining, let word = currentWord else { return }
+        // In Meaning-to-Term mode, keep front silent until revealed so audio doesn't give away the word.
+        if selectedChallengeMode == .meaningToTerm {
+            return
+        }
+        guard autoSpeakOnCard || selectedChallengeMode == .blindAudio else { return }
         speechService.speak(word.term, language: word.language)
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: [WordProgress.self, CustomWordRecord.self, ReviewEvent.self], inMemory: true)
+        .modelContainer(for: [WordProgress.self, CustomWordRecord.self, ReviewEvent.self, TodayPracticeCheckpoint.self], inMemory: true)
 }

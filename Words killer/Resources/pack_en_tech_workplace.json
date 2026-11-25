@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "tech-en-int-algorithm",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "algorithm",
+    "pronunciation": "/ˈælɡərɪðəm/",
+    "translation": "算法；运算规则",
+    "memoryCue": "源自波斯数学家花拉子米，软件求解步骤的核心规则。",
+    "example": "A smart spacing algorithm schedules harder cards more often."
+  },
+  {
+    "id": "tech-en-int-architecture",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "architecture",
+    "pronunciation": "/ˈɑːrkɪtektʃər/",
+    "translation": "系统架构；建筑学",
+    "memoryCue": "arch-（首领/主）+ tect（建造）→ 系统的总体骨架设计。",
+    "example": "Clean modular architecture makes long-term app updates painless."
+  },
+  {
+    "id": "tech-en-int-authentication",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "authentication",
+    "pronunciation": "/ɔːˌθentɪˈkeɪʃn/",
+    "translation": "身份验证；鉴权",
+    "memoryCue": "authentic（真实的）→ 确认对方确实是本人。",
+    "example": "Biometric authentication keeps private notes locked offline."
+  },
+  {
+    "id": "tech-en-int-bandwidth",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "bandwidth",
+    "pronunciation": "/ˈbændwɪdθ/",
+    "translation": "带宽；精力余量",
+    "memoryCue": "既指网络传输带宽，外企口语常指“是否有精力/时间”。",
+    "example": "Do you have bandwidth this week to review the design spec?"
+  },
+  {
+    "id": "tech-en-int-baseline",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "baseline",
+    "pronunciation": "/ˈbeɪslaɪn/",
+    "translation": "基线；基准线",
+    "memoryCue": "base（底部）+ line（线）→ 对比改进效果的起点线。",
+    "example": "Run all unit tests first to confirm a clean baseline."
+  },
+  {
+    "id": "tech-en-int-bottleneck",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "bottleneck",
+    "pronunciation": "/ˈbɑːtlnek/",
+    "translation": "瓶颈；卡点",
+    "memoryCue": "bottle（瓶子）+ neck（脖子）→ 最窄卡住流量的瓶颈。",
+    "example": "Main-thread file parsing was the startup performance bottleneck."
+  },
+  {
+    "id": "tech-en-int-cache",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "cache",
+    "pronunciation": "/kæʃ/",
+    "translation": "缓存；高速缓冲存储器",
+    "memoryCue": "发音同 cash /kæʃ/，源自法语“藏匿处”。",
+    "example": "Caching parsed dictionaries prevents repeated disk reads."
+  },
+  {
+    "id": "tech-en-int-compatibility",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "compatibility",
+    "pronunciation": "/kəmˌpætəˈbɪləti/",
+    "translation": "兼容性；相容性",
+    "memoryCue": "com- + pat（感受相合）→ 跨版本都能平稳运行。",
+    "example": "Keep backward compatibility whenever updating JSON schemas."
+  },
+  {
+    "id": "tech-en-int-component",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "component",
+    "pronunciation": "/kəmˈpoʊnənt/",
+    "translation": "组件；零部件；成分",
+    "memoryCue": "com- + pon（放）→ 拼在一起构成整机的部件。",
+    "example": "Reusable UI components keep every screen visually consistent."
+  },
+  {
+    "id": "tech-en-int-compression",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "compression",
+    "pronunciation": "/kəmˈpreʃn/",
+    "translation": "压缩；紧缩",
+    "memoryCue": "com-（一起）+ press（压）→ 压紧减小体积。",
+    "example": "Lossless PNG compression cuts asset size without blurring edges."
+  },
+  {
+    "id": "tech-en-int-configuration",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "configuration",
+    "pronunciation": "/kənˌfɪɡjəˈreɪʃn/",
+    "translation": "配置；构型；设定",
+    "memoryCue": "con- + figure（形状）→ 按需求调整参数设定。",
+    "example": "Save your export configuration outside the main source folder."
+  },
+  {
+    "id": "tech-en-int-console",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "console",
+    "pronunciation": "/ˈkɑːnsoʊl/",
+    "translation": "控制台；终端；游戏主机",
+    "memoryCue": "开发调试面板或安慰（动词读 /kənˈsoʊl/）。",
+    "example": "Check the debugger console for any warning messages."
+  },
+  {
+    "id": "tech-en-int-dashboard",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "dashboard",
+    "pronunciation": "/ˈdæʃbɔːrd/",
+    "translation": "仪表盘；数据看板",
+    "memoryCue": "原指马车前挡泥板，后指汽车仪表盘与数据总览屏。",
+    "example": "The analytics dashboard highlights your twelve-week study streak."
+  },
+  {
+    "id": "tech-en-int-database",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "database",
+    "pronunciation": "/ˈdeɪtəbeɪs/",
+    "translation": "数据库；资料库",
+    "memoryCue": "data（数据）+ base（基地）→ 结构化存放数据的仓库。",
+    "example": "SwiftData stores local progress safely in an on-device database."
+  },
+  {
+    "id": "tech-en-int-debug",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "debug",
+    "pronunciation": "/ˌdiːˈbʌɡ/",
+    "translation": "调试；排查故障",
+    "memoryCue": "de-（去掉）+ bug（虫子/程序缺陷）→ 捉虫排错。",
+    "example": "Writing small unit tests makes logic bugs much easier to debug."
+  },
+  {
+    "id": "tech-en-int-deploy",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "deploy",
+    "pronunciation": "/dɪˈplɔɪ/",
+    "translation": "部署；发布上线；调度",
+    "memoryCue": "de- + ploy（展开）→ 把构建好的版本展开投入运行。",
+    "example": "Automated pipelines verify tests before teams deploy a build."
+  },
+  {
+    "id": "tech-en-int-diagnostic",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "diagnostic",
+    "pronunciation": "/ˌdaɪəɡˈnɑːstɪk/",
+    "translation": "诊断的；诊断工具",
+    "memoryCue": "dia-（穿透）+ gnosis（认识）→ 透过表象看清病灶或报错。",
+    "example": "Sampling logs offered clear diagnostic clues for the freeze."
+  },
+  {
+    "id": "tech-en-int-duplicate",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "duplicate",
+    "pronunciation": "/ˈduːplɪkeɪt/",
+    "translation": "复制；重复的；副本",
+    "memoryCue": "du-（二）+ plic（折叠）→ 折出一模一样的第二份。",
+    "example": "Deterministic IDs prevent duplicate records during backup imports."
+  },
+  {
+    "id": "tech-en-int-encryption",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "encryption",
+    "pronunciation": "/ɪnˈkrɪpʃn/",
+    "translation": "加密；编码",
+    "memoryCue": "en- + crypt（隐藏）→ 把明文锁成密文保护隐私。",
+    "example": "On-device encryption protects personal notes even without cloud sync."
+  },
+  {
+    "id": "tech-en-int-endpoint",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "endpoint",
+    "pronunciation": "/ˈendpoint/",
+    "translation": "接口端点；终端设备",
+    "memoryCue": "end（末端）+ point（点）→ 服务暴露给客户端的访问点。",
+    "example": "An offline-first app works smoothly with zero external endpoints."
+  },
+  {
+    "id": "tech-en-int-interface",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "interface",
+    "pronunciation": "/ˈɪntərfeɪs/",
+    "translation": "界面；接口；交互界面",
+    "memoryCue": "inter-（之间）+ face（面）→ 人与机器或模块间接触的面。",
+    "example": "A clean swipe interface lets learners focus purely on recall."
+  },
+  {
+    "id": "tech-en-int-iteration",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "iteration",
+    "pronunciation": "/ˌɪtəˈreɪʃn/",
+    "translation": "迭代；重复循环",
+    "memoryCue": "iter-（再次）+ -ation → 一轮一轮小步优化。",
+    "example": "Each product iteration improved responsiveness based on real feedback."
+  },
+  {
+    "id": "tech-en-int-latency",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "latency",
+    "pronunciation": "/ˈleɪtnsi/",
+    "translation": "延迟；响应耗时",
+    "memoryCue": "latent（潜在等待）→ 请求发出到收到回应之间的停顿。",
+    "example": "Local storage ensures instant feedback with virtually zero latency."
+  },
+  {
+    "id": "tech-en-int-metadata",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "metadata",
+    "pronunciation": "/ˈmetədeɪtə/",
+    "translation": "元数据（描述数据的数据）",
+    "memoryCue": "meta-（超越/关于……本身）+ data → 标题、作者、尺寸等属性。",
+    "example": "Store review metadata helps testers understand new build changes."
+  },
+  {
+    "id": "tech-en-int-migration",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "migration",
+    "pronunciation": "/maɪˈɡreɪʃn/",
+    "translation": "数据迁移；迁徙",
+    "memoryCue": "migr-（移动）→ 结构升级时把旧数据平安搬进新表。",
+    "example": "Always provide default values for lightweight schema migration."
+  },
+  {
+    "id": "tech-en-int-module",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "module",
+    "pronunciation": "/ˈmɑːdʒuːl/",
+    "translation": "模块；单元；课程模块",
+    "memoryCue": "mod-（小尺度标准件）→ 独立可复用的功能块。",
+    "example": "Separating parsing into its own module keeps UI views clean."
+  },
+  {
+    "id": "tech-en-int-parameter",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "parameter",
+    "pronunciation": "/pəˈræmɪtər/",
+    "translation": "参数；边界条件",
+    "memoryCue": "para-（旁侧）+ meter（测量）→ 控制行为的输入指标。",
+    "example": "Adjust spring parameters slightly until card movement feels natural."
+  },
+  {
+    "id": "tech-en-int-pipeline",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "pipeline",
+    "pronunciation": "/ˈpaɪplaɪn/",
+    "translation": "流水线；工作管道；储备项目",
+    "memoryCue": "pipe（管）+ line（线）→ 自动化构建测试流或销售漏斗。",
+    "example": "Our continuous integration pipeline runs every unit test automatically."
+  },
+  {
+    "id": "tech-en-int-protocol",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "protocol",
+    "pronunciation": "/ˈproʊtəkɔːl/",
+    "translation": "协议；规范；礼仪草案",
+    "memoryCue": "proto-（第一/原始文本）→ 双方事先约定好的通信或合作规则。",
+    "example": "Clear coding protocols save teams hours during release reviews."
+  },
+  {
+    "id": "tech-en-int-prototype",
+    "language": "english",
+    "difficulty": "intermediate",
+    "term": "prototype",
+    "pronunciation": "/ˈproʊtətaɪp/",
+    "translation": "原型；样机",
+    "memoryCue": "proto-（最初）+ type（模型）→ 先做出来试手感的第一版样本。",
+    "example": "Click through an interactive prototype before polishing final assets."
+  },
+  {
+    "id": "tech-en-adv-abstraction",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "abstraction",
+    "pronunciation": "/æbˈstrækʃn/",
+    "translation": "抽象层；抽离概念",
+    "memoryCue": "把底层复杂细节隐藏起来，暴露简洁稳定的上层接口。",
+    "example": "A good storage abstraction hides database quirks from view logic."
+  },
+  {
+    "id": "tech-en-adv-asynchronous",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "asynchronous",
+    "pronunciation": "/eɪˈsɪŋkrənəs/",
+    "translation": "异步的；非同步的",
+    "memoryCue": "a-（不）+ syn-（一起）+ chron（时间）→ 不卡住当前线程，后台跑完回调。",
+    "example": "Run dictionary parsing asynchronously so scrolling stays silky smooth."
+  },
+  {
+    "id": "tech-en-adv-concurrency",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "concurrency",
+    "pronunciation": "/kənˈkɜːrənsi/",
+    "translation": "并发；同时发生",
+    "memoryCue": "con-（一起）+ cur（跑）→ 多项任务交错推进时的安全协调。",
+    "example": "Structured concurrency avoids race conditions during rapid speech taps."
+  },
+  {
+    "id": "tech-en-adv-deterministic",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "deterministic",
+    "pronunciation": "/dɪˌtɜːrmɪˈnɪstɪk/",
+    "translation": "确定性的；可复现的",
+    "memoryCue": "相同输入永远产生完全一致的输出，不靠随机运气。",
+    "example": "Deterministic word IDs ensure progress survives app updates safely."
+  },
+  {
+    "id": "tech-en-adv-diagnostics",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "diagnostics",
+    "pronunciation": "/ˌdaɪəɡˈnɑːstɪks/",
+    "translation": "诊断数据；系统排查信息",
+    "memoryCue": "复数形式常指软件日志、崩溃堆栈与性能采样信息。",
+    "example": "Process diagnostics revealed why the audio lookup stalled on launch."
+  },
+  {
+    "id": "tech-en-adv-idempotent",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "idempotent",
+    "pronunciation": "/ˌaɪdemˈpoʊtənt/",
+    "translation": "幂等的（多次执行结果一致）",
+    "memoryCue": "idem-（相同）+ potent（效力）→ 导入同一份备份十次也不会重复记双倍。",
+    "example": "Idempotent backup restores never duplicate existing review events."
+  },
+  {
+    "id": "tech-en-adv-immutable",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "immutable",
+    "pronunciation": "/ɪˈmjuːtəbl/",
+    "translation": "不可变的；恒定的",
+    "memoryCue": "im-（不）+ mut（变）→ 一经创建不可篡改，多线程更安全。",
+    "example": "Immutable value structs simplify state updates across SwiftUI views."
+  },
+  {
+    "id": "tech-en-adv-instrumentation",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "instrumentation",
+    "pronunciation": "/ˌɪnstrəmenˈteɪʃn/",
+    "translation": "性能埋点；监测仪器",
+    "memoryCue": "加装测量探针以精准捕捉耗时与内存占用。",
+    "example": "Profiling instrumentation pinpointed the slow view re-render immediately."
+  },
+  {
+    "id": "tech-en-adv-interoperability",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "interoperability",
+    "pronunciation": "/ˌɪntərˌɑːpəˈrəbɪləti/",
+    "translation": "互操作性；跨格式兼容",
+    "memoryCue": "inter-（互相）+ oper（工作）→ 不同软件与数据格式能顺畅互通。",
+    "example": "Supporting CSV, TSV, and JSON provides broad interoperability."
+  },
+  {
+    "id": "tech-en-adv-obsolete",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "obsolete",
+    "pronunciation": "/ˌɑːbsəˈliːt/",
+    "translation": "过时的；废弃淘汰的",
+    "memoryCue": "ob- + sol（习惯）→ 不再习惯使用的旧技术。",
+    "example": "Drop obsolete build flags before submitting to the store."
+  },
+  {
+    "id": "tech-en-adv-orchestration",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "orchestration",
+    "pronunciation": "/ˌɔːrkɪˈstreɪʃn/",
+    "translation": "编排；多服务调度协同",
+    "memoryCue": "源自管弦乐队总谱指挥（orchestra）→ 统筹多个任务有序协作。",
+    "example": "Clean background task orchestration keeps playback smooth when locked."
+  },
+  {
+    "id": "tech-en-adv-overhead",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "overhead",
+    "pronunciation": "/ˈoʊvərhed/",
+    "translation": "额外开销；固定运营成本",
+    "memoryCue": "在技术里指性能额外损耗；在商业里指房租水电等固定开支。",
+    "example": "Lazy loading keeps initial startup memory overhead minimal."
+  },
+  {
+    "id": "tech-en-adv-redundancy",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "redundancy",
+    "pronunciation": "/rɪˈdʌndənsi/",
+    "translation": "冗余；容错备份；裁员",
+    "memoryCue": "re- + und（溢出）→ 多余的重复或为防单点故障而设的备份。",
+    "example": "Deduplication removes redundancy without discarding custom notes."
+  },
+  {
+    "id": "tech-en-adv-regression",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "regression",
+    "pronunciation": "/rɪˈɡreʃn/",
+    "translation": "回归（测试退化）；倒退",
+    "memoryCue": "re-（向后）+ gress（走）→ 修新问题时把旧功能改坏的退步。",
+    "example": "Automated unit tests catch spacing regressions before release."
+  },
+  {
+    "id": "tech-en-adv-resilience",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "resilience",
+    "pronunciation": "/rɪˈzɪliəns/",
+    "translation": "容错弹性；系统韧性；抗压恢复力",
+    "memoryCue": "re- + sil（跳回）→ 遇到异常输入也不崩溃并快速恢复。",
+    "example": "Per-row JSON decoding adds resilience against malformed lines."
+  },
+  {
+    "id": "tech-en-adv-scalability",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "scalability",
+    "pronunciation": "/ˌskeɪləˈbɪləti/",
+    "translation": "可扩展性；规模伸缩能力",
+    "memoryCue": "scale（尺度）+ -ability → 词库从几百条涨到几万条依然流畅。",
+    "example": "Bounded queries preserve UI scalability as review logs grow."
+  },
+  {
+    "id": "tech-en-adv-serialization",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "serialization",
+    "pronunciation": "/ˌsɪriələˈzeɪʃn/",
+    "translation": "序列化（对象转字节/JSON）",
+    "memoryCue": "serial（串行序列）→ 把内存对象排成一串以便保存或传输。",
+    "example": "JSON serialization lets users back up every word progress cleanly."
+  },
+  {
+    "id": "tech-en-adv-throughput",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "throughput",
+    "pronunciation": "/ˈθruːpuːt/",
+    "translation": "吞吐量；单位时间处理量",
+    "memoryCue": "through（穿过）+ put（放）→ 管道每秒钟能处理多少数据。",
+    "example": "Batch inserts dramatically boost dictionary import throughput."
+  },
+  {
+    "id": "tech-en-adv-telemetry",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "telemetry",
+    "pronunciation": "/təˈlemətri/",
+    "translation": "遥测；远程数据回传",
+    "memoryCue": "tele-（远程）+ metry（测量）→ 隐私优先应用通常坚持零遥测。",
+    "example": "Our app runs completely offline with zero background telemetry."
+  },
+  {
+    "id": "tech-en-adv-validation",
+    "language": "english",
+    "difficulty": "advanced",
+    "term": "validation",
+    "pronunciation": "/ˌvælɪˈdeɪʃn/",
+    "translation": "校验；验证合规性",
+    "memoryCue": "valid（有效）+ -ation → 上线前检查签名、数据与边界是否合格。",
+    "example": "Schema validation catches missing IDs during continuous testing."
+  },
+  {
+    "id": "tech-en-bus-acquisition",
+    "language": "english",
+    "difficulty": "business",
+    "term": "acquisition",
+    "pronunciation": "/ˌækwɪˈzɪʃn/",
+    "translation": "收购；获客；技能习得",
+    "memoryCue": "ac- + quis（寻求）→ 企业并购（M&A）或用户获取（user acquisition）。",
+    "example": "Organic word-of-mouth drove steady user acquisition without ad spend."
+  },
+  {
+    "id": "tech-en-bus-actionable",
+    "language": "english",
+    "difficulty": "business",
+    "term": "actionable",
+    "pronunciation": "/ˈækʃənəbl/",
+    "translation": "可执行的；可落地的",
+    "memoryCue": "action（行动）+ -able → 会议结束后能立刻排期推进的结论。",
+    "example": "End every weekly review with three clear, actionable next steps."
+  },
+  {
+    "id": "tech-en-bus-allocation",
+    "language": "english",
+    "difficulty": "business",
+    "term": "allocation",
+    "pronunciation": "/ˌæləˈkeɪʃn/",
+    "translation": "资源配置；资金分配",
+    "memoryCue": "allocate 的名词，budget allocation（预算分配）。",
+    "example": "Quarterly budget allocation prioritizes core reliability improvements."
+  },
+  {
+    "id": "tech-en-bus-amortize",
+    "language": "english",
+    "difficulty": "business",
+    "term": "amortize",
+    "pronunciation": "/ˈæmərtaɪz/",
+    "translation": "摊销；分期偿还",
+    "memoryCue": "a- + mort（死/清零）→ 逐期把成本或债务摊销清零。",
+    "example": "Upfront localization costs amortize nicely over multi-year growth."
+  },
+  {
+    "id": "tech-en-bus-appraisal",
+    "language": "english",
+    "difficulty": "business",
+    "term": "appraisal",
+    "pronunciation": "/əˈpreɪzl/",
+    "translation": "绩效评估；资产估价",
+    "memoryCue": "ap- + prais（价格/评价）→ 年终考评或房地产估价。",
+    "example": "Annual performance appraisals should include peer recognition."
+  },
+  {
+    "id": "tech-en-bus-arbitration",
+    "language": "english",
+    "difficulty": "business",
+    "term": "arbitration",
+    "pronunciation": "/ˌɑːrbɪˈtreɪʃn/",
+    "translation": "仲裁；调解裁决",
+    "memoryCue": "arbitr-（裁判）→ 商业合同纠纷常走第三方仲裁。",
+    "example": "Both partners agreed to resolve licensing disputes via arbitration."
+  },
+  {
+    "id": "tech-en-bus-backlog",
+    "language": "english",
+    "difficulty": "business",
+    "term": "backlog",
+    "pronunciation": "/ˈbæklɔːɡ/",
+    "translation": "待办积压；产品需求池",
+    "memoryCue": "back（后面）+ log（记录原木/账本）→ 排在队列等待处理的需求清单。",
+    "example": "We groomed the product backlog to prioritize iPad layout polish."
+  },
+  {
+    "id": "tech-en-bus-breakeven",
+    "language": "english",
+    "difficulty": "business",
+    "term": "breakeven",
+    "pronunciation": "/ˌbreɪkˈiːvn/",
+    "translation": "盈亏平衡；保本点",
+    "memoryCue": "break + even（持平）→ 收入刚好抵消全部成本的临界点。",
+    "example": "Lower hosting costs helped the subscription studio hit breakeven early."
+  },
+  {
+    "id": "tech-en-bus-briefing",
+    "language": "english",
+    "difficulty": "business",
+    "term": "briefing",
+    "pronunciation": "/ˈbriːfɪŋ/",
+    "translation": "简报会；情况通报",
+    "memoryCue": "brief（简短）+ -ing → 简明扼要的会前吹风或战情汇报。",
+    "example": "Prepare a two-page executive briefing ahead of tomorrow's call."
+  },
+  {
+    "id": "tech-en-bus-cadence",
+    "language": "english",
+    "difficulty": "business",
+    "term": "cadence",
+    "pronunciation": "/ˈkeɪdns/",
+    "translation": "节奏；周期频率",
+    "memoryCue": "cad-（落点节拍）→ 团队例会、发版或复习的固定节奏。",
+    "example": "Keeping a steady two-week release cadence builds customer trust."
+  },
+  {
+    "id": "tech-en-bus-churn",
+    "language": "english",
+    "difficulty": "business",
+    "term": "churn",
+    "pronunciation": "/tʃɜːrn/",
+    "translation": "客户流失率；搅动",
+    "memoryCue": "原指搅动奶油桶，SaaS 中专指取消订阅或流失的用户比例。",
+    "example": "Better onboarding reduced first-week user churn by half."
+  },
+  {
+    "id": "tech-en-bus-collateral",
+    "language": "english",
+    "difficulty": "business",
+    "term": "collateral",
+    "pronunciation": "/kəˈlætərəl/",
+    "translation": "抵押品；宣传物料",
+    "memoryCue": "col- + later（侧边）→ 融资担保物或配套营销手册。",
+    "example": "Update sales collateral before launching the autumn campaign."
+  },
+  {
+    "id": "tech-en-bus-consensus",
+    "language": "english",
+    "difficulty": "business",
+    "term": "consensus",
+    "pronunciation": "/kənˈsensəs/",
+    "translation": "共识；一致意见",
+    "memoryCue": "con-（共同）+ sens（感觉）→ 大家想一块儿去了（reach consensus）。",
+    "example": "The leadership team reached consensus on keeping offline privacy strict."
+  },
+  {
+    "id": "tech-en-bus-consolidation",
+    "language": "english",
+    "difficulty": "business",
+    "term": "consolidation",
+    "pronunciation": "/kənˌsɑːlɪˈdeɪʃn/",
+    "translation": "合并；整合；巩固",
+    "memoryCue": "con- + solid（稳固）→ 把分散业务整合成更稳固的整体。",
+    "example": "Tool consolidation saved the engineering department six subscriptions."
+  },
+  {
+    "id": "tech-en-bus-contingency",
+    "language": "english",
+    "difficulty": "business",
+    "term": "contingency",
+    "pronunciation": "/kənˈtɪndʒənsi/",
+    "translation": "应急预案；意外情况；备用金",
+    "memoryCue": "contingency plan（B 计划 / 应急方案）。",
+    "example": "Always prepare a contingency timeline before hardware launches."
+  },
+  {
+    "id": "tech-en-bus-conversion",
+    "language": "english",
+    "difficulty": "business",
+    "term": "conversion",
+    "pronunciation": "/kənˈvɜːrʒn/",
+    "translation": "转化率；转换",
+    "memoryCue": "convert（转化）的名词，trial-to-paid conversion。",
+    "example": "Clear value propositions lift trial-to-paid conversion rates."
+  },
+  {
+    "id": "tech-en-bus-counterpart",
+    "language": "english",
+    "difficulty": "business",
+    "term": "counterpart",
+    "pronunciation": "/ˈkaʊntərpɑːrt/",
+    "translation": "对应方；同行；职位相当的人",
+    "memoryCue": "counter-（面对面）+ part（角色）→ 对方团队中对接你的人。",
+    "example": "She coordinated shipping schedules with her Tokyo counterpart."
+  },
+  {
+    "id": "tech-en-bus-covenant",
+    "language": "english",
+    "difficulty": "business",
+    "term": "covenant",
+    "pronunciation": "/ˈkʌvənənt/",
+    "translation": "契约；贷款限制性条款",
+    "memoryCue": "con- + ven（来到一起）→ 具有法律约束力的正式盟约。",
+    "example": "The credit facility includes a standard cash-reserve covenant."
+  },
+  {
+    "id": "tech-en-bus-credentials",
+    "language": "english",
+    "difficulty": "business",
+    "term": "credentials",
+    "pronunciation": "/krəˈdenʃlz/",
+    "translation": "资历；凭证；登录凭据",
+    "memoryCue": "cred-（信任）→ 证明专业资质或系统访问权限的凭据。",
+    "example": "Never commit API credentials or signing keys into shared repos."
+  },
+  {
+    "id": "tech-en-bus-deferral",
+    "language": "english",
+    "difficulty": "business",
+    "term": "deferral",
+    "pronunciation": "/dɪˈfɜːrəl/",
+    "translation": "递延；延期（收入/付款）",
+    "memoryCue": "defer（推迟）的名词，revenue deferral（递延收入）。",
+    "example": "Annual prepaid plans follow strict accounting deferral rules."
+  },
+  {
+    "id": "tech-en-bus-delegate",
+    "language": "english",
+    "difficulty": "business",
+    "term": "delegate",
+    "pronunciation": "/ˈdelɪɡeɪt/",
+    "translation": "授权委派；代表",
+    "memoryCue": "de- + leg（指派）→ 把任务交给合适同事（名词读 /-ɡət/）。",
+    "example": "Effective managers delegate routine checks so teams stay agile."
+  },
+  {
+    "id": "tech-en-bus-dependency",
+    "language": "english",
+    "difficulty": "business",
+    "term": "dependency",
+    "pronunciation": "/dɪˈpendənsi/",
+    "translation": "依赖项；附属关系",
+    "memoryCue": "zero third-party dependencies（零第三方依赖）。",
+    "example": "Eliminating third-party SDK dependencies sped up app review."
+  },
+  {
+    "id": "tech-en-bus-deprecation",
+    "language": "english",
+    "difficulty": "business",
+    "term": "deprecation",
+    "pronunciation": "/ˌdeprəˈkeɪʃn/",
+    "translation": "弃用通知；淘汰期",
+    "memoryCue": "正式宣告某接口或版本即将下线。",
+    "example": "Give enterprise clients six months notice before API deprecation."
+  },
+  {
+    "id": "tech-en-bus-disbursement",
+    "language": "english",
+    "difficulty": "business",
+    "term": "disbursement",
+    "pronunciation": "/dɪsˈbɜːrsmənt/",
+    "translation": "拨款；资金支付",
+    "memoryCue": "dis-（拿出）+ purse（钱包）→ 从资金池正式打款支出。",
+    "example": "Milestone verification triggers the next grant disbursement."
+  },
+  {
+    "id": "tech-en-bus-disclosure",
+    "language": "english",
+    "difficulty": "business",
+    "term": "disclosure",
+    "pronunciation": "/dɪsˈkloʊʒər/",
+    "translation": "信息披露；公开声明",
+    "memoryCue": "dis-（打开）+ close（关闭）→ 揭开盖子公开说明（隐私/财报）。",
+    "example": "Clear privacy disclosure earns lasting user confidence."
+  },
+  {
+    "id": "tech-en-bus-diversify",
+    "language": "english",
+    "difficulty": "business",
+    "term": "diversify",
+    "pronunciation": "/daɪˈvɜːrsɪfaɪ/",
+    "translation": "多元化；分散风险",
+    "memoryCue": "di- + vers（转）+ -ify → 不把鸡蛋放在一个篮子里。",
+    "example": "Local cafés diversify income by selling roasted beans online."
+  },
+  {
+    "id": "tech-en-bus-downtime",
+    "language": "english",
+    "difficulty": "business",
+    "term": "downtime",
+    "pronunciation": "/ˈdaʊntaɪm/",
+    "translation": "停机时间；业务空档期",
+    "memoryCue": "down（停下）+ time → 系统维护或业务暂停的时间。",
+    "example": "Offline architecture guarantees zero server downtime for learners."
+  },
+  {
+    "id": "tech-en-bus-due-diligence",
+    "language": "english",
+    "difficulty": "business",
+    "term": "due diligence",
+    "pronunciation": "/ˌduː ˈdɪlɪdʒəns/",
+    "translation": "尽职调查",
+    "memoryCue": "并购、合作或采购前对资质、财务与合规的全面核查。",
+    "example": "Complete legal due diligence before signing exclusive distribution deals."
+  },
+  {
+    "id": "tech-en-bus-efficiency",
+    "language": "english",
+    "difficulty": "business",
+    "term": "efficiency",
+    "pronunciation": "/ɪˈfɪʃnsi/",
+    "translation": "效率；效能",
+    "memoryCue": "efficient 的名词形式，operational efficiency（运营效率）。",
+    "example": "Keyboard shortcuts noticeably improve daily editing efficiency."
+  },
+  {
+    "id": "tech-en-bus-endorsement",
+    "language": "english",
+    "difficulty": "business",
+    "term": "endorsement",
+    "pronunciation": "/ɪnˈdɔːrsmənt/",
+    "translation": "背书；认可；支票背书",
+    "memoryCue": "en- + dorse（背部）→ 站在背后支持或签字担保。",
+    "example": "Third-party certification provides credible market endorsement."
+  },
+  {
+    "id": "tech-en-bus-engagement",
+    "language": "english",
+    "difficulty": "business",
+    "term": "engagement",
+    "pronunciation": "/ɪnˈɡeɪdʒmənt/",
+    "translation": "用户参与度；约定；投入",
+    "memoryCue": "engage（吸引参与）→ 用户每日留存互动的活跃度。",
+    "example": "Interactive streaks boosted seven-day learner engagement."
+  },
+  {
+    "id": "tech-en-bus-equity",
+    "language": "english",
+    "difficulty": "business",
+    "term": "equity",
+    "pronunciation": "/ˈekwəti/",
+    "translation": "股权；净资产；公平公正",
+    "memoryCue": "equ-（平等）→ 公司所有权份额或社会公平。",
+    "example": "Early team members received modest equity alongside salaries."
+  },
+  {
+    "id": "tech-en-bus-escalation",
+    "language": "english",
+    "difficulty": "business",
+    "term": "escalation",
+    "pronunciation": "/ˌeskəˈleɪʃn/",
+    "translation": "问题升级（上报处理）",
+    "memoryCue": "escalate（沿扶梯上升）→ 遇阻塞及时上报升级协调。",
+    "example": "Define a clear escalation path for urgent store rejection issues."
+  },
+  {
+    "id": "tech-en-bus-expenditure",
+    "language": "english",
+    "difficulty": "business",
+    "term": "expenditure",
+    "pronunciation": "/ɪkˈspendɪtʃər/",
+    "translation": "支出；经费开销",
+    "memoryCue": "ex-（出）+ pend（花费）→ 预算中花出去的钱。",
+    "example": "Capital expenditure focuses on test devices across iOS versions."
+  },
+  {
+    "id": "tech-en-bus-facilitate",
+    "language": "english",
+    "difficulty": "business",
+    "term": "facilitate",
+    "pronunciation": "/fəˈsɪlɪteɪt/",
+    "translation": "促进；主持引导（会议）；使便利",
+    "memoryCue": "facil-（容易，同 easy/facile）→ 让协作或学习顺畅推进。",
+    "example": "A neutral facilitator helps cross-functional workshops stay on track."
+  },
+  {
+    "id": "tech-en-bus-feasibility",
+    "language": "english",
+    "difficulty": "business",
+    "term": "feasibility",
+    "pronunciation": "/ˌfiːzəˈbɪləti/",
+    "translation": "可行性",
+    "memoryCue": "feasible（可行的）的名词，feasibility study（可行性研究）。",
+    "example": "Run a quick technical feasibility check before committing two sprints."
+  },
+  {
+    "id": "tech-en-bus-fiduciary",
+    "language": "english",
+    "difficulty": "business",
+    "term": "fiduciary",
+    "pronunciation": "/fəˈduːʃeri/",
+    "translation": "受托责任的；信托的",
+    "memoryCue": "fid-（信任）→ 必须以委托人利益为最高准则的法律责任。",
+    "example": "Board directors owe a strict fiduciary duty to long-term stewardship."
+  },
+  {
+    "id": "tech-en-bus-fiscal",
+    "language": "english",
+    "difficulty": "business",
+    "term": "fiscal",
+    "pronunciation": "/ˈfɪskl/",
+    "translation": "财政的；财年的",
+    "memoryCue": "fisc-（国库钱筐）→ fiscal year（财政年度）。",
+    "example": "Sales closed strong in the final week of the fiscal quarter."
+  },
+  {
+    "id": "tech-en-bus-fulfillment",
+    "language": "english",
+    "difficulty": "business",
+    "term": "fulfillment",
+    "pronunciation": "/fʊlˈfɪlmənt/",
+    "translation": "履约；订单交付；成就感",
+    "memoryCue": "fulfill（履行实现）的名词，order fulfillment。",
+    "example": "Automated warehouse packing cut order fulfillment down to four hours."
+  },
+  {
+    "id": "tech-en-bus-governance",
+    "language": "english",
+    "difficulty": "business",
+    "term": "governance",
+    "pronunciation": "/ˈɡʌvərnəns/",
+    "translation": "公司治理；数据治理；管理体系",
+    "memoryCue": "govern（治理）+ -ance → 权责分明的制度规范。",
+    "example": "Sound data governance keeps personal metrics local and auditable."
+  },
+  {
+    "id": "tech-en-bus-headcount",
+    "language": "english",
+    "difficulty": "business",
+    "term": "headcount",
+    "pronunciation": "/ˈhedkaʊnt/",
+    "translation": "人员编制；人头数",
+    "memoryCue": "head（人头）+ count（数）→ 团队正式招聘名额。",
+    "example": "New engineering headcount was approved for the mobile core team."
+  },
+  {
+    "id": "tech-en-bus-incentive",
+    "language": "english",
+    "difficulty": "business",
+    "term": "incentive",
+    "pronunciation": "/ɪnˈsentɪv/",
+    "translation": "激励措施；诱因；奖金机制",
+    "memoryCue": "in- + cent（唱歌激励）→ 调动积极性的奖赏或机制。",
+    "example": "Daily streak badges act as a gentle intrinsic study incentive."
+  },
+  {
+    "id": "tech-en-bus-incur",
+    "language": "english",
+    "difficulty": "business",
+    "term": "incur",
+    "pronunciation": "/ɪnˈkɜːr/",
+    "translation": "招致；产生（费用/损失/风险）",
+    "memoryCue": "in- + cur（跑）→ 迎面撞上并承担某种费用或后果。",
+    "example": "Offline storage means users never incur unexpected cloud fees."
+  },
+  {
+    "id": "tech-en-bus-indemnity",
+    "language": "english",
+    "difficulty": "business",
+    "term": "indemnity",
+    "pronunciation": "/ɪnˈdemnəti/",
+    "translation": "赔偿保障；免责补偿条款",
+    "memoryCue": "in-（免）+ damn（损害）→ 合同中出现损失由谁兜底赔付。",
+    "example": "Review indemnity clauses carefully with counsel before signing."
+  },
+  {
+    "id": "tech-en-bus-inventory",
+    "language": "english",
+    "difficulty": "business",
+    "term": "inventory",
+    "pronunciation": "/ˈɪnvəntɔːri/",
+    "translation": "库存；存货清单",
+    "memoryCue": "in- + vent（发现清点）→ 清点仓库现有货物明细。",
+    "example": "Real-time inventory alerts prevent popular items from selling out."
+  },
+  {
+    "id": "tech-en-bus-invoice",
+    "language": "english",
+    "difficulty": "business",
+    "term": "invoice",
+    "pronunciation": "/ˈɪnvɔɪs/",
+    "translation": "发票；请款单；开票",
+    "memoryCue": "商务收付款必用单据，匹配 PO 号后付款。",
+    "example": "Please include the purchase order number on your monthly invoice."
+  },
+  {
+    "id": "tech-en-bus-leverage",
+    "language": "english",
+    "difficulty": "business",
+    "term": "leverage",
+    "pronunciation": "/ˈlevərɪdʒ/",
+    "translation": "杠杆作用；充分利用；影响力",
+    "memoryCue": "lever（杠杆）→ 用小支点撬动大收益，外企高频动词。",
+    "example": "Leverage existing unit tests when refactoring core spacing logic."
+  },
+  {
+    "id": "tech-en-bus-liability",
+    "language": "english",
+    "difficulty": "business",
+    "term": "liability",
+    "pronunciation": "/ˌlaɪəˈbɪləti/",
+    "translation": "负债；法律责任；不利因素",
+    "memoryCue": "资产负债表里的“负债”（assets and liabilities）。",
+    "example": "Clear user consent minimizes compliance liability."
+  },
+  {
+    "id": "tech-en-bus-onboarding",
+    "language": "english",
+    "difficulty": "business",
+    "term": "onboarding",
+    "pronunciation": "/ˈɔːnbɔːrdɪŋ/",
+    "translation": "新员工入职引导；新用户上手引导",
+    "memoryCue": "on + board（登船）→ 帮助新人顺利上船熟悉流程。",
+    "example": "A one-screen onboarding flow lets newcomers start learning immediately."
+  },
+  {
+    "id": "tech-en-bus-outsourcing",
+    "language": "english",
+    "difficulty": "business",
+    "term": "outsourcing",
+    "pronunciation": "/ˈaʊtsɔːrsɪŋ/",
+    "translation": "外包；外部采购服务",
+    "memoryCue": "out（外部）+ source（来源）→ 把非核心环节交由外部团队处理。",
+    "example": "Careful vendor vetting matters when outsourcing translation audits."
+  }
+]

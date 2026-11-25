@@ -398,4 +398,92 @@ struct SpacedRepetitionTests {
         )
         #expect(emptyFav.isEmpty)
     }
+
+    @Test("难度范围过滤：exact 仅抽取当前级别，不混入更低难度；upTo 兼容向下覆盖")
+    func buildChallengeRespectsDifficultyScope() {
+        let words = [
+            WordItem(id: "w-beg", language: .english, difficulty: .beginner, term: "apple", pronunciation: "", translation: "苹果", memoryCue: "", example: ""),
+            WordItem(id: "w-adv", language: .english, difficulty: .advanced, term: "empirical", pronunciation: "", translation: "实证的", memoryCue: "", example: ""),
+            WordItem(id: "w-mst", language: .english, difficulty: .master, term: "ephemeral", pronunciation: "", translation: "转瞬即逝的", memoryCue: "", example: "")
+        ]
+
+        let exactMaster = SpacedRepetitionEngine.buildChallenge(
+            from: words,
+            difficulty: .master,
+            progressMap: [:],
+            excluding: [],
+            limit: 10,
+            mode: .smart,
+            difficultyScope: .exact,
+            now: baseDate
+        )
+        #expect(exactMaster.map(\.id) == ["w-mst"])
+
+        let upToMaster = SpacedRepetitionEngine.buildChallenge(
+            from: words,
+            difficulty: .master,
+            progressMap: [:],
+            excluding: [],
+            limit: 10,
+            mode: .smart,
+            difficultyScope: .upTo,
+            now: baseDate
+        )
+        #expect(upToMaster.count == 3)
+        #expect(Set(upToMaster.map(\.id)) == ["w-beg", "w-adv", "w-mst"])
+
+        let emptyExactMaster = SpacedRepetitionEngine.buildChallenge(
+            from: [words[0]],
+            difficulty: .master,
+            progressMap: [:],
+            excluding: [],
+            limit: 10,
+            mode: .smart,
+            difficultyScope: .exact,
+            now: baseDate
+        )
+        #expect(emptyExactMaster.isEmpty)
+    }
+
+    @Test("熟词一键标斩：直接升至满阶并设置长间隔，支持完整撤回回滚")
+    func masterImmediatelyPromotesAndSupportsUndo() throws {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: WordProgress.self, CustomWordRecord.self, ReviewEvent.self, configurations: config)
+        let context = ModelContext(container)
+
+        let word = WordItem(
+            id: "w-master-斩",
+            language: .english,
+            difficulty: .master,
+            term: "ubiquitous",
+            pronunciation: "/juːˈbɪkwɪtəs/",
+            translation: "无处不在的",
+            memoryCue: "词根 ubiqui- 到处",
+            example: "Smartphones have become ubiquitous."
+        )
+
+        let snapshot = SpacedRepetitionEngine.masterImmediately(
+            for: word,
+            existingProgress: nil,
+            in: context,
+            now: baseDate
+        )
+
+        let progressList = try context.fetch(FetchDescriptor<WordProgress>())
+        let events = try context.fetch(FetchDescriptor<ReviewEvent>())
+        #expect(progressList.count == 1)
+        #expect(events.count == 1)
+
+        let saved = try #require(progressList.first)
+        #expect(saved.wordID == word.id)
+        #expect(saved.masteryLevel >= 5)
+        #expect(saved.intervalDays >= 60)
+
+        SpacedRepetitionEngine.undoReview(snapshot, progress: saved, in: context)
+
+        let remainingProgress = try context.fetch(FetchDescriptor<WordProgress>())
+        let remainingEvents = try context.fetch(FetchDescriptor<ReviewEvent>())
+        #expect(remainingProgress.isEmpty)
+        #expect(remainingEvents.isEmpty)
+    }
 }

@@ -1,0 +1,463 @@
+#!/usr/bin/env bash
+# ask-advisor — 只读第二意见 / read-only second opinion via Antigravity CLI (agy)
+#
+# Usage:
+#   ask-advisor [--model M] [--files FILE ...] [--] [QUESTION]
+#   echo "question" | ask-advisor [--files FILE ...]
+#
+# Safe to copy into a project (scripts/) or ~/bin. Does not install software.
+# Writes logs under ~/.agent-logs/ only.
+
+set -euo pipefail
+
+SCRIPT_NAME=$(basename -- "$0")
+
+# Do not pin a model slug by default: headless `agy --model` fails hard on
+# unknown ids (official headless docs). Override with ADVISOR_MODEL / --model
+# after checking `agy models`.
+DEFAULT_TIMEOUT=180
+MAX_FILE_BYTES=204800
+MAX_TOTAL_BYTES=1048576
+# Stay under typical macOS ARG_MAX when passing the question via -p.
+MAX_PROMPT_ARGV=80000
+
+usage() {
+  cat <<'USAGE'
+ask-advisor — 只读第二意见 / read-only second opinion (Antigravity CLI: agy)
+
+用法 / Usage:
+  ask-advisor [--model M] [--timeout SECS] [--files FILE ...] [--] [QUESTION]
+  echo "question" | ask-advisor [--files FILE ...]
+
+选项 / Options:
+  -m, --model M      Model slug (default: $ADVISOR_MODEL, else agy's own default).
+                     List slugs with: agy models
+  --files FILE ...   Attach text files (inlined into the request). Stops at
+                     --, the next option, or a path that is not an existing file.
+  --file FILE        Attach one file (repeatable)
+  -t, --timeout SECS Kill the CLI after SECS seconds (default: $ADVISOR_TIMEOUT or 180)
+  -h, --help         Show this help
+
+环境变量 / Environment:
+  ADVISOR_MODEL      Optional model slug (passed as --model)
+  ADVISOR_TIMEOUT    Default timeout in seconds (default: 180)
+  AGENT_LOG_DIR      Log directory (default: ~/.agent-logs)
+  AGY, AGY_BIN       Optional path to the agy binary
+
+行为 / Behaviour:
+  Official binary is `agy` (not `antigravity`). The advisor is Antigravity;
+  the coding worker is Grok Build (see code-worker).
+
+  agy is started in an isolated workspace under AGENT_LOG_DIR so it cannot
+  edit your repo. The request is written to REQUEST.md in that workspace.
+
+  Flags used (verified in official docs, 2026):
+    -p / --prompt / --print   headless one-shot prompt
+    --mode=plan               documented mode: research / outline, approval
+                              required before writing code
+    --sandbox                 OS terminal sandbox (sandbox-exec on macOS)
+    --output-format text
+    --print-timeout <Ns>
+    --model <slug>            only if you pass --model or set ADVISOR_MODEL
+
+  Intentionally NOT used:
+    --mode=auto / --mode=accept-edits
+    --dangerously-skip-permissions   (auto-approves all tools, including writes)
+  Trap: since v1.5.7, if agentMode is unset, `agy -p` itself defaults to
+  auto mode where available (auto-approves workspace edits). This script
+  always passes --mode=plan to pin away from auto.
+
+  Keep slash command expansion enabled so that --mode=plan can prepend /plan.
+  Official Antigravity docs say
+  plan prepends /plan, uses read-only research tools, and asks for approval
+  before writing. In headless mode, tools that need approval are soft-denied
+  (run continues, exit 0, notice on stderr). Isolation in a dedicated
+  workspace is still applied, in case a user allow-rule would otherwise
+  permit writes.
+
+  The official --mode flag table lists accept-edits, auto, and plan.
+  "default" mode exists in /config as agentMode="", but --mode=default is
+  not clearly listed, so it is not passed.
+
+  The answer is printed to stdout. A full log is written under AGENT_LOG_DIR.
+USAGE
+}
+
+die() {
+  printf '%s\n' "$SCRIPT_NAME: $*" >&2
+  exit 1
+}
+
+# Portable timeout. Exit 124 on timeout (GNU timeout convention).
+# macOS bash 3.2 has no builtin timeout(1); prefer timeout/gtimeout, else
+# python3, else a perl watchdog. Do not use GNU-only flags.
+run_with_timeout() {
+  local secs
+  secs=$1
+  shift
+  if command -v timeout >/dev/null 2>&1; then
+    timeout "$secs" "$@"
+    return $?
+  fi
+  if command -v gtimeout >/dev/null 2>&1; then
+    gtimeout "$secs" "$@"
+    return $?
+  fi
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -c '
+import subprocess, sys
+t = int(sys.argv[1])
+cmd = sys.argv[2:]
+try:
+    r = subprocess.run(cmd, timeout=t)
+    sys.exit(r.returncode if r.returncode is not None else 1)
+except subprocess.TimeoutExpired:
+    sys.exit(124)
+except OSError as e:
+    sys.stderr.write("failed to start command: %s\n" % e)
+    sys.exit(127)
+' "$secs" "$@"
+    return $?
+  fi
+  if command -v perl >/dev/null 2>&1; then
+    perl -e '
+      my $secs = shift;
+      my $pid = fork();
+      die "fork: $!\n" unless defined $pid;
+      if ($pid == 0) { exec @ARGV or die "exec: $!\n"; }
+      $SIG{ALRM} = sub {
+        kill "TERM", $pid;
+        select(undef, undef, undef, 2);
+        kill "KILL", $pid;
+        exit 124;
+      };
+      alarm $secs;
+      waitpid($pid, 0);
+      my $st = $?;
+      alarm 0;
+      if ($st & 127) { exit 128 + ($st & 127); }
+      exit $st >> 8;
+    ' "$secs" "$@"
+    return $?
+  fi
+  die "no timeout helper found (need timeout, gtimeout, python3, or perl)"
+}
+
+find_agy() {
+  local p
+  if [ -n "${AGY_BIN:-}" ]; then
+    if [ -x "$AGY_BIN" ]; then
+      printf '%s\n' "$AGY_BIN"
+      return 0
+    fi
+    die "AGY_BIN is set but not executable: $AGY_BIN"
+  fi
+  if [ -n "${AGY:-}" ]; then
+    if [ -x "$AGY" ]; then
+      printf '%s\n' "$AGY"
+      return 0
+    fi
+    # AGY may be a command name on PATH
+    if command -v "$AGY" >/dev/null 2>&1; then
+      command -v "$AGY"
+      return 0
+    fi
+    die "AGY is set but not found: $AGY"
+  fi
+  if command -v agy >/dev/null 2>&1; then
+    command -v agy
+    return 0
+  fi
+  for p in "$HOME/.local/bin/agy" /usr/local/bin/agy /opt/antigravity/bin/agy; do
+    if [ -x "$p" ]; then
+      printf '%s\n' "$p"
+      return 0
+    fi
+  done
+  return 1
+}
+
+is_sensitive_file() {
+  local base
+  base=$(basename -- "$1")
+  case "$base" in
+    .env|.env.*)
+      case "$base" in
+        .env.example|.env.sample|.env.template|.env.example.*)
+          return 1
+          ;;
+        *)
+          return 0
+          ;;
+      esac
+      ;;
+    *.p8|*.p12|*.mobileprovision)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
+# True if the file contains a NUL byte. Do not use grep: a NUL in the
+# pattern is truncated and can match every file.
+is_binary_file() {
+  local orig stripped
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -c 'import sys; sys.exit(0 if b"\0" in open(sys.argv[1], "rb").read() else 1)' "$1"
+    return $?
+  fi
+  orig=$(wc -c < "$1" | tr -d '[:space:]')
+  stripped=$(tr -d '\000' < "$1" | wc -c | tr -d '[:space:]')
+  [ "$orig" != "$stripped" ]
+}
+
+ORIG_PWD=$(pwd)
+model="${ADVISOR_MODEL:-}"
+timeout_secs="${ADVISOR_TIMEOUT:-$DEFAULT_TIMEOUT}"
+log_dir="${AGENT_LOG_DIR:-$HOME/.agent-logs}"
+files=()
+question=""
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    -m|--model)
+      [ $# -ge 2 ] || die "$1 requires an argument"
+      model=$2
+      shift 2
+      ;;
+    -t|--timeout)
+      [ $# -ge 2 ] || die "$1 requires an argument"
+      timeout_secs=$2
+      shift 2
+      ;;
+    --file)
+      [ $# -ge 2 ] || die "$1 requires an argument"
+      files+=("$2")
+      shift 2
+      ;;
+    --files)
+      shift
+      while [ $# -gt 0 ]; do
+        case "$1" in
+          --|-m|--model|-t|--timeout|--file|--files|-h|--help)
+            break
+            ;;
+          -*)
+            break
+            ;;
+          *)
+            if [ -f "$1" ]; then
+              files+=("$1")
+              shift
+            else
+              break
+            fi
+            ;;
+        esac
+      done
+      ;;
+    --)
+      shift
+      break
+      ;;
+    -*)
+      die "unknown option: $1 (try --help)"
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+if [ $# -gt 0 ]; then
+  question="$*"
+fi
+
+if [ -z "$question" ]; then
+  if [ ! -t 0 ]; then
+    question=$(cat)
+  else
+    die "no question given (pass an argument, or pipe stdin). See --help"
+  fi
+fi
+
+[ -n "$question" ] || die "question is empty"
+case "$timeout_secs" in
+  ''|*[!0-9]*) die "timeout must be a positive integer, got: $timeout_secs" ;;
+  0) die "timeout must be a positive integer, got: $timeout_secs" ;;
+esac
+
+agy_bin=$(find_agy) || die "agy (Antigravity CLI) not found on PATH or in ~/.local/bin. Install from https://antigravity.google/docs/getting-started/ and log in once with an interactive \`agy\` session. Official installer places the binary at ~/.local/bin/agy."
+
+mkdir -p -- "$log_dir" || die "cannot create log dir: $log_dir"
+
+ts=$(date +%Y%m%d-%H%M%S)
+log_file="$log_dir/ask-advisor-${ts}-$$.log"
+
+# Reuse a stable workspace so a one-time folder-trust decision can stick.
+# Official docs do not document a --skip-trust flag (unlike Gemini CLI).
+ws="$log_dir/ask-advisor-workspace"
+if [ -e "$ws" ] && [ ! -d "$ws" ]; then
+  die "workspace path exists but is not a directory: $ws"
+fi
+mkdir -p -- "$ws" || die "cannot create workspace: $ws"
+if [ ! -f "$ws/.ask-advisor-workspace" ]; then
+  # Do not take over a directory we did not create.
+  leftover=$(ls -A "$ws" 2>/dev/null || true)
+  if [ -n "$leftover" ]; then
+    die "refusing to use non-empty unexpected directory: $ws"
+  fi
+  printf '%s\n' "ask-advisor isolated workspace" > "$ws/.ask-advisor-workspace"
+fi
+
+request_file="$ws/REQUEST.md"
+out_file="$ws/.ask-advisor-stdout.txt"
+err_file="$ws/.ask-advisor-stderr.txt"
+
+trap 'rm -f -- "$request_file" "$out_file" "$err_file"' EXIT
+
+{
+  printf '%s\n' "You are a read-only advisor. Reply with analysis, a plan, or review comments only."
+  printf '%s\n' "Do not edit files, do not create files, and do not run shell commands."
+  printf '%s\n' "If you lack enough context, say so and list what you would need."
+  printf '%s\n' "Write the answer in the same language as the question unless asked otherwise."
+  printf '\n%s\n\n' "===== QUESTION ====="
+  printf '%s\n' "$question"
+} > "$request_file"
+
+total_bytes=0
+if [ "${#files[@]}" -gt 0 ]; then
+  printf '\n%s\n' "===== ATTACHED FILES (inline copies; you have no access to the original tree) =====" >> "$request_file"
+  i=0
+  while [ "$i" -lt "${#files[@]}" ]; do
+    f="${files[$i]}"
+    i=$((i + 1))
+
+    case "$f" in
+      /*) abs=$f ;;
+      *) abs="$ORIG_PWD/$f" ;;
+    esac
+
+    if [ ! -f "$abs" ]; then
+      die "not a file: $f"
+    fi
+    if [ ! -r "$abs" ]; then
+      die "not readable: $f"
+    fi
+    if is_sensitive_file "$abs"; then
+      die "refusing to inline sensitive file: $f (matches .env / *.p8 / *.p12 / *.mobileprovision)"
+    fi
+    if is_binary_file "$abs"; then
+      die "refusing to inline binary file: $f"
+    fi
+
+    size=$(wc -c < "$abs" | tr -d '[:space:]')
+    case "$size" in
+      ''|*[!0-9]*) die "could not stat file size: $f" ;;
+    esac
+    if [ "$size" -gt "$MAX_FILE_BYTES" ]; then
+      die "file too large to inline ($size bytes, max $MAX_FILE_BYTES): $f"
+    fi
+    total_bytes=$((total_bytes + size))
+    if [ "$total_bytes" -gt "$MAX_TOTAL_BYTES" ]; then
+      die "attached files exceed $MAX_TOTAL_BYTES bytes in total"
+    fi
+
+    {
+      printf '\n----- FILE: %s (%s bytes) -----\n' "$f" "$size"
+      cat -- "$abs"
+      printf '\n----- END FILE: %s -----\n' "$f"
+    } >> "$request_file"
+  done
+fi
+
+request_size=$(wc -c < "$request_file" | tr -d '[:space:]')
+short_prompt="You are a read-only advisor. Read REQUEST.md in this workspace (it contains the full question and any attached files) and answer in text only. Do not edit files, do not create files, and do not run shell commands."
+prompt=$short_prompt
+# If the request is small enough, also pass the body via -p so the answer
+# does not depend on a workspace file-read tool being allowed.
+if [ "$request_size" -le "$MAX_PROMPT_ARGV" ]; then
+  prompt=$(cat -- "$request_file")
+fi
+
+{
+  printf '%s\n' "ask-advisor $ts"
+  printf '%s\n' "agy=$agy_bin model=${model:-(agy default)} timeout=${timeout_secs}s"
+  printf '%s\n' "cwd=$ORIG_PWD workspace=$ws"
+  printf '%s\n' "log=$log_file"
+  if [ "${#files[@]}" -gt 0 ]; then
+    printf 'files='
+    i=0
+    while [ "$i" -lt "${#files[@]}" ]; do
+      printf ' %s' "${files[$i]}"
+      i=$((i + 1))
+    done
+    printf '\n'
+  else
+    printf '%s\n' "files=(none)"
+  fi
+  printf '%s\n' "----- request -----"
+  cat -- "$request_file"
+  printf '\n%s\n' "----- agy output -----"
+} > "$log_file"
+
+# Confirmed flags: https://antigravity.google/docs/cli/reference/
+# Headless:        https://antigravity.google/docs/cli/headless/
+# Modes:           https://antigravity.google/docs/cli/modes/
+# stdin is /dev/null: official stream-json input is a different mode; with
+# -p, unused stdin has been reported to block, so we do not feed it.
+# --print-timeout is agy's own limit; the process watchdog is slightly longer
+# so agy can exit on its own first.
+watchdog_secs=$((timeout_secs + 20))
+
+set -- \
+  "$agy_bin" \
+  --mode=plan \
+  --sandbox \
+  --output-format text \
+  --print-timeout "${timeout_secs}s" \
+  -p "$prompt"
+
+if [ -n "$model" ]; then
+  set -- "$@" --model "$model"
+fi
+
+set +e
+(
+  cd -- "$ws" || exit 1
+  run_with_timeout "$watchdog_secs" "$@" </dev/null
+) > "$out_file" 2> "$err_file"
+rc=$?
+set -e
+
+if [ -s "$err_file" ]; then
+  cat -- "$err_file" >> "$log_file"
+  cat -- "$err_file" >&2
+fi
+if [ -s "$out_file" ]; then
+  cat -- "$out_file" >> "$log_file"
+  cat -- "$out_file"
+  case "$(tail -c 1 "$out_file" 2>/dev/null | od -An -t x1)" in
+    *0a*) ;;
+    *) printf '\n' ;;
+  esac
+fi
+
+printf '\n%s\n' "----- exit $rc -----" >> "$log_file"
+
+if [ "$rc" -eq 124 ]; then
+  die "agy timed out after ${timeout_secs}s (log: $log_file). If this is the first run in $ws, agy may be waiting on a workspace-trust prompt (no official --skip-trust flag). Run \`agy\` once interactively in that directory and accept trust, then retry."
+fi
+if [ "$rc" -ne 0 ]; then
+  die "agy exited $rc (log: $log_file). If the message is authentication required, log in once with an interactive \`agy\` session."
+fi
+
+if [ ! -s "$out_file" ]; then
+  printf '%s\n' "$SCRIPT_NAME: warning: agy produced no stdout (log: $log_file)" >&2
+fi
+
+exit 0

@@ -1,0 +1,1502 @@
+[
+  {
+    "id": "gre-en-mst-ebullient",
+    "language": "english",
+    "difficulty": "master",
+    "term": "ebullient",
+    "pronunciation": "/ɪˈbʊliənt/",
+    "translation": "热情洋溢的；兴高采烈的",
+    "memoryCue": "e-（出）+ bull（沸腾）→ 像沸腾冒泡一样抑制不住的热情。",
+    "example": "Her ebullient commentary kept the entire seminar lively."
+  },
+  {
+    "id": "gre-en-mst-efficacy",
+    "language": "english",
+    "difficulty": "master",
+    "term": "efficacy",
+    "pronunciation": "/ˈefɪkəsi/",
+    "translation": "功效；效力；有效性",
+    "memoryCue": "常见于药学与教育实验论文，衡量方法实际奏效的程度。",
+    "example": "Long-term studies confirm the efficacy of spaced recall."
+  },
+  {
+    "id": "gre-en-mst-effrontery",
+    "language": "english",
+    "difficulty": "master",
+    "term": "effrontery",
+    "pronunciation": "/ɪˈfrʌntəri/",
+    "translation": "厚颜无耻；放肆无礼",
+    "memoryCue": "ef-（出）+ front（前额/脸面）→ 把脸皮豁出去不要脸面。",
+    "example": "He had the effrontery to take credit for his teammate's draft."
+  },
+  {
+    "id": "gre-en-mst-elicit",
+    "language": "english",
+    "difficulty": "master",
+    "term": "elicit",
+    "pronunciation": "/ɪˈlɪsɪt/",
+    "translation": "引出；诱出；探出（回答/反应）",
+    "memoryCue": "e-（出）+ licit（引诱）→ 用巧妙提问把真话引出来（区别 illicit 非法）。",
+    "example": "Open-ended prompts elicit richer responses than yes-no questions."
+  },
+  {
+    "id": "gre-en-mst-elucidate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "elucidate",
+    "pronunciation": "/ɪˈluːsɪdeɪt/",
+    "translation": "阐明；详尽解释",
+    "memoryCue": "e-（出）+ luc（光，同 lucid）→ 打一束光照亮难点。",
+    "example": "A concrete timeline helps elucidate complex historical shifts."
+  },
+  {
+    "id": "gre-en-mst-elusive",
+    "language": "english",
+    "difficulty": "master",
+    "term": "elusive",
+    "pronunciation": "/ɪˈluːsɪv/",
+    "translation": "难以捉摸的；易忘的；逃避的",
+    "memoryCue": "e- + lude（玩/滑走）→ 总从指缝溜走抓不住。",
+    "example": "Exact translations for cultural idioms can prove surprisingly elusive."
+  },
+  {
+    "id": "gre-en-mst-embellish",
+    "language": "english",
+    "difficulty": "master",
+    "term": "embellish",
+    "pronunciation": "/ɪmˈbelɪʃ/",
+    "translation": "修饰；润色；渲染（故事）",
+    "memoryCue": "em- + bell（美，源自法语 belle）→ 加花边添油加醋装饰。",
+    "example": "Travelers often embellish minor mishaps into dramatic tales."
+  },
+  {
+    "id": "gre-en-mst-emulate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "emulate",
+    "pronunciation": "/ˈemjuleɪt/",
+    "translation": "效仿；赶超；仿真模拟",
+    "memoryCue": "源自拉丁语竞争追赶，既表向榜样学习，技术里也指系统仿真。",
+    "example": "New studios sought to emulate the clean ergonomics of classic tools."
+  },
+  {
+    "id": "gre-en-mst-enervate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "enervate",
+    "pronunciation": "/ˈenərveɪt/",
+    "translation": "使衰弱；耗尽精力",
+    "memoryCue": "e-（去掉）+ nerve（神经/筋力）→ 抽掉筋骨让人萎靡无力（不是打鸡血！）。",
+    "example": "Humid afternoon heat tends to enervate unaccustomed hikers."
+  },
+  {
+    "id": "gre-en-mst-engender",
+    "language": "english",
+    "difficulty": "master",
+    "term": "engender",
+    "pronunciation": "/ɪnˈdʒendər/",
+    "translation": "产生；引发；酿成（情绪/局面）",
+    "memoryCue": "en- + gender（生育/产生）→ 孕育出某种结果。",
+    "example": "Transparent communication engenders lasting trust across teams."
+  },
+  {
+    "id": "gre-en-mst-enigma",
+    "language": "english",
+    "difficulty": "master",
+    "term": "enigma",
+    "pronunciation": "/əˈnɪɡmə/",
+    "translation": "谜；不可思议的事物",
+    "memoryCue": "二战著名密码机也叫 Enigma。",
+    "example": "The ancient script remained an unsolved enigma for two centuries."
+  },
+  {
+    "id": "gre-en-mst-equivocal",
+    "language": "english",
+    "difficulty": "master",
+    "term": "equivocal",
+    "pronunciation": "/ɪˈkwɪvəkl/",
+    "translation": "模棱两可的；含糊不清的；可疑的",
+    "memoryCue": "equi-（同等）+ voc（声音）→ 两种解释听着都像，故意含糊。",
+    "example": "Analysts gave an equivocal forecast ahead of the election."
+  },
+  {
+    "id": "gre-en-mst-eradicate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "eradicate",
+    "pronunciation": "/ɪˈrædɪkeɪt/",
+    "translation": "根除；彻底消灭",
+    "memoryCue": "e-（出）+ radic（根，同 radical）→ 连根拔起。",
+    "example": "Targeted drills help eradicate persistent pronunciation habits."
+  },
+  {
+    "id": "gre-en-mst-erudite",
+    "language": "english",
+    "difficulty": "master",
+    "term": "erudite",
+    "pronunciation": "/ˈerudaɪt/",
+    "translation": "博学的；学识渊博的",
+    "memoryCue": "e-（摆脱）+ rude（粗野蒙昧）→ 脱离愚昧而满腹经纶。",
+    "example": "The professor delivered an erudite lecture without consulting notes."
+  },
+  {
+    "id": "gre-en-mst-esoteric",
+    "language": "english",
+    "difficulty": "master",
+    "term": "esoteric",
+    "pronunciation": "/ˌesəˈterɪk/",
+    "translation": "深奥难懂的；仅少数内行懂的",
+    "memoryCue": "eso-（内部）→ 只在圈内流传的小众晦涩知识。",
+    "example": "Skip esoteric jargon when explaining science to general readers."
+  },
+  {
+    "id": "gre-en-mst-espouse",
+    "language": "english",
+    "difficulty": "master",
+    "term": "espouse",
+    "pronunciation": "/ɪˈspaʊz/",
+    "translation": "拥护；信奉；支持（主张）",
+    "memoryCue": "原意“娶/嫁”，引申为坚定拥抱并支持某项理念。",
+    "example": "Few economists today espouse strict isolationist trade rules."
+  },
+  {
+    "id": "gre-en-mst-ethereal",
+    "language": "english",
+    "difficulty": "master",
+    "term": "ethereal",
+    "pronunciation": "/ɪˈθɪriəl/",
+    "translation": "飘渺的；超凡脱俗的；轻盈的",
+    "memoryCue": "ether（以太/高空清气）→ 仿佛来自云端般轻灵。",
+    "example": "Morning mist gave the pine valley an ethereal stillness."
+  },
+  {
+    "id": "gre-en-mst-eulogy",
+    "language": "english",
+    "difficulty": "master",
+    "term": "eulogy",
+    "pronunciation": "/ˈjuːlədʒi/",
+    "translation": "颂词；悼词；高度赞美",
+    "memoryCue": "eu-（好）+ logy（说）→ 追悼会或典礼上讲的好话赞美。",
+    "example": "Her colleague delivered a moving eulogy celebrating decades of mentorship."
+  },
+  {
+    "id": "gre-en-mst-exacerbate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "exacerbate",
+    "pronunciation": "/ɪɡˈzæsərbeɪt/",
+    "translation": "使恶化；加剧（矛盾/病情）",
+    "memoryCue": "ex- + acerb（酸/尖锐）→ 让伤口更加疼痛恶化。",
+    "example": "Skipping sleep before exams only exacerbates test anxiety."
+  },
+  {
+    "id": "gre-en-mst-exculpate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "exculpate",
+    "pronunciation": "/ˈekskʌlpeɪt/",
+    "translation": "开脱罪责；证明无罪",
+    "memoryCue": "ex-（出）+ culp（罪，同 culprit）→ 把罪名清洗出去。",
+    "example": "Timestamped access logs served to exculpate the night operator."
+  },
+  {
+    "id": "gre-en-mst-exhaustive",
+    "language": "english",
+    "difficulty": "master",
+    "term": "exhaustive",
+    "pronunciation": "/ɪɡˈzɔːstɪv/",
+    "translation": "详尽无遗的；彻底的",
+    "memoryCue": "exhaust（耗尽）+ -ive → 穷尽所有可能绝无遗漏（区别 exhausted 精疲力竭）。",
+    "example": "An exhaustive literature review took six months to compile."
+  },
+  {
+    "id": "gre-en-mst-exonerate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "exonerate",
+    "pronunciation": "/ɪɡˈzɑːnəreɪt/",
+    "translation": "免除责任；宣布无罪",
+    "memoryCue": "ex-（去掉）+ oner（重担，同 onerous）→ 卸下罪责重担。",
+    "example": "DNA testing helped exonerate the wrongly accused technician."
+  },
+  {
+    "id": "gre-en-mst-expedient",
+    "language": "english",
+    "difficulty": "master",
+    "term": "expedient",
+    "pronunciation": "/ɪkˈspiːdiənt/",
+    "translation": "权宜之计；权宜的；便利的",
+    "memoryCue": "ex-（出）+ ped（脚）→ 把脚从泥潭拔出来先应急，常含“未必长久”之意。",
+    "example": "Cutting corners may seem expedient now but creates debt later."
+  },
+  {
+    "id": "gre-en-mst-expunge",
+    "language": "english",
+    "difficulty": "master",
+    "term": "expunge",
+    "pronunciation": "/ɪkˈspʌndʒ/",
+    "translation": "抹去；彻底删去（记录）",
+    "memoryCue": "ex-（出）+ punge（刺/打点划掉）→ 彻底刮除痕迹。",
+    "example": "Privacy tools let users expunge local history with one tap."
+  },
+  {
+    "id": "gre-en-mst-extol",
+    "language": "english",
+    "difficulty": "master",
+    "term": "extol",
+    "pronunciation": "/ɪkˈstoʊl/",
+    "translation": "赞美；颂扬；极力吹捧",
+    "memoryCue": "ex-（向上）+ tol（举起）→ 高高举起大加赞扬。",
+    "example": "Reviewers continue to extol the novel's spare, rhythmic prose."
+  },
+  {
+    "id": "gre-en-mst-extraneous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "extraneous",
+    "pronunciation": "/ɪkˈstreɪniəs/",
+    "translation": "无关的；外来的；多余的",
+    "memoryCue": "extra-（外部）→ 与当前主题毫不相干的冗余元素。",
+    "example": "Strip extraneous badges from the study card to sharpen focus."
+  },
+  {
+    "id": "gre-en-mst-extrapolate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "extrapolate",
+    "pronunciation": "/ɪkˈstræpəleɪt/",
+    "translation": "推断；外推（从已知推未知）",
+    "memoryCue": "extra-（之外）+ polate（估算）→ 顺着现有趋势往未知区间外推。",
+    "example": "Be cautious when you extrapolate short pilots to global markets."
+  },
+  {
+    "id": "gre-en-mst-facetious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "facetious",
+    "pronunciation": "/fəˈsiːʃəs/",
+    "translation": "滑稽的；不正经开玩笑的",
+    "memoryCue": "face（扮鬼脸）→ 在严肃场合故意插科打诨（含全部五个元音 a-e-i-o-u！）。",
+    "example": "His facetious remark broke the tension but missed the point."
+  },
+  {
+    "id": "gre-en-mst-fallacious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "fallacious",
+    "pronunciation": "/fəˈleɪʃəs/",
+    "translation": "谬误的；含糊欺骗的；站不住脚的",
+    "memoryCue": "fall（欺骗/错，同 fallacy）→ 逻辑上存在硬伤的论证。",
+    "example": "The editorial exposed several fallacious assumptions in the report."
+  },
+  {
+    "id": "gre-en-mst-fastidious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "fastidious",
+    "pronunciation": "/fæˈstɪdiəs/",
+    "translation": "挑剔的；吹毛求疵的；极讲究细节的",
+    "memoryCue": "一尘不染、对排版或用词苛刻追求完美。",
+    "example": "She is fastidious about keeping phonetic symbols consistent."
+  },
+  {
+    "id": "gre-en-mst-fatuous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "fatuous",
+    "pronunciation": "/ˈfætʃuəs/",
+    "translation": "愚昧可笑的；空洞自满的",
+    "memoryCue": "蠢话连篇却还洋洋得意。",
+    "example": "Critics dismissed the slogan as a fatuous oversimplification."
+  },
+  {
+    "id": "gre-en-mst-feign",
+    "language": "english",
+    "difficulty": "master",
+    "term": "feign",
+    "pronunciation": "/feɪn/",
+    "translation": "假装；伪装；捏造",
+    "memoryCue": "源自词根 fig-（捏造，同 fiction）→ 装出某种表情或疾病。",
+    "example": "He tried to feign calm even after missing the last ferry."
+  },
+  {
+    "id": "gre-en-mst-fervent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "fervent",
+    "pronunciation": "/ˈfɜːrvənt/",
+    "translation": "热烈的；炽热的；虔诚的",
+    "memoryCue": "ferv-（沸腾发热）→ 满腔热忱（fervent supporter）。",
+    "example": "She remains a fervent advocate of bilingual early education."
+  },
+  {
+    "id": "gre-en-mst-fetter",
+    "language": "english",
+    "difficulty": "master",
+    "term": "fetter",
+    "pronunciation": "/ˈfetər/",
+    "translation": "脚镣；束缚；加枷锁限制",
+    "memoryCue": "与 foot（脚）同源 → 锁在脚踝上的铁链，引申束缚创造力。",
+    "example": "Rigid templates can fetter natural storytelling in essays."
+  },
+  {
+    "id": "gre-en-mst-flagrant",
+    "language": "english",
+    "difficulty": "master",
+    "term": "flagrant",
+    "pronunciation": "/ˈfleɪɡrənt/",
+    "translation": "明目张胆的；公然恶劣的",
+    "memoryCue": "flagr-（燃烧）→ 坏事做得火光冲天人人看见。",
+    "example": "Plagiarism represents a flagrant violation of academic integrity."
+  },
+  {
+    "id": "gre-en-mst-flout",
+    "language": "english",
+    "difficulty": "master",
+    "term": "flout",
+    "pronunciation": "/flaʊt/",
+    "translation": "公然蔑视；嘲弄违反（规则）",
+    "memoryCue": "区别 flaunt（炫耀）与 flout（公然无视规定）。",
+    "example": "Scooters that flout pedestrian zones face automatic fines."
+  },
+  {
+    "id": "gre-en-mst-foment",
+    "language": "english",
+    "difficulty": "master",
+    "term": "foment",
+    "pronunciation": "/foʊˈment/",
+    "translation": "煽动；挑起；助长（动乱）",
+    "memoryCue": "原意“热敷”，引申给矛盾升温煽风点火。",
+    "example": "Sensational headlines often foment unnecessary public panic."
+  },
+  {
+    "id": "gre-en-mst-forestall",
+    "language": "english",
+    "difficulty": "master",
+    "term": "forestall",
+    "pronunciation": "/fɔːrˈstɔːl/",
+    "translation": "预先阻止；先发制人防止",
+    "memoryCue": "fore-（提前）+ stall（挡住）→ 提前站好位拦住麻烦发生。",
+    "example": "Regular backups forestall catastrophic data loss."
+  },
+  {
+    "id": "gre-en-mst-fortuitous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "fortuitous",
+    "pronunciation": "/fɔːrˈtuːɪtəs/",
+    "translation": "偶然的；幸运巧合的",
+    "memoryCue": "fort-（运气，同 fortune）→ 纯属意外碰巧（常指好巧合）。",
+    "example": "A fortuitous train delay led to an unforgettable conversation."
+  },
+  {
+    "id": "gre-en-mst-fractious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "fractious",
+    "pronunciation": "/ˈfrækʃəs/",
+    "translation": "易怒的；脾气暴躁难驾驭的",
+    "memoryCue": "fract-（打碎/裂）→ 动不动就炸毛闹分裂。",
+    "example": "Calming a fractious committee requires patience and clear facts."
+  },
+  {
+    "id": "gre-en-mst-frugal",
+    "language": "english",
+    "difficulty": "master",
+    "term": "frugal",
+    "pronunciation": "/ˈfruːɡl/",
+    "translation": "节俭的；朴素的；节省资源的",
+    "memoryCue": "精打细算不铺张浪费。",
+    "example": "Frugal memory usage allows smooth scrolling on older devices."
+  },
+  {
+    "id": "gre-en-mst-furtive",
+    "language": "english",
+    "difficulty": "master",
+    "term": "furtive",
+    "pronunciation": "/ˈfɜːrtɪv/",
+    "translation": "鬼鬼祟祟的；偷偷摸摸的",
+    "memoryCue": "fur-（小偷）+ -tive → 像贼一样躲躲闪闪偷瞄。",
+    "example": "He cast a furtive glance at his watch during the long speech."
+  },
+  {
+    "id": "gre-en-mst-futile",
+    "language": "english",
+    "difficulty": "master",
+    "term": "futile",
+    "pronunciation": "/ˈfjuːtl/",
+    "translation": "徒劳的；无用的；白费力气的",
+    "memoryCue": "像漏底水壶怎么倒水都白搭。",
+    "example": "Trying to memorize isolated lists without review proves futile."
+  },
+  {
+    "id": "gre-en-mst-gainsay",
+    "language": "english",
+    "difficulty": "master",
+    "term": "gainsay",
+    "pronunciation": "/ˌɡeɪnˈseɪ/",
+    "translation": "否认；反驳；争辩",
+    "memoryCue": "against（反）+ say（说）→ 站出来反驳否认（多用于否定句）。",
+    "example": "No one can gainsay the steady impact of daily reading."
+  },
+  {
+    "id": "gre-en-mst-galvanize",
+    "language": "english",
+    "difficulty": "master",
+    "term": "galvanize",
+    "pronunciation": "/ˈɡælvənaɪz/",
+    "translation": "激励；刺激；电镀",
+    "memoryCue": "原指用电流刺激青蛙腿跳动，引申猛然唤醒团队斗志。",
+    "example": "A clear countdown timer helped galvanize the final sprint."
+  },
+  {
+    "id": "gre-en-mst-garrulous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "garrulous",
+    "pronunciation": "/ˈɡærələs/",
+    "translation": "喋喋不休的；饶舌啰嗦的",
+    "memoryCue": "嘴里叽里呱啦说个没完，常指琐碎闲扯。",
+    "example": "A garrulous narrator slowed the opening chapter considerably."
+  },
+  {
+    "id": "gre-en-mst-germane",
+    "language": "english",
+    "difficulty": "master",
+    "term": "germane",
+    "pronunciation": "/dʒɜːrˈmeɪn/",
+    "translation": "密切相关的；切题的（to）",
+    "memoryCue": "原意“同胞亲属”，引申与话题血脉相连、十分中肯。",
+    "example": "Please keep questions germane to the quarterly budget."
+  },
+  {
+    "id": "gre-en-mst-glib",
+    "language": "english",
+    "difficulty": "master",
+    "term": "glib",
+    "pronunciation": "/ɡlɪb/",
+    "translation": "油嘴滑舌的；肤浅流利的",
+    "memoryCue": "嘴皮子溜得很，但内容轻浮欠缺真思考。",
+    "example": "Audiences quickly see through glib promises lacking real data."
+  },
+  {
+    "id": "gre-en-mst-grandiloquent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "grandiloquent",
+    "pronunciation": "/ɡrænˈdɪləkwənt/",
+    "translation": "夸夸其谈的；词藻浮夸的",
+    "memoryCue": "grand（宏大）+ loqu（说）→ 满口空洞大词。",
+    "example": "Skip grandiloquent phrasing and write in crisp, clear verbs."
+  },
+  {
+    "id": "gre-en-mst-gregarious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "gregarious",
+    "pronunciation": "/ɡrɪˈɡeriəs/",
+    "translation": "合群的；爱社交的；群居的",
+    "memoryCue": "greg-（群体，同 aggregate）→ 天生喜欢待在群体里。",
+    "example": "Gregarious learners thrive in weekly conversation clubs."
+  },
+  {
+    "id": "gre-en-mst-guile",
+    "language": "english",
+    "difficulty": "master",
+    "term": "guile",
+    "pronunciation": "/ɡaɪl/",
+    "translation": "狡诈；诡计；城府",
+    "memoryCue": "巧言伪装骗人；形容词 guileless 表“天真无邪”。",
+    "example": "Young readers admired the hero's honesty and lack of guile."
+  },
+  {
+    "id": "gre-en-mst-gullible",
+    "language": "english",
+    "difficulty": "master",
+    "term": "gullible",
+    "pronunciation": "/ˈɡʌləbl/",
+    "translation": "易受骗的；轻信他人的",
+    "memoryCue": "比 credulous 更口语常用，指动不动就上当。",
+    "example": "Scam alerts remind users not to be gullible about urgent links."
+  },
+  {
+    "id": "gre-en-mst-hackneyed",
+    "language": "english",
+    "difficulty": "master",
+    "term": "hackneyed",
+    "pronunciation": "/ˈhækniːd/",
+    "translation": "陈腐的；老掉牙的；用滥的",
+    "memoryCue": "原指租给任何人骑的老马，引申被用烂的陈词滥调。",
+    "example": "Editors flagged three hackneyed metaphors in the opening draft."
+  },
+  {
+    "id": "gre-en-mst-halcyon",
+    "language": "english",
+    "difficulty": "master",
+    "term": "halcyon",
+    "pronunciation": "/ˈhælsiən/",
+    "translation": "宁静美好的；太平盛世的（岁月）",
+    "memoryCue": "源自神话里让海面风平浪静的翠鸟；常搭配 halcyon days。",
+    "example": "Many alumni still recall the halcyon days of campus radio."
+  },
+  {
+    "id": "gre-en-mst-harangue",
+    "language": "english",
+    "difficulty": "master",
+    "term": "harangue",
+    "pronunciation": "/həˈræŋ/",
+    "translation": "长篇大论的训斥；激昂演说",
+    "memoryCue": "嗓门大、时间长、带说教味地批一通。",
+    "example": "Listeners grew weary of the host's twenty-minute harangue."
+  },
+  {
+    "id": "gre-en-mst-harbinger",
+    "language": "english",
+    "difficulty": "master",
+    "term": "harbinger",
+    "pronunciation": "/ˈhɑːrbɪndʒər/",
+    "translation": "先兆；预示者；前驱",
+    "memoryCue": "原指提前打前站安排住宿的人，引申“春燕是春天的先声”。",
+    "example": "Swallows returning north are a welcome harbinger of spring."
+  },
+  {
+    "id": "gre-en-mst-haughty",
+    "language": "english",
+    "difficulty": "master",
+    "term": "haughty",
+    "pronunciation": "/ˈhɔːti/",
+    "translation": "傲慢的；目中无人的",
+    "memoryCue": "词源与 high（高）同源 → 鼻孔朝天看不起人。",
+    "example": "His haughty dismissal alienated helpful junior analysts."
+  },
+  {
+    "id": "gre-en-mst-heinous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "heinous",
+    "pronunciation": "/ˈheɪnəs/",
+    "translation": "极其恶劣的；十恶不赦的",
+    "memoryCue": "注意读音为 /ˈheɪnəs/，源自法语“痛恨”。",
+    "example": "Historical archives documented heinous abuses during the blockade."
+  },
+  {
+    "id": "gre-en-mst-hermetic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "hermetic",
+    "pronunciation": "/hɜːrˈmetɪk/",
+    "translation": "密闭的；与世隔绝的；晦涩的",
+    "memoryCue": "源自炼金术鼻祖 Hermes 密封玻璃管 → 密不透风。",
+    "example": "Museum vaults rely on hermetic seals to protect ancient scrolls."
+  },
+  {
+    "id": "gre-en-mst-heterogeneous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "heterogeneous",
+    "pronunciation": "/ˌhetərəˈdʒiːniəs/",
+    "translation": "异质的；成分混杂多样的",
+    "memoryCue": "hetero-（不同）+ gen（种类）→ 多种不同元素混在一起。",
+    "example": "Global classrooms bring together heterogeneous learning styles."
+  },
+  {
+    "id": "gre-en-mst-homogeneous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "homogeneous",
+    "pronunciation": "/ˌhoʊməˈdʒiːniəs/",
+    "translation": "同质的；均一的；纯一色的",
+    "memoryCue": "homo-（相同）+ gen（种类）→ 成分高度一致。",
+    "example": "No nation possesses a completely homogeneous regional dialect."
+  },
+  {
+    "id": "gre-en-mst-hyperbole",
+    "language": "english",
+    "difficulty": "master",
+    "term": "hyperbole",
+    "pronunciation": "/haɪˈpɜːrbəli/",
+    "translation": "夸张法；言过其实",
+    "memoryCue": "hyper-（超越）+ bole（扔）→ 把话说得飞到天外去。",
+    "example": "Saying a test took forever is everyday hyperbole."
+  },
+  {
+    "id": "gre-en-mst-iconoclast",
+    "language": "english",
+    "difficulty": "master",
+    "term": "iconoclast",
+    "pronunciation": "/aɪˈkɑːnəklæst/",
+    "translation": "打破传统观念者；反偶像者",
+    "memoryCue": "icon（偶像）+ clast（打碎）→ 敢于质疑权威旧教条的革新者。",
+    "example": "Design iconoclasts challenged decades of cluttered menu layouts."
+  },
+  {
+    "id": "gre-en-mst-idiosyncratic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "idiosyncratic",
+    "pronunciation": "/ˌɪdiəsɪŋˈkrætɪk/",
+    "translation": "特有的；古怪独特的；个人癖好的",
+    "memoryCue": "idio-（自己独有，同 idiom）→ 每个人独一无二的怪癖或风格。",
+    "example": "Every poet develops an idiosyncratic sense of punctuation."
+  },
+  {
+    "id": "gre-en-mst-ignominious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "ignominious",
+    "pronunciation": "/ˌɪɡnəˈmɪniəs/",
+    "translation": "可耻的；丢脸的；屈辱的",
+    "memoryCue": "ig-（不）+ nomin（好名声）→ 声名扫地的惨败。",
+    "example": "Overconfidence led the defending champions to an ignominious exit."
+  },
+  {
+    "id": "gre-en-mst-illicit",
+    "language": "english",
+    "difficulty": "master",
+    "term": "illicit",
+    "pronunciation": "/ɪˈlɪsɪt/",
+    "translation": "非法的；违禁的；暗中不道德的",
+    "memoryCue": "il-（不）+ licit（允许）→ 法律或规则禁止的。",
+    "example": "Customs patrols intercepted illicit shipments of rare timber."
+  },
+  {
+    "id": "gre-en-mst-impassive",
+    "language": "english",
+    "difficulty": "master",
+    "term": "impassive",
+    "pronunciation": "/ɪmˈpæsɪv/",
+    "translation": "面无表情的；无动于衷的",
+    "memoryCue": "im-（不）+ pass（感情）→ 脸上看不出任何情绪波澜。",
+    "example": "The chess grandmaster remained impassive even after a blunder."
+  },
+  {
+    "id": "gre-en-mst-impeccable",
+    "language": "english",
+    "difficulty": "master",
+    "term": "impeccable",
+    "pronunciation": "/ɪmˈpekəbl/",
+    "translation": "无可挑剔的；完美无瑕的",
+    "memoryCue": "im-（不）+ pecc（犯罪/瑕疵）→ 找不到一丝毛病。",
+    "example": "Her pronunciation and pacing during the keynote were impeccable."
+  },
+  {
+    "id": "gre-en-mst-impecunious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "impecunious",
+    "pronunciation": "/ˌɪmpɪˈkjuːniəs/",
+    "translation": "身无分文的；贫困的",
+    "memoryCue": "im-（无）+ pecuni（钱财）→ 口袋空空如也的穷学生或诗人。",
+    "example": "Many celebrated writers started out in impecunious attic rooms."
+  },
+  {
+    "id": "gre-en-mst-impervious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "impervious",
+    "pronunciation": "/ɪmˈpɜːrviəs/",
+    "translation": "穿不透的；不受影响的（to）",
+    "memoryCue": "im-（不）+ per-（穿过）+ via（路）→ 水泼不进、油盐不进。",
+    "example": "Well-baked ceramic tiles are completely impervious to moisture."
+  },
+  {
+    "id": "gre-en-mst-impetuous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "impetuous",
+    "pronunciation": "/ɪmˈpetʃuəs/",
+    "translation": "鲁莽冲动的；猛烈的",
+    "memoryCue": "im- + pet（冲撞）→ 不加思索一头冲出去。",
+    "example": "Impetuous edits without testing often introduce subtle regressions."
+  },
+  {
+    "id": "gre-en-mst-implacable",
+    "language": "english",
+    "difficulty": "master",
+    "term": "implacable",
+    "pronunciation": "/ɪmˈplækəbl/",
+    "translation": "难以安抚的；冷酷不妥协的",
+    "memoryCue": "im-（不）+ plac（安抚，同 placate）→ 怎么劝都不肯松口。",
+    "example": "Time is an implacable reminder to review words before they fade."
+  },
+  {
+    "id": "gre-en-mst-implicit",
+    "language": "english",
+    "difficulty": "master",
+    "term": "implicit",
+    "pronunciation": "/ɪmˈplɪsɪt/",
+    "translation": "含蓄的；隐含的；绝对无疑的",
+    "memoryCue": "im-（向内）+ plic（折叠）→ 折在里面没明说但双方都懂。",
+    "example": "Every question carries an implicit assumption worth checking."
+  },
+  {
+    "id": "gre-en-mst-impudent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "impudent",
+    "pronunciation": "/ˈɪmpjuːdənt/",
+    "translation": "无礼的；鲁莽傲慢的",
+    "memoryCue": "im-（不）+ pud（羞耻）→ 不知羞愧、没大没小。",
+    "example": "Critics scolded the impudent interruption during the ceremony."
+  },
+  {
+    "id": "gre-en-mst-inadvertent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "inadvertent",
+    "pronunciation": "/ˌɪnədˈvɜːrtnt/",
+    "translation": "疏忽的；无意间造成的",
+    "memoryCue": "in-（不）+ advert（注意转向）→ 没留神顺手点错的。",
+    "example": "An undo button rescues learners from inadvertent swipe ratings."
+  },
+  {
+    "id": "gre-en-mst-inane",
+    "language": "english",
+    "difficulty": "master",
+    "term": "inane",
+    "pronunciation": "/ɪˈneɪn/",
+    "translation": "空洞无聊的；愚蠢浅薄的",
+    "memoryCue": "毫无实质意义的废话连篇。",
+    "example": "Skip inane small talk and get straight to the core insight."
+  },
+  {
+    "id": "gre-en-mst-incendiary",
+    "language": "english",
+    "difficulty": "master",
+    "term": "incendiary",
+    "pronunciation": "/ɪnˈsendieri/",
+    "translation": "煽动性的；纵火的；引燃物",
+    "memoryCue": "in- + cend（火，同 candle）→ 一点就着、挑起争端的话语。",
+    "example": "Incendiary remarks derailed what began as a calm panel."
+  },
+  {
+    "id": "gre-en-mst-incessant",
+    "language": "english",
+    "difficulty": "master",
+    "term": "incessant",
+    "pronunciation": "/ɪnˈsesnt/",
+    "translation": "不停的；连绵不绝的",
+    "memoryCue": "in-（不）+ cess（停止，同 cease）→ 没完没了地持续。",
+    "example": "Incessant rain forced festival organizers to move stages indoors."
+  },
+  {
+    "id": "gre-en-mst-incipient",
+    "language": "english",
+    "difficulty": "master",
+    "term": "incipient",
+    "pronunciation": "/ɪnˈsɪpiənt/",
+    "translation": "初期的；刚萌芽的",
+    "memoryCue": "in- + cip（拿取/开始）→ 刚刚露头起步的阶段。",
+    "example": "Early testing catches incipient memory decay right on schedule."
+  },
+  {
+    "id": "gre-en-mst-incisive",
+    "language": "english",
+    "difficulty": "master",
+    "term": "incisive",
+    "pronunciation": "/ɪnˈsaɪsɪv/",
+    "translation": "一针见血的；尖锐深刻的",
+    "memoryCue": "in-（切入）+ cis（切）→ 一刀切中问题要害。",
+    "example": "Her incisive summary cut through forty pages of jargon."
+  },
+  {
+    "id": "gre-en-mst-incongruous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "incongruous",
+    "pronunciation": "/ɪnˈkɑːŋɡruəs/",
+    "translation": "不协调的；格格不入的",
+    "memoryCue": "in-（不）+ congru（相合）→ 放在一块非常违和突兀。",
+    "example": "Neon billboards looked incongruous beside medieval stone walls."
+  },
+  {
+    "id": "gre-en-mst-incorrigible",
+    "language": "english",
+    "difficulty": "master",
+    "term": "incorrigible",
+    "pronunciation": "/ɪnˈkɔːrɪdʒəbl/",
+    "translation": "无可救药的；积习难改的",
+    "memoryCue": "in-（不）+ corrigible（可改）→ 怎么教也改不过来。",
+    "example": "Even an incorrigible night owl can build a morning study streak."
+  },
+  {
+    "id": "gre-en-mst-inculcate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "inculcate",
+    "pronunciation": "/ɪnˈkʌlkeɪt/",
+    "translation": "反复灌输；谆谆教诲（习惯/观念）",
+    "memoryCue": "in-（向内）+ culc（用脚踩实）→ 一次次踩实进脑海里。",
+    "example": "Good coaches inculcate steady fundamentals before flashy tricks."
+  },
+  {
+    "id": "gre-en-mst-indelible",
+    "language": "english",
+    "difficulty": "master",
+    "term": "indelible",
+    "pronunciation": "/ɪnˈdeləbl/",
+    "translation": "磨灭不掉的；令人难忘的",
+    "memoryCue": "in-（不）+ del（删除，同 delete）→ 擦不掉的深刻印记。",
+    "example": "Vivid personal stories leave an indelible mark on vocabulary memory."
+  },
+  {
+    "id": "gre-en-mst-indigenous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "indigenous",
+    "pronunciation": "/ɪnˈdɪdʒənəs/",
+    "translation": "本土的；土生土长的；原住民的",
+    "memoryCue": "indi-（内部）+ gen（出生）→ 生于斯长于斯的原生事物。",
+    "example": "Botanists cataloged forty indigenous ferns in the cloud forest."
+  },
+  {
+    "id": "gre-en-mst-indigent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "indigent",
+    "pronunciation": "/ˈɪndɪdʒənt/",
+    "translation": "贫困的；穷困潦倒的",
+    "memoryCue": "与需要救济的赤贫阶层相关（注意区分 indigenous 本土的！）。",
+    "example": "Public clinics provide free medicine to indigent residents."
+  },
+  {
+    "id": "gre-en-mst-indolent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "indolent",
+    "pronunciation": "/ˈɪndələnt/",
+    "translation": "懒惰的；懒洋洋不爱动的",
+    "memoryCue": "in-（无）+ dol（痛/劳苦）→ 逃避劳累、整天偷懒。",
+    "example": "An indolent afternoon on the porch restored everyone's energy."
+  },
+  {
+    "id": "gre-en-mst-ineffable",
+    "language": "english",
+    "difficulty": "master",
+    "term": "ineffable",
+    "pronunciation": "/ɪnˈefəbl/",
+    "translation": "难以言喻的；不可名状的",
+    "memoryCue": "in-（不）+ ef-（出）+ fable（说）→ 美或痛到语言形容不出来。",
+    "example": "Standing above the sea of clouds brought an ineffable calm."
+  },
+  {
+    "id": "gre-en-mst-inexorable",
+    "language": "english",
+    "difficulty": "master",
+    "term": "inexorable",
+    "pronunciation": "/ɪnˈeksərəbl/",
+    "translation": "不可阻挡的；无情的；毫不妥协的",
+    "memoryCue": "in-（不）+ exor（恳求）→ 怎么求饶也拦不住的时间车轮。",
+    "example": "Without spaced review, forgetting follows an inexorable curve."
+  },
+  {
+    "id": "gre-en-mst-ingenuous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "ingenuous",
+    "pronunciation": "/ɪnˈdʒenjuəs/",
+    "translation": "天真的；率直单纯的",
+    "memoryCue": "区别：ingenious（巧妙聪明的）vs ingenuous（天真坦诚的）。",
+    "example": "Children ask delightfully ingenuous questions about adult habits."
+  },
+  {
+    "id": "gre-en-mst-inimical",
+    "language": "english",
+    "difficulty": "master",
+    "term": "inimical",
+    "pronunciation": "/ɪˈnɪmɪkl/",
+    "translation": "敌意的；有害的；不利的（to）",
+    "memoryCue": "in-（不）+ amic（朋友，同 amicable）→ 不是朋友即敌人。",
+    "example": "Noisy notifications are inimical to sustained reading focus."
+  },
+  {
+    "id": "gre-en-mst-innocuous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "innocuous",
+    "pronunciation": "/ɪˈnɑːkjuəs/",
+    "translation": "无害的；无伤大雅的",
+    "memoryCue": "in-（不）+ noc（伤害）→ 不疼不痒、安全无害。",
+    "example": "What seemed like an innocuous typo broke the entire CSV import."
+  },
+  {
+    "id": "gre-en-mst-inscrutable",
+    "language": "english",
+    "difficulty": "master",
+    "term": "inscrutable",
+    "pronunciation": "/ɪnˈskruːtəbl/",
+    "translation": "高深莫测的；难以理解的",
+    "memoryCue": "in-（不）+ scrutin（细查，同 scrutinize）→ 怎么端详也猜不透。",
+    "example": "The cat stared back with an inscrutable amber gaze."
+  },
+  {
+    "id": "gre-en-mst-insipid",
+    "language": "english",
+    "difficulty": "master",
+    "term": "insipid",
+    "pronunciation": "/ɪnˈsɪpɪd/",
+    "translation": "平淡无味的；枯燥乏味的",
+    "memoryCue": "in-（无）+ sip（味道）→ 寡淡如白开水，毫无新意。",
+    "example": "Memorizing bare definitions without examples feels insipid."
+  },
+  {
+    "id": "gre-en-mst-insolent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "insolent",
+    "pronunciation": "/ˈɪnsələnt/",
+    "translation": "粗鲁傲慢的；目无尊长的",
+    "memoryCue": "in-（逆）+ sol（常规礼仪）→ 突破礼貌底线的狂妄。",
+    "example": "The clerk stayed polite despite the customer's insolent tone."
+  },
+  {
+    "id": "gre-en-mst-instigate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "instigate",
+    "pronunciation": "/ˈɪnstɪɡeɪt/",
+    "translation": "煽动；教唆；发起",
+    "memoryCue": "in- + stig（刺，同 stigma）→ 在背后拿针戳人去挑事。",
+    "example": "Curiosity often instigates our finest independent experiments."
+  },
+  {
+    "id": "gre-en-mst-insular",
+    "language": "english",
+    "difficulty": "master",
+    "term": "insular",
+    "pronunciation": "/ˈɪnsjələr/",
+    "translation": "狭隘封闭的；岛屿的",
+    "memoryCue": "insul-（岛屿，同 peninsula 半岛）→ 像孤岛一样闭门自守。",
+    "example": "Avoid an insular study routine by mixing real-world podcasts."
+  },
+  {
+    "id": "gre-en-mst-intractable",
+    "language": "english",
+    "difficulty": "master",
+    "term": "intractable",
+    "pronunciation": "/ɪnˈtræktəbl/",
+    "translation": "棘手的；难管教的；难以解决的",
+    "memoryCue": "in-（不）+ tract（拉/处理）→ 硬骨头啃不动。",
+    "example": "Urban traffic remains an intractable challenge for planners."
+  },
+  {
+    "id": "gre-en-mst-intransigent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "intransigent",
+    "pronunciation": "/ɪnˈtrænzɪdʒənt/",
+    "translation": "不妥协的；固执强硬的",
+    "memoryCue": "in-（不）+ trans- + ig（推动）→ 一寸步也不肯退让。",
+    "example": "Intransigent positions stalled negotiations for three months."
+  },
+  {
+    "id": "gre-en-mst-intrepid",
+    "language": "english",
+    "difficulty": "master",
+    "term": "intrepid",
+    "pronunciation": "/ɪnˈtrepɪd/",
+    "translation": "无畏的；勇猛果敢的",
+    "memoryCue": "in-（不）+ trepid（颤抖，同 trepidation）→ 临危丝毫不发抖。",
+    "example": "Intrepid explorers charted winter passages across the ice shelf."
+  },
+  {
+    "id": "gre-en-mst-inundate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "inundate",
+    "pronunciation": "/ˈɪnʌndeɪt/",
+    "translation": "淹没；使应接不暇（with）",
+    "memoryCue": "in- + und（波浪）→ 大水漫灌淹掉，常指被邮件/通知淹没。",
+    "example": "Skipping a week of SRS can inundate you with overdue cards."
+  },
+  {
+    "id": "gre-en-mst-inure",
+    "language": "english",
+    "difficulty": "master",
+    "term": "inure",
+    "pronunciation": "/ɪˈnjʊr/",
+    "translation": "使习惯（痛苦/艰苦）；使麻木（to）",
+    "memoryCue": "in- + ure（使用）→ 久居鲍鱼之肆久而惯之。",
+    "example": "Years of coastal winds seemed to inure the pine trees to storms."
+  },
+  {
+    "id": "gre-en-mst-invective",
+    "language": "english",
+    "difficulty": "master",
+    "term": "invective",
+    "pronunciation": "/ɪnˈvektɪv/",
+    "translation": "恶言谩骂；猛烈抨击",
+    "memoryCue": "in- + vect（携带攻击）→ 尖酸刻薄的口头攻击。",
+    "example": "Substantive debate works far better than partisan invective."
+  },
+  {
+    "id": "gre-en-mst-inveterate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "inveterate",
+    "pronunciation": "/ɪnˈvetərət/",
+    "translation": "根深蒂固的；成癖的",
+    "memoryCue": "in- + veter（老/旧）→ 积攒多年改不掉的老毛病或老爱好者。",
+    "example": "He is an inveterate note-taker who fills three notebooks a year."
+  },
+  {
+    "id": "gre-en-mst-invidious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "invidious",
+    "pronunciation": "/ɪnˈvɪdiəs/",
+    "translation": "引起反感/嫉妒的；不公的",
+    "memoryCue": "in- + vid（看，同 envy）→ 挑拨是非让人眼红生恨的。",
+    "example": "Avoid making invidious comparisons between completely different learners."
+  },
+  {
+    "id": "gre-en-mst-irascible",
+    "language": "english",
+    "difficulty": "master",
+    "term": "irascible",
+    "pronunciation": "/ɪˈræsəbl/",
+    "translation": "易怒的；暴躁的",
+    "memoryCue": "ira-（愤怒，同 ire）→ 一点就着的坏脾气。",
+    "example": "Even an irascible critic softened after seeing the live demo."
+  },
+  {
+    "id": "gre-en-mst-juxtapose",
+    "language": "english",
+    "difficulty": "master",
+    "term": "juxtapose",
+    "pronunciation": "/ˌdʒʌkstəˈpoʊz/",
+    "translation": "并列；把……并置对比",
+    "memoryCue": "juxta-（紧挨着）+ pose（放）→ 并排放在一起凸显反差。",
+    "example": "Juxtaposing light and dark mode previews exposes contrast flaws quickly."
+  },
+  {
+    "id": "gre-en-mst-laconic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "laconic",
+    "pronunciation": "/ləˈkɑːnɪk/",
+    "translation": "简洁的；言简意赅的（甚至略显冷淡）",
+    "memoryCue": "源自古希腊斯巴达所在的 Laconia 地区，斯巴达人说话出了名惜字如金。",
+    "example": "Her laconic reply said everything needed in just four words."
+  },
+  {
+    "id": "gre-en-mst-languid",
+    "language": "english",
+    "difficulty": "master",
+    "term": "languid",
+    "pronunciation": "/ˈlæŋɡwɪd/",
+    "translation": "倦怠的；懒洋洋的；无力的",
+    "memoryCue": "langu-（疲软）→ 酷暑下午提不起劲的慵懒状态。",
+    "example": "A gentle breeze stirred the languid afternoon curtains."
+  },
+  {
+    "id": "gre-en-mst-laudable",
+    "language": "english",
+    "difficulty": "master",
+    "term": "laudable",
+    "pronunciation": "/ˈlɔːdəbl/",
+    "translation": "值得赞许的；可嘉的",
+    "memoryCue": "laud（赞美）+ -able → 值得鼓掌表扬的。",
+    "example": "Keeping user progress strictly on-device is a laudable design choice."
+  },
+  {
+    "id": "gre-en-mst-lethargic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "lethargic",
+    "pronunciation": "/ləˈθɑːrdʒɪk/",
+    "translation": "昏昏欲睡的；无精打采的",
+    "memoryCue": "leth-（遗忘/沉睡）→ 像中了瞌睡咒一样没精神。",
+    "example": "Heavy lunches often leave afternoon meetings feeling lethargic."
+  },
+  {
+    "id": "gre-en-mst-levity",
+    "language": "english",
+    "difficulty": "master",
+    "term": "levity",
+    "pronunciation": "/ˈlevəti/",
+    "translation": "轻率；轻浮；幽默调侃",
+    "memoryCue": "lev-（轻）→ 在庄重场合显得轻飘飘不够严肃。",
+    "example": "A touch of levity keeps intense workshops enjoyable."
+  },
+  {
+    "id": "gre-en-mst-loquacious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "loquacious",
+    "pronunciation": "/loʊˈkweɪʃəs/",
+    "translation": "话多的；爱讲话的",
+    "memoryCue": "loqu（说话）+ -acious → 滔滔不绝，中性偏活泼（比 garrulous 温和）。",
+    "example": "Loquacious hosts keep dinner parties humming until midnight."
+  },
+  {
+    "id": "gre-en-mst-lucid",
+    "language": "english",
+    "difficulty": "master",
+    "term": "lucid",
+    "pronunciation": "/ˈluːsɪd/",
+    "translation": "清晰的；头脑清醒的；透彻的",
+    "memoryCue": "luc-（光）→ 逻辑透明得像阳光穿透水晶。",
+    "example": "Clear examples keep technical guides lucid for newcomers."
+  },
+  {
+    "id": "gre-en-mst-lugubrious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "lugubrious",
+    "pronunciation": "/ləˈɡuːbriəs/",
+    "translation": "悲哀的；郁郁寡欢的；阴沉的",
+    "memoryCue": "lug-（哀悼哭泣）→ 苦大仇深、夸大悲伤的腔调。",
+    "example": "Rainy clouds gave the empty pier a slightly lugubrious mood."
+  },
+  {
+    "id": "gre-en-mst-magnanimous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "magnanimous",
+    "pronunciation": "/mæɡˈnænɪməs/",
+    "translation": "宽宏大量的；豁达大度的",
+    "memoryCue": "magn-（大）+ anim（心胸）→ 胸怀宽广不计前嫌。",
+    "example": "She was magnanimous in praising her rival's bold performance."
+  },
+  {
+    "id": "gre-en-mst-malevolent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "malevolent",
+    "pronunciation": "/məˈlevələnt/",
+    "translation": "恶意的；怀恨在心的",
+    "memoryCue": "mal-（坏）+ vol（意愿）→ 怀着恶意（反义 benevolent）。",
+    "example": "Zero network calls eliminate fears of malevolent ad trackers."
+  },
+  {
+    "id": "gre-en-mst-malleable",
+    "language": "english",
+    "difficulty": "master",
+    "term": "malleable",
+    "pronunciation": "/ˈmæliəbl/",
+    "translation": "可塑的；有延展性的；易受影响的",
+    "memoryCue": "mall-（锤子）→ 金属锤打可变形，引申人或思维可塑性强。",
+    "example": "Early neural pathways remain remarkably malleable with practice."
+  },
+  {
+    "id": "gre-en-mst-maverick",
+    "language": "english",
+    "difficulty": "master",
+    "term": "maverick",
+    "pronunciation": "/ˈmævərɪk/",
+    "translation": "特立独行者；标新立异的人",
+    "memoryCue": "源自美国拒绝给牛打烙印的牧场主 Maverick，指不走寻常路的人。",
+    "example": "A design maverick challenged the cluttered three-panel convention."
+  },
+  {
+    "id": "gre-en-mst-mendacious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "mendacious",
+    "pronunciation": "/menˈdeɪʃəs/",
+    "translation": "虚假的；爱撒谎的",
+    "memoryCue": "mend-（缺陷/谎言）→ 满嘴跑火车不诚实。",
+    "example": "Fact-checkers swiftly dismantled the mendacious campaign claims."
+  },
+  {
+    "id": "gre-en-mst-mercurial",
+    "language": "english",
+    "difficulty": "master",
+    "term": "mercurial",
+    "pronunciation": "/mərˈkjʊriəl/",
+    "translation": "善变的；情绪不定的；水银般的",
+    "memoryCue": "Mercury（水银/信使神）→ 像水银珠一样滚来滚去难以捉摸。",
+    "example": "Critics struggled to predict the director's mercurial shifts in tone."
+  },
+  {
+    "id": "gre-en-mst-meticulous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "meticulous",
+    "pronunciation": "/məˈtɪkjələs/",
+    "translation": "一丝不苟的；极度细致的",
+    "memoryCue": "原意“小心翼翼生怕出错”，现指对细节极致严谨。",
+    "example": "Meticulous testing caught subtle audio callback edge cases."
+  },
+  {
+    "id": "gre-en-mst-misanthrope",
+    "language": "english",
+    "difficulty": "master",
+    "term": "misanthrope",
+    "pronunciation": "/ˈmɪsənθroʊp/",
+    "translation": "厌世者；讨厌人类社交的人",
+    "memoryCue": "mis-（恨）+ anthrop（人，同 anthropology）→ 愤世避人。",
+    "example": "Despite playing a gruff misanthrope, he was warm off-camera."
+  },
+  {
+    "id": "gre-en-mst-mollify",
+    "language": "english",
+    "difficulty": "master",
+    "term": "mollify",
+    "pronunciation": "/ˈmɑːlɪfaɪ/",
+    "translation": "平息；安抚；缓和（怒火）",
+    "memoryCue": "moll-（软）+ -ify → 把硬邦邦的怒气揉软顺平。",
+    "example": "Prompt apologies and quick fixes helped mollify frustrated users."
+  },
+  {
+    "id": "gre-en-mst-morose",
+    "language": "english",
+    "difficulty": "master",
+    "term": "morose",
+    "pronunciation": "/məˈroʊs/",
+    "translation": "郁闷的；脾气乖戾阴郁的",
+    "memoryCue": "整天沉着脸、闷闷不乐。",
+    "example": "November drizzle left the quiet street looking rather morose."
+  },
+  {
+    "id": "gre-en-mst-munificent",
+    "language": "english",
+    "difficulty": "master",
+    "term": "munificent",
+    "pronunciation": "/mjuːˈnɪfɪsnt/",
+    "translation": "极其慷慨的；丰厚的",
+    "memoryCue": "mun-（礼物）+ fic（做）→ 挥金如土大方捐赠。",
+    "example": "A munificent grant funded twenty community reading rooms."
+  },
+  {
+    "id": "gre-en-mst-nebulous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "nebulous",
+    "pronunciation": "/ˈnebjələs/",
+    "translation": "模糊不清的；星云般的；朦胧的",
+    "memoryCue": "nebula（星云/雾）→ 像星云一样轮廓不清（nebulous plans）。",
+    "example": "Turn nebulous goals into concrete ten-minute daily milestones."
+  },
+  {
+    "id": "gre-en-mst-nefarious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "nefarious",
+    "pronunciation": "/nɪˈferiəs/",
+    "translation": "极恶毒的；不法的；邪恶的",
+    "memoryCue": "ne-（不）+ fas（天理法律）→ 违背天理良知的勾当。",
+    "example": "Strict sandboxing blocks nefarious scripts from touching files."
+  },
+  {
+    "id": "gre-en-mst-neophyte",
+    "language": "english",
+    "difficulty": "master",
+    "term": "neophyte",
+    "pronunciation": "/ˈniːəfaɪt/",
+    "translation": "新手；初学入门者",
+    "memoryCue": "neo-（新）+ phyte（植物/新苗）→ 刚刚破土的新手小白。",
+    "example": "Friendly hints keep neophyte learners motivated through week one."
+  },
+  {
+    "id": "gre-en-mst-nonchalant",
+    "language": "english",
+    "difficulty": "master",
+    "term": "nonchalant",
+    "pronunciation": "/ˌnɑːnʃəˈlɑːnt/",
+    "translation": "若无其事的；冷淡漫不经心的",
+    "memoryCue": "源自法语“不发热不紧张”→ 一副毫不在乎的淡定模样。",
+    "example": "She gave a nonchalant shrug before acing the oral exam."
+  },
+  {
+    "id": "gre-en-mst-obdurate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "obdurate",
+    "pronunciation": "/ˈɑːbdjərət/",
+    "translation": "顽固的；冷酷铁石心肠的",
+    "memoryCue": "ob- + dur（硬，同 durable）→ 心肠变得像石头一样硬。",
+    "example": "Obdurate officials refused to reconsider the outdated zoning rule."
+  },
+  {
+    "id": "gre-en-mst-obfuscate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "obfuscate",
+    "pronunciation": "/ˈɑːbfʌskeɪt/",
+    "translation": "使模糊；蓄意混淆；扰乱视线",
+    "memoryCue": "ob- + fusc（暗）→ 故意把水搅浑让人看不清（代码混淆也用它）。",
+    "example": "Technical jargon should never obfuscate simple privacy terms."
+  },
+  {
+    "id": "gre-en-mst-obsequious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "obsequious",
+    "pronunciation": "/əbˈsiːkwiəs/",
+    "translation": "谄媚的；阿谀奉承的；唯唯诺诺的",
+    "memoryCue": "ob- + sequ（跟随）→ 像哈巴狗一样低眉顺眼紧跟拍马屁。",
+    "example": "Peers grew uncomfortable with his obsequious praise of the VP."
+  },
+  {
+    "id": "gre-en-mst-obstinate",
+    "language": "english",
+    "difficulty": "master",
+    "term": "obstinate",
+    "pronunciation": "/ˈɑːbstɪnət/",
+    "translation": "固执的；倔强的；难消除的",
+    "memoryCue": "ob- + stin（站立）→ 死死站住一步不肯挪。",
+    "example": "An obstinate cold lingered well past the weekend."
+  },
+  {
+    "id": "gre-en-mst-onerous",
+    "language": "english",
+    "difficulty": "master",
+    "term": "onerous",
+    "pronunciation": "/ˈoʊnərəs/",
+    "translation": "繁重的；费力的；令人负担沉重的",
+    "memoryCue": "oner-（重担）+ -ous → 压得人喘不过气的琐碎负担。",
+    "example": "Manual imports felt onerous before CSV auto-detection arrived."
+  },
+  {
+    "id": "gre-en-mst-opaque",
+    "language": "english",
+    "difficulty": "master",
+    "term": "opaque",
+    "pronunciation": "/oʊˈpeɪk/",
+    "translation": "不透明的；晦涩难懂的",
+    "memoryCue": "光穿不过去 → 玻璃磨砂不透明，或规则黑箱不透明。",
+    "example": "Learners dislike opaque algorithms that hide why cards repeat."
+  },
+  {
+    "id": "gre-en-mst-ostentatious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "ostentatious",
+    "pronunciation": "/ˌɑːstenˈteɪʃəs/",
+    "translation": "炫耀卖弄的；铺张浮夸的",
+    "memoryCue": "os- + tent（伸展展示）→ 恨不得把金表名牌全摊出来炫耀。",
+    "example": "Minimalist tools favor quiet craft over ostentatious animations."
+  },
+  {
+    "id": "gre-en-mst-ostracize",
+    "language": "english",
+    "difficulty": "master",
+    "term": "ostracize",
+    "pronunciation": "/ˈɑːstrəsaɪz/",
+    "translation": "排斥；放逐；孤立",
+    "memoryCue": "源自古雅典用陶片（ostrakon）投票放逐不受欢迎者的制度。",
+    "example": "Healthy study groups welcome beginners rather than ostracize mistakes."
+  },
+  {
+    "id": "gre-en-mst-paragon",
+    "language": "english",
+    "difficulty": "master",
+    "term": "paragon",
+    "pronunciation": "/ˈpærəɡɑːn/",
+    "translation": "模范；典范；完美典型",
+    "memoryCue": "原指试金石，引申出无可挑剔的标杆榜样。",
+    "example": "That open dictionary remains a paragon of careful curation."
+  },
+  {
+    "id": "gre-en-mst-pariah",
+    "language": "english",
+    "difficulty": "master",
+    "term": "pariah",
+    "pronunciation": "/pəˈraɪə/",
+    "translation": "被社会唾弃者；流放者",
+    "memoryCue": "被集体彻底孤立排斥在圈外的人。",
+    "example": "Chronic polluter companies quickly became market pariahs."
+  },
+  {
+    "id": "gre-en-mst-parsimonious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "parsimonious",
+    "pronunciation": "/ˌpɑːrsɪˈmoʊniəs/",
+    "translation": "吝啬的；小气的；极度节省的",
+    "memoryCue": "比 frugal 更贬义，指抠门到近乎小气。",
+    "example": "Even parsimonious reviewers praised the app's free offline tools."
+  },
+  {
+    "id": "gre-en-mst-paucity",
+    "language": "english",
+    "difficulty": "master",
+    "term": "paucity",
+    "pronunciation": "/ˈpɔːsəti/",
+    "translation": "匮乏；少量；稀缺",
+    "memoryCue": "pauc-（少）+ -ity → 数量少得可怜（与 plethora 正相反）。",
+    "example": "Early adopters noted a paucity of high-difficulty Spanish packs."
+  },
+  {
+    "id": "gre-en-mst-pedantic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "pedantic",
+    "pronunciation": "/pəˈdæntɪk/",
+    "translation": "学究气的；卖弄学问、咬文嚼字的",
+    "memoryCue": "ped-（教/孩子）→ 像老学究一样死抠无关紧要的字眼。",
+    "example": "Helpful grammar notes stay practical without turning pedantic."
+  },
+  {
+    "id": "gre-en-mst-penchant",
+    "language": "english",
+    "difficulty": "master",
+    "term": "penchant",
+    "pronunciation": "/ˈpentʃənt/",
+    "translation": "强烈嗜好；倾向；偏好（for）",
+    "memoryCue": "源自法语“倾斜”→ 心里明显倾向于偏爱某物。",
+    "example": "He has a penchant for collecting pocket etymology guides."
+  },
+  {
+    "id": "gre-en-mst-penury",
+    "language": "english",
+    "difficulty": "master",
+    "term": "penury",
+    "pronunciation": "/ˈpenjəri/",
+    "translation": "极度贫穷；赤贫；匮乏",
+    "memoryCue": "pen-（缺乏）→ 连基本温饱都难维持的贫困。",
+    "example": "Several classic authors wrote masterpieces while living in penury."
+  },
+  {
+    "id": "gre-en-mst-perfidious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "perfidious",
+    "pronunciation": "/pərˈfɪdiəs/",
+    "translation": "背信弃义的；不忠的",
+    "memoryCue": "per-（毁坏）+ fid（信任）→ 彻底践踏背叛诺言。",
+    "example": "Historical chronicles condemned the perfidious breach of truce."
+  },
+  {
+    "id": "gre-en-mst-perfunctory",
+    "language": "english",
+    "difficulty": "master",
+    "term": "perfunctory",
+    "pronunciation": "/pərˈfʌŋktəri/",
+    "translation": "敷衍了事的；草率例行公事的",
+    "memoryCue": "per- + funct（履行）→ 只顾走完形式走个过场。",
+    "example": "A perfunctory glance at flashcards rarely beats active recall."
+  },
+  {
+    "id": "gre-en-mst-pernicious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "pernicious",
+    "pronunciation": "/pərˈnɪʃəs/",
+    "translation": "极其有害的；致命的；暗中侵蚀的",
+    "memoryCue": "per-（彻底）+ nic（毒害）→ 润物细无声却毒性极强。",
+    "example": "Passive highlighting gives learners a pernicious illusion of mastery."
+  },
+  {
+    "id": "gre-en-mst-perspicacious",
+    "language": "english",
+    "difficulty": "master",
+    "term": "perspicacious",
+    "pronunciation": "/ˌpɜːrspɪˈkeɪʃəs/",
+    "translation": "洞察力敏锐的；明察秋毫的",
+    "memoryCue": "per-（穿透）+ spic（看）→ 一眼看穿表象直击本质。",
+    "example": "Perspicacious editors spotted the subtle timeline contradiction."
+  },
+  {
+    "id": "gre-en-mst-phlegmatic",
+    "language": "english",
+    "difficulty": "master",
+    "term": "phlegmatic",
+    "pronunciation": "/fleɡˈmætɪk/",
+    "translation": "冷静沉着的；淡定甚至冷漠的",
+    "memoryCue": "源于古希腊“四体液学说”里的黏液质，遇天塌下来也面不改色。",
+    "example": "A phlegmatic captain kept the crew steady through heavy swells."
+  }
+]

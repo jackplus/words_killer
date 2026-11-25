@@ -13,13 +13,23 @@ struct QuizView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Query private var allProgress: [WordProgress]
+    @AppStorage("speechSpeed") private var speechSpeedRawValue = SpeechSpeed.normal.rawValue
 
     let sourceWords: [WordItem]
     let allAvailableWords: [WordItem]
-    var onComplete: (() -> Void)? = nil
+    var onRecordReview: ((String) -> Void)?
+    var onComplete: (() -> Void)?
+    private let todaySummary: (() -> (remaining: Int, canLearn: Bool))?
+    private let onNextToday: (() -> Void)?
+    private let onPracticeMistakes: (() -> Void)?
 
     @State private var speechService = SpeechService()
-    @State private var quizMode: QuizMode = .multipleChoice
+    @State private var todayState: TodayPracticeState?
+    @State private var todayError: String?
+    @State private var noteEditingWord: WordItem?
+    @State private var quizMode: QuizMode
+    @State private var practiceRound: VocabularyPracticeRound?
+    @State private var retryCorrectCount = 0
     @State private var activeWords: [WordItem] = []
     @State private var questions: [QuizQuestion] = []
     @State private var currentIndex: Int = 0
@@ -27,6 +37,7 @@ struct QuizView: View {
     @State private var hasAnswered: Bool = false
     @State private var correctCount: Int = 0
     @State private var wrongWords: [WordItem] = []
+    @State private var reviewWordRatings: [String: RecallRating] = [:]
 
     // Animation & sensory triggers
     @State private var optionShakeCount: Int = 0
@@ -43,8 +54,34 @@ struct QuizView: View {
     @State private var spellingFeedback: (isCorrect: Bool, message: String)? = nil
     @FocusState private var isInputFocused: Bool
 
+    init(
+        sourceWords: [WordItem],
+        allAvailableWords: [WordItem],
+        initialMode: QuizMode = .multipleChoice,
+        today: TodayPracticeState? = nil,
+        todaySummary: (() -> (remaining: Int, canLearn: Bool))? = nil,
+        onNextToday: (() -> Void)? = nil,
+        onPracticeMistakes: (() -> Void)? = nil,
+        onRecordReview: ((String) -> Void)? = nil,
+        onComplete: (() -> Void)? = nil
+    ) {
+        self.sourceWords = sourceWords
+        self.allAvailableWords = allAvailableWords
+        self.todaySummary = todaySummary
+        self.onNextToday = onNextToday
+        self.onPracticeMistakes = onPracticeMistakes
+        self.onRecordReview = onRecordReview
+        self.onComplete = onComplete
+        _quizMode = State(initialValue: initialMode)
+        _todayState = State(initialValue: today)
+    }
+
     private var themeColor: Color {
         accentTheme.adaptiveColor(for: colorScheme)
+    }
+
+    private var selectedSpeechSpeed: SpeechSpeed {
+        SpeechSpeed(rawValue: speechSpeedRawValue) ?? .normal
     }
 
     private var progressMap: [String: WordProgress] {
@@ -57,37 +94,67 @@ struct QuizView: View {
     }
 
     private var currentQuestion: QuizQuestion? {
+        if let practiceRound { return practiceRound.question(at: currentIndex) }
         guard !questions.isEmpty, currentIndex < questions.count else { return nil }
         return questions[currentIndex]
     }
 
     private var isFinished: Bool {
-        let total = quizMode == .multipleChoice ? questions.count : activeWords.count
-        return total > 0 && currentIndex >= total
+        totalCount > 0 && currentIndex >= totalCount
+    }
+
+    private var scoredQuestionCount: Int {
+        practiceRound?.questions.count ?? (quizMode == .spelling ? activeWords.count : questions.count)
     }
 
     private var totalCount: Int {
-        quizMode == .multipleChoice ? questions.count : activeWords.count
+        scoredQuestionCount + (practiceRound?.retryQuestions.count ?? 0)
+    }
+
+    private var isRetry: Bool {
+        practiceRound?.isRetry(at: currentIndex) == true
+    }
+
+    private var phaseCount: Int {
+        isRetry ? (practiceRound?.retryQuestions.count ?? 0) : scoredQuestionCount
+    }
+
+    private var phaseIndex: Int {
+        isRetry ? currentIndex - scoredQuestionCount : currentIndex
     }
 
     private var progress: Double {
-        guard totalCount > 0 else { return 0 }
-        return Double(currentIndex) / Double(totalCount)
+        guard phaseCount > 0 else { return 0 }
+        return Double(phaseIndex) / Double(phaseCount)
     }
 
     var body: some View {
+        let currentProgressMap = progressMap
+
         NavigationStack {
             ZStack(alignment: .top) {
                 AppAmbientBackground()
 
                 ScrollView {
                     VStack(spacing: 18) {
-                        if !isFinished {
+                        if quizMode == .mistakePractice && totalCount == 0 {
+                            ContentUnavailableView(
+                                "暂无错词",
+                                systemImage: "checkmark.circle",
+                                description: Text("当前语种和词书下，最近一次标为「不认识」的词会出现在这里。")
+                            )
+                        } else if !isFinished {
                             modeAndProgressBar
 
-                            if quizMode == .multipleChoice {
+                            if let warning = speechService.voiceWarningMessage {
+                                VoicePackNoticeBanner(message: warning) {
+                                    speechService.dismissVoiceWarning()
+                                }
+                            }
+
+                            if quizMode != .spelling {
                                 if let question = currentQuestion {
-                                    multipleChoiceSection(question: question)
+                                    multipleChoiceSection(question: question, progressMap: currentProgressMap)
                                         .id(question.id)
                                         .transition(
                                             reduceMotion
@@ -100,7 +167,7 @@ struct QuizView: View {
                                 }
                             } else {
                                 if let word = currentWord {
-                                    spellingSection(word: word)
+                                    spellingSection(word: word, progressMap: currentProgressMap)
                                         .id("\(currentIndex)-\(word.id)")
                                         .transition(
                                             reduceMotion
@@ -113,7 +180,7 @@ struct QuizView: View {
                                 }
                             }
                         } else {
-                            quizSummaryView
+                            quizSummaryView(summaryProgress: currentProgressMap)
                                 .transition(.scale(scale: 0.96).combined(with: .opacity))
                         }
                     }
@@ -124,38 +191,70 @@ struct QuizView: View {
                 ConfettiBurstView(trigger: celebrateTrigger)
                     .allowsHitTesting(false)
             }
-            .navigationTitle("测验练习")
+            .navigationTitle(todayState.map { $0.learnsNewWords ? "学新词" : "今日复习" }
+                ?? (quizMode == .mistakePractice ? quizMode.rawValue : "测验练习"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("退出") {
+                    Button(todayState != nil && !isFinished ? "稍后继续" : "退出") {
                         speechService.stop()
                         dismiss()
                     }
                 }
             }
+            .sheet(item: $noteEditingWord) { word in
+                PersonalNoteSheet(
+                    word: word,
+                    initialNote: currentProgressMap[word.id]?.customNote ?? ""
+                ) { updatedNote in
+                    saveCustomNote(updatedNote, for: word)
+                }
+            }
             .sensoryFeedback(.success, trigger: successTrigger)
             .sensoryFeedback(.error, trigger: errorTrigger)
+            .alert("复习未保存", isPresented: Binding(
+                get: { todayError != nil }, set: { if !$0 { todayError = nil } }
+            )) {
+                Button("知道了", role: .cancel) {}
+                Button("返回背词") { dismiss() }
+            } message: {
+                Text(todayError ?? "")
+            }
             .onAppear {
-                restartQuiz(using: sourceWords)
+                speechService.speed = selectedSpeechSpeed
+                if let todayState { restoreToday(todayState) }
+                else { restartQuiz(using: sourceWords) }
+            }
+            .onChange(of: speechSpeedRawValue) {
+                speechService.speed = selectedSpeechSpeed
+            }
+            .onDisappear {
+                speechService.stop()
             }
         }
     }
 
     private var modeAndProgressBar: some View {
         VStack(spacing: 12) {
-            Picker("测验模式", selection: $quizMode) {
-                ForEach(QuizMode.allCases) { mode in
-                    Label(mode.rawValue, systemImage: mode.systemImage).tag(mode)
+            if todayState == nil && quizMode != .mistakePractice {
+                Picker("测验模式", selection: $quizMode) {
+                    ForEach(QuizMode.allCases.filter { $0 != .mistakePractice }) { mode in
+                        Label(mode.rawValue, systemImage: mode.systemImage).tag(mode)
+                    }
                 }
-            }
-            .pickerStyle(.segmented)
-            .onChange(of: quizMode) {
-                restartQuiz(using: activeWords.isEmpty ? sourceWords : activeWords)
+                .pickerStyle(.segmented)
+                .onChange(of: quizMode) {
+                    restartQuiz(using: activeWords.isEmpty ? sourceWords : activeWords)
+                }
+            } else if quizMode == .mistakePractice && !isRetry {
+                Text("已到期优先，同组按最近失误排序")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
 
             HStack {
-                Text("题目 \(min(currentIndex + 1, totalCount)) / \(totalCount)")
+                Text("\(isRetry ? "错题补练" : "题目") \(min(phaseIndex + 1, phaseCount)) / \(phaseCount)")
                     .font(.caption.monospacedDigit().weight(.bold))
                     .foregroundStyle(.secondary)
                     .contentTransition(.numericText())
@@ -173,6 +272,8 @@ struct QuizView: View {
                         .foregroundStyle(.red)
                         .contentTransition(.numericText())
                 }
+                .opacity(isRetry ? 0 : 1)
+                .accessibilityHidden(isRetry)
             }
 
             GeometryReader { geo in
@@ -197,7 +298,7 @@ struct QuizView: View {
     }
 
     // MARK: - Multiple Choice
-    private func multipleChoiceSection(question: QuizQuestion) -> some View {
+    private func multipleChoiceSection(question: QuizQuestion, progressMap: [String: WordProgress]) -> some View {
         let isSpeaking = speechService.isSpeaking && speechService.activeText == question.word.term
 
         return VStack(spacing: 16) {
@@ -212,23 +313,26 @@ struct QuizView: View {
 
                     Spacer()
 
-                    Button {
-                        speechService.speak(question.word.term, language: question.word.language)
-                    } label: {
-                        Image(systemName: isSpeaking ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(themeColor)
-                            .frame(width: 34, height: 34)
-                            .background(themeColor.opacity(0.12), in: Circle())
-                            .symbolEffect(.variableColor.iterative, isActive: isSpeaking && !reduceMotion)
+                    if question.subtype == .wordToMeaning || (practiceRound == nil && question.subtype == .meaningToWord) {
+                        Button {
+                            speechService.speak(question.word.term, language: question.word.language)
+                        } label: {
+                            Image(systemName: isSpeaking ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(themeColor)
+                                .frame(width: 34, height: 34)
+                                .background(themeColor.opacity(0.12), in: Circle())
+                                .symbolEffect(.variableColor.iterative, isActive: isSpeaking && !reduceMotion)
+                        }
+                        .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                        .accessibilityLabel("播放单词读音")
                     }
-                    .buttonStyle(PressScaleButtonStyle(scale: 0.90))
                 }
 
                 switch question.subtype {
                 case .wordToMeaning:
                     Text(question.word.term)
-                        .font(.system(size: 36, weight: .bold, design: .rounded))
+                        .font(.system(.largeTitle, design: .rounded).bold())
                         .padding(.vertical, 6)
                     if !question.word.pronunciation.isEmpty {
                         Text(question.word.pronunciation)
@@ -274,6 +378,14 @@ struct QuizView: View {
                         .background(themeColor.opacity(0.06), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     }
                     .buttonStyle(PressScaleButtonStyle())
+
+                    if !hasAnswered {
+                        Button("不便听音，换文字题") {
+                            replaceAudioQuestion(question)
+                        }
+                        .font(.subheadline)
+                        .frame(minHeight: 44)
+                    }
                 }
             }
             .padding(18)
@@ -330,6 +442,9 @@ struct QuizView: View {
                         )
                     }
                     .buttonStyle(PressScaleButtonStyle())
+                    .accessibilityLabel(optionText)
+                    .accessibilityValue(hasAnswered ? (isCorrectOption ? "正确答案" : (isSelected ? "你的答案，回答错误" : "")) : "")
+                    .accessibilityIdentifier("quiz-option-\(index)")
                     .modifier(ShakeEffect(shakes: shouldShake && !reduceMotion ? CGFloat(optionShakeCount) : 0, amplitude: 6))
                     .scaleEffect(hasAnswered && isCorrectOption && !reduceMotion ? 1.01 : 1.0)
                     .animation(MotionTokens.bouncy, value: hasAnswered)
@@ -338,22 +453,48 @@ struct QuizView: View {
             }
 
             if hasAnswered {
-                answerExplanationCard(word: question.word)
+                answerExplanationCard(word: question.word, progressMap: progressMap)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
 
                 Button {
+                    guard hasAnswered, currentQuestion?.id == question.id else { return }
                     nextQuestion()
                 } label: {
-                    Label(currentIndex + 1 < totalCount ? "下一题" : "查看成绩", systemImage: "arrow.right")
+                    Label(nextQuestionTitle, systemImage: "arrow.right")
                         .font(.headline)
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 48)
+                        .frame(minHeight: 48)
                         .background(themeColor, in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
                 }
                 .buttonStyle(PressScaleButtonStyle())
                 .transition(.opacity)
             }
+        }
+    }
+
+    private var nextQuestionTitle: String {
+        if currentIndex + 1 >= totalCount { return "查看成绩" }
+        if practiceRound?.isRetry(at: currentIndex + 1) == true && !isRetry {
+            return "开始错题补练"
+        }
+        return "下一题"
+    }
+
+    private func replaceAudioQuestion(_ question: QuizQuestion) {
+        guard !hasAnswered, currentQuestion?.id == question.id else { return }
+        speechService.stop()
+        if var state = todayState, var round = practiceRound {
+            round.replaceAudioQuestion(at: currentIndex)
+            state.questions = round.questions
+            state.retryQuestions = round.retryQuestions
+            saveToday(state)
+            return
+        }
+        if practiceRound != nil {
+            practiceRound?.replaceAudioQuestion(at: currentIndex)
+        } else if let alternative = QuizEngine.textAlternative(for: question, distractorPool: allAvailableWords) {
+            questions[currentIndex] = alternative
         }
     }
 
@@ -375,7 +516,27 @@ struct QuizView: View {
     }
 
     private func handleOptionTap(index: Int, question: QuizQuestion) {
+        guard !hasAnswered, currentQuestion?.id == question.id, question.options.indices.contains(index) else { return }
         let isCorrect = (index == question.correctOptionIndex)
+
+        if var state = todayState, var round = practiceRound {
+            state.answers[question.id] = index
+            let firstAnswer = !isRetry
+            if firstAnswer {
+                state.pending.removeValue(forKey: question.word.id)
+                if !isCorrect {
+                    round.addRetry(for: question)
+                    state.retryQuestions = round.retryQuestions
+                }
+            }
+            let review: (word: WordItem, rating: RecallRating)? = firstAnswer
+                ? (question.word, isCorrect ? .known : .unknown) : nil
+            if saveToday(state, review: review) {
+                if isCorrect { successTrigger += 1 }
+                else { errorTrigger += 1; optionShakeCount += 2 }
+            }
+            return
+        }
 
         withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
             selectedOptionIndex = index
@@ -383,19 +544,29 @@ struct QuizView: View {
         }
 
         if isCorrect {
-            correctCount += 1
             successTrigger += 1
-            recordQuizOutcome(word: question.word, rating: .known)
         } else {
             errorTrigger += 1
             withAnimation(.easeInOut(duration: 0.32)) {
                 optionShakeCount += 2
             }
+        }
+
+        if isRetry {
+            if isCorrect { retryCorrectCount += 1 }
+            return
+        }
+
+        if isCorrect {
+            correctCount += 1
+        } else {
             if !wrongWords.contains(where: { $0.id == question.word.id }) {
                 wrongWords.append(question.word)
             }
-            recordQuizOutcome(word: question.word, rating: .unknown)
+            reviewWordRatings[question.word.id] = .unknown
+            practiceRound?.addRetry(for: question)
         }
+        recordQuizOutcome(word: question.word, rating: isCorrect ? .known : .unknown)
     }
 
     private func optionTextColor(isSelected: Bool, isCorrect: Bool) -> Color {
@@ -420,7 +591,7 @@ struct QuizView: View {
     }
 
     // MARK: - Spelling Mode
-    private func spellingSection(word: WordItem) -> some View {
+    private func spellingSection(word: WordItem, progressMap: [String: WordProgress]) -> some View {
         let isSpeaking = speechService.isSpeaking && speechService.activeText == word.term
         let slotCount = min(14, max(1, word.term.count))
 
@@ -503,6 +674,7 @@ struct QuizView: View {
                     )
                     .modifier(ShakeEffect(shakes: reduceMotion ? 0 : CGFloat(spellingShakeCount), amplitude: 7))
                     .focused($isInputFocused)
+                    .disabled(isSpellingRevealed || spellingFeedback?.isCorrect == true)
                     .onSubmit {
                         checkSpelling(word: word)
                     }
@@ -521,9 +693,10 @@ struct QuizView: View {
 
                 HStack(spacing: 10) {
                     Button {
+                        guard currentWord?.id == word.id else { return }
                         if !word.term.isEmpty {
                             usedSpellingHint = true
-                            spellingInput = String(word.term.prefix(max(1, spellingInput.count + 1)))
+                            spellingInput = QuizEngine.nextSpellingHint(currentInput: spellingInput, target: word.term)
                         }
                     } label: {
                         Label("提示字母", systemImage: "lightbulb")
@@ -537,13 +710,16 @@ struct QuizView: View {
 
                     Button {
                         guard !isSpellingRevealed, spellingFeedback?.isCorrect != true else { return }
+                        guard currentWord?.id == word.id else { return }
                         isSpellingRevealed = true
+                        isInputFocused = false
                         spellingInput = word.term
                         spellingFeedback = (false, "答案已揭晓：\(word.term)")
                         errorTrigger += 1
                         if !wrongWords.contains(where: { $0.id == word.id }) {
                             wrongWords.append(word)
                         }
+                        reviewWordRatings[word.id] = .unknown
                         recordQuizOutcome(word: word, rating: .unknown)
                     } label: {
                         Label("看答案", systemImage: "eye")
@@ -559,7 +735,8 @@ struct QuizView: View {
                 Button {
                     checkSpelling(word: word)
                 } label: {
-                    Text(spellingFeedback?.isCorrect == true || isSpellingRevealed ? "下一题" : "检查拼写")
+                    Text(spellingFeedback?.isCorrect == true || isSpellingRevealed
+                         ? (currentIndex + 1 < totalCount ? "下一题" : "查看成绩") : "检查拼写")
                         .font(.headline)
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
@@ -567,12 +744,14 @@ struct QuizView: View {
                         .background(themeColor, in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
                 }
                 .buttonStyle(PressScaleButtonStyle())
+                .disabled(spellingInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                          && !isSpellingRevealed && spellingFeedback?.isCorrect != true)
             }
             .padding(16)
             .surfacePanel(radius: AppMetrics.panelRadius)
 
             if isSpellingRevealed || spellingFeedback?.isCorrect == true {
-                answerExplanationCard(word: word)
+                answerExplanationCard(word: word, progressMap: progressMap)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
@@ -583,22 +762,29 @@ struct QuizView: View {
     }
 
     private func checkSpelling(word: WordItem) {
+        guard currentWord?.id == word.id else { return }
         if spellingFeedback?.isCorrect == true || isSpellingRevealed {
             nextQuestion()
             return
         }
 
-        let trimmedInput = spellingInput.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        let trimmedTarget = word.term.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let trimmedInput = spellingInput.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedInput.isEmpty else { return }
 
-        if trimmedInput == trimmedTarget {
-            if !hadWrongAttempt {
+        if QuizEngine.isSpellingMatch(trimmedInput, target: word.term) {
+            isInputFocused = false
+            let rating = QuizEngine.spellingRating(usedHint: usedSpellingHint, hadWrongAttempt: hadWrongAttempt)
+            if rating == .known {
                 correctCount += 1
+            } else {
+                if !wrongWords.contains(where: { $0.id == word.id }) {
+                    wrongWords.append(word)
+                }
+                reviewWordRatings[word.id] = rating
             }
             successTrigger += 1
-            let rating: RecallRating = (usedSpellingHint || hadWrongAttempt) ? .fuzzy : .known
             withAnimation(MotionTokens.snappy) {
-                spellingFeedback = (true, rating == .known ? "拼写完全正确！已记入掌握进度" : "拼写正确！已记为待巩固（将提前复习）")
+                spellingFeedback = (true, rating == .known ? "首次独立拼写正确，已更新复习计划" : "拼写正确，已记为待巩固")
             }
             recordQuizOutcome(word: word, rating: rating)
             speechService.speak(word.term, language: word.language)
@@ -612,6 +798,7 @@ struct QuizView: View {
             if !wrongWords.contains(where: { $0.id == word.id }) {
                 wrongWords.append(word)
             }
+            reviewWordRatings[word.id] = .unknown
         }
     }
 
@@ -623,24 +810,93 @@ struct QuizView: View {
             existingProgress: progressMap[word.id],
             in: modelContext
         )
+        onRecordReview?(word.id)
+    }
+
+    private func fetchProgress(for wordID: String) -> WordProgress? {
+        var descriptor = FetchDescriptor<WordProgress>(predicate: #Predicate { $0.wordID == wordID })
+        descriptor.fetchLimit = 1
+        return try? modelContext.fetch(descriptor).first
+    }
+
+    private func toggleFavorite(_ word: WordItem) {
+        let record: WordProgress
+        if let existing = fetchProgress(for: word.id) {
+            record = existing
+        } else {
+            record = WordProgress(wordID: word.id, language: word.language)
+            modelContext.insert(record)
+        }
+        record.isFavorite.toggle()
+        try? modelContext.save()
+    }
+
+    private func saveCustomNote(_ note: String, for word: WordItem) {
+        let trimmed = note.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let existing = fetchProgress(for: word.id) {
+            existing.customNote = trimmed
+        } else if !trimmed.isEmpty {
+            let record = WordProgress(wordID: word.id, language: word.language, customNote: trimmed)
+            modelContext.insert(record)
+        }
+        try? modelContext.save()
     }
 
     // MARK: - Answer Explanation
-    private func answerExplanationCard(word: WordItem) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
+    private func answerExplanationCard(word: WordItem, progressMap: [String: WordProgress]) -> some View {
+        let progress = progressMap[word.id]
+        let isFav = progress?.isFavorite == true
+        let trimmedNote = progress?.customNote.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let isSpeakingExample = speechService.isSpeaking && speechService.activeText == word.example
+
+        return VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
                 Text(word.term)
                     .font(.headline.weight(.bold))
-                Text(word.pronunciation)
-                    .font(.subheadline)
-                    .foregroundStyle(themeColor)
+                if !word.pronunciation.isEmpty {
+                    Text(word.pronunciation)
+                        .font(.subheadline)
+                        .foregroundStyle(themeColor)
+                }
                 Spacer()
+                Button {
+                    toggleFavorite(word)
+                } label: {
+                    Image(systemName: isFav ? "star.fill" : "star")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(isFav ? Color.orange : Color.secondary)
+                        .frame(width: 30, height: 30)
+                        .background(isFav ? Color.orange.opacity(0.14) : Color(.tertiarySystemFill), in: Circle())
+                }
+                .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                .accessibilityLabel(isFav ? "取消收藏单词" : "收藏单词")
+
+                Button {
+                    noteEditingWord = word
+                } label: {
+                    Image(systemName: trimmedNote.isEmpty ? "square.and.pencil" : "note.text")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(trimmedNote.isEmpty ? Color.secondary : themeColor)
+                        .frame(width: 30, height: 30)
+                        .background(
+                            trimmedNote.isEmpty ? Color(.tertiarySystemFill) : themeColor.opacity(0.12),
+                            in: Circle()
+                        )
+                }
+                .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                .accessibilityLabel(trimmedNote.isEmpty ? "添加助记笔记" : "编辑助记笔记")
+
                 Button {
                     speechService.speak(word.term, language: word.language)
                 } label: {
                     Image(systemName: "speaker.wave.2")
+                        .font(.subheadline.weight(.semibold))
                         .foregroundStyle(themeColor)
+                        .frame(width: 30, height: 30)
+                        .background(themeColor.opacity(0.12), in: Circle())
                 }
+                .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                .accessibilityLabel("朗读单词")
             }
 
             Text("释义：\(word.translation)")
@@ -653,9 +909,40 @@ struct QuizView: View {
             }
 
             if !word.example.isEmpty {
-                Text("例句：\(word.example)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                HStack(alignment: .top, spacing: 8) {
+                    Text("例句：\(word.example)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer(minLength: 4)
+                    Button {
+                        speechService.speak(word.example, language: word.language)
+                    } label: {
+                        Image(systemName: isSpeakingExample ? "speaker.wave.3.fill" : "speaker.wave.2")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(themeColor)
+                            .frame(width: 28, height: 28)
+                            .background(themeColor.opacity(0.12), in: Circle())
+                    }
+                    .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                    .accessibilityLabel("朗读例句")
+                }
+            }
+
+            if !trimmedNote.isEmpty {
+                HStack(alignment: .top, spacing: 6) {
+                    Image(systemName: "note.text")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(themeColor)
+                        .padding(.top, 2)
+                    Text("我的笔记：\(trimmedNote)")
+                        .font(.caption)
+                        .foregroundStyle(.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(9)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
         }
         .padding(14)
@@ -665,6 +952,11 @@ struct QuizView: View {
 
     // MARK: - Navigation
     private func nextQuestion() {
+        if var state = todayState {
+            state.index += 1
+            if saveToday(state, finishing: state.index == totalCount) { speechService.stop() }
+            return
+        }
         withAnimation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion)) {
             currentIndex += 1
             selectedOptionIndex = nil
@@ -680,18 +972,57 @@ struct QuizView: View {
             celebrateTrigger += 1
         }
 
-        if quizMode == .multipleChoice, let question = currentQuestion, question.subtype == .audioToWord {
-            speechService.speak(question.word.term, language: question.word.language)
-        } else if quizMode == .spelling, let word = currentWord {
+        speechService.stop()
+        if quizMode == .spelling, let word = currentWord {
             speechService.speak(word.term, language: word.language)
             isInputFocused = true
         }
     }
 
+    private func restoreToday(_ state: TodayPracticeState) {
+        let round = state.round(distractors: allAvailableWords)
+        practiceRound = round
+        currentIndex = state.index
+        selectedOptionIndex = round.question(at: state.index).flatMap { state.answers[$0.id] }
+        hasAnswered = selectedOptionIndex != nil
+        correctCount = state.questions.count { state.answers[$0.id] == $0.correctOptionIndex }
+        wrongWords = state.questions.compactMap { question in
+            guard let answer = state.answers[question.id], answer != question.correctOptionIndex else { return nil }
+            return question.word
+        }
+        reviewWordRatings = Dictionary(uniqueKeysWithValues: wrongWords.map { ($0.id, RecallRating.unknown) })
+        retryCorrectCount = state.retryQuestions.count { state.answers[$0.id] == $0.correctOptionIndex }
+    }
+
+    @discardableResult
+    private func saveToday(
+        _ state: TodayPracticeState,
+        review: (word: WordItem, rating: RecallRating)? = nil,
+        finishing: Bool = false
+    ) -> Bool {
+        do {
+            let saved = try TodayPracticeStore.commit(
+                finishing ? nil : state, replacing: todayState, review: review, in: modelContext.container
+            ) ?? state
+            withAnimation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion)) {
+                todayState = saved
+                restoreToday(saved)
+            }
+            if let review { onRecordReview?(review.word.id) }
+            return true
+        } catch {
+            todayError = error.localizedDescription
+            return false
+        }
+    }
+
     private func restartQuiz(using wordsPool: [WordItem]) {
+        speechService.stop()
         currentIndex = 0
         correctCount = 0
+        retryCorrectCount = 0
         wrongWords.removeAll()
+        reviewWordRatings.removeAll()
         selectedOptionIndex = nil
         hasAnswered = false
         spellingInput = ""
@@ -700,22 +1031,32 @@ struct QuizView: View {
         hadWrongAttempt = false
         spellingFeedback = nil
 
-        let target = Array(wordsPool.prefix(20))
+        let eligibleWords = quizMode == .mistakePractice
+            ? MistakePractice.selectWords(from: wordsPool, progressByID: progressMap)
+            : wordsPool
+        let target = Array(eligibleWords.prefix(20))
         activeWords = target
-        questions = QuizEngine.buildQuestions(from: target, distractorPool: allAvailableWords)
+        practiceRound = quizMode.usesPracticeRound
+            ? VocabularyPracticeRound(sourceWords: eligibleWords, distractorPool: allAvailableWords)
+            : nil
+        questions = quizMode == .multipleChoice
+            ? QuizEngine.buildQuestions(from: target, distractorPool: allAvailableWords)
+            : []
 
-        if quizMode == .multipleChoice, let first = questions.first, first.subtype == .audioToWord {
-            speechService.speak(first.word.term, language: first.word.language)
-        } else if quizMode == .spelling, let first = target.first {
+        if quizMode == .spelling, let first = target.first {
             speechService.speak(first.term, language: first.language)
             isInputFocused = true
         }
     }
 
     // MARK: - Summary
-    private var quizSummaryView: some View {
-        let ratio = totalCount > 0 ? Double(correctCount) / Double(totalCount) : 0
+    private func quizSummaryView(summaryProgress: [String: WordProgress]) -> some View {
+        let ratio = scoredQuestionCount > 0 ? Double(correctCount) / Double(scoredQuestionCount) : 0
         let isPerfect = wrongWords.isEmpty
+        let todayFacts = todaySummary?()
+        let hasEligibleMistakes = wrongWords.contains { word in
+            summaryProgress[word.id]?.lastRating == .unknown
+        }
 
         return VStack(spacing: 18) {
             VStack(spacing: 14) {
@@ -735,21 +1076,37 @@ struct QuizView: View {
                         .foregroundStyle(isPerfect ? .orange : themeColor)
                 }
 
-                Text(isPerfect ? "满分达成！" : "测验完成")
+                Text(practiceRound != nil ? "短练完成" : (isPerfect ? "满分达成！" : "测验完成"))
                     .font(.title.weight(.bold))
 
-                Text("本次得分：\(correctCount) / \(totalCount)（\(Int(ratio * 100))%）")
+                Text("\(practiceRound != nil ? "首答正确" : (quizMode == .spelling ? "首次独立拼对" : "本次得分"))：\(correctCount) / \(scoredQuestionCount)（\(Int(ratio * 100))%）")
                     .font(.title3.monospacedDigit().weight(.semibold))
                     .foregroundStyle(themeColor)
 
-                Text(
-                    isPerfect
-                        ? "所有单词均已准确掌握，记忆进度与今日打卡已同步更新！"
-                        : "本次共有 \(wrongWords.count) 个词出现失误，已自动加入待重学队列。"
-                )
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
+                if let practiceRound {
+                    if !practiceRound.retryQuestions.isEmpty {
+                        Text("补练答对：\(retryCorrectCount) / \(practiceRound.retryQuestions.count)")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    Text("复习计划已按首答更新")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    if let todayFacts {
+                        Text("当前范围还有 \(todayFacts.remaining) 个到期词")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                } else {
+                    Text(
+                        isPerfect
+                            ? "本轮首次作答全部正确，复习计划已更新。"
+                            : "本轮有 \(wrongWords.count) 个词需要巩固，可查看解析或继续专练。"
+                    )
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                }
             }
             .padding(24)
             .frame(maxWidth: .infinity)
@@ -757,24 +1114,61 @@ struct QuizView: View {
 
             if !wrongWords.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
-                    SectionTitle(icon: "exclamationmark.triangle", title: "需重点复习词 (\(wrongWords.count))")
+                    SectionTitle(
+                        icon: "exclamationmark.triangle",
+                        title: practiceRound != nil ? "首答错词 (\(wrongWords.count))" : "需重点复习词 (\(wrongWords.count))"
+                    )
 
                     ForEach(wrongWords) { word in
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(word.term)
-                                    .font(.headline)
+                        let wordProgress = summaryProgress[word.id]
+                        let isFav = wordProgress?.isFavorite == true
+                        let outcome = reviewWordRatings[word.id] ?? wordProgress?.lastRating ?? .unknown
+
+                        HStack(spacing: 10) {
+                            VStack(alignment: .leading, spacing: 3) {
+                                HStack(spacing: 6) {
+                                    Text(word.term)
+                                        .font(.headline)
+                                    Text(outcome == .fuzzy ? "待巩固" : "不认识")
+                                        .font(.caption2.weight(.bold))
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 2)
+                                        .background(
+                                            (outcome == .fuzzy ? Color.orange : Color.red).opacity(0.14),
+                                            in: Capsule()
+                                        )
+                                        .foregroundStyle(outcome == .fuzzy ? .orange : .red)
+                                }
                                 Text(word.translation)
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
+                                if let date = wordProgress?.nextReviewDate {
+                                    Text(date <= .now ? "现在可复习" : "下次复习：\(date.formatted(date: .abbreviated, time: .shortened))")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
                             }
                             Spacer()
+                            Button {
+                                toggleFavorite(word)
+                            } label: {
+                                Image(systemName: isFav ? "star.fill" : "star")
+                                    .font(.subheadline)
+                                    .foregroundStyle(isFav ? Color.orange : Color.secondary)
+                                    .frame(width: 30, height: 30)
+                            }
+                            .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                            .accessibilityLabel(isFav ? "取消收藏 \(word.term)" : "收藏 \(word.term)")
+
                             Button {
                                 speechService.speak(word.term, language: word.language)
                             } label: {
                                 Image(systemName: "speaker.wave.2")
                                     .foregroundStyle(themeColor)
+                                    .frame(width: 30, height: 30)
                             }
+                            .buttonStyle(PressScaleButtonStyle(scale: 0.90))
+                            .accessibilityLabel("朗读 \(word.term)")
                         }
                         .padding(12)
                         .surfacePanel(radius: 12)
@@ -783,7 +1177,7 @@ struct QuizView: View {
             }
 
             VStack(spacing: 10) {
-                if !wrongWords.isEmpty {
+                if practiceRound == nil && !wrongWords.isEmpty {
                     Button {
                         let mistakesToRetry = wrongWords
                         restartQuiz(using: mistakesToRetry)
@@ -798,17 +1192,39 @@ struct QuizView: View {
                     .buttonStyle(PressScaleButtonStyle())
                 }
 
-                Button {
-                    restartQuiz(using: sourceWords)
-                } label: {
-                    Label("完整再测一次", systemImage: "arrow.clockwise")
+                if let todayFacts {
+                    if let onNextToday, todayFacts.remaining > 0 || todayFacts.canLearn {
+                        Button(todayFacts.remaining > 0 ? "继续复习" : "学新词") {
+                            onNextToday()
+                            dismiss()
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                    }
+                } else {
+                    Button {
+                        restartQuiz(using: sourceWords)
+                    } label: {
+                        Label(
+                            quizMode == .mistakePractice ? "继续错词专练" : (practiceRound != nil ? "再练一次" : "完整再测一次"),
+                            systemImage: "arrow.clockwise"
+                        )
                         .font(.headline)
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 48)
                         .background(themeColor, in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
+                    }
+                    .buttonStyle(PressScaleButtonStyle())
                 }
-                .buttonStyle(PressScaleButtonStyle())
+
+                if let onPracticeMistakes, hasEligibleMistakes {
+                    Button("错词专练") {
+                        onPracticeMistakes()
+                        dismiss()
+                    }
+                    .buttonStyle(.bordered)
+                }
 
                 Button {
                     dismiss()

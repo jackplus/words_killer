@@ -246,3 +246,66 @@ diff -u PRIVACY.md "Words killer/Resources/PrivacyPolicy.md"
    - 若修改了隐私文本，执行 `diff -u PRIVACY.md "Words killer/Resources/PrivacyPolicy.md"` 确认零差异。
 4. **文档同步**：重要功能变更更新 `README.md` / `HANDOFF.md`；发布状态或构建号变更更新 `APP_STORE_CHECKLIST.md`。
 5. **Git 卫生**：切勿提交 `artifacts/`、`DerivedData/`、`xcuserdata/` 或 `.DS_Store`；保持工作区干净，不覆盖用户尚未提交的发版改动。
+
+---
+
+## 7. 本仓库的多模型分工（Codex 是主 Agent）
+
+**Codex** 负责需求、派工、集成、审查和测试，小改动直接在本地完成。设计存在取舍时找 Antigravity，能单独验收的模块才考虑 Grok 写手，需要第二份代码审查时再找 Grok 审查员。按任务选用，避免每次迭代都跑完整套。
+
+### 调用边界
+
+- 对外派工走本节包装脚本，使用当前会话沙箱，网络权限按次审批。保持脚本的 `plan`、`dontAsk`、读写和工具限制，禁用自动批准与绕过沙箱的参数。Codex 主 Agent 可以直接完成工作，也可以在会话允许时使用内置子 Agent。
+- 默认给外部模型的上下文限于合成示例、公开资料和经筛选的非敏感摘要。私有源码、diff、未跟踪文件或包含私有细节的 spec 需获用户对接收服务及文件范围的明确授权。沙箱权限控制工具行为，发送范围需要单独核对。Grok 的 `workspace` 和 `read-only` 配置允许读取工作目录之外的文件，不等同于文件白名单。 [Grok Build 沙箱](https://docs.x.ai/build/features/sandbox)
+- macOS 上，Grok 会自行应用沙箱，避免额外用 `sandbox-exec` 套住 Grok 包装脚本。若启动时报 `sandbox initialization failed: Operation not permitted`，先检查是否叠加了 `sandbox-exec`。临时验证需要禁止访问真实仓库时，在临时目录配置 Grok 自身的 sandbox profile，写手继承 `workspace`，审查员继承 `read-only`，两者都用 `deny` 拒绝读写真实仓库路径。保留包装脚本的工具限制和当前会话审批。若所需隔离无法生效，转由 Codex 本地处理。
+- 先用各 CLI 的默认型号，调用时省略 `--model` 并检查是否继承了 `ADVISOR_MODEL`、`WORKER_MODEL` 或 `REVIEW_MODEL`。有明确需求时才指定当前账号已确认可用的型号。遇到 `unknown model id`，去掉本次型号覆盖后再试。
+- 外发被拦截、登录不可用或工作区有改动时，Codex 在本地继续。只有已获对应授权且确有必要时，才从干净基线制作仅含所需文件的临时副本。禁止为派工擅自暂存、提交、还原或移走用户的工作区改动。
+
+### Antigravity (`scripts/ask-advisor`)
+
+用 `agy` 的 `plan` 模式比较方案、检查交互和中文文案，或给出容易遗漏的边界场景。默认沿用 CLI 选型。短文案可选当前账号可用的低延迟档，跨模块设计可选更高推理档。用 `--model` 或 `ADVISOR_MODEL` 单次指定已确认可用的型号，仓库不固定型号。保留 `/plan` 展开，勿重新加上 `--disable-slash-commands`。查看 stderr 的权限提示，确认输出覆盖了提问。 [Antigravity 模型](https://antigravity.google/docs/models) · [Headless 模式](https://antigravity.google/docs/cli/headless/) · [Plan 模式](https://antigravity.google/docs/cli/modes)
+
+```bash
+scripts/ask-advisor -- '根据这份设计摘要，列出最多三个影响用户的风险，并给出最小替代方案。'
+```
+
+按需用 `--file` 附上已获授权的文本。脚本会复制文件内容，在同一个日志目录下复用顾问工作区，同一日志目录的调用应串行。
+
+### Grok Build 写手 (`scripts/code-worker`)
+
+适合接口和验收条件明确的实现，例如纯 Swift 逻辑及对应的 Swift Testing 用例。任务说明列出起始基线、允许改动的文件、输入输出、必须保留的行为、验收场景和交付内容。让写手汇报改动与已知限制，并把修改留在 worktree。脚本禁止 Grok 跑 shell，测试由 Codex 执行。 [Grok Build 设置](https://docs.x.ai/build/settings)
+
+```bash
+AGENT_CODE_ROOT=/Volumes/Mac_Ext scripts/code-worker --task-file /tmp/task.md --branch worker-vocabulary-round
+```
+
+上述命令适用于原仓库。它要求工作区干净（含未跟踪文件），并在 `../WordsKiller-wt/<branch>` 创建 worktree。每个写手独占一个分支与 worktree，文件范围须互不重叠。临时副本则使用该副本所在的父目录作为 `AGENT_CODE_ROOT`。
+
+### Grok Build 审查员 (`scripts/grok-review`)
+
+优先对明确的验收点和高风险行为审查，例如 SM-2 写入次数、旧数据兼容和 SwiftUI 交互竞态。用 `--diff-file` 提交已核对、获授权的补丁，并将 `--cwd` 指向仅含已获授权上下文的审查目录。直接对完整工作树调用 `--base` 会收集相对基线的改动和部分未跟踪文件，先核对实际范围。Grok 复审 Grok 写手时属于分开的审查会话，跨模型判断由 Codex 负责。 [Grok Build Headless](https://docs.x.ai/build/cli/headless-scripting)
+
+```bash
+scripts/grok-review --cwd /tmp/review-context --diff-file /tmp/approved.diff -- '核对列出的验收条件，指出可复核的阻塞问题。'
+```
+
+审查超时后先查日志，区分实际超时、认证失败和型号错误。确认是超时后，用同一份获授权补丁、同一只读目录和 CLI 默认型号重试一次。缩短附加提问到关键验收点，适当提高 `--timeout`（例如从 60 秒提高到 100 秒）。再次超时则由 Codex 本地审查，并记录外部审查未完成。
+
+### 交接与验收
+
+1. 记录脚本返回的 worktree、起始 SHA 和退出状态。检查相对该 SHA 的完整 diff 及 `git status --short`，逐个核对未跟踪文件、越界改动和敏感文件提示。
+2. Codex 逐条复核 `Blocking` 的证据和触发条件，按需采纳 `Non-blocking`。同一问题与外部审查员最多往返两轮，剩余分歧由 Codex 依据代码和测试裁决，产品取舍交用户决定。
+3. 在可构建的工作树验证受影响行为。只纳入已审查的改动，再对集成结果执行第 6 节的验证。来自临时副本的结果按任务文件逐项纳入，并检查与本地进行中改动的冲突。
+
+### 必须先问人的事（不要交给 worker，也不要自己做）
+
+- 删除数据或做破坏性 git 操作（`reset --hard`、强制推送、删分支）
+- 花钱、下单、改计费
+- 对外发消息（邮件、Slack、社交、评论）
+- 改权限、密钥、证书、`.env`、签名/发布证书
+- 发布到 App Store / TestFlight（签名和上架保持手动）
+- 向其他项目或全局目录安装工具、改 `~/.zshrc`、改 `~/.gemini/`、`~/.grok/` 或 `~/.codex/` 配置
+
+### 并行
+
+默认同时最多派两个写手，有第三个互不重叠的任务时可增至三个，并遵守当前会话的调度限制。
