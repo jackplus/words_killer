@@ -253,4 +253,5 @@ xcodebuild test -scheme "Words killer" \
 - 用户确认上传 1.0 (4)，本轮发布前重新运行 64 项全量测试并完成签名 Release 归档。所有本地功能、试用原型、匿名模板和多 Agent 包装脚本一并纳入 GitHub 同步范围。
 - 桌面与锁屏 Extension 目前为模板，App 内小组件预览和路由可测试。真人次日数据及真机验收仍待收集，词义配对仅在试用原型内。
 - 构建导出、上传及 Apple 处理结果以 `APP_STORE_CHECKLIST.md` 第十二节为准。归档、IPA 与日志位于新的本地发布目录 `artifacts/testflight-2026-11-25/`。
-- 功能代码已以 `ce071bd` 推送 GitHub main。2026-11-25 10:44:05（Asia/Taipei）Xcode 确认 1.0 (4) 上传成功，Apple 开始处理安装包。网页会话需重新登录，最终处理状态及测试分配待核对。
+- 功能代码已以 `ce071bd` 推送 GitHub main。2026-11-25 10:44:05（Asia/Taipei）Xcode 确认 1.0 (4) 上传成功。用户登录后已确认 Apple 二进制「已验证」、构建「准备提交」，internal 群组自动关联 2 名测试员，测试说明保存并核实。
+- 上传后补充了 Xcode 26 的首页表达式与观察链拆分，修复编译器类型检查超时；最新 GitHub 代码包含此兼容修复，已上传构建对应 `ce071bd`。

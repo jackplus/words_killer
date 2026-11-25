@@ -271,5 +271,8 @@ xcodebuild -exportArchive \
 - GitHub 功能提交为 `ce071bd9ff62ae4581c90f1adb9321584f08b57b`，已推送 `origin/main`。
 - IPA 本地验签与 Store profile 校验通过，`get-task-allow = false`，归属团队 `Y382F52F3K`。IPA SHA-256 为 `93325be8a8b4b4fd1095e9c01c07a6ccbdab9d07e41f1112fe92638c6fa178f4`。
 - 2026-11-25 10:44:05（Asia/Taipei），Xcode 返回 `Upload succeeded` 和 `EXPORT SUCCEEDED`，日志确认 `Uploaded package is processing`。Apple 已接收 1.0 (4) 并开始处理。
-- App Store Connect 网页当前需要重新登录，构建二进制处理完成、内部测试群组关联和服务端「测试内容」尚待核对。本地 `what-to-test.txt` 已准备，尚未提交外部 Beta 或正式商店审核。
+- 用户登录后已核对 Apple 服务端：1.0 (4) 二进制「已验证」、构建「准备提交」，最低 iOS 17.0、arm64、符号包含、非豁免加密为「否」，Team `Y382F52F3K`、Bundle ID 与发行归档一致。
+- 已保存简体中文「测试内容」并重新打开页面核实，现有 internal 内部群组自动关联 2 名测试员。尚未提交外部 Beta 或正式商店审核。
+- 构建 ID 为 `2522b0dc-1013-4144-9672-a92f6781a273`。 [构建详情](https://appstoreconnect.apple.com/teams/87c2efdb-0337-4b83-b4bd-95ef36cb5a8d/apps/6837619955/testflight/ios/2522b0dc-1013-4144-9672-a92f6781a273)
 - GitHub 功能提交的 CI 在 Xcode 26 编译首页时出现 SwiftUI 类型检查超时，本机 Xcode 27.2 的 64 项测试与归档均通过。上传后另作首页表达式拆分以兼容 CI，未改变题目与复习规则；该源码修复不包含在已上传的 1.0 (4) 中。
+- 兼容修复提交 `98792b3` 在本机全量 64 项测试通过；[GitHub Actions 回归](https://github.com/jackplus/words_killer/actions/runs/45535626290)仍在运行，云端结果尚未确认。
