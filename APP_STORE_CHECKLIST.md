@@ -272,3 +272,4 @@ xcodebuild -exportArchive \
 - IPA 本地验签与 Store profile 校验通过，`get-task-allow = false`，归属团队 `Y382F52F3K`。IPA SHA-256 为 `93325be8a8b4b4fd1095e9c01c07a6ccbdab9d07e41f1112fe92638c6fa178f4`。
 - 2026-11-25 10:44:05（Asia/Taipei），Xcode 返回 `Upload succeeded` 和 `EXPORT SUCCEEDED`，日志确认 `Uploaded package is processing`。Apple 已接收 1.0 (4) 并开始处理。
 - App Store Connect 网页当前需要重新登录，构建二进制处理完成、内部测试群组关联和服务端「测试内容」尚待核对。本地 `what-to-test.txt` 已准备，尚未提交外部 Beta 或正式商店审核。
+- GitHub 功能提交的 CI 在 Xcode 26 编译首页时出现 SwiftUI 类型检查超时，本机 Xcode 27.2 的 64 项测试与归档均通过。上传后另作首页表达式拆分以兼容 CI，未改变题目与复习规则；该源码修复不包含在已上传的 1.0 (4) 中。

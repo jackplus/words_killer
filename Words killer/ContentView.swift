@@ -245,8 +245,7 @@ struct ContentView: View {
         let streak = streakDays
         let studiedToday = todayStudiedWords
 
-        NavigationStack {
-            ZStack(alignment: .top) {
+        let screen = ZStack(alignment: .top) {
                 AppAmbientBackground()
 
                 ScrollView {
@@ -341,6 +340,8 @@ struct ContentView: View {
             } message: {
                 Text(todayError ?? "")
             }
+        return NavigationStack {
+            screen
             .task(id: StudyAnalytics.streakMayExceedWindow(streak)) {
                 guard StudyAnalytics.streakMayExceedWindow(streak) else { return }
                 olderActiveDays = StudyAnalytics.olderActiveDays(before: windowStart, in: modelContext)
