@@ -290,8 +290,8 @@ xcodebuild -exportArchive \
 - 构建 ID 为 `5ee7246a-bebb-4d16-a23f-b4ebd30aab25`。[构建详情](https://appstoreconnect.apple.com/teams/87c2efdb-0337-4b83-b4bd-95ef36cb5a8d/apps/6837619955/testflight/ios/5ee7246a-bebb-4d16-a23f-b4ebd30aab25)
 - 本地全量 66 项测试通过；[二进制源码对应的 GitHub Actions](https://github.com/jackplus/words_killer/actions/runs/45608181779)最终取消，未取得云端通过结果。
 
-## 十四、首页改版发布准备（2026-11-25）
+## 十四、构建 1.0 (6) 首页改版发布验证（2026-11-25）
 
 - 最新源码新增首页范围掌握度、今日一词交互卡及四种训练快捷入口，不改持久化模型、原词条 ID、隐私与签名配置。
 - 发布前重新运行 iPhone 18 Pro 全量 67 项测试，0 失败、0 跳过、Swift 编译 0 警告；未签名 Release arm64 归档及发行 plist 校验通过，隐私双副本一致。
-- 发布准备和测试证据位于 `artifacts/testflight-2026-11-25-build6/`，历史目录保留。Apple 最新构建仍为 1.0 (5)，下一构建建议 1.0 (6)，待用户确认后签名归档上传。
+- 发布准备和测试证据位于 `artifacts/testflight-2026-11-25-build6/`，历史目录保留。用户已明确确认上传 1.0 (6)，工程构建号由 5 递增为 6，签名归档及上传结果待核实。
