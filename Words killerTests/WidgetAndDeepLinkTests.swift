@@ -194,6 +194,30 @@ struct WidgetAndDeepLinkTests {
         #expect(router.selectedTab == .study)
     }
 
+    @Test("首页范围掌握度统计：区分已掌握、学习中与未学习，空词池安全返回 0")
+    func studyScopeSummaryCountsMasteredLearningAndUnseen() {
+        let empty = StudyScopeSummary.compute(words: [], progressMap: [:])
+        #expect(empty.totalCount == 0)
+        #expect(empty.masteredCount == 0)
+        #expect(empty.learningCount == 0)
+        #expect(empty.unseenCount == 0)
+        #expect(empty.masteryRatio == 0)
+
+        let words = [makeWord("m1"), makeWord("l1"), makeWord("fav-unseen"), makeWord("u1")]
+        let progress: [String: WordProgress] = [
+            "m1": WordProgress(wordID: "m1", language: .english, masteryLevel: 3, reviewCount: 2),
+            "l1": WordProgress(wordID: "l1", language: .english, masteryLevel: 2, reviewCount: 1),
+            "fav-unseen": WordProgress(wordID: "fav-unseen", language: .english, masteryLevel: 0, reviewCount: 0, isFavorite: true)
+        ]
+
+        let summary = StudyScopeSummary.compute(words: words, progressMap: progress)
+        #expect(summary.totalCount == 4)
+        #expect(summary.masteredCount == 1)
+        #expect(summary.learningCount == 1)
+        #expect(summary.unseenCount == 2)
+        #expect(summary.masteryRatio == 0.25)
+    }
+
     private func makeWord(_ id: String) -> WordItem {
         WordItem(
             id: id,

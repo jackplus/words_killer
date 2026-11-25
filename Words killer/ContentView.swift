@@ -86,6 +86,7 @@ struct ContentView: View {
     @State private var todayNewCount = 0
     @State private var todayMistakeCount = 0
     @State private var todayError: String?
+    @State private var dailyWordOffset = 0
     @State private var showsClassicTraining = false
     @State private var isShowingAudioSheet = false
     @State private var isShowingStrategyTip = false
@@ -252,14 +253,20 @@ struct ContentView: View {
         let currentProgress = currentWord.flatMap { currentProgressMap[$0.id] }
         let streak = streakDays
         let studiedToday = todayStudiedWords
+        let scopedWords = availableWords
+        let scopeSummary = StudyScopeSummary.compute(words: scopedWords, progressMap: currentProgressMap)
+        let spotlightWord = showsClassicTraining ? nil : DailyWordSelector.selectDailyWord(
+            from: scopedWords,
+            progressMap: currentProgressMap,
+            offset: dailyWordOffset
+        )
 
         let screen = ZStack(alignment: .top) {
                 AppAmbientBackground()
 
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 14) {
                         compactTopBar(studiedToday: studiedToday, streak: streak)
-                        todayPanel
 
                         if isPreferenceExpanded {
                             expandedPreferencesDrawer
@@ -270,13 +277,17 @@ struct ContentView: View {
                                 )
                         }
 
-                        if showsClassicTraining {
-                            sessionProgressBar
-                            if let warning = speechService.voiceWarningMessage {
-                                VoicePackNoticeBanner(message: warning) {
-                                    speechService.dismissVoiceWarning()
-                                }
+                        if let warning = speechService.voiceWarningMessage {
+                            VoicePackNoticeBanner(message: warning) {
+                                speechService.dismissVoiceWarning()
                             }
+                        }
+
+                        todayPanel(scopeSummary: scopeSummary)
+
+                        if showsClassicTraining {
+                            classicTrainingHeaderBar
+                            sessionProgressBar
                             if isChallengeFinished {
                                 sessionCompleteCard
                                     .transition(.opacity.combined(with: .scale(scale: 0.96)))
@@ -289,11 +300,36 @@ struct ContentView: View {
                                 emptyModeCard
                             }
                             strategyFooterTip
+                        } else {
+                            if let spotlightWord {
+                                DailyWordSpotlightCard(
+                                    word: spotlightWord,
+                                    progress: currentProgressMap[spotlightWord.id],
+                                    speechService: speechService,
+                                    themeColor: themeColor,
+                                    onNextWord: {
+                                        selectionTrigger += 1
+                                        dailyWordOffset += 1
+                                    },
+                                    onToggleFavorite: {
+                                        toggleFavorite(spotlightWord)
+                                    },
+                                    onEditNote: {
+                                        noteEditingWord = spotlightWord
+                                    },
+                                    onOpenDetail: {
+                                        router?.navigate(to: .word(id: spotlightWord.id))
+                                    }
+                                )
+                            }
+
+                            practiceModesSection
+                            strategyFooterTip
                         }
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 8)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 24)
                     .readableColumn()
                 }
                 .scrollIndicators(.hidden)
@@ -373,6 +409,7 @@ struct ContentView: View {
                 if scenePhase == .active && quizEntry == nil { refreshToday() }
             }
             .onChange(of: todayScope) {
+                dailyWordOffset = 0
                 refreshToday()
             }
             .onChange(of: selectedDifficultyRawValue) { refreshToday() }
@@ -499,7 +536,7 @@ struct ContentView: View {
         }
     }
 
-    private var todayPanel: some View {
+    private func todayPanel(scopeSummary: StudyScopeSummary) -> some View {
         let packTitle = activeLanguagePacks.first { $0.id == todayScope.packID }?.title ?? "全部词书"
         let hasReviewCheckpoint = todayCheckpoint.map { !$0.learnsNewWords } ?? false
         let hasNewCheckpoint = todayCheckpoint?.learnsNewWords == true
@@ -510,14 +547,33 @@ struct ContentView: View {
         let highlightReview = hasReviewCheckpoint || (!hasNewCheckpoint && canReview)
 
         return VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .firstTextBaseline) {
-                Text("今日学习")
-                    .font(.title2.weight(.bold))
-                Spacer()
-                Text("\(selectedLanguage.title) · \(packTitle)")
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
+            HStack(alignment: .center, spacing: 8) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("今日学习")
+                        .font(.title2.weight(.bold))
+                    Text("\(selectedLanguage.title) · \(packTitle)")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+
+                Spacer(minLength: 8)
+
+                Button {
+                    selectionTrigger += 1
+                    withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                        isPreferenceExpanded.toggle()
+                    }
+                } label: {
+                    Label(selectedDifficulty.shortTitle, systemImage: "slider.horizontal.3")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(themeColor)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(themeColor.opacity(0.12), in: Capsule())
+                }
+                .buttonStyle(PressScaleButtonStyle(scale: 0.95))
+                .accessibilityLabel("切换词书与难度")
             }
 
             HStack(spacing: 10) {
@@ -533,12 +589,25 @@ struct ContentView: View {
                 )
             }
 
+            if scopeSummary.totalCount > 0 {
+                ScopeMasteryBar(summary: scopeSummary, themeColor: themeColor)
+            }
+
             if let todayCheckpoint {
                 let completedCount = todayCheckpoint.questions.count - todayCheckpoint.pending.count
                 let kindLabel = todayCheckpoint.learnsNewWords ? "背新词" : "复习"
-                Text("未完成的\(kindLabel)：已完成 \(completedCount) / \(todayCheckpoint.questions.count) 个首答")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                HStack(spacing: 6) {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .font(.caption)
+                        .foregroundStyle(themeColor)
+                    Text("未完成的\(kindLabel)：已完成 \(completedCount) / \(todayCheckpoint.questions.count) 个首答")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.primary)
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 7)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(accentTheme.softTint(for: colorScheme), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
 
             if canReview || canLearnNew {
@@ -553,6 +622,7 @@ struct ContentView: View {
                                     .frame(maxWidth: .infinity)
                             }
                             .buttonStyle(.borderedProminent)
+                            .buttonBorderShape(.capsule)
                             .controlSize(.large)
                         } else {
                             Button {
@@ -563,6 +633,7 @@ struct ContentView: View {
                                     .frame(maxWidth: .infinity)
                             }
                             .buttonStyle(.bordered)
+                            .buttonBorderShape(.capsule)
                             .tint(themeColor)
                             .controlSize(.large)
                         }
@@ -571,8 +642,8 @@ struct ContentView: View {
                             .font(.subheadline.weight(.medium))
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity)
-                            .frame(minHeight: 46)
-                            .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
+                            .frame(minHeight: 50)
+                            .background(Color(.tertiarySystemFill), in: Capsule())
                     }
 
                     if canLearnNew {
@@ -585,6 +656,7 @@ struct ContentView: View {
                                     .frame(maxWidth: .infinity)
                             }
                             .buttonStyle(.borderedProminent)
+                            .buttonBorderShape(.capsule)
                             .controlSize(.large)
                         } else {
                             Button {
@@ -595,6 +667,7 @@ struct ContentView: View {
                                     .frame(maxWidth: .infinity)
                             }
                             .buttonStyle(.bordered)
+                            .buttonBorderShape(.capsule)
                             .tint(themeColor)
                             .controlSize(.large)
                         }
@@ -603,8 +676,8 @@ struct ContentView: View {
                             .font(.subheadline.weight(.medium))
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity)
-                            .frame(minHeight: 46)
-                            .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
+                            .frame(minHeight: 50)
+                            .background(Color(.tertiarySystemFill), in: Capsule())
                     }
                 }
             } else {
@@ -613,7 +686,7 @@ struct ContentView: View {
                     .foregroundStyle(.secondary)
             }
 
-            if todayMistakeCount > 0 {
+            if showsClassicTraining && todayMistakeCount > 0 {
                 Button {
                     quizEntry = .mistakes
                 } label: {
@@ -625,9 +698,105 @@ struct ContentView: View {
                 .tint(themeColor)
             }
         }
-        .padding(18)
+        .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .surfacePanel(radius: AppMetrics.panelRadius)
+        .surfacePanel(radius: AppMetrics.cardRadius, borderColor: themeColor.opacity(0.20))
+    }
+
+    private var classicTrainingHeaderBar: some View {
+        HStack {
+            Label("闪卡记忆训练", systemImage: "rectangle.stack.fill")
+                .font(.subheadline.weight(.bold))
+                .foregroundStyle(themeColor)
+            Spacer()
+            Button {
+                selectionTrigger += 1
+                withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                    showsClassicTraining = false
+                }
+                speechService.stop()
+            } label: {
+                Label("收起闪卡", systemImage: "chevron.up.circle")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.horizontal, 4)
+    }
+
+    private var practiceModesSection: some View {
+        let columns = [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)]
+
+        return VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                SectionTitle(icon: "square.grid.2x2.fill", title: "更多训练模式")
+                Spacer()
+                Text("多种方式巩固记忆")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal, 2)
+
+            LazyVGrid(columns: columns, spacing: 10) {
+                PracticeModeTile(
+                    title: "闪卡记忆",
+                    subtitle: "滑卡判词 · 4 种挑战强度",
+                    icon: "rectangle.stack.fill",
+                    tint: themeColor,
+                    badgeText: selectedChallengeMode == .standard ? nil : selectedChallengeMode.shortTitle
+                ) {
+                    selectionTrigger += 1
+                    withAnimation(MotionTokens.resolve(MotionTokens.snappy, reduceMotion: reduceMotion)) {
+                        showsClassicTraining = true
+                    }
+                    if sessionQueue.isEmpty { startNewChallenge() }
+                    else { speakCurrentWordIfNeeded() }
+                }
+
+                PracticeModeTile(
+                    title: "随身听学",
+                    subtitle: "锁屏磨耳朵 · 自动循环连播",
+                    icon: "headphones",
+                    tint: .indigo
+                ) {
+                    selectionTrigger += 1
+                    if sessionQueue.isEmpty { startNewChallenge() }
+                    guard !sessionQueue.isEmpty else {
+                        todayError = "当前筛选范围没有可听学的词条。"
+                        return
+                    }
+                    audioController.startPlayback(words: sessionQueue, startIndex: currentIndex)
+                    isShowingAudioSheet = true
+                }
+
+                PracticeModeTile(
+                    title: "速测与拼写",
+                    subtitle: "四选一综合测验与听音听写",
+                    icon: "pencil.and.outline",
+                    tint: .orange
+                ) {
+                    selectionTrigger += 1
+                    if sessionQueue.isEmpty { startNewChallenge() }
+                    guard !sessionQueue.isEmpty else {
+                        todayError = "当前筛选范围没有可用的练习词条。"
+                        return
+                    }
+                    quizEntry = .currentRound
+                }
+
+                PracticeModeTile(
+                    title: "错词专练",
+                    subtitle: todayMistakeCount > 0 ? "优先攻克近期遗忘词条" : "答错词条会自动汇总于此",
+                    icon: QuizMode.mistakePractice.systemImage,
+                    tint: .red,
+                    badgeText: todayMistakeCount > 0 ? "\(todayMistakeCount) 词" : nil
+                ) {
+                    selectionTrigger += 1
+                    quizEntry = .mistakes
+                }
+            }
+        }
     }
 
     private func todayProgress(in context: ModelContext) throws -> [String: WordProgress] {

@@ -266,3 +266,13 @@ xcodebuild test -scheme "Words killer" \
 - **验证**：新增 `autoSpeakRuleTargetsOnlyUnansweredAudioQuestions` 与 `switchingFromDueReviewToNewWordsPreservesCompletedReviewProgress` 两项测试，iPhone 18 Pro 模拟器全量通过 **66/66 项** Swift Testing 单元测试，Swift 编译 0 警告，`PRIVACY.md` 与内置副本零差异。
 - **发布准备**：本轮发布前在 iPhone 18 Pro Max 重新运行全量 66 项测试，0 失败、0 跳过；未签名 Release arm64 归档通过。用户已确认上传 1.0 (5)，发行结果见 `APP_STORE_CHECKLIST.md` 第十三节。
 - **发布结果**：二进制源码 `abf20a2` 已推送 GitHub，1.0 (5) 于 2026-11-25 19:53:52（Asia/Taipei）上传成功。Apple 二进制「已验证」、构建「准备提交」，internal 自动关联 2 名测试员，测试说明已保存并重新打开核实。本地证据位于 `artifacts/testflight-2026-11-25-build5/`，GitHub 云端回归尚在运行。
+
+## 十五、背词首页版面与信息架构重构（2026-11-25）
+
+- **模块化首页组件（新增 `Views/StudyHomeComponents.swift`）**：
+  - `StudyScopeSummary` + `ScopeMasteryBar`：单次计算当前语种/词书范围的已掌握、学习中与未学习词数，以双段进度条直观呈现掌握进度。
+  - `DailyWordSpotlightCard`：接入第 12 轮同源 `DailyWordSelector`，首页首屏直接提供「今日一词」微卡片，支持一键换词、星标收藏、单词/例句朗读、展开记忆点与助记笔记以及直达词库详情。
+  - `PracticeModeTile`：构建 2×2「更多训练模式」快捷宫格，将原本藏于右上角菜单的**闪卡记忆**、**随身听学**、**速测与拼写**、**错词专练**直接呈现于首页。
+- **首屏层次与交互优化（`ContentView.swift`）**：
+  - 设置抽屉紧贴顶部控制胶囊正下方展开；缺失语音包提示横幅上移至通用区域，覆盖默认首页朗读场景；「今日学习」主卡内置词书/难度快捷切换胶囊、掌握度进度条与对称胶囊式「复习 / 背新词」双主入口；展开闪卡时收起首页其余模块并显示「收起闪卡」返回条，保证沉浸度。
+- **验证**：新增 `studyScopeSummaryCountsMasteredLearningAndUnseen` 单元测试，iPhone 18 Pro 模拟器全量通过 **67/67 项** Swift Testing 单元测试，Swift 编译 0 警告，`PRIVACY.md` 与内置副本零差异；完成 iPhone 浅色/深色首屏模拟器截图验收。
