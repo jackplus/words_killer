@@ -35,6 +35,26 @@ struct QuizAndBackupTests {
         #expect(QuizEngine.spellingRating(usedHint: true, hadWrongAttempt: true) == .fuzzy)
     }
 
+    @Test("听音选词自动朗读规则：仅未作答的听音选词自动播音，已作答或非听音题不自动播音")
+    func autoSpeakRuleTargetsOnlyUnansweredAudioQuestions() throws {
+        let words = [
+            WordItem(id: "w1", language: .english, difficulty: .beginner, term: "apple", pronunciation: "", translation: "苹果", memoryCue: "", example: ""),
+            WordItem(id: "w2", language: .english, difficulty: .beginner, term: "banana", pronunciation: "", translation: "香蕉", memoryCue: "", example: ""),
+            WordItem(id: "w3", language: .english, difficulty: .beginner, term: "cherry", pronunciation: "", translation: "樱桃", memoryCue: "", example: "")
+        ]
+        let audioQuestion = try #require(QuizEngine.buildQuestions(from: [words[0]], distractorPool: words, subtype: .audioToWord).first)
+        let wordToMeaning = try #require(QuizEngine.buildQuestions(from: [words[0]], distractorPool: words, subtype: .wordToMeaning).first)
+        let meaningToWord = try #require(QuizEngine.buildQuestions(from: [words[0]], distractorPool: words, subtype: .meaningToWord).first)
+        let textFallback = try #require(QuizEngine.textAlternative(for: audioQuestion, distractorPool: words))
+
+        #expect(QuizEngine.shouldAutoSpeak(question: audioQuestion, hasAnswered: false) == true)
+        #expect(QuizEngine.shouldAutoSpeak(question: audioQuestion, hasAnswered: true) == false)
+        #expect(QuizEngine.shouldAutoSpeak(question: wordToMeaning, hasAnswered: false) == false)
+        #expect(QuizEngine.shouldAutoSpeak(question: meaningToWord, hasAnswered: false) == false)
+        #expect(QuizEngine.shouldAutoSpeak(question: textFallback, hasAnswered: false) == false)
+        #expect(QuizEngine.shouldAutoSpeak(question: nil, hasAnswered: false) == false)
+    }
+
     @Test("拼写判分：兼容大小写、多余空格与智能弯撇号，拒绝空白与拼错")
     func spellingMatchNormalizesKeyboardPunctuationAndWhitespace() {
         #expect(QuizEngine.isSpellingMatch("chiffre d\u{2019}affaires", target: "chiffre d'affaires"))

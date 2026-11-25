@@ -35,10 +35,18 @@ private struct ExitingCardState: Identifiable {
 
 private enum VocabularyQuizEntry: String, Identifiable {
     case today
+    case todayReview
+    case todayNew
     case currentRound
     case mistakes
 
     var id: String { rawValue }
+}
+
+private enum TodayStartMode {
+    case resumeOrDefault
+    case review
+    case newWords
 }
 
 struct ContentView: View {
@@ -75,7 +83,7 @@ struct ContentView: View {
     @State private var quizAfterDismissal: VocabularyQuizEntry?
     @State private var todayCheckpoint: TodayPracticeState?
     @State private var todayDueCount = 0
-    @State private var todayCanLearn = false
+    @State private var todayNewCount = 0
     @State private var todayMistakeCount = 0
     @State private var todayError: String?
     @State private var showsClassicTraining = false
@@ -453,23 +461,28 @@ struct ContentView: View {
     }
 
     private func practiceSheet(for entry: VocabularyQuizEntry) -> some View {
+        let isTodayEntry = entry == .today || entry == .todayReview || entry == .todayNew
         let summary: (() -> (remaining: Int, canLearn: Bool))?
-        let next: (() -> Void)?
-        if entry == .today {
+        let nextReview: (() -> Void)?
+        let nextNewWords: (() -> Void)?
+        if isTodayEntry {
             summary = { todayTotals() }
-            next = { quizAfterDismissal = .today }
+            nextReview = { quizAfterDismissal = .todayReview }
+            nextNewWords = { quizAfterDismissal = .todayNew }
         } else {
             summary = nil
-            next = nil
+            nextReview = nil
+            nextNewWords = nil
         }
         let mistakes: (() -> Void)? = entry == .mistakes ? nil : { quizAfterDismissal = .mistakes }
         let quiz = QuizView(
             sourceWords: entry == .mistakes ? availableWords : sessionQueue,
             allAvailableWords: languageWords,
             initialMode: entry == .mistakes ? .mistakePractice : .vocabularyPractice,
-            today: entry == .today ? todayCheckpoint : nil,
+            today: isTodayEntry ? todayCheckpoint : nil,
             todaySummary: summary,
-            onNextToday: next,
+            onNextToday: nextReview,
+            onNextNewWords: nextNewWords,
             onPracticeMistakes: mistakes,
             onRecordReview: { wordID in
                 if undoStack.contains(where: { $0.reviewSnapshot.wordID == wordID }) {
@@ -488,32 +501,118 @@ struct ContentView: View {
 
     private var todayPanel: some View {
         let packTitle = activeLanguagePacks.first { $0.id == todayScope.packID }?.title ?? "全部词书"
-        let title = todayCheckpoint != nil ? "继续复习" : todayDueCount > 0 ? "开始复习" : "学新词"
+        let hasReviewCheckpoint = todayCheckpoint.map { !$0.learnsNewWords } ?? false
+        let hasNewCheckpoint = todayCheckpoint?.learnsNewWords == true
+        let canReview = hasReviewCheckpoint || todayDueCount > 0
+        let canLearnNew = hasNewCheckpoint || todayNewCount > 0
+        let reviewTitle = hasReviewCheckpoint ? "继续复习" : "开始复习"
+        let newWordsTitle = hasNewCheckpoint ? "继续背新词" : "背新词"
+        let highlightReview = hasReviewCheckpoint || (!hasNewCheckpoint && canReview)
+
         return VStack(alignment: .leading, spacing: 12) {
-            Text("今日复习")
-                .font(.title2.weight(.bold))
-            Text("\(selectedLanguage.title) · \(packTitle)")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            Text(todayDueCount > 0 ? "\(todayDueCount) 个到期词" : "当前范围暂无到期词")
-                .font(.subheadline)
+            HStack(alignment: .firstTextBaseline) {
+                Text("今日学习")
+                    .font(.title2.weight(.bold))
+                Spacer()
+                Text("\(selectedLanguage.title) · \(packTitle)")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
+
+            HStack(spacing: 10) {
+                StatPill(
+                    title: "待复习",
+                    value: todayDueCount > 0 ? "\(todayDueCount) 词" : "已清空",
+                    color: todayDueCount > 0 ? .orange : .green
+                )
+                StatPill(
+                    title: "可背新词（\(selectedDifficulty.shortTitle)）",
+                    value: todayNewCount > 0 ? "\(todayNewCount) 词" : "已学完",
+                    color: todayNewCount > 0 ? themeColor : .secondary
+                )
+            }
+
             if let todayCheckpoint {
-                Text("已完成 \(todayCheckpoint.questions.count - todayCheckpoint.pending.count) / \(todayCheckpoint.questions.count) 个首答")
+                let completedCount = todayCheckpoint.questions.count - todayCheckpoint.pending.count
+                let kindLabel = todayCheckpoint.learnsNewWords ? "背新词" : "复习"
+                Text("未完成的\(kindLabel)：已完成 \(completedCount) / \(todayCheckpoint.questions.count) 个首答")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
-            if todayCheckpoint != nil || todayDueCount > 0 || todayCanLearn {
-                Button(action: openToday) {
-                    Label(title, systemImage: "arrow.right.circle.fill")
-                        .frame(maxWidth: .infinity)
+
+            if canReview || canLearnNew {
+                HStack(spacing: 10) {
+                    if canReview {
+                        if highlightReview {
+                            Button {
+                                openToday(mode: .review)
+                            } label: {
+                                Label(reviewTitle, systemImage: "arrow.counterclockwise.circle.fill")
+                                    .font(.subheadline.weight(.bold))
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
+                        } else {
+                            Button {
+                                openToday(mode: .review)
+                            } label: {
+                                Label(reviewTitle, systemImage: "arrow.counterclockwise.circle")
+                                    .font(.subheadline.weight(.semibold))
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(themeColor)
+                            .controlSize(.large)
+                        }
+                    } else {
+                        Label("暂无到期复习", systemImage: "checkmark.circle")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity)
+                            .frame(minHeight: 46)
+                            .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
+                    }
+
+                    if canLearnNew {
+                        if !highlightReview {
+                            Button {
+                                openToday(mode: .newWords)
+                            } label: {
+                                Label(newWordsTitle, systemImage: "sparkles")
+                                    .font(.subheadline.weight(.bold))
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
+                        } else {
+                            Button {
+                                openToday(mode: .newWords)
+                            } label: {
+                                Label(newWordsTitle, systemImage: "sparkles")
+                                    .font(.subheadline.weight(.semibold))
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(themeColor)
+                            .controlSize(.large)
+                        }
+                    } else {
+                        Label("暂无可背新词", systemImage: "book.closed")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity)
+                            .frame(minHeight: 46)
+                            .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: AppMetrics.controlRadius, style: .continuous))
+                    }
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
             } else {
-                Text("当前难度暂无新词，可调整背词设置。")
+                Text("当前难度暂无到期词与新词，可展开顶部设置切换难度或词书。")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
+
             if todayMistakeCount > 0 {
                 Button {
                     quizEntry = .mistakes
@@ -551,9 +650,9 @@ struct ContentView: View {
             let progress = try todayProgress(in: context)
             let words = availableWords
             todayDueCount = TodayPracticeState.dueWords(from: words, progress: progress).count
-            todayCanLearn = !TodayPracticeState.newWords(
+            todayNewCount = TodayPracticeState.newWords(
                 from: words, progress: progress, difficulty: selectedDifficulty, scope: selectedDifficultyScope
-            ).isEmpty
+            ).count
             todayMistakeCount = MistakePractice.selectWords(from: words, progressByID: progress).count
 
             let stored: TodayPracticeState?
@@ -602,41 +701,77 @@ struct ContentView: View {
         }
     }
 
-    private func openToday() {
+    private func openToday(mode: TodayStartMode = .resumeOrDefault) {
         refreshToday()
         guard todayError == nil else { return }
-        if todayCheckpoint != nil {
-            quizEntry = .today
-            return
+
+        if let existing = todayCheckpoint {
+            let matchesMode: Bool = switch mode {
+            case .resumeOrDefault: true
+            case .review: !existing.learnsNewWords
+            case .newWords: existing.learnsNewWords
+            }
+            if matchesMode {
+                quizEntry = existing.learnsNewWords ? .todayNew : .todayReview
+                return
+            }
         }
+
         do {
             let context = ModelContext(modelContext.container)
             let progress = try todayProgress(in: context)
             let words = availableWords
             let due = TodayPracticeState.dueWords(from: words, progress: progress)
-            let isNew = due.isEmpty
-            let targets = isNew ? TodayPracticeState.newWords(
+            let unseen = TodayPracticeState.newWords(
                 from: words, progress: progress, difficulty: selectedDifficulty, scope: selectedDifficultyScope
-            ) : due
+            )
+
+            let isNew: Bool
+            let targets: [WordItem]
+            switch mode {
+            case .resumeOrDefault:
+                isNew = due.isEmpty
+                targets = isNew ? unseen : due
+            case .review:
+                isNew = false
+                targets = due
+            case .newWords:
+                isNew = true
+                targets = unseen
+            }
+
             guard !targets.isEmpty else { return }
+
+            if let existing = todayCheckpoint {
+                try TodayPracticeStore.commit(nil, replacing: existing, in: modelContext.container)
+                todayCheckpoint = nil
+            }
+
             let draft = TodayPracticeState(
                 scope: todayScope, learnsNewWords: isNew, words: targets, distractors: languageWords, progress: progress
             )
             todayCheckpoint = try TodayPracticeStore.commit(draft, replacing: nil, in: modelContext.container)
-            quizEntry = .today
+            quizEntry = isNew ? .todayNew : .todayReview
         } catch {
-            todayError = "未能开始今日复习：\(error.localizedDescription)"
+            todayError = "未能开始学习：\(error.localizedDescription)"
         }
     }
 
     private func didDismissQuiz() {
         let destination = quizAfterDismissal
         quizAfterDismissal = nil
-        if destination == .today {
-            openToday()
-        } else {
+        switch destination {
+        case .today:
+            openToday(mode: .resumeOrDefault)
+        case .todayReview:
+            openToday(mode: .review)
+        case .todayNew:
+            openToday(mode: .newWords)
+        case .mistakes:
             refreshToday()
-            if destination == .mistakes { quizEntry = .mistakes }
+            quizEntry = .mistakes
+        case .currentRound, nil:
+            refreshToday()
         }
     }
 

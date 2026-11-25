@@ -128,6 +128,59 @@ struct TodayPracticeTests {
         #expect(!state.isValid(for: scope, words: editedWords, progress: [:]))
     }
 
+    @Test("在存在到期词时仍可独立切换开启背新词，已提交首答进度不丢失")
+    func switchingFromDueReviewToNewWordsPreservesCompletedReviewProgress() throws {
+        let container = try ModelContainer(
+            for: WordProgress.self, ReviewEvent.self, TodayPracticeCheckpoint.self,
+            configurations: ModelConfiguration(isStoredInMemoryOnly: true)
+        )
+        let dueWords = (0..<2).map { word($0) }
+        let unseenWords = (2..<5).map { word($0) }
+        let allWords = dueWords + unseenWords
+        let context = ModelContext(container)
+        for item in dueWords {
+            context.insert(progress(for: item, due: now.addingTimeInterval(-60)))
+        }
+        try context.save()
+
+        let initialProgress = Dictionary(
+            uniqueKeysWithValues: try context.fetch(FetchDescriptor<WordProgress>()).map { ($0.wordID, $0) }
+        )
+        let reviewDraft = TodayPracticeState(
+            scope: scope, learnsNewWords: false, words: dueWords, distractors: allWords, progress: initialProgress
+        )
+        let storedReview = try #require(try TodayPracticeStore.commit(reviewDraft, replacing: nil, in: container))
+
+        // Complete one due word first
+        var answeredReview = storedReview
+        let q0 = answeredReview.questions[0]
+        answeredReview.answers[q0.id] = q0.correctOptionIndex
+        answeredReview.pending.removeValue(forKey: q0.word.id)
+        let savedReview = try #require(try TodayPracticeStore.commit(
+            answeredReview, replacing: storedReview, review: (q0.word, .known), in: container, now: now
+        ))
+
+        // Explicitly switch to learning new words while one due word remains
+        try TodayPracticeStore.commit(nil, replacing: savedReview, in: container)
+        let refreshedProgress = Dictionary(
+            uniqueKeysWithValues: try ModelContext(container).fetch(FetchDescriptor<WordProgress>()).map { ($0.wordID, $0) }
+        )
+        let remainingDue = TodayPracticeState.dueWords(from: allWords, progress: refreshedProgress, now: now)
+        let availableNew = TodayPracticeState.newWords(
+            from: allWords, progress: refreshedProgress, difficulty: .beginner, scope: .exact
+        )
+        #expect(remainingDue.count == 1)
+        #expect(availableNew == unseenWords)
+
+        let newDraft = TodayPracticeState(
+            scope: scope, learnsNewWords: true, words: availableNew, distractors: allWords, progress: refreshedProgress
+        )
+        let storedNew = try #require(try TodayPracticeStore.commit(newDraft, replacing: nil, in: container))
+        #expect(storedNew.learnsNewWords == true)
+        #expect(storedNew.questions.map(\.word) == unseenWords)
+        #expect(try ModelContext(container).fetchCount(FetchDescriptor<ReviewEvent>()) == 1)
+    }
+
     @Test("旧版磁盘库升级后保留进度，写入失败时首答和续练均保留原值")
     func upgradesOldStoreAndLeavesPriorStateOnSaveFailure() throws {
         let database = temporaryStore()

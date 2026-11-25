@@ -275,4 +275,10 @@ xcodebuild -exportArchive \
 - 已保存简体中文「测试内容」并重新打开页面核实，现有 internal 内部群组自动关联 2 名测试员。尚未提交外部 Beta 或正式商店审核。
 - 构建 ID 为 `2522b0dc-1013-4144-9672-a92f6781a273`。 [构建详情](https://appstoreconnect.apple.com/teams/87c2efdb-0337-4b83-b4bd-95ef36cb5a8d/apps/6837619955/testflight/ios/2522b0dc-1013-4144-9672-a92f6781a273)
 - GitHub 功能提交的 CI 在 Xcode 26 编译首页时出现 SwiftUI 类型检查超时，本机 Xcode 27.2 的 64 项测试与归档均通过。上传后另作首页表达式拆分以兼容 CI，未改变题目与复习规则；该源码修复不包含在已上传的 1.0 (4) 中。
-- 兼容修复提交 `98792b3` 在本机全量 64 项测试通过；[GitHub Actions 回归](https://github.com/jackplus/words_killer/actions/runs/45535626290)仍在运行，云端结果尚未确认。
+- 兼容修复提交 `98792b3` 在本机全量 64 项测试通过；[GitHub Actions 回归](https://github.com/jackplus/words_killer/actions/runs/45535626290)最终取消，未取得云端通过结果。
+
+## 十三、下一构建发布准备（2026-11-25）
+
+- 本轮新增首页「复习 / 背新词」并行入口与听音选词自动朗读，包含此前上传后补充的 Xcode 26 编译兼容修复；不改持久化模型、词条 ID、隐私与签名配置。
+- 重新运行 iPhone 18 Pro Max 模拟器全量 66 项测试通过，Swift 编译 0 警告，未签名 Release arm64 归档通过；隐私双副本零差异，发行 plist 校验通过。
+- 发布准备、测试、未签名归档及测试说明位于 `artifacts/testflight-2026-11-25-build5/`，历史目录保留。Apple 当前最新仍为 1.0 (4)，新构建号建议 5，待用户确认后签名归档并上传。

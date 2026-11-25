@@ -21,6 +21,7 @@ struct QuizView: View {
     var onComplete: (() -> Void)?
     private let todaySummary: (() -> (remaining: Int, canLearn: Bool))?
     private let onNextToday: (() -> Void)?
+    private let onNextNewWords: (() -> Void)?
     private let onPracticeMistakes: (() -> Void)?
 
     @State private var speechService = SpeechService()
@@ -61,6 +62,7 @@ struct QuizView: View {
         today: TodayPracticeState? = nil,
         todaySummary: (() -> (remaining: Int, canLearn: Bool))? = nil,
         onNextToday: (() -> Void)? = nil,
+        onNextNewWords: (() -> Void)? = nil,
         onPracticeMistakes: (() -> Void)? = nil,
         onRecordReview: ((String) -> Void)? = nil,
         onComplete: (() -> Void)? = nil
@@ -69,11 +71,22 @@ struct QuizView: View {
         self.allAvailableWords = allAvailableWords
         self.todaySummary = todaySummary
         self.onNextToday = onNextToday
+        self.onNextNewWords = onNextNewWords
         self.onPracticeMistakes = onPracticeMistakes
         self.onRecordReview = onRecordReview
         self.onComplete = onComplete
         _quizMode = State(initialValue: initialMode)
         _todayState = State(initialValue: today)
+    }
+
+    private var autoSpeakAudioQuestionID: String? {
+        guard !isFinished,
+              quizMode != .spelling,
+              QuizEngine.shouldAutoSpeak(question: currentQuestion, hasAnswered: hasAnswered),
+              let question = currentQuestion else {
+            return nil
+        }
+        return question.id
     }
 
     private var themeColor: Color {
@@ -228,6 +241,15 @@ struct QuizView: View {
             .onChange(of: speechSpeedRawValue) {
                 speechService.speed = selectedSpeechSpeed
             }
+            .onChange(of: autoSpeakAudioQuestionID, initial: true) { _, newID in
+                guard newID != nil,
+                      let question = currentQuestion,
+                      QuizEngine.shouldAutoSpeak(question: question, hasAnswered: hasAnswered) else {
+                    return
+                }
+                speechService.speed = selectedSpeechSpeed
+                speechService.speak(question.word.term, language: question.word.language)
+            }
             .onDisappear {
                 speechService.stop()
             }
@@ -365,7 +387,7 @@ struct QuizView: View {
                             }
 
                             HStack(spacing: 8) {
-                                Text(isSpeaking ? "正在朗读单词…" : "点击播放读音")
+                                Text(isSpeaking ? "正在朗读单词…" : "点击重播读音")
                                     .font(.caption.weight(.semibold))
                                     .foregroundStyle(themeColor)
                                 if isSpeaking {
@@ -952,9 +974,10 @@ struct QuizView: View {
 
     // MARK: - Navigation
     private func nextQuestion() {
+        speechService.stop()
         if var state = todayState {
             state.index += 1
-            if saveToday(state, finishing: state.index == totalCount) { speechService.stop() }
+            saveToday(state, finishing: state.index == totalCount)
             return
         }
         withAnimation(MotionTokens.resolve(MotionTokens.cardDeck, reduceMotion: reduceMotion)) {
@@ -972,7 +995,6 @@ struct QuizView: View {
             celebrateTrigger += 1
         }
 
-        speechService.stop()
         if quizMode == .spelling, let word = currentWord {
             speechService.speak(word.term, language: word.language)
             isInputFocused = true
@@ -1193,13 +1215,50 @@ struct QuizView: View {
                 }
 
                 if let todayFacts {
-                    if let onNextToday, todayFacts.remaining > 0 || todayFacts.canLearn {
-                        Button(todayFacts.remaining > 0 ? "继续复习" : "学新词") {
-                            onNextToday()
-                            dismiss()
+                    let prefersNewWords = todayState?.learnsNewWords == true
+                    if prefersNewWords {
+                        if let onNextNewWords, todayFacts.canLearn {
+                            Button("继续背新词") {
+                                onNextNewWords()
+                                dismiss()
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.large)
+                        if let onNextToday, todayFacts.remaining > 0 {
+                            Button("去复习（\(todayFacts.remaining) 词）") {
+                                onNextToday()
+                                dismiss()
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.large)
+                        }
+                    } else {
+                        if let onNextToday, todayFacts.remaining > 0 {
+                            Button("继续复习（剩余 \(todayFacts.remaining) 词）") {
+                                onNextToday()
+                                dismiss()
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
+                        }
+                        if let onNextNewWords, todayFacts.canLearn {
+                            if todayFacts.remaining == 0 {
+                                Button("背新词") {
+                                    onNextNewWords()
+                                    dismiss()
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .controlSize(.large)
+                            } else {
+                                Button("背新词") {
+                                    onNextNewWords()
+                                    dismiss()
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.large)
+                            }
+                        }
                     }
                 } else {
                     Button {

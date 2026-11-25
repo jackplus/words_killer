@@ -186,4 +186,9 @@ enum QuizEngine {
     static func spellingRating(usedHint: Bool, hadWrongAttempt: Bool) -> RecallRating {
         usedHint || hadWrongAttempt ? .fuzzy : .known
     }
+
+    static func shouldAutoSpeak(question: QuizQuestion?, hasAnswered: Bool) -> Bool {
+        guard let question, !hasAnswered else { return false }
+        return question.subtype == .audioToWord
+    }
 }

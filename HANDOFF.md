@@ -255,3 +255,12 @@ xcodebuild test -scheme "Words killer" \
 - 构建导出、上传及 Apple 处理结果以 `APP_STORE_CHECKLIST.md` 第十二节为准。归档、IPA 与日志位于新的本地发布目录 `artifacts/testflight-2026-11-25/`。
 - 功能代码已以 `ce071bd` 推送 GitHub main。2026-11-25 10:44:05（Asia/Taipei）Xcode 确认 1.0 (4) 上传成功。用户登录后已确认 Apple 二进制「已验证」、构建「准备提交」，internal 群组自动关联 2 名测试员，测试说明保存并核实。
 - 上传后补充了 Xcode 26 的首页表达式与观察链拆分，修复编译器类型检查超时；最新 GitHub 代码包含此兼容修复，已上传构建对应 `ce071bd`。
+
+## 十四、实测体验修复：双入口并行与听音选词自动播音（2026-11-25）
+
+- **背词首页并行保留「复习」与「背新词」（`ContentView` + `QuizView`）**：
+  - 背词主面板升级为「今日学习」，同时展示当前范围的「待复习」与「可背新词（含当前难度）」余量，并列提供「开始复习 / 继续复习」与「背新词 / 继续背新词」双入口，不再因存在到期词而隐藏背新词。
+  - 若存在未完成续练并显式切换至另一种学习，先安全清理临时续练草稿（已完成的首答进度与打卡记录已落盘零丢失）再开启新轮次；结算页同步提供「继续复习」与「背新词」双出口。
+- **听音选词自动朗读（`QuizEngine` + `QuizView`）**：
+  - 新增 `QuizEngine.shouldAutoSpeak(question:hasAnswered:)`；当首次呈现或切入未作答的「听音选词」题（含首轮、续练恢复及错题补练）时，按全局 `speechSpeed` 自动朗读当前单词；已作答反馈态、非听音题或切换「不便听音，换文字题」后不重复触发，切题前先停止旧朗读防止串音。
+- **验证**：新增 `autoSpeakRuleTargetsOnlyUnansweredAudioQuestions` 与 `switchingFromDueReviewToNewWordsPreservesCompletedReviewProgress` 两项测试，iPhone 18 Pro 模拟器全量通过 **66/66 项** Swift Testing 单元测试，Swift 编译 0 警告，`PRIVACY.md` 与内置副本零差异。
