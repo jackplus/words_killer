@@ -276,3 +276,4 @@ xcodebuild test -scheme "Words killer" \
 - **首屏层次与交互优化（`ContentView.swift`）**：
   - 设置抽屉紧贴顶部控制胶囊正下方展开；缺失语音包提示横幅上移至通用区域，覆盖默认首页朗读场景；「今日学习」主卡内置词书/难度快捷切换胶囊、掌握度进度条与对称胶囊式「复习 / 背新词」双主入口；展开闪卡时收起首页其余模块并显示「收起闪卡」返回条，保证沉浸度。
 - **验证**：新增 `studyScopeSummaryCountsMasteredLearningAndUnseen` 单元测试，iPhone 18 Pro 模拟器全量通过 **67/67 项** Swift Testing 单元测试，Swift 编译 0 警告，`PRIVACY.md` 与内置副本零差异；完成 iPhone 浅色/深色首屏模拟器截图验收。
+- **发布结果**：本轮发布前重新运行 67 项全量测试并通过 Release 编译、签名归档、发行导出和 IPA 验签。用户确认上传 1.0 (6)，二进制源码 `7a29bd3` 已推送 GitHub；2026-11-25 20:42:49（Asia/Taipei）上传成功。Apple 二进制「已验证」、构建「准备提交」，internal 自动关联 2 名测试员，测试说明已保存并核实。证据保存在 `artifacts/testflight-2026-11-25-build6/`，云端回归尚未取得最终结果。

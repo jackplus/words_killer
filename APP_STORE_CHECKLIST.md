@@ -294,4 +294,11 @@ xcodebuild -exportArchive \
 
 - 最新源码新增首页范围掌握度、今日一词交互卡及四种训练快捷入口，不改持久化模型、原词条 ID、隐私与签名配置。
 - 发布前重新运行 iPhone 18 Pro 全量 67 项测试，0 失败、0 跳过、Swift 编译 0 警告；未签名 Release arm64 归档及发行 plist 校验通过，隐私双副本一致。
-- 发布准备和测试证据位于 `artifacts/testflight-2026-11-25-build6/`，历史目录保留。用户已明确确认上传 1.0 (6)，工程构建号由 5 递增为 6，签名归档及上传结果待核实。
+- 发布准备和测试证据位于 `artifacts/testflight-2026-11-25-build6/`，历史目录保留。用户已明确确认上传 1.0 (6)，工程构建号由 5 递增为 6。
+- 签名 Release 归档、发行导出及 IPA 验签通过；最低 iOS 17.0、Bundle ID 与团队保持一致，Store profile 无设备列表且 `get-task-allow = false`，隐私资源校验通过。
+- 二进制对应已推送源码 `7a29bd3036a0bece4e75c3ec20e3c83cf63361d0`。IPA SHA-256：`bde6bc41c3ddf7dce6d27b41bbacea83e17e03a669539ad17391325bc71c0eb8`。
+- 2026-11-25 20:42:49（Asia/Taipei），Xcode 返回 `Upload succeeded` 与 `EXPORT SUCCEEDED`，Apple 已接收 1.0 (6) 并开始处理。
+- Apple 处理完成：二进制「已验证」、构建「准备提交」。服务端版本 1.0 (6)、Bundle ID、Team、最低 iOS 17.0、arm64、包含符号、非豁免加密为「否」及非调试权限均与发行包一致。
+- internal 内部群组自动关联 2 名测试员；简体中文测试说明已保存，切回测试信息页确认正文及禁用的保存按钮。未提交外部 Beta 或正式商店审核。
+- 构建 ID：`601e5fa6-c3f3-4365-99e1-b6c266fe58de`。[构建详情](https://appstoreconnect.apple.com/teams/87c2efdb-0337-4b83-b4bd-95ef36cb5a8d/apps/6837619955/testflight/ios/601e5fa6-c3f3-4365-99e1-b6c266fe58de)
+- 本机 67 项测试通过；发布记录写入时，GitHub 云端回归尚未完成，最终状态见 [iOS Tests](https://github.com/jackplus/words_killer/actions/workflows/ios-tests.yml)。
