@@ -268,4 +268,7 @@ xcodebuild -exportArchive \
 - 本轮包含 18 册 1,800 词、六档难度、今日复习与退出续练、错词专练、听音转文字、拼写容错和提示、解析收藏与笔记、每日一词和 App 内小组件预览。桌面与锁屏小组件的 Extension 仍为模板，外部 URL scheme 尚未注册，当前通过 App 内路由预览跳转。
 - 发布前 64 项 Swift Testing 测试全部通过，Swift 编译无警告。签名 Release 归档成功，核实版本 1.0 (4)、Bundle ID、Team 和最低 iOS 17.0。
 - 新发布目录为 `artifacts/testflight-2026-11-25/`，包含测试结果、归档、发行导出和日志。原有 650 个词条 ID 保留，隐私政策双副本一致。
-- 当前正在导出验证与上传，Apple 服务端处理状态待核实。
+- GitHub 功能提交为 `ce071bd9ff62ae4581c90f1adb9321584f08b57b`，已推送 `origin/main`。
+- IPA 本地验签与 Store profile 校验通过，`get-task-allow = false`，归属团队 `Y382F52F3K`。IPA SHA-256 为 `93325be8a8b4b4fd1095e9c01c07a6ccbdab9d07e41f1112fe92638c6fa178f4`。
+- 2026-11-25 10:44:05（Asia/Taipei），Xcode 返回 `Upload succeeded` 和 `EXPORT SUCCEEDED`，日志确认 `Uploaded package is processing`。Apple 已接收 1.0 (4) 并开始处理。
+- App Store Connect 网页当前需要重新登录，构建二进制处理完成、内部测试群组关联和服务端「测试内容」尚待核对。本地 `what-to-test.txt` 已准备，尚未提交外部 Beta 或正式商店审核。
